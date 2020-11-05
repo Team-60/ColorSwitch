@@ -19,11 +19,15 @@
 - ? Ball within Game instead of Player to side-line game info with details
 - Controller interacts with other *controllers and fxml* but only interacts with logic of it's superceding class
 - Could use the concept of __flags__ to communicate between logic and controller
+- Cloning in Player, Database as immutable generic class
 
 ## Misc
 - Threading
 - Transitions could be done via Scene replacement in a single stage
 - maintain .gitignore
+- Load games via creating overridden constructors
+- ? Loading fxml while creation
+- Every Loading and Saving would be treated as new player creation but with same parameters (Leaderboard)
 
 ## Classes
 * ~~MainPage : New Game, Load Game, Exit Game~~
