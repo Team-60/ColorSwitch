@@ -47,6 +47,7 @@ Class Game:
         + pause() { return void; } (write into file) ? // can be avoided depends on our implementation of Game
         + resume() { return void; } (read from file) ? // can be avoided depends on our implementation of Game
         + save() { return void; } (write to load file)
+        + getApp() {return App; }
     Exceptions:
         ObstacleCollision
         FellDown
