@@ -13,7 +13,7 @@ Class App (My main screen) [Controller]
     Extends:
     Implements:
 
-Class Database (Load game screen / Leaderboard in show) [Controller] <Generic>
+Class Database (Load game screen / LeaderBoard in show) [Controller] <Generic>
     Fields:
         - NumParam (Overriding param)
         - ArrayList<T>
@@ -78,7 +78,7 @@ Class Ball:
         - jumpSpeed (final static)
         - Circle ball
     Functions:
-        + jump () { return void; } // just sets veloctiy to jumpSpeed
+        + jump () { return void; } // just sets velocity to jumpSpeed
         + move () { return int; } // returns the offset
         + refresh() { return void; }
     Exceptions:
@@ -97,7 +97,7 @@ Class GameElements: (Abstract)
         + refresh() { return void; } (Abstract)
         + checkCollision(Ball ball) { return Boolean; } (Abstract)
         + destroy() { return void; } (Abstract)
-        + getclosestSafeDist() { return int; }
+        + getClosestSafeDist() { return int; }
     Exceptions:
     Extends:
     Implements:
