@@ -2,6 +2,7 @@ Class App (My main screen) [Controller]
     Fields:
         - Database<Player>
         - Database<Games>
+        - highscore (-1 for first ever game)
     Functions:
         - addAssets() { return void; }
         - formDatabase() { return void; }
@@ -10,6 +11,7 @@ Class App (My main screen) [Controller]
         - restartGame() { return Game; } (refresh all states except the player's info)
         - leaderBoard() { return Database<Player>; } (will only be accessed by leaderBoardController)
         - exit() { return void } (perform all cleanUp operations and exit the Application)
+        getter/setter highscore
         + giveId()
     Exceptions:
     Extends:
@@ -17,14 +19,14 @@ Class App (My main screen) [Controller]
 
 Class Database (Load game screen / Leaderboard in show) <Generic>
     Fields:
-        - NumParam (Overriding param)
-        - ArrayList<T>
+        - MAX_SIZE (Overriding param)
+        - data ArrayList<T>
     Functions:
         // I am not sure about these functions yet
         // depends on how you if we are using instanceOf or getting value using getter
-        + form()
-        + retrieveData()
-        + update()
+        + form() : void
+        + retrieveData() : ArrayList<T>
+        + update(T , pos) : void
     Exceptions:
         Exception (IO / ClassNotFound)
     Extends:
@@ -36,9 +38,10 @@ Class Game:
         - Player (Keep Info) (Player and game elements interact through ball) (Association) (As a constructor param)
         - Game Elements
         - ball
-        - Mid line (final)
-        + starsForRestart (static)
-        + numElements (number of elements to spawn) (static)
+        - FILE_PATH (static final)
+        + MID_LINE (static final)
+        + STARS_RESTART (static final)
+        + NUM_ELEMENTS (number of elements to spawn) (static final)
     Functions:
         + refreshGameElements() { return void; } (ensure proper pairings between stars / obstacles / switches) (discard) (reflectChanges in gui counterpart)
         - moveScreenRelative() (apply offset) { return void; }
@@ -48,6 +51,8 @@ Class Game:
         + resume() { return void; } (read from file) ? // can be avoided depends on our implementation of Game
         + save() { return void; } (write to load file)
         + getApp() {return App; }
+        + getPlayer() {return Player; }
+        + getFilePath() {return String; }
     Exceptions:
         ObstacleCollision
         FellDown
@@ -61,10 +66,12 @@ Class Player:
         - name // it is necessary ?
         - id
         - score
-        - highScore
+        - FILE_PATH (static final)
     Functions:
+        getter/setters
         + incrementScore() { return void; }
         + compareTo(Player) { return int; }
+        + getFilePath {return string; }
     Exceptions:
     Extends:
     Implements:
@@ -86,6 +93,7 @@ Class Ball:
         + refresh() { return void; }
         + destroy() {return void; }
         + checkFall() { return Boolean; }
+        getx, gety
     Exceptions:
     Extends:
     Implements:
