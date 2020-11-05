@@ -2,13 +2,13 @@ Class App (My main screen) [Controller]
     Fields:
         - Database
     Functions:
-        - addAssets
-        - formDatabase
-        - newGame
-        - loadGame
-        - restartGame (refresh all states except the player's info)
-        - leaderboard
-        - exit
+        - addAssets() { return void; }
+        - formDatabase() { return void; }
+        - newGame() { return Game; } (will be called be AppController which will transfer Game's instance to GamePlayController)
+        - loadGame(int PlayerId) { return Game; } (Similar to new Game : notice one player can only have one loadGame)
+        - restartGame() { return Game; } (refresh all states except the player's info)
+        - leaderBoard() { return Database<Player>; } (will only be accessed by leaderBoardController)
+        - exit() { return void } (perform all cleanUp operations and exit the Application)
     Exceptions:
     Extends:
     Implements:
@@ -16,12 +16,14 @@ Class App (My main screen) [Controller]
 Class Database (Load game screen / Leaderboard in show) [Controller] <Generic>
     Fields:
         - NumParam (Overriding param)
-        - ArrayList<Field>
+        - ArrayList<T>
     Functions:
-        + form
-        + show
-        + update
-        + giveId
+        // I am not sure about these functions yet
+        // depends on how you if we are using instanceOf or getting value using getter
+        + form()
+        + show()
+        + update()
+        + giveId()
     Exceptions:
         Exception (IO / ClassNotFound)
     Extends:
@@ -33,17 +35,17 @@ Class Game:
         - Player (Keep Info) (Player and game elements interact through ball) (Association) (As a constructor param)
         - Game Elements
         - ball
-        - Mid line
+        - Mid line (final)
         + starsForRestart (static)
         + numElements (number of elements to spawn) (static)
     Functions:
-        + refreshGameElements (ensure proper pairings between stars / obstacles / switches) (discard) (reflectChanges in gui counterpart)
-        - moveScreen (apply offset)
-        + registerJump (relocation & calls move screen)
-        + checkAndUpdate (checks for interaction & score updation)
-        + pause (write into file)
-        + resume (read from file)
-        + save (write to load file)
+        + refreshGameElements() { return void; } (ensure proper pairings between stars / obstacles / switches) (discard) (reflectChanges in gui counterpart)
+        - moveScreen() (apply offset) { return void; }
+        + registerJump() { return void; } (relocation & calls move screen)
+        + checkAndUpdate() { return void; } (checks for interaction & score update)
+        + pause() { return void; } (write into file) ? // can be avoided depends on our implementation of Game
+        + resume() { return void; } (read from file) ? // can be avoided depends on our implementation of Game
+        + save() { return void; } (write to load file)
     Exceptions:
         ObstacleCollision
         FellDown
@@ -54,12 +56,12 @@ Class Game:
 
 Class Player:
     Fields:
-        - name
+        - name // it is necessary ?
         - id
         - score
-        - highscore
+        - highScore
     Functions:
-        + incrementScore
+        + incrementScore() { return void; }
     Exceptions:
     Extends:
     Implements:
@@ -73,10 +75,12 @@ Class Ball:
         - color
         - velocity
         - gravity
-        - jumpSpeed
+        - jumpSpeed (final static)
+        - Circle ball
     Functions:
-        + jump : int
-        + getPosition
+        + jump () { return void; } // just sets veloctiy to jumpSpeed
+        + move () { return int; } // returns the offset
+        + refresh() { return void; }
     Exceptions:
     Extends:
     Implements:
@@ -88,11 +92,12 @@ Class GameElements: (Abstract)
         - y
         - closestSafeDist
     Functions:
-        + applyOffset
-        + spawn (Abstract)
-        + refresh (Abstract)
-        + checkCollision (Abstract)
-        + destroy (Abstract)
+        + applyOffset (int offset) { return void; }
+        + spawn(Pane pane) { return void; } (Abstract)
+        + refresh() { return void; } (Abstract)
+        + checkCollision(Ball ball) { return Boolean; } (Abstract)
+        + destroy() { return void; } (Abstract)
+        + getclosestSafeDist() { return int; }
     Exceptions:
     Extends:
     Implements:
@@ -102,6 +107,7 @@ Class Star:
     Fields:
         closestSafeDist static
         points static
+        // will also contain GUI components but not sure what
     Functions:
         Overriding Abstract Methods
     Exceptions:
@@ -113,6 +119,7 @@ Class SwitchColor:
     Fields:
         closestSafeDist static
         predefined color
+        // will also contain GUI components but not sure what
     Functions:
         Overriding Abstract Methods
     Exceptions:
@@ -134,6 +141,7 @@ Class Obstacle: (Abstract)
 Class ObsCircle:
     Fields:
         closestSafeDist static
+        // will also contain GUI components but not sure what
         # radius
     Functions:
         spawn
@@ -148,6 +156,7 @@ Class ObsCircle:
 Class ObsDoubleCircle:
     Fields:
         # radiusOut
+        // will also contain GUI components but not sure what
     Functions: (Override)
         spawn
         + refresh
@@ -161,6 +170,7 @@ Class ObsDoubleCircle:
 Class ObsLine:
     Fields:
         closestSafeDist static
+        // will also contain GUI components but not sure what
     Functions:
         spawn
         + refresh
@@ -174,6 +184,7 @@ Class ObsLine:
 Class ObsDoubleLine:
     Fields:
         closestSafeDist static
+        // will also contain GUI components but not sure what
     Functions:
         spawn
         + refresh
@@ -187,6 +198,7 @@ Class ObsDoubleLine:
 Class ObsSquare:
     Fields:
         closestSafeDist static
+        // will also contain GUI components but not sure what
     Functions:
         spawn
         + refresh
