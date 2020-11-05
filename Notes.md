@@ -56,3 +56,6 @@
 - Fell Down
 - Not enough stars for restart
 - Std. IO/Class Not Found/
+
+### UML notes
+- Add constructors
