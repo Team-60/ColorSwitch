@@ -18,6 +18,7 @@
 - Generic classes for Database, as Database for games for load screens, Database of Players for leaderboard.
 - ? Ball within Game instead of Player to side-line game info with details
 - Controller interacts with other *controllers and fxml* but only interacts with logic of it's superceding class
+- Could use the concept of __flags__ to communicate between logic and controller
 
 ## Misc
 - Threading
