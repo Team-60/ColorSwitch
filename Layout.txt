@@ -34,16 +34,16 @@ Class Game:
         - Game Elements
         - ball
         - Mid line
-        - starsForRestart
-        - numElements (number of elements to spawn)
+        + starsForRestart (static)
+        + numElements (number of elements to spawn) (static)
     Functions:
-        getNewElements (ensure proper pairings between stars / obstacles / switches)
-        registerJump
-        setOffset (mid line)
-        checkAndUpdate (checks for interaction & score updation)
-        pause (write into file)
-        resume (read from file)
-        save (write to load file)
+        + refreshGameElements (ensure proper pairings between stars / obstacles / switches) (discard) (reflectChanges in gui counterpart)
+        - moveScreen (apply offset)
+        + registerJump (relocation & calls move screen)
+        + checkAndUpdate (checks for interaction & score updation)
+        + pause (write into file)
+        + resume (read from file)
+        + save (write to load file)
     Exceptions:
         ObstacleCollision
         FellDown
@@ -59,8 +59,7 @@ Class Player:
         - score
         - highscore
     Functions:
-        updateScore
-        clone
+        + incrementScore
     Exceptions:
     Extends:
     Implements:
@@ -72,9 +71,12 @@ Class Ball:
         - y
         - radius
         - color
+        - velocity
+        - gravity
+        - jumpSpeed
     Functions:
-        jump
-        getPosition
+        + jump : int
+        + getPosition
     Exceptions:
     Extends:
     Implements:
@@ -84,9 +86,12 @@ Class GameElements: (Abstract)
     Fields:
         - x
         - y
+        - closestSafeDist
     Functions:
-        - spawn (Abstract)
-        - checkCollision (Abstract)
+        + applyOffset
+        + spawn (Abstract)
+        + refresh (Abstract)
+        + checkCollision (Abstract)
     Exceptions:
     Extends:
     Implements:
@@ -94,7 +99,8 @@ Class GameElements: (Abstract)
 
 Class Star:
     Fields:
-        points ? static
+        closestSafeDist static
+        points static
     Functions:
         Overriding Abstract Methods
     Exceptions:
@@ -104,10 +110,47 @@ Class Star:
 
 Class SwitchColor:
     Fields:
+        closestSafeDist static
+        predefined color
     Functions:
         Overriding Abstract Methods
-        giveNewColor
     Exceptions:
     Extends:
         GameElements
     Implements:
+
+Class Obstacle: (Abstract)
+    Fields:
+        transalation speed
+        rotation speed
+    Functions:
+        Abstract
+    Exceptions:
+    Extends:
+        GameElements
+    Implements:
+
+Class ObsCircle:
+    Fields:
+        closestSafeDist static
+        # radius
+    Functions:
+        spawn
+        + refresh
+        checkCollision
+    Exceptions:
+    Extends:
+        Obstacle
+    Implements:
+
+Class ObsDoubleCircle:
+        Fields:
+            # radiusOut
+        Functions: (Override)
+            spawn
+            + refresh
+            checkCollision
+        Exceptions:
+        Extends:
+            Obstacle
+        Implements:
