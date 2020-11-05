@@ -15,6 +15,8 @@
 - Classes like Main Game screen and Load game not necessary and can be implemented better with fxml, instead things like Database would be a good idea
 - A class with its controller methods are intertwined, load corresponding fxml in class and handle in controller
 - Maintain midLine, highScoreLine
+- Generic classes for Database, as Database for games for load screens, Database of Players for leaderboard.
+- ? Ball within Game instead of Player to side-line game info with details
 
 ## Misc
 - Threading
@@ -44,7 +46,6 @@
 - https://github.com/crt09/Color-Switch (Assets)
 
 ### Exceptions
-- Game won
 - Collision
 - Fell Down
 - Game Paused
