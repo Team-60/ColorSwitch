@@ -152,5 +152,42 @@ Class ObsDoubleCircle:
             checkCollision
         Exceptions:
         Extends:
-            Obstacle
+            ObsCircle
         Implements:
+
+Class ObsLine:
+    Fields:
+        closestSafeDist static
+    Functions:
+        spawn
+        + refresh
+        checkCollision
+    Exceptions:
+    Extends:
+        Obstacle
+    Implements:
+
+Class ObsDoubleLine:
+    Fields:
+        closestSafeDist static
+    Functions:
+        spawn
+        + refresh
+        checkCollision
+    Exceptions:
+    Extends:
+        ObsLine
+    Implements:
+
+Class ObsSquare:
+    Fields:
+        closestSafeDist static
+    Functions:
+        spawn
+        + refresh
+        checkCollision
+    Exceptions:
+    Extends:
+        Obstacle
+    Implements:
+
