@@ -1,0 +1,92 @@
+Class Main (My main screen) [Controller]
+    Fields:
+        - Database
+    Functions:
+        + main
+        - addAssets
+        - formDatabase
+        - newGame
+        - loadGame
+        - exit
+    Exceptions:
+    Extends:
+    Implements:
+
+Class Database (Load game screen / Leaderboard in show) [Controller] <Generic>
+    Fields:
+        - NumParam (Overriding param)
+        - ArrayList<Field>
+    Functions:
+        + form
+        + show
+        + update
+        giveId
+    Exceptions:
+        - Exception (IO / ClassNotFound)
+    Extends:
+    Implements:
+
+Class Game:
+    Fields:
+        - Player (Keep Info) (Player and game elements interact through ball)
+        - Game Elements
+        - Mid line
+        - starsForRestart
+        - numElements (number of elements to spawn)
+    Functions:
+        getNewElements (ensure proper pairings between stars / obstacles / switches)
+        registerJump
+        setOffset (mid line)
+        checkAndUpdate (checks for interaction & score updation)
+        pause (write into file)
+        resume (read from file)
+        save (write to load file)
+        restart (refresh all states except the player's info)
+    Exceptions:
+        ObstacleCollision
+        FellDown
+        NotEnoughStarsForRestart
+    Extends:
+    Implements:
+        Serializable
+
+Class Player:
+    Fields:
+        - name
+        - id
+        - score
+        - highscore
+        - ball
+    Functions:
+        updateBall
+        updateScore
+        clone
+    Exceptions:
+    Extends:
+    Implements:
+        Serializable, Cloneable
+
+Class Ball:
+    Fields:
+        - x
+        - y
+        - radius
+        - color
+    Functions:
+        jump
+    Exceptions:
+    Extends:
+    Implements:
+        Serializable, Cloneable
+
+Class GameElements:
+    Fields:
+        - x
+        - y
+    Functions:
+        - spawn
+        - checkCollision
+    Exceptions:
+    Extends:
+    Implements:
+        Serializable
