@@ -32,7 +32,7 @@ Class Database (Load game screen / Leaderboard in show) <Generic>
 
 Class Game:
     Fields:
-        - App (Association)
+        - App (Binary Association) (Stronger form of dependency)
         - Player (Keep Info) (Player and game elements interact through ball) (Association) (As a constructor param)
         - Game Elements
         - ball
