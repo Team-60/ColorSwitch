@@ -1,12 +1,13 @@
-Class Main (My main screen) [Controller]
+Class App (My main screen) [Controller]
     Fields:
         - Database
     Functions:
-        + main
         - addAssets
         - formDatabase
         - newGame
         - loadGame
+        - restartGame (refresh all states except the player's info)
+        - leaderboard
         - exit
     Exceptions:
     Extends:
@@ -20,16 +21,16 @@ Class Database (Load game screen / Leaderboard in show) [Controller] <Generic>
         + form
         + show
         + update
-        giveId
+        + giveId
     Exceptions:
-        - Exception (IO / ClassNotFound)
+        Exception (IO / ClassNotFound)
     Extends:
     Implements:
 
 Class Game:
     Fields:
         - database (Association)
-        - Player (Keep Info) (Player and game elements interact through ball) (Association ?)
+        - Player (Keep Info) (Player and game elements interact through ball) (Association) (As a constructor param)
         - Game Elements
         - ball
         - Mid line
@@ -43,7 +44,6 @@ Class Game:
         pause (write into file)
         resume (read from file)
         save (write to load file)
-        restart (refresh all states except the player's info)
     Exceptions:
         ObstacleCollision
         FellDown
