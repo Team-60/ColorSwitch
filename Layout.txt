@@ -3,6 +3,7 @@ Class App (My main screen) [Controller]
         - Database<Player>
         - Database<Games>
         - highscore (-1 for first ever game)
+        Added Height & Width
     Functions:
         - addAssets() { return void; }
         - formDatabase() { return void; }
@@ -72,6 +73,7 @@ Class Player:
         + incrementScore() { return void; }
         + compareTo(Player) { return int; }
         + getFilePath {return string; }
+        getters/setters for score, id, name
     Exceptions:
     Extends:
     Implements:
@@ -91,7 +93,7 @@ Class Ball:
         + jump() { return void; } // just sets velocity to jumpSpeed
         + move() { return int; } // returns the offset
         + refresh() { return void; }
-        + destroy() {return void; }
+        + destroy(Pane p) {return void; } ?
         + checkFall() { return Boolean; }
         getx, gety
     Exceptions:
@@ -105,11 +107,12 @@ Class GameElements: (Abstract)
         - y
         - closestSafeDist
     Functions:
+        constructor
         + applyOffset (int offset) { return void; }
         + spawn(Pane pane) { return void; } (Abstract)
         + refresh() { return void; } (Abstract)
         + checkCollision(Ball ball) { return Boolean; } (Abstract)
-        + destroy() { return void; } (Abstract)
+        + destroy(Pane p) { return void; } (Abstract)
         + getClosestSafeDist() { return int; }
     Exceptions:
     Extends:
@@ -135,6 +138,7 @@ Class SwitchColor:
         // will also contain GUI components but not sure what
     Functions:
         Overriding Abstract Methods
+        getColor
     Exceptions:
     Extends:
         GameElements
@@ -151,6 +155,7 @@ Class Obstacle: (Abstract)
         GameElements
     Implements:
 
+# Constructors for each class below, Double constructors in case of inheritance
 Class ObsCircle:
     Fields:
         closestSafeDist static
@@ -183,6 +188,8 @@ Class ObsDoubleCircle:
 Class ObsLine:
     Fields:
         closestSafeDist static
+        width
+        height
         // will also contain GUI components but not sure what
     Functions:
         spawn
@@ -197,6 +204,8 @@ Class ObsLine:
 Class ObsDoubleLine:
     Fields:
         closestSafeDist static
+        width
+        height
         // will also contain GUI components but not sure what
     Functions:
         spawn
