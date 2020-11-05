@@ -59,3 +59,4 @@
 
 ### UML notes
 - Add constructors
+- Add sorting for players

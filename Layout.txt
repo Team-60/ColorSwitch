@@ -1,6 +1,7 @@
 Class App (My main screen) [Controller]
     Fields:
-        - Database
+        - Database<Player>
+        - Database<Games>
     Functions:
         - addAssets() { return void; }
         - formDatabase() { return void; }
@@ -9,11 +10,12 @@ Class App (My main screen) [Controller]
         - restartGame() { return Game; } (refresh all states except the player's info)
         - leaderBoard() { return Database<Player>; } (will only be accessed by leaderBoardController)
         - exit() { return void } (perform all cleanUp operations and exit the Application)
+        + giveId()
     Exceptions:
     Extends:
     Implements:
 
-Class Database (Load game screen / Leaderboard in show) [Controller] <Generic>
+Class Database (Load game screen / Leaderboard in show) <Generic>
     Fields:
         - NumParam (Overriding param)
         - ArrayList<T>
@@ -21,9 +23,8 @@ Class Database (Load game screen / Leaderboard in show) [Controller] <Generic>
         // I am not sure about these functions yet
         // depends on how you if we are using instanceOf or getting value using getter
         + form()
-        + show()
+        + retrieveData()
         + update()
-        + giveId()
     Exceptions:
         Exception (IO / ClassNotFound)
     Extends:
@@ -31,7 +32,7 @@ Class Database (Load game screen / Leaderboard in show) [Controller] <Generic>
 
 Class Game:
     Fields:
-        - database (Association)
+        - App (Association)
         - Player (Keep Info) (Player and game elements interact through ball) (Association) (As a constructor param)
         - Game Elements
         - ball
@@ -40,9 +41,9 @@ Class Game:
         + numElements (number of elements to spawn) (static)
     Functions:
         + refreshGameElements() { return void; } (ensure proper pairings between stars / obstacles / switches) (discard) (reflectChanges in gui counterpart)
-        - moveScreen() (apply offset) { return void; }
-        + registerJump() { return void; } (relocation & calls move screen)
-        + checkAndUpdate() { return void; } (checks for interaction & score update)
+        - moveScreenRelative() (apply offset) { return void; }
+        + registerJump() { return void; } (changes ball velocity)
+        + checkAndUpdate() { return void; } (checks for interaction & score update & move screens)
         + pause() { return void; } (write into file) ? // can be avoided depends on our implementation of Game
         + resume() { return void; } (read from file) ? // can be avoided depends on our implementation of Game
         + save() { return void; } (write to load file)
@@ -62,25 +63,28 @@ Class Player:
         - highScore
     Functions:
         + incrementScore() { return void; }
+        + compareTo(Player) { return int; }
     Exceptions:
     Extends:
     Implements:
-        Serializable
+        Serializable, Comparable
 
 Class Ball:
     Fields:
-        - x
+        - x (static)
         - y
-        - radius
+        - radius (static)
         - color
         - velocity
-        - gravity
+        - gravity (final static)
         - jumpSpeed (final static)
-        - Circle ball
+        - Circle sprite
     Functions:
-        + jump () { return void; } // just sets veloctiy to jumpSpeed
-        + move () { return int; } // returns the offset
+        + jump() { return void; } // just sets velocity to jumpSpeed
+        + move() { return int; } // returns the offset
         + refresh() { return void; }
+        + destroy() {return void; }
+        + checkFall() { return Boolean; }
     Exceptions:
     Extends:
     Implements:
@@ -97,7 +101,7 @@ Class GameElements: (Abstract)
         + refresh() { return void; } (Abstract)
         + checkCollision(Ball ball) { return Boolean; } (Abstract)
         + destroy() { return void; } (Abstract)
-        + getclosestSafeDist() { return int; }
+        + getClosestSafeDist() { return int; }
     Exceptions:
     Extends:
     Implements:
