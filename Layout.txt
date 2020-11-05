@@ -64,7 +64,7 @@ Class Player:
     Exceptions:
     Extends:
     Implements:
-        Serializable, Cloneable
+        Serializable
 
 Class Ball:
     Fields:
@@ -74,10 +74,11 @@ Class Ball:
         - color
     Functions:
         jump
+        getPosition
     Exceptions:
     Extends:
     Implements:
-        Serializable, Cloneable
+        Serializable
 
 Class GameElements: (Abstract)
     Fields:
