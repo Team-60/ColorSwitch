@@ -28,8 +28,10 @@ Class Database (Load game screen / Leaderboard in show) [Controller] <Generic>
 
 Class Game:
     Fields:
-        - Player (Keep Info) (Player and game elements interact through ball)
+        - database (Association)
+        - Player (Keep Info) (Player and game elements interact through ball) (Association ?)
         - Game Elements
+        - ball
         - Mid line
         - starsForRestart
         - numElements (number of elements to spawn)
@@ -56,9 +58,7 @@ Class Player:
         - id
         - score
         - highscore
-        - ball
     Functions:
-        updateBall
         updateScore
         clone
     Exceptions:
@@ -79,14 +79,34 @@ Class Ball:
     Implements:
         Serializable, Cloneable
 
-Class GameElements:
+Class GameElements: (Abstract)
     Fields:
         - x
         - y
     Functions:
-        - spawn
-        - checkCollision
+        - spawn (Abstract)
+        - checkCollision (Abstract)
     Exceptions:
     Extends:
     Implements:
         Serializable
+
+Class Star:
+    Fields:
+        points ? static
+    Functions:
+        Overriding Abstract Methods
+    Exceptions:
+    Extends:
+        GameElements
+    Implements:
+
+Class SwitchColor:
+    Fields:
+    Functions:
+        Overriding Abstract Methods
+        giveNewColor
+    Exceptions:
+    Extends:
+        GameElements
+    Implements:
