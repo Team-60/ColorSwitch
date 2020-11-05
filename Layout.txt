@@ -92,6 +92,7 @@ Class GameElements: (Abstract)
         + spawn (Abstract)
         + refresh (Abstract)
         + checkCollision (Abstract)
+        + destroy (Abstract)
     Exceptions:
     Extends:
     Implements:
@@ -121,10 +122,10 @@ Class SwitchColor:
 
 Class Obstacle: (Abstract)
     Fields:
-        transalation speed
+        translation speed
         rotation speed
     Functions:
-        Abstract
+        Implementing Abstract
     Exceptions:
     Extends:
         GameElements
@@ -138,22 +139,24 @@ Class ObsCircle:
         spawn
         + refresh
         checkCollision
+        + destroy
     Exceptions:
     Extends:
         Obstacle
     Implements:
 
 Class ObsDoubleCircle:
-        Fields:
-            # radiusOut
-        Functions: (Override)
-            spawn
-            + refresh
-            checkCollision
-        Exceptions:
-        Extends:
-            ObsCircle
-        Implements:
+    Fields:
+        # radiusOut
+    Functions: (Override)
+        spawn
+        + refresh
+        checkCollision
+        + destroy
+    Exceptions:
+    Extends:
+        ObsCircle
+    Implements:
 
 Class ObsLine:
     Fields:
@@ -162,6 +165,7 @@ Class ObsLine:
         spawn
         + refresh
         checkCollision
+        + destroy
     Exceptions:
     Extends:
         Obstacle
@@ -174,6 +178,7 @@ Class ObsDoubleLine:
         spawn
         + refresh
         checkCollision
+        + destroy
     Exceptions:
     Extends:
         ObsLine
@@ -186,8 +191,13 @@ Class ObsSquare:
         spawn
         + refresh
         checkCollision
+        + destroy
     Exceptions:
     Extends:
         Obstacle
     Implements:
 
+Custom Exceptions:
+- Collision
+- Fell Down
+- Not enough stars for restart
