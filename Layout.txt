@@ -11,6 +11,7 @@ Class App (My main screen) [Controller]
         - loadGame(int PlayerId) { return Game; } (Similar to new Game : notice one player can only have one loadGame)
         - restartGame() { return Game; } (refresh all states except the player's info)
         - leaderBoard() { return Database<Player>; } (will only be accessed by leaderBoardController)
+        - removeGame(Game g) {from database based on if game is finished}
         - exit() { return void } (perform all cleanUp operations and exit the Application)
         getter/setter highscore
         + giveId()
@@ -18,6 +19,7 @@ Class App (My main screen) [Controller]
     Extends:
     Implements:
 
+# implements loadable, comparable (need getters for file_path, save position in game)
 Class Database (Load game screen / Leaderboard in show) <Generic>
     Fields:
         - MAX_SIZE (Overriding param)
@@ -25,24 +27,25 @@ Class Database (Load game screen / Leaderboard in show) <Generic>
     Functions:
         // I am not sure about these functions yet
         // depends on how you if we are using instanceOf or getting value using getter
-        + form() : void
+        + form(String filePath) : void
         + retrieveData() : ArrayList<T>
-        + update(T , pos) : void
+        + update(T , pos) : void (can use instanceOf here)
     Exceptions:
-        Exception (IO / ClassNotFound)
+        Exception (IO / ClassNotFound / ClassCast)
     Extends:
     Implements:
 
+# adding equals based on id of players, added destroyed parameter, and compareTo & the save slot (getters setters accordingly)
 Class Game:
     Fields:
         - App (Binary Association) (Stronger form of dependency)
         - Player (Keep Info) (Player and game elements interact through ball) (Association) (As a constructor param)
         - Game Elements
         - ball
-        - FILE_PATH (static final)
+        + FILE_PATH (static final)
         + MID_LINE (static final)
         + STARS_RESTART (static final)
-        + NUM_ELEMENTS (number of elements to spawn) (static final)
+        - NUM_ELEMENTS (number of elements to spawn) (static final)
     Functions:
         + refreshGameElements() { return void; } (ensure proper pairings between stars / obstacles / switches) (discard) (reflectChanges in gui counterpart)
         - moveScreenRelative() (apply offset) { return void; }
@@ -53,32 +56,32 @@ Class Game:
         + save() { return void; } (write to load file)
         + getApp() {return App; }
         + getPlayer() {return Player; }
-        + getFilePath() {return String; }
+        + setApp(App) {return void; }
     Exceptions:
         ObstacleCollision
         FellDown
         NotEnoughStarsForRestart
     Extends:
     Implements:
-        Serializable
+        Serializable, Comparable
 
 Class Player:
     Fields:
         - name // it is necessary ?
         - id
         - score
-        - FILE_PATH (static final)
+        + FILE_PATH (static final)
     Functions:
         getter/setters
         + incrementScore() { return void; }
         + compareTo(Player) { return int; }
-        + getFilePath {return string; }
         getters/setters for score, id, name
     Exceptions:
     Extends:
     Implements:
         Serializable, Comparable
 
+added getColor, setColor
 Class Ball:
     Fields:
         - x (static)

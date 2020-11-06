@@ -57,6 +57,10 @@
 - Not enough stars for restart
 - Std. IO/Class Not Found/
 
-### UML notes
-- Add constructors
-- Add sorting for players
+### UML & USE CASE notes
+- ~~Add constructors~~
+- ~~Add sorting for players~~
+- ~~Add actor for enter name ?~~
+- ~~what are extension points ?~~
+- ~~Can generalize interact with obstacle ?~~
+
