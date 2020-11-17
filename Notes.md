@@ -64,3 +64,5 @@
 - ~~what are extension points ?~~
 - ~~Can generalize interact with obstacle ?~~
 
+## Resources Deadline 2
+- Color Combination https://designschool.canva.com/wp-content/uploads/sites/2/2016/01/100_Brilliant_Color_combinations_Updated1.pdf
