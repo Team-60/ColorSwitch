@@ -66,3 +66,6 @@
 
 ## Resources Deadline 2
 - Color Combination https://designschool.canva.com/wp-content/uploads/sites/2/2016/01/100_Brilliant_Color_combinations_Updated1.pdf
+
+## Notes gui:
+- Pref width 450, height 700
