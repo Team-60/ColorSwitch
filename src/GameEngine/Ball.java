@@ -14,7 +14,7 @@ public class Ball {
     private double y;
     private double velocity;
     private Color color;
-    private GraphicsContext graphicsContext;
+    private final GraphicsContext graphicsContext;
 
     Ball(GraphicsContext graphicsContext) {
         x = 225;
@@ -22,7 +22,7 @@ public class Ball {
         radius = 10;
         velocity = 0;
         jumpSpeed = -500;
-        gravity = 1800;
+        gravity = 1900;
         midLine = 350;
         color = Color.RED;
         this.graphicsContext = graphicsContext;
@@ -37,7 +37,7 @@ public class Ball {
         velocity = jumpSpeed;
     }
 
-    public double move(long time) {
+    public double move(double time) {
         // TODO : tweaks to make jump animation good
         double distance = velocity * time + (gravity * time * time)/2;
         velocity += gravity * time;
@@ -48,7 +48,6 @@ public class Ball {
             y = 600;
             velocity = 0;
         }
-
         if (y < midLine) {
             double te = y;
             y = midLine;
