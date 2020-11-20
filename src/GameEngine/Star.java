@@ -17,7 +17,7 @@ public class Star extends GameElement{
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-        Image image = new Image("file:/home/zyrch/IdeaProjects/ColorSwitch/Assets/star.png");
+        Image image = new Image("file:C:\\Users\\DIVYANSH\\OneDrive\\Desktop\\College\\Sem3\\AP_Project_Keep\\ColorSwitch\\Assets\\star.png");
         double x = getX();
         double y = getY();
         x -= image.getWidth()/2;

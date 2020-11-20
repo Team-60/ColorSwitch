@@ -25,4 +25,7 @@ public abstract class Obstacle extends GameElement{
         rotationAngle += rotationalSpeed * time;
     }
 
+    public boolean checkNotEqual(Color a, Color b) {
+        return a.getRed() != b.getRed() || a.getGreen() != b.getGreen() || a.getBlue() != b.getBlue();
+    }
 }

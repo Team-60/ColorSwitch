@@ -18,7 +18,7 @@ public class SwitchColor extends GameElement{
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-        Image image = new Image("file:/home/zyrch/IdeaProjects/ColorSwitch/Assets/color_switcher_s.png");
+        Image image = new Image("file:C:\\Users\\DIVYANSH\\OneDrive\\Desktop\\College\\Sem3\\AP_Project_Keep\\ColorSwitch\\Assets\\color_switcher_s.png");
         double x = getX();
         double y = getY();
         x -= image.getWidth()/2;
@@ -32,10 +32,10 @@ public class SwitchColor extends GameElement{
             Color prev = ball.getColor();
             // If the number of colors in ball is small enough (== 1 or 2) infinite loop may occur
             Color color = prev;
-            while(color == prev) {
+            while (checkEqual(color, prev)) {
                 color = obstacle.getRandomColor();
             }
-            ball.setColor(obstacle.getRandomColor());
+            ball.setColor(color);
             destroy();
             points++;
             return true;
@@ -46,6 +46,10 @@ public class SwitchColor extends GameElement{
     @Override
     public void destroy() {
 
+    }
+
+    public boolean checkEqual(Color a, Color b) {
+        return !(a.getRed() != b.getRed() || a.getGreen() != b.getGreen() || a.getBlue() != b.getBlue());
     }
 
     public void setObstacle(Obstacle obstacle) {
