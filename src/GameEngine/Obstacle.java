@@ -10,7 +10,7 @@ public abstract class Obstacle extends GameElement{
 
     Obstacle(double x, double y, double safeDist) {
         super(x, y, safeDist);
-        rotationalSpeed = 45;
+        rotationalSpeed = 90;
         rotationAngle = 0;
     }
 

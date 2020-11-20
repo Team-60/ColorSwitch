@@ -50,8 +50,10 @@ public class Ball {
         }
         if (y < midLine) {
             double te = y;
-            y = midLine;
-            return midLine - te;
+            double offset = midLine - te;
+
+            y = midLine + offset * 0.0;
+            return offset * 1.0;
         }
         return 0;
     }
