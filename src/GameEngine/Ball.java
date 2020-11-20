@@ -60,6 +60,10 @@ public class Ball {
         return y;
     }
 
+    public double getRadius() {
+        return radius;
+    }
+
     public Color getColor() {
         return color;
     }

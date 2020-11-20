@@ -42,6 +42,9 @@ public class Game {
         ArrayList<GameElement> gameElementsTemp = new ArrayList<>();
         for (GameElement gameElement : gameElements) {
             if (!gameElement.checkCollision(ball) && gameElement.getY() < 1000) {
+                if (gameElement instanceof Obstacle) {
+                    ((Obstacle)gameElement).setRotationAngle(time);
+                }
                 gameElementsTemp.add(gameElement);
             }
         }
