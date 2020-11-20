@@ -56,4 +56,17 @@ public class Ball {
         return 0;
     }
 
+    public double getY() {
+        return y;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+
 }

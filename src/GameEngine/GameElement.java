@@ -33,7 +33,7 @@ public abstract class GameElement {
     // TODO: Should GameElement Contain instance of GraphicsContext
     // render == spawn
     public abstract void refresh(GraphicsContext graphicsContext);
-    public abstract void checkCollision(Ball ball);
+    public abstract boolean checkCollision(Ball ball);
     public abstract void destroy();
 
 }

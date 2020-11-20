@@ -2,40 +2,48 @@ package GameEngine;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.FillRule;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class ObsCircle extends Obstacle{
 
-    public static double closestSafeDist = 100;     // TODO: not final
-    public double radius;
-    public double innerRadius;
-    public double width;
-    public Renderer renderer;
+    private static final double closestSafeDist = 100;     // TODO: not final
+    private final double radius;
+    private final double innerRadius;
+    private final ArrayList<Color> colors = new ArrayList<>()
+    {{
+        add(Color.web("F6DF0E"));
+        add(Color.web("8E11FE"));
+        add(Color.web("32E1F4"));
+        add(Color.web("FD0082"));
+    }};           // Note : differs from UML
 
     ObsCircle(double x, double y, double closestSafeDist, double radius, double width) {
         super(x, y, closestSafeDist);
         this.radius = radius;
-        this.width = width;
+        this.innerRadius = radius - width;
+    }
+
+    ObsCircle(double x, double y, double radius, double width) {
+        super(x, y, closestSafeDist);
+        this.radius = radius;
         this.innerRadius = radius - width;
     }
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-        renderer = new Renderer(graphicsContext);
-        Color Yellow = Color.web("F6DF0E");
-        Color Purple = Color.web("8E11FE");
-        Color Cyan = Color.web("32E1F4");
-        Color Pink = Color.web("FD0082");
-        renderer.drawArc(getX(), getY(), radius, innerRadius, Yellow, Yellow, 0);
-        renderer.drawArc(getX(), getY(), radius, innerRadius, Cyan, Cyan, 1);
-        renderer.drawArc(getX(), getY(), radius, innerRadius, Pink, Pink, 2);
-        renderer.drawArc(getX(), getY(), radius, innerRadius, Purple, Purple, 3);
+        Renderer renderer = new Renderer(graphicsContext);
+        int angle = 0;
+        for (Color color : colors) {
+            renderer.drawArc(getX(), getY(), radius, innerRadius, color, color, angle++);
+        }
     }
 
 
     @Override
-    public void checkCollision(Ball ball) {
-
+    public boolean checkCollision(Ball ball) {
+        return false;
     }
 
     @Override
@@ -43,4 +51,9 @@ public class ObsCircle extends Obstacle{
 
     }
 
+    @Override
+    public Color getRandomColor() {
+        Random random = new Random();
+        return colors.get(random.nextInt(colors.size()));
+    }
 }

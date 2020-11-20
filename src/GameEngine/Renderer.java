@@ -103,8 +103,4 @@ public class Renderer {
         }
         return xx + centerY;
     }
-
-
-
-
 }
