@@ -4,6 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+
 public class Star extends GameElement{
 
     // TODO: why is this useful??
@@ -17,7 +19,7 @@ public class Star extends GameElement{
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-        Image image = new Image("file:C:\\Users\\DIVYANSH\\OneDrive\\Desktop\\College\\Sem3\\AP_Project_Keep\\ColorSwitch\\Assets\\star.png");
+        Image image = new Image(new File("src/assets/star.png").toURI().toString());
         double x = getX();
         double y = getY();
         x -= image.getWidth()/2;

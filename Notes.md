@@ -49,7 +49,7 @@
 
 ### Resources
 - https://gist.github.com/Roland09/71ef45f14d0ec2a353e6 (Particle system)
-- https://github.com/crt09/Color-Switch (Assets)
+- https://github.com/crt09/Color-Switch (assets)
 
 ### Exceptions
 - Collision

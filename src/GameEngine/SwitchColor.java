@@ -4,6 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+
 public class SwitchColor extends GameElement{
 
     // TODO: why is this useful??
@@ -18,7 +20,7 @@ public class SwitchColor extends GameElement{
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-        Image image = new Image("file:C:\\Users\\DIVYANSH\\OneDrive\\Desktop\\College\\Sem3\\AP_Project_Keep\\ColorSwitch\\Assets\\color_switcher_s.png");
+        Image image = new Image(new File("src/assets/color_switcher_s.png").toURI().toString());
         double x = getX();
         double y = getY();
         x -= image.getWidth()/2;
