@@ -70,7 +70,7 @@ public class ObsCircle extends Obstacle{
 
             return isCollided;
 
-        }else if (top > getY() - radius && top < getY() - innerRadius) {
+        } else if (top > getY() - radius && top < getY() - innerRadius) {
 
             int angle = (int) (getRotationAngle() % 360);
             boolean isCollided = false;
