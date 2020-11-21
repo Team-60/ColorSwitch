@@ -20,7 +20,7 @@ public class SwitchColor extends GameElement{
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-        Image image = new Image(new File("src/assets/color_switcher_s.png").toURI().toString());
+        Image image = new Image(new File("src/assets/gameplay/color_switcher_s.png").toURI().toString());
         double x = getX();
         double y = getY();
         x -= image.getWidth()/2;
