@@ -154,7 +154,12 @@ public class MainPageController {
         Scene scene = this.app.getScene();
         StackPane rootContainer = (StackPane) scene.getRoot();
         rootContainer.getChildren().remove(mainPageRoot);
-        new GameApp(scene);
+        try {
+            new GameApp(scene);
+        } catch (IOException e) {
+            System.out.println("New game failed to load!");
+            e.printStackTrace();
+        }
     }
 
     @FXML

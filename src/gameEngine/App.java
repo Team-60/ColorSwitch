@@ -20,6 +20,8 @@ import java.io.IOException;
 Divyansh's:
 TODO: Add go back option, load game page
 TODO: Beware of file changes and refactoring, especially in file paths while making jar
+TODO: Add effects for gameplay
+TODO: Add pause game button with screen
 */
 
 public class App extends Application {

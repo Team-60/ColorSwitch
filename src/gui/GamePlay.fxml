@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GamePlayController">
+   <children>
+      <Canvas height="700.0" width="450.0" />
+      <ImageView fitHeight="66.0" fitWidth="74.0" layoutX="368.0" layoutY="14.0" onMouseClicked="#pausePressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/possibleBg/3.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
