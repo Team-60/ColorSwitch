@@ -125,8 +125,6 @@ public class Game {
             graphicsContext.fillText("Game Over", 225, 350);
             return;
         }
-
-
         for (GameElement gameElement : gameElements) {
             gameElement.refresh(graphicsContext);
         }

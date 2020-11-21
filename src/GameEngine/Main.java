@@ -36,7 +36,7 @@ public class Main extends Application {
 
         Game game = new Game(graphicsContext);
 
-        // TODO: find a class to put AnimationTimer in
+        //comTODO: find a class to put AnimationTimer in
         new AnimationTimer() {
             long previousFrameTime = -1;
             @Override
