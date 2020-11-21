@@ -1,10 +1,9 @@
-package GameEngine;
+package gameEngine;
 
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;

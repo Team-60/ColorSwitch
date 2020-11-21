@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane fx:id="mainPageRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" style="-fx-background-color: #03060F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainPageController">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="450.0" opacity="0.75" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/mainPage/bg.png" />
+         </image>
+      </ImageView>
+      <Group layoutX="50.0" layoutY="4.0">
+         <children>
+            <ImageView fitHeight="255.0" fitWidth="367.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/mainPage/headingWithoutRing.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logoRingL" fitHeight="65.0" fitWidth="58.0" layoutX="99.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/mainPage/colorCircleSmallWide.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logoRingR" fitHeight="65.0" fitWidth="58.0" layoutX="204.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/mainPage/colorCircleSmallWide.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <ImageView fx:id="outerPlayRing" fitHeight="228.0" fitWidth="223.0" layoutX="113.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/mainPage/colorCircle.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="innerPlayRing" fitHeight="167.0" fitWidth="167.0" layoutX="141.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../assets/mainPage/colorCircle.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="117.0" fitWidth="118.0" layoutX="166.0" layoutY="293.0" onMouseClicked="#playPressed" onMouseEntered="#playHoverActive" onMouseExited="#playHoverInactive" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/mainPage/play.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="iconLB" layoutX="44.0" layoutY="598.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
+         <children>
+            <Circle fx:id="circleLB" fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <ImageView fx:id="imgLB" fitHeight="65.0" fitWidth="73.0" layoutX="13.0" layoutY="10.0" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/mainPage/leaderboard.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="iconLoad" layoutX="181.0" layoutY="598.0" onMouseClicked="#loadGamePressed" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
+         <children>
+            <Circle fx:id="circleLoad" fill="YELLOW" layoutX="44.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <ImageView fx:id="imgLoad" fitHeight="65.0" fitWidth="73.0" layoutX="11.0" layoutY="11.0" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/mainPage/load.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="iconExit" layoutX="318.0" layoutY="598.0" onMouseClicked="#exitPressed" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
+         <children>
+            <Circle fx:id="circleExit" fill="YELLOW" layoutX="46.0" layoutY="47.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <ImageView fx:id="imgExit" fitHeight="65.0" fitWidth="73.0" layoutX="16.0" layoutY="17.0" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/mainPage/exit.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>
