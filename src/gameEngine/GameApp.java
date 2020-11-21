@@ -1,42 +1,28 @@
-package GameEngine;
+package gameEngine;
 
 import javafx.animation.AnimationTimer;
-import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
-public class Main extends Application {
+// This simulates a controller
+public class GameApp {
 
     static double HEIGHT = 700;
     static double WIDTH = 450;
-    static GraphicsContext graphicsContext;
-    @Override
-    public void start(Stage stage) {
+    GraphicsContext graphicsContext;
 
-        Group root = new Group();
+    public GameApp(Scene scene) {
+
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
-        root.getChildren().add(canvas);
+        this.graphicsContext = canvas.getGraphicsContext2D();
 
-        graphicsContext = canvas.getGraphicsContext2D();
-
-        Scene scene = new Scene(root);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
-
-        stage.setResizable(false);
-        stage.show();
+        StackPane stackPane = (StackPane) scene.getRoot();
+        stackPane.getChildren().add(canvas);
 
         Game game = new Game(graphicsContext);
 
@@ -69,9 +55,5 @@ public class Main extends Application {
             }
         });
 
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
