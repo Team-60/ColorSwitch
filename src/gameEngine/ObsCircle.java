@@ -57,9 +57,14 @@ public class ObsCircle extends Obstacle{
     public boolean checkCollision(Ball ball) {
 
         double top = ball.getY() - ball.getRadius();
-        if (top < getY() + radius && top > getY() + innerRadius) {
-            int angle = (int) (getRotationAngle() % 360);
-            boolean isCollided = false;
+        double bottom = ball.getY() + ball.getRadius();
+        int posAngle = (int)getRotationAngle();
+        while(posAngle < 0) posAngle += 360;
+        int angle = posAngle % 360;
+        boolean isCollided = false;
+
+        if ((top < getY() + radius && top > getY() + innerRadius) || (bottom < getY() + radius && bottom > getY() + innerRadius)) {
+
             if (angle > 355 || (angle > 0 && angle < 95)) {
                 isCollided = checkNotEqual(colors.get(2), ball.getColor());
             }
@@ -69,16 +74,11 @@ public class ObsCircle extends Obstacle{
             if (angle > 175 && angle < 275) {
                 isCollided |= checkNotEqual(colors.get(0), ball.getColor());
             }
-            if ((angle > 265 && angle < 360) || (angle < 5)) {
+            if ((angle > 265) || (angle < 5)) {
                 isCollided |= checkNotEqual(colors.get(3), ball.getColor());
             }
+        } else if ((top > getY() - radius && top < getY() - innerRadius) || (bottom > getY() - radius && bottom < getY() - innerRadius) ) {
 
-            return isCollided;
-
-        } else if (top > getY() - radius && top < getY() - innerRadius) {
-
-            int angle = (int) (getRotationAngle() % 360);
-            boolean isCollided = false;
             if (angle > 355 || (angle > 0 && angle < 95)) {
                 isCollided = checkNotEqual(colors.get(0), ball.getColor());
             }
@@ -88,13 +88,12 @@ public class ObsCircle extends Obstacle{
             if (angle > 175 && angle < 275) {
                 isCollided |= checkNotEqual(colors.get(2), ball.getColor());
             }
-            if ((angle > 265 && angle < 360) || (angle < 5)) {
+            if ((angle > 265) || (angle < 5)) {
                 isCollided |= checkNotEqual(colors.get(1), ball.getColor());
             }
-            return isCollided;
         }
 
-        return false;
+        return isCollided;
     }
 
     @Override
