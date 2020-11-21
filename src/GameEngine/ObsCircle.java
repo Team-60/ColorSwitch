@@ -11,7 +11,12 @@ public class ObsCircle extends Obstacle{
     private static final double closestSafeDist = 100;     // TODO: not final
     private final double radius;
     private final double innerRadius;
-    private final ArrayList<Color> colors = new ArrayList<>()
+
+    public void setColors(ArrayList<Color> colors) {
+        this.colors = colors;
+    }
+
+    private ArrayList<Color> colors = new ArrayList<>()
     {{
         add(Color.web("F6DF0E"));
         add(Color.web("8E11FE"));
@@ -86,9 +91,7 @@ public class ObsCircle extends Obstacle{
             if ((angle > 265 && angle < 360) || (angle < 5)) {
                 isCollided |= checkNotEqual(colors.get(1), ball.getColor());
             }
-
             return isCollided;
-
         }
 
         return false;

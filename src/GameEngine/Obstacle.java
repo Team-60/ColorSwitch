@@ -21,7 +21,15 @@ public abstract class Obstacle extends GameElement{
         return rotationAngle;
     }
 
-    void setRotationAngle(double time) {
+    public void addRotationalAngle(double rotationalAngle) {
+        this.rotationAngle += rotationalAngle;
+    }
+
+    public double getRotationalSpeed() {
+        return rotationalSpeed;
+    }
+
+    void updateRotationAngle(double time) {
         rotationAngle += rotationalSpeed * time;
     }
 

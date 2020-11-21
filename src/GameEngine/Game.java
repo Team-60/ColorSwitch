@@ -1,14 +1,20 @@
 package GameEngine;
 
+import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 
 public class Game {
 
-    Ball ball;
-    ArrayList<GameElement> gameElements;
-    GraphicsContext graphicsContext;
+    private Ball ball;
+    private int score;
+    private ArrayList<GameElement> gameElements;
+    private GraphicsContext graphicsContext;
     Game(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
         ball = new Ball(graphicsContext);
@@ -41,9 +47,13 @@ public class Game {
         // remove unwanted objects
         ArrayList<GameElement> gameElementsTemp = new ArrayList<>();
         for (GameElement gameElement : gameElements) {
-            if (!gameElement.checkCollision(ball) && gameElement.getY() < 1000) {
+            if (gameElement.checkCollision(ball)) {
+                if (gameElement instanceof Star) score++;
+                continue;
+            }
+            if (gameElement.getY() < 1000) {
                 if (gameElement instanceof Obstacle) {
-                    ((Obstacle)gameElement).setRotationAngle(time);
+                    ((Obstacle)gameElement).updateRotationAngle(time);
                 }
                 gameElementsTemp.add(gameElement);
             }
@@ -69,6 +79,7 @@ public class Game {
             }else {
                 y = prev.getY() - prev.getClosestSafeDist();
             }
+//            GameElement obsCircle = new ObsDoubleCircle(x, y, 380 , 115, 90, 15);
             GameElement obsCircle = new ObsCircle(x, y, 350, 90, 15);
             GameElement star = new Star(x, y);
             GameElement switchColor = new SwitchColor(x, y - obsCircle.getClosestSafeDist()/2);
@@ -85,6 +96,13 @@ public class Game {
                 ((SwitchColor) prev).setObstacle((Obstacle)gameElement);
             }
         }
+
+        // displayScore
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.setTextAlign(TextAlignment.CENTER);
+        graphicsContext.setTextBaseline(VPos.CENTER);
+        graphicsContext.setFont(new Font("Monospaced", 60));
+        graphicsContext.fillText(Integer.toString(score), 50, 60);
 
     }
 
