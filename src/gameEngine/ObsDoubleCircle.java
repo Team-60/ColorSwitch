@@ -16,9 +16,9 @@ public class ObsDoubleCircle extends ObsCircle {
         add(Color.web("8E11FE"));
     }};             // Note : differs from UML
 
-    ObsDoubleCircle(double x, double y, double closestSafeDist, double innerRadius, double outerRadius, double width) {
-        super(x, y, closestSafeDist, outerRadius, width);
-        innerCircle = new ObsCircle(x, y, closestSafeDist, innerRadius, width);
+    ObsDoubleCircle(double x, double y, double innerRadius, double outerRadius, double width) {
+        super(x, y, outerRadius, width);
+        innerCircle = new ObsCircle(x, y, innerRadius, width);
         addRotationalAngle(45);
         innerCircle.addRotationalAngle(45);
         setColors(colors);

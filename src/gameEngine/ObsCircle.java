@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class ObsCircle extends Obstacle{
 
-    private static final double closestSafeDist = 100;     // TODO: not final
     private final double radius;
     private final double innerRadius;
 
@@ -24,14 +23,8 @@ public class ObsCircle extends Obstacle{
         add(Color.web("FD0082"));
     }};           // Note : differs from UML
 
-    ObsCircle(double x, double y, double closestSafeDist, double radius, double width) {
-        super(x, y, closestSafeDist);
-        this.radius = radius;
-        this.innerRadius = radius - width;
-    }
-
     ObsCircle(double x, double y, double radius, double width) {
-        super(x, y, closestSafeDist);
+        super(x, y, radius);
         this.radius = radius;
         this.innerRadius = radius - width;
     }

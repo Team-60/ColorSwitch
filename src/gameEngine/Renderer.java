@@ -6,11 +6,24 @@ import javafx.scene.shape.FillRule;
 
 public class Renderer {
 
+    public final static int WIDTH = 450;
+    public final static int HEIGHT = 700;
     // to handle gui components
     GraphicsContext graphicsContext;
 
     Renderer(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
+    }
+
+    // draw rectangle that curves around screen
+    public void drawFoldingRed(double topLeftX, double topLeftY, double width, double length, Color color) {
+
+        graphicsContext.setFill(color);
+        graphicsContext.fillRect(topLeftX, topLeftY, width, length);
+        if (topLeftX + width > WIDTH) {
+            graphicsContext.fillRect(0,topLeftY, topLeftX + width - WIDTH, length);
+        }
+
     }
 
     public void drawArc(double centerX, double centerY, double radius, double innerRadius, Color bgColor, Color strokeColor, int angle) {
