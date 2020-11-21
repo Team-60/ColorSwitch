@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Game {
 
     private Ball ball;
+    private boolean gameOver = false;
     private int score;
     private ArrayList<GameElement> gameElements;
     private GraphicsContext graphicsContext;
@@ -39,6 +40,7 @@ public class Game {
     }
 
     public void checkAndUpdate(double time) {
+        if (gameOver) return;
         double offset = ball.move(time);
         moveScreenRelative(offset);
         double y = 350;
@@ -49,6 +51,7 @@ public class Game {
         for (GameElement gameElement : gameElements) {
             if (gameElement.checkCollision(ball)) {
                 if (gameElement instanceof Star) score++;
+                if (gameElement instanceof Obstacle) gameOver = false;
                 continue;
             }
             if (gameElement.getY() < 1000) {
@@ -59,6 +62,7 @@ public class Game {
             }
         }
         gameElements = gameElementsTemp;
+
 
         boolean touched = true;
         GameElement prev = null;
@@ -79,8 +83,8 @@ public class Game {
             }else {
                 y = prev.getY() - prev.getClosestSafeDist();
             }
-//            GameElement obsCircle = new ObsDoubleCircle(x, y, 380 , 115, 90, 15);
-            GameElement obsCircle = new ObsCircle(x, y, 350, 90, 15);
+            GameElement obsCircle = new ObsDoubleCircle(x, y, 380 , 115, 90, 15);
+//            GameElement obsCircle = new ObsCircle(x, y, 350, 90, 15);
             GameElement star = new Star(x, y);
             GameElement switchColor = new SwitchColor(x, y - obsCircle.getClosestSafeDist()/2);
             gameElements.add(obsCircle);
@@ -112,10 +116,23 @@ public class Game {
 
     public void refreshGameElements() {
 
+        if (gameOver) {
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.setTextAlign(TextAlignment.CENTER);
+            graphicsContext.setTextBaseline(VPos.CENTER);
+            graphicsContext.setFont(new Font("Monospaced", 60));
+            graphicsContext.fillText("Game Over", 225, 350);
+            graphicsContext.fillText("Game Over", 225, 350);
+            return;
+        }
+
+
         for (GameElement gameElement : gameElements) {
             gameElement.refresh(graphicsContext);
         }
         ball.refresh();
     }
+
+
 
 }

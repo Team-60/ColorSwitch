@@ -9,13 +9,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main extends Application {
 
@@ -53,7 +49,7 @@ public class Main extends Application {
                 previousFrameTime = currentNanoTime;
 
                 graphicsContext.clearRect(0, 0, WIDTH, HEIGHT);
-                graphicsContext.setFill(Color.BLACK);
+                graphicsContext.setFill(Color.web("0D152C"));
                 graphicsContext.fillRect(0, 0, WIDTH, HEIGHT);
                 game.checkAndUpdate(timeDifference);
                 game.refreshGameElements();
