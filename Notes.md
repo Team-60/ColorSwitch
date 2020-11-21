@@ -70,3 +70,4 @@
 ## Notes gui:
 - Pref width 450, height 700
 - Color Yellow: F6DF0E Purple: 8E11FE Blue: 32E1F4 Pink: FD0082
+- keep in mind, referencing of loaders & objects
