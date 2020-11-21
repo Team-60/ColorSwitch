@@ -1,5 +1,6 @@
 package gui;
 
+import gameEngine.App;
 import gameEngine.GameApp;
 import javafx.animation.*;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class MainPageController {
-    private MainPage mainPage;
+    private App app;
     private HashMap<Group, Circle> iconCircleMap;
     private HashMap<Group, ImageView> iconImgMap;
     private AudioClip hoverSound;
@@ -62,8 +63,8 @@ public class MainPageController {
     @FXML
     private ImageView logoRingR;
 
-    public void init(MainPage _mainPage) {
-        this.mainPage = _mainPage;
+    public void init(App _app) {
+        this.app = _app;
 
         this.iconCircleMap = new HashMap<>();
         this.iconCircleMap.put(iconLB, circleLB);
@@ -140,7 +141,7 @@ public class MainPageController {
 
     @FXML
     public void exitPressed() throws InterruptedException {
-        this.mainPage.getMediaPlayer().stop();
+        this.app.getMediaPlayer().stop();
         this.exitSound.play();
         System.out.println("Game ded :(");
         Thread.sleep(500);
@@ -150,7 +151,7 @@ public class MainPageController {
     @FXML
     public void playPressed() {
         this.clickSound.play();
-        Scene scene = this.mainPage.getScene();
+        Scene scene = this.app.getScene();
         StackPane rootContainer = (StackPane) scene.getRoot();
         rootContainer.getChildren().remove(mainPageRoot);
         new GameApp(scene);
@@ -159,7 +160,7 @@ public class MainPageController {
     @FXML
     public void loadGamePressed() throws IOException {
         this.clickSound.play();
-        Scene scene = this.mainPage.getScene();
+        Scene scene = this.app.getScene();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoadGamePage.fxml"));
         Parent loadGameRoot = loader.load();
         LoadGamePageController loadGamePageController = loader.getController(); // init the controller
