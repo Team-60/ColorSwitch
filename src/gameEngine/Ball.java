@@ -75,4 +75,7 @@ public class Ball {
     }
 
 
+    public double getX() {
+        return x;
+    }
 }

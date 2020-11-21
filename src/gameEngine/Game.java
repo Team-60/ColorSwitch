@@ -126,7 +126,7 @@ public class Game {
         if (randomNumber == 0) {
             return (new ObsCircle(x, y - 90, 90, 15));
         }else if (randomNumber == 1) {
-            return new Line(x, y - 15,15);
+            return new Line(x, y - 7.5,15);
         }else {
             return new ObsDoubleCircle(x, y - 115, 90, 115, 15);
         }

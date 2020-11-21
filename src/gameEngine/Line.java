@@ -30,7 +30,7 @@ public class Line extends Obstacle {
         // x can be anything doesn't matter
         // y is the higher part of line
         // safeDist is zero as y is the higher part
-        super(x, y, 0);
+        super(x, y, length/2);
         this.length = length;
         renderer = null;
         setTranslationSpeed(90);
@@ -42,11 +42,11 @@ public class Line extends Obstacle {
         if (renderer == null) {
             renderer = new Renderer(graphicsContext);
         }
-        double topLeft = getStartingPoint();
+        double Left = getStartingPoint();
         for (int i = 0; i < 4; ++i) {
-            renderer.drawFoldingRed(topLeft, getY(), width, length, colors.get(i));
-            topLeft += width;
-            topLeft %= GameApp.WIDTH;
+            renderer.drawFoldingRed(Left, getY() - length/2, width, length, colors.get(i));
+            Left += width;
+            Left %= GameApp.WIDTH;
         }
     }
 
@@ -54,6 +54,19 @@ public class Line extends Obstacle {
 
     @Override
     public boolean checkCollision(Ball ball) {
+
+        double top = ball.getY() - ball.getRadius();
+        double bottom = ball.getY() + ball.getRadius();
+        double Left = getStartingPoint();
+        if ((top < getY() + length/2 && top > getY() - length/2) || (bottom < getY() + length/2 && bottom > getY() - length/2)) {
+            for (int i = 0; i < 4; ++i) {
+                if (ball.getX() > Left && ball.getX() < Left + width) {
+                    return checkNotEqual(colors.get(i), ball.getColor());
+                }
+                Left += width;
+            }
+        }
+
         return false;
     }
 
