@@ -51,8 +51,6 @@ public class Line extends Obstacle {
         }
     }
 
-
-
     @Override
     public boolean checkCollision(Ball ball) {
 

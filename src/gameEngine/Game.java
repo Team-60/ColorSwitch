@@ -2,10 +2,12 @@ package gameEngine;
 
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,6 +20,7 @@ public class Game {
     private static final int numberofObstacle = 3;
     private static final double distanceBetweenObstacles = 150;
 
+
     Game(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
         ball = new Ball(graphicsContext);
@@ -26,7 +29,6 @@ public class Game {
         x = 225;
         y = 350;
         gameElements = new ArrayList<>();
-
         Obstacle obstacle = new ObsCircle(225, 350, 90, 15);
         GameElement star = new Star(x, y);
         GameElement switchColor = new SwitchColor(x, y - obstacle.getClosestSafeDist() - distanceBetweenObstacles/2);
@@ -43,6 +45,7 @@ public class Game {
     }
 
     public void checkAndUpdate(double time) {
+
         double offset = ball.move(time);
         moveScreenRelative(offset);
         double y = 350;
@@ -120,6 +123,7 @@ public class Game {
             gameElement.refresh(graphicsContext);
         }
         ball.refresh();
+
     }
 
     public Obstacle getRandomObstacle(double x, double y) {

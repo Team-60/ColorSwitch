@@ -1,7 +1,10 @@
 package gameEngine;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
+import java.io.File;
 
 public class Ball {
 
@@ -11,10 +14,12 @@ public class Ball {
     private final double x;
     private final double midLine;
 
+    private double handPosition = 570;
     private double y;
     private double velocity;
     private Color color;
     private final GraphicsContext graphicsContext;
+    private Image hand;
 
     Ball(GraphicsContext graphicsContext) {
         x = 225;
@@ -26,11 +31,15 @@ public class Ball {
         midLine = 350;
         color = Color.RED;
         this.graphicsContext = graphicsContext;
+        hand = new Image(new File("src/assets/gameplay/hand_s.png").toURI().toString());
     }
 
     public void refresh() {
         graphicsContext.setFill(color);
         graphicsContext.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
+        if (handPosition < 900) {
+            graphicsContext.drawImage(hand, x - 17, handPosition + 15);
+        }
     }
 
     public void jump() {
@@ -44,15 +53,15 @@ public class Ball {
         y += distance;
 
         // TODO : add hand
-        if (y > 600) {
-            y = 600;
+        if (y > handPosition) {
+            y = handPosition;
             velocity = 0;
         }
         if (y < midLine) {
             double te = y;
             double offset = midLine - te;
-
             y = midLine + offset * 0.0;
+            handPosition += offset;
             return offset * 1.0;
         }
         return 0;
