@@ -19,8 +19,8 @@ public class ObsDoubleCircle extends ObsCircle {
     ObsDoubleCircle(double x, double y, double innerRadius, double outerRadius, double width) {
         super(x, y, outerRadius, width);
         innerCircle = new ObsCircle(x, y, innerRadius, width);
-        addRotationalAngle(45);
-        innerCircle.addRotationalAngle(45);
+        rotationAngle = 45;
+        innerCircle.setRotationAngle(45);
         setColors(colors);
     }
 
@@ -32,7 +32,6 @@ public class ObsDoubleCircle extends ObsCircle {
 
     @Override
     public boolean checkCollision(Ball ball) {
-
         return super.checkCollision(ball) || innerCircle.checkCollision(ball);
     }
 
@@ -42,16 +41,15 @@ public class ObsDoubleCircle extends ObsCircle {
     }
 
     @Override
-    void applyOffset(double offset) {
+    public void applyOffset(double offset) {
         super.applyOffset(offset);
         innerCircle.applyOffset(offset);
     }
 
     @Override
-    void updateRotationAngle(double time) {
-        addRotationalAngle(getRotationalSpeed() * time);
-        innerCircle.addRotationalAngle(-getRotationalSpeed() * time);
+    public void update(double time) {
+        super.update(time);
+        innerCircle.update(-time);
     }
-
 
 }
