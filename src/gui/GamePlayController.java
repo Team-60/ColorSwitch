@@ -1,19 +1,32 @@
 package gui;
 
-import gameEngine.Game;
 import gameEngine.GamePlay;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+
+import java.io.IOException;
 
 public class GamePlayController {
     private GamePlay gamePlay;
     private Boolean paused;
+    private AnchorPane pausePane;
+    private PauseOverlayController pauseOverlayController;
+
     @FXML
     private Button button;
-    public void init(GamePlay _gamePlay) {
+    public void init(GamePlay _gamePlay) throws IOException {
         this.gamePlay = _gamePlay;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseOverlay.fxml"));
+        this.pausePane = loader.load();
+        this.pauseOverlayController = loader.getController();
+
         this.button.setStyle("-fx-background-radius: 200px; -fx-background-color: #808588");
         this.paused = false;
     }
@@ -29,21 +42,26 @@ public class GamePlayController {
         this.button.setScaleY(1);
         this.button.setStyle("-fx-background-radius: 200px; -fx-background-color: #808588");
     }
-    @FXML
+    @FXML // remember to add event handler for canvas again after unpause
     public void pausePressed() { // most probably have to serialize here to pause (Naah but might use if saved from there), focus shifts to button (IMP)
-        System.out.println("Pause Pressed Gameplay");
         AnimationTimer animationTimer = this.gamePlay.getAnimationTimer();
-        if (this.paused) {
-            System.out.println("Game State: paused");
-            this.paused = false;
-            this.gamePlay.getCanvas().requestFocus();
-            animationTimer.start();
-        }
-        else {
-            System.out.println("Game State: play");
-            this.paused = true;
-            GamePlay.PreviousFrameTime = -1;
-            animationTimer.stop();
-        }
+        Scene scene = this.button.getScene();
+        StackPane rootContainer = (StackPane) scene.getRoot();
+
+        assert (this.paused == false);
+        System.out.println(this.getClass().toString() + "Pause pressed");
+        this.paused = true;
+        GamePlay.PreviousFrameTime = -1;
+        animationTimer.stop();
+        this.gamePlay.getCanvas().removeEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
+        rootContainer.getChildren().add(this.pausePane);
+        this.pausePane.requestFocus(); // very very important
+        this.pauseOverlayController.init();
+
+//            System.out.println("Game State: paused"); UNPAUSE LOGIC
+//            this.paused = false;
+//            rootContainer.getChildren().remove(this.pausePane);
+//            this.gamePlay.getCanvas().requestFocus(); // very very IMP
+//            animationTimer.start();
     }
 }
