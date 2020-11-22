@@ -30,17 +30,17 @@ public class GamePlayController {
         this.button.setStyle("-fx-background-radius: 200px; -fx-background-color: #808588");
     }
     @FXML
-    public void pausePressed() { // most probably have to serialize here to pause, focus shifts to button (IMP)
+    public void pausePressed() { // most probably have to serialize here to pause (Naah but might use if saved from there), focus shifts to button (IMP)
         System.out.println("Pause Pressed Gameplay");
         AnimationTimer animationTimer = this.gamePlay.getAnimationTimer();
         if (this.paused) {
-            System.out.println("paused again");
+            System.out.println("Game State: paused");
             this.paused = false;
             this.gamePlay.getCanvas().requestFocus();
             animationTimer.start();
         }
         else {
-            System.out.println("play again");
+            System.out.println("Game State: play");
             this.paused = true;
             GamePlay.PreviousFrameTime = -1;
             animationTimer.stop();
