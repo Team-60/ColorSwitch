@@ -21,7 +21,8 @@ Divyansh's:
 TODO: Add go back option, load game page
 TODO: Beware of file changes and refactoring, especially in file paths while making jar
 TODO: Add effects for gameplay
-TODO: Add pause game button with screen
+TODO: Add game buttons on pause game screen
+TODO: Better game over screen, link it with gameplay, and have boolean for end in GamePlay
 */
 
 public class App extends Application {
@@ -48,6 +49,7 @@ public class App extends Application {
         mainPageController.init(this);
 
         StackPane rootContainer = new StackPane(root); // roots of this stack pane will be switched
+        rootContainer.setStyle("-fx-background-color :  #03060F;"); // for pixel based positioning issues
         primaryStage.initStyle(StageStyle.UNDECORATED);
         this.scene = new Scene(rootContainer); // scene's root is the rootContainer (stackPane) whose root is our switching panes
         this.scene.setCursor(new ImageCursor(new Image(new File("src/assets/mainPage/cursor.png").toURI().toString())));
