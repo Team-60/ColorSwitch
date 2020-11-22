@@ -105,7 +105,7 @@ public class Game {
         graphicsContext.setTextAlign(TextAlignment.CENTER);
         graphicsContext.setTextBaseline(VPos.CENTER);
         graphicsContext.setFont(new Font("Monospaced", 60));
-        graphicsContext.fillText(Integer.toString(score), 50, 38);
+        graphicsContext.fillText(Integer.toString(score), 50, 60);
     }
 
     public void registerJump() {

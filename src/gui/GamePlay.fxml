@@ -9,7 +9,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GamePlayController">
    <children>
       <Canvas height="700.0" width="450.0" />
-      <Button fx:id="button" layoutX="381.0" layoutY="14.0" mnemonicParsing="false" onAction="#pausePressed" onMouseEntered="#pauseHoverActive" onMouseExited="#pauseHoverInactive" prefHeight="54.0" prefWidth="54.0">
+      <Button fx:id="button" layoutX="370.0" layoutY="30.0" mnemonicParsing="false" onAction="#pausePressed" onMouseEntered="#pauseHoverActive" onMouseExited="#pauseHoverInactive" prefHeight="54.0" prefWidth="54.0">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
