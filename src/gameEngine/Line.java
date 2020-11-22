@@ -33,7 +33,7 @@ public class Line extends Obstacle {
         super(x, y, length/2);
         this.length = length;
         renderer = null;
-        setTranslationSpeed(90);
+        translationSpeed = 90;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Line extends Obstacle {
         if (renderer == null) {
             renderer = new Renderer(graphicsContext);
         }
-        double Left = getStartingPoint();
+        double Left = startingPoint;
         for (int i = 0; i < 4; ++i) {
             renderer.drawFoldingRed(Left, getY() - length/2, width, length, colors.get(i));
             Left += width;
@@ -57,7 +57,7 @@ public class Line extends Obstacle {
 
         double top = ball.getY() - ball.getRadius();
         double bottom = ball.getY() + ball.getRadius();
-        double Left = getStartingPoint();
+        double Left = startingPoint;
         if ((top < getY() + length/2 && top > getY() - length/2) || (bottom < getY() + length/2 && bottom > getY() - length/2)) {
             for (int i = 0; i < 4; ++i) {
                 if (ball.getX() > Left && ball.getX() < Left + width) {
@@ -73,6 +73,12 @@ public class Line extends Obstacle {
     @Override
     public void destroy() {
 
+    }
+
+    @Override
+    public void update(double time) {
+        startingPoint += translationSpeed * time;
+        startingPoint %= GameApp.WIDTH;
     }
 
     @Override

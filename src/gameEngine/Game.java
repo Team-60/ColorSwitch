@@ -58,8 +58,7 @@ public class Game {
             }
             if (gameElement.getY() < 1000) {
                 if (gameElement instanceof Obstacle) {
-                    ((Obstacle)gameElement).updateRotationAngle(time);
-                    ((Obstacle)gameElement).updateStartingPoint(time);
+                    ((Obstacle)gameElement).update(time);
                 }
                 gameElementsTemp.add(gameElement);
             }
@@ -78,7 +77,7 @@ public class Game {
         }
 
         while(gameElements.size() < 16) {
-            GameElement obstacle = getRandomObstacle(x, y);
+            GameElement obstacle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
 
             y -= obstacle.getClosestSafeDist();
             GameElement star = new Star(x, y);                  // TODO : getStar() gives star location based on type of obstacle
@@ -131,6 +130,4 @@ public class Game {
             return new ObsDoubleCircle(x, y - 115, 90, 115, 15);
         }
     }
-
-
 }
