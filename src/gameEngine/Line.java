@@ -11,7 +11,7 @@ public class Line extends Obstacle {
     private static final double closestSafeDist = 100;     // TODO: not final
     private final double length;                                  // TODO: can we make it static?
     private double startingPoint = 0;                      // a reference point to assess rotation
-    private final double width = GameApp.WIDTH/4;
+    private final double width = GamePlay.WIDTH/4;
     Renderer renderer;
     public void setColors(ArrayList<Color> colors) {
         this.colors = colors;
@@ -46,7 +46,7 @@ public class Line extends Obstacle {
         for (int i = 0; i < 4; ++i) {
             renderer.drawFoldingRed(Left, getY() - length/2, width, length, colors.get(i));
             Left += width;
-            Left %= GameApp.WIDTH;
+            Left %= GamePlay.WIDTH;
         }
     }
 

@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="700.0" fitWidth="450.0" opacity="0.6" pickOnBounds="true">
          <image>
-            <Image url="@../assets/possibleBg/15.png" />
+            <Image url="@../assets/loadGamePage/bg.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="77.0" opacity="0.8" stroke="BLACK" strokeWidth="0.0" width="450.0" />

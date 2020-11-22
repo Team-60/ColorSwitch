@@ -1,7 +1,7 @@
 package gui;
 
 import gameEngine.App;
-import gameEngine.GameApp;
+import gameEngine.GamePlay;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -155,7 +155,7 @@ public class MainPageController {
         StackPane rootContainer = (StackPane) scene.getRoot();
         rootContainer.getChildren().remove(mainPageRoot);
         try {
-            new GameApp(scene);
+            new GamePlay(scene);
         } catch (IOException e) {
             System.out.println("New game failed to load!");
             e.printStackTrace();

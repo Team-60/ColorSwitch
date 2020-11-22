@@ -3,11 +3,9 @@ package gameEngine;
 import gui.GamePlayController;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,13 +15,13 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 
 // This simulates a controller
-public class GameApp {
+public class GamePlay {
 
     static double HEIGHT = 700;
     static double WIDTH = 450;
     GraphicsContext graphicsContext;
 
-    public GameApp(Scene scene) throws IOException {
+    public GamePlay(Scene scene) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GamePlay.fxml"));
         AnchorPane canvasContainer = loader.load(); // for adding a button and a canvas
