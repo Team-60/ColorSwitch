@@ -42,7 +42,7 @@ public class GamePlayController {
         this.button.setScaleY(1);
         this.button.setStyle("-fx-background-radius: 200px; -fx-background-color: #808588");
     }
-    @FXML // remember to add event handler for canvas again after unpause
+    @FXML
     public void pausePressed() { // most probably have to serialize here to pause (Naah but might use if saved from there), focus shifts to button (IMP)
         AnimationTimer animationTimer = this.gamePlay.getAnimationTimer();
         Scene scene = this.button.getScene();
@@ -57,18 +57,23 @@ public class GamePlayController {
         rootContainer.getChildren().add(this.pausePane);
         this.pausePane.requestFocus(); // very very important
         this.pauseOverlayController.init(this);
-
-//            System.out.println("Game State: paused"); UNPAUSE LOGIC
-//            this.paused = false;
-//            rootContainer.getChildren().remove(this.pausePane);
-//            this.gamePlay.getCanvas().requestFocus(); // very very IMP
-//            animationTimer.start();
     }
 
+    public void unpause() { // add event handler again, and get focus
+        Scene scene = this.button.getScene();
+        StackPane rootContainer = (StackPane) scene.getRoot();
+        AnimationTimer animationTimer = this.gamePlay.getAnimationTimer();
+
+        this.paused = false;
+        rootContainer.getChildren().remove(this.pausePane);
+        this.gamePlay.getCanvas().requestFocus();
+        this.gamePlay.getCanvas().addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
+        animationTimer.start();
+    }
+    public GamePlay getGamePlay() {
+        return gamePlay;
+    }
     public Boolean getPaused() {
         return this.paused;
-    }
-    public void unpause() {
-        this.paused = false;
     }
 }
