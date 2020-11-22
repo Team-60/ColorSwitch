@@ -14,12 +14,15 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
+// TODO: IMP, ball fall, it doesn't fall down completely
+
 // This simulates a controller
 public class GamePlay {
 
     static double HEIGHT = 700;
     static double WIDTH = 450;
-    GraphicsContext graphicsContext;
+    private final Game game;
+    private final GamePlayAnimationTimer animationTimer;
 
     public GamePlay(Scene scene) throws IOException {
 
@@ -28,42 +31,53 @@ public class GamePlay {
         GamePlayController gamePlayController = loader.getController(); // Controller, for handling mouse events
 
         Canvas canvas = (Canvas) canvasContainer.getChildren().get(0);
-        this.graphicsContext = canvas.getGraphicsContext2D();
+        GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
         StackPane stackPane = (StackPane) scene.getRoot();
         stackPane.getChildren().add(canvasContainer);
 
-        Game game = new Game(graphicsContext);
-        gamePlayController.init(game); // Controller, for referring game
+        this.game = new Game(graphicsContext);
+        gamePlayController.init(this); // Controller, for referring game
 
         // TODO: find a place for EventHandler
         // TODO: bug case : continuous space pressed
         canvas.requestFocus(); // very very important
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if(KeyCode.SPACE == key.getCode()) {
-                game.registerJump();
+                this.game.registerJump();
             }
         });
 
-        //comTODO: find a class to put AnimationTimer in
-        new AnimationTimer() {
-            long previousFrameTime = -1;
-            @Override
-            public void handle(long currentNanoTime) {
-                if (previousFrameTime == -1) {
-                    previousFrameTime = currentNanoTime;
-                    return;
-                }
-                double timeDifference = (double)(currentNanoTime - previousFrameTime)/1000000000;
-                previousFrameTime = currentNanoTime;
-
-                graphicsContext.clearRect(0, 0, WIDTH, HEIGHT);
-                graphicsContext.setFill(Color.web("0D152C"));
-                graphicsContext.fillRect(0, 0, WIDTH, HEIGHT);
-                game.checkAndUpdate(timeDifference);
-                game.refreshGameElements();
-            }
-        }.start();
+        this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game);
+        this.animationTimer.start();
     }
     
+}
+
+class GamePlayAnimationTimer extends AnimationTimer {
+
+    private long previousFrameTime = -1;
+    private final GraphicsContext graphicsContext;
+    private final Game game;
+
+    GamePlayAnimationTimer(GraphicsContext _graphicsContext, Game _game) {
+        this.graphicsContext = _graphicsContext;
+        this.game = _game;
+    }
+
+    @Override
+    public void handle(long currentNanoTime) {
+        if (previousFrameTime == -1) {
+            previousFrameTime = currentNanoTime;
+            return;
+        }
+        double timeDifference = (double)(currentNanoTime - previousFrameTime)/1000000000;
+        previousFrameTime = currentNanoTime;
+
+        graphicsContext.clearRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
+        graphicsContext.setFill(Color.web("0D152C"));
+        graphicsContext.fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
+        game.checkAndUpdate(timeDifference);
+        game.refreshGameElements();
+    }
 }

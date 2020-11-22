@@ -1,16 +1,17 @@
 package gui;
 
 import gameEngine.Game;
+import gameEngine.GamePlay;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 public class GamePlayController {
-    private Game game;
+    private GamePlay gamePlay;
     @FXML
     private Button button;
-    public void init(Game _game) {
-        this.game = _game;
+    public void init(GamePlay _gamePlay) {
+        this.gamePlay = _gamePlay;
         this.button.setStyle("-fx-background-radius: 200px; -fx-background-color: #808588");
     }
     @FXML
@@ -27,7 +28,7 @@ public class GamePlayController {
     }
     @FXML
     public void pausePressed() { // most probably have to serialize here to pause, focus shifts to button (IMP)
-        Scene scene = button.getScene();
-        System.out.println("hey");
+        System.out.println("Pause Pressed Gameplay");
+
     }
 }
