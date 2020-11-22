@@ -2,6 +2,7 @@ package gameEngine;
 
 import gui.GamePlayController;
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,12 +20,13 @@ import java.io.IOException;
 // This simulates a controller
 public class GamePlay {
 
-    static double HEIGHT = 700;
-    static double WIDTH = 450;
+    public static double HEIGHT = 700;
+    public static double WIDTH = 450;
     private final Game game;
     private final GamePlayAnimationTimer animationTimer;
     private final Canvas canvas;
     public static long PreviousFrameTime = -1;
+    public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
     public GamePlay(Scene scene) throws IOException {
 
@@ -41,14 +43,14 @@ public class GamePlay {
         this.game = new Game(graphicsContext);
         gamePlayController.init(this); // Controller, for referring game
 
-        // TODO: find a place for EventHandler
+        GamePlay.JumpEventHandler = keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.SPACE) {
+                game.registerJump();
+            }
+        };
         // TODO: bug case : continuous space pressed
         canvas.requestFocus(); // very very important
-        canvas.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(KeyCode.SPACE == key.getCode()) {
-                this.game.registerJump();
-            }
-        });
+        canvas.addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
 
         this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game);
         this.animationTimer.start();
