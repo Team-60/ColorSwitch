@@ -78,7 +78,7 @@ public class Line extends Obstacle {
     @Override
     public void update(double time) {
         startingPoint += translationSpeed * time;
-        startingPoint %= GameApp.WIDTH;
+        startingPoint %= GamePlay.WIDTH;
     }
 
     @Override
