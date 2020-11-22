@@ -53,7 +53,7 @@ public class Line extends Obstacle {
 
     @Override
     public boolean checkCollision(Ball ball) {
-
+        // TODO : needs improvement and bug fixes
         double top = ball.getY() - ball.getRadius();
         double bottom = ball.getY() + ball.getRadius();
         double Left = startingPoint;

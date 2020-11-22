@@ -4,8 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 
 public abstract class GameElement {
 
-    private double x;
-    private double y;
+    protected double x;
+    protected double y;
     private double closestSafeDist;
 
     GameElement(double x, double y, double closestSafeDist) {

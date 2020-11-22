@@ -11,9 +11,18 @@ public class Renderer {
     // to handle gui components
     GraphicsContext graphicsContext;
 
-//    public double rotateX(int x, int y, int angle) {
-//
-//    }
+    public double rotateX(int x, int y, int angle) {
+        double angleRadians = angle * (Math.PI/180);
+        double newX = x * Math.cos(angleRadians) - y * Math.sin(angleRadians);
+        return newX;
+    }
+
+
+    public double rotateY(int x, int y, int angle) {
+        double angleRadians = angle * (Math.PI/180);
+        double newY = x * Math.sin(angleRadians) + y * Math.cos(angleRadians);
+        return newY;
+    }
 
     Renderer(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
