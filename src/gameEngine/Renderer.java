@@ -11,6 +11,10 @@ public class Renderer {
     // to handle gui components
     GraphicsContext graphicsContext;
 
+//    public double rotateX(int x, int y, int angle) {
+//
+//    }
+
     Renderer(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
     }
