@@ -2,6 +2,7 @@ package gui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -24,6 +25,8 @@ public class LoadGamePageController {
 
     @FXML
     private VBox buttonContainer; // load slots on the main page
+    @FXML
+    private Group goBack;
 
     public void init(ArrayList<Boolean> buttonContent) { // Boolean List but actually will be a Game ArrayList (all active and then all inactive)
 

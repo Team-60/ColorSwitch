@@ -49,7 +49,7 @@ public class App extends Application {
         mainPageController.init(this);
 
         StackPane rootContainer = new StackPane(root); // roots of this stack pane will be switched
-        rootContainer.setStyle("-fx-background-color :  #03060F;"); // for pixel based positioning issues
+        rootContainer.setStyle("-fx-background-color :  #0D152C;"); // for pixel based positioning issues
         primaryStage.initStyle(StageStyle.UNDECORATED);
         this.scene = new Scene(rootContainer); // scene's root is the rootContainer (stackPane) whose root is our switching panes
         this.scene.setCursor(new ImageCursor(new Image(new File("src/assets/mainPage/cursor.png").toURI().toString())));
