@@ -1,6 +1,9 @@
 package gameEngine;
 
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
+
+import java.io.File;
 
 public abstract class Obstacle extends GameElement{
 
@@ -15,6 +18,8 @@ public abstract class Obstacle extends GameElement{
     Obstacle(double x, double y, double safeDist) {
         super(x, y, safeDist);
         rotationalSpeed = 90;
+        audioClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
+
     }
 
     // TODO: do a deep copy

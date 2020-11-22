@@ -2,6 +2,7 @@ package gameEngine;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 
 import java.io.File;
@@ -20,6 +21,7 @@ public class Ball {
     private Color color;
     private final GraphicsContext graphicsContext;
     private Image hand;
+    AudioClip audioClip;
 
     Ball(GraphicsContext graphicsContext) {
         x = 225;
@@ -32,6 +34,7 @@ public class Ball {
         color = Color.RED;
         this.graphicsContext = graphicsContext;
         hand = new Image(new File("src/assets/gameplay/hand_s.png").toURI().toString());
+        audioClip = new AudioClip(new File("src/assets/music/gameplay/jump.wav").toURI().toString());
     }
 
     public void refresh() {
@@ -43,6 +46,7 @@ public class Ball {
     }
 
     public void jump() {
+        audioClip.play();
         velocity = jumpSpeed;
     }
 

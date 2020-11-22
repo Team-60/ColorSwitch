@@ -2,6 +2,7 @@ package gameEngine;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 
 import java.io.File;
 
@@ -24,6 +25,7 @@ public class Star extends GameElement{
         x -= image.getWidth()/2;
         y -= image.getHeight()/2;
         graphicsContext.drawImage(image, x, y);
+        audioClip = new AudioClip(new File("src/assets/music/gameplay/star.wav").toURI().toString());
     }
 
     @Override
