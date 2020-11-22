@@ -77,10 +77,13 @@ public class Game {
         }
 
         while(gameElements.size() < 16) {
-            GameElement obstacle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
-
+            Obstacle obstacle = getRandomObstacle(x, y);
             y -= obstacle.getClosestSafeDist();
+
+            y -= obstacle.getClosestStar();
             GameElement star = new Star(x, y);                  // TODO : getStar() gives star location based on type of obstacle
+            y += obstacle.getClosestStar();
+
             y -= obstacle.getClosestSafeDist();
             GameElement switchColor = new SwitchColor(x, y - distanceBetweenObstacles/2);
 

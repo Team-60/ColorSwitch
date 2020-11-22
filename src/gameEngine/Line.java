@@ -30,10 +30,11 @@ public class Line extends Obstacle {
         // x can be anything doesn't matter
         // y is the higher part of line
         // safeDist is zero as y is the higher part
-        super(x, y, length/2);
+        super(x, y, length);
         this.length = length;
         renderer = null;
         translationSpeed = 90;
+        closestStar = 40;
     }
 
     @Override
@@ -58,13 +59,24 @@ public class Line extends Obstacle {
         double top = ball.getY() - ball.getRadius();
         double bottom = ball.getY() + ball.getRadius();
         double Left = startingPoint;
-        if ((top < getY() + length/2 && top > getY() - length/2) || (bottom < getY() + length/2 && bottom > getY() - length/2)) {
-            for (int i = 0; i < 4; ++i) {
-                if (ball.getX() > Left && ball.getX() < Left + width) {
-                    return checkNotEqual(colors.get(i), ball.getColor());
-                }
-                Left += width;
+        if ((top < getY() + length/2 && bottom > getY() - length/2)) {
+            boolean isCollided = false;
+            if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
+                isCollided = checkNotEqual(ball.getColor(), colors.get(0));
             }
+            Left += width;
+            if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
+                isCollided |= checkNotEqual(ball.getColor(), colors.get(1));
+            }
+            Left += width;
+            if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
+                isCollided |= checkNotEqual(ball.getColor(), colors.get(2));
+            }
+            Left += width;
+            if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
+                isCollided |= checkNotEqual(ball.getColor(), colors.get(3));
+            }
+            return isCollided;
         }
 
         return false;
