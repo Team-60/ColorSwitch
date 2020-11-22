@@ -17,7 +17,7 @@ public class Game {
     private int score;
     private ArrayList<GameElement> gameElements;
     private GraphicsContext graphicsContext;
-    private static final int numberofObstacle = 4;
+    private static final int numberofObstacle = 5;
     private static final double distanceBetweenObstacles = 150;
 
 
@@ -134,10 +134,12 @@ public class Game {
             return (new ObsCircle(x, y - 90, 90, 15));
         }else if (randomNumber == 1) {
             return new Line(x, y - 7.5,15);
-        }else if (randomNumber == 3){
+        }else if (randomNumber == 3) {
             return new ObsDoubleCircle(x, y - 115, 90, 115, 15);
-        }else {
+        }else if (randomNumber == 4) {
             return new ObsSquare(x , y - 85 * Math.sqrt(2), 170, 15);
+        }else {
+            return new Triangle(x , y - 200 / Math.sqrt(3), 200, 15);
         }
     }
 }

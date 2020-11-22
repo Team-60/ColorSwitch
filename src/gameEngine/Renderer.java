@@ -6,22 +6,33 @@ import javafx.scene.shape.FillRule;
 
 public class Renderer {
 
+    // TODO: make all methods static
+
     public final static int WIDTH = 450;
     public final static int HEIGHT = 700;
     // to handle gui components
     GraphicsContext graphicsContext;
 
-    public double rotateX(int x, int y, int angle) {
+    public double rotateX(double x, double y, double angle) {
         double angleRadians = angle * (Math.PI/180);
         double newX = x * Math.cos(angleRadians) - y * Math.sin(angleRadians);
         return newX;
     }
 
 
-    public double rotateY(int x, int y, int angle) {
+    public double rotateY(double x, double y, double angle) {
         double angleRadians = angle * (Math.PI/180);
         double newY = x * Math.sin(angleRadians) + y * Math.cos(angleRadians);
         return newY;
+    }
+
+    public void drawRotatedRoundRect(double x, double y, double width, double height, double arcWidth, double arcHeight, double angle, Color color) {
+        graphicsContext.translate(x , y);
+        graphicsContext.rotate(-angle);
+        graphicsContext.setFill(color);
+        graphicsContext.fillRoundRect(-height/2, -height/2, width, height, arcHeight, arcHeight);
+        graphicsContext.rotate(angle);
+        graphicsContext.translate(-x, -y);
     }
 
     Renderer(GraphicsContext graphicsContext) {
