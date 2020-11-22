@@ -67,7 +67,7 @@ public class ObsCircle extends Obstacle{
         int angle = (int)rotationAngle % 360;
         boolean isCollided = false;
 
-        if ((top < getY() + radius && top > getY() + innerRadius) || (bottom < getY() + radius && bottom > getY() + innerRadius)) {
+        if ((top < getY() + radius && bottom > getY() + innerRadius)) {
 
             if (angle > 355 || (angle > 0 && angle < 95)) {
                 isCollided = checkNotEqual(colors.get(2), ball.getColor());
@@ -81,7 +81,7 @@ public class ObsCircle extends Obstacle{
             if ((angle > 265) || (angle < 5)) {
                 isCollided |= checkNotEqual(colors.get(3), ball.getColor());
             }
-        } else if ((top > getY() - radius && top < getY() - innerRadius) || (bottom > getY() - radius && bottom < getY() - innerRadius) ) {
+        } else if ((top > getY() - radius && bottom < getY() - innerRadius) ) {
 
             if (angle > 355 || (angle > 0 && angle < 95)) {
                 isCollided = checkNotEqual(colors.get(0), ball.getColor());

@@ -6,6 +6,11 @@ public abstract class Obstacle extends GameElement{
 
     protected double translationSpeed;
     protected double rotationalSpeed;
+    protected double closestStar = 0;
+
+    public double getClosestStar() {
+        return closestStar;
+    }
 
     Obstacle(double x, double y, double safeDist) {
         super(x, y, safeDist);
