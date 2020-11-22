@@ -49,7 +49,7 @@ public abstract class Obstacle extends GameElement{
 
     public void updateStartingPoint(double time) {
         startingPoint += translationSpeed * time;
-        startingPoint %= GameApp.WIDTH;
+        startingPoint %= GamePlay.WIDTH;
     }
 
 }
