@@ -23,6 +23,8 @@ public class GamePlay {
     static double WIDTH = 450;
     private final Game game;
     private final GamePlayAnimationTimer animationTimer;
+    private final Canvas canvas;
+    public static long PreviousFrameTime = -1;
 
     public GamePlay(Scene scene) throws IOException {
 
@@ -30,7 +32,7 @@ public class GamePlay {
         AnchorPane canvasContainer = loader.load(); // for adding a button and a canvas
         GamePlayController gamePlayController = loader.getController(); // Controller, for handling mouse events
 
-        Canvas canvas = (Canvas) canvasContainer.getChildren().get(0);
+        this.canvas = (Canvas) canvasContainer.getChildren().get(0);
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
         StackPane stackPane = (StackPane) scene.getRoot();
@@ -51,12 +53,18 @@ public class GamePlay {
         this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game);
         this.animationTimer.start();
     }
-    
+
+    public AnimationTimer getAnimationTimer() {
+        return this.animationTimer;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
 }
 
 class GamePlayAnimationTimer extends AnimationTimer {
 
-    private long previousFrameTime = -1;
     private final GraphicsContext graphicsContext;
     private final Game game;
 
@@ -67,12 +75,12 @@ class GamePlayAnimationTimer extends AnimationTimer {
 
     @Override
     public void handle(long currentNanoTime) {
-        if (previousFrameTime == -1) {
-            previousFrameTime = currentNanoTime;
+        if (GamePlay.PreviousFrameTime == -1) {
+            GamePlay.PreviousFrameTime = currentNanoTime;
             return;
         }
-        double timeDifference = (double)(currentNanoTime - previousFrameTime)/1000000000;
-        previousFrameTime = currentNanoTime;
+        double timeDifference = (double)(currentNanoTime - GamePlay.PreviousFrameTime)/1000000000;
+        GamePlay.PreviousFrameTime = currentNanoTime;
 
         graphicsContext.clearRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
         graphicsContext.setFill(Color.web("0D152C"));
