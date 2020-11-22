@@ -48,7 +48,7 @@ public class GamePlayController {
         Scene scene = this.button.getScene();
         StackPane rootContainer = (StackPane) scene.getRoot();
 
-        assert (this.paused == false);
+        assert (!this.paused);
         System.out.println(this.getClass().toString() + "Pause pressed");
         this.paused = true;
         GamePlay.PreviousFrameTime = -1;
@@ -56,12 +56,19 @@ public class GamePlayController {
         this.gamePlay.getCanvas().removeEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
         rootContainer.getChildren().add(this.pausePane);
         this.pausePane.requestFocus(); // very very important
-        this.pauseOverlayController.init();
+        this.pauseOverlayController.init(this);
 
 //            System.out.println("Game State: paused"); UNPAUSE LOGIC
 //            this.paused = false;
 //            rootContainer.getChildren().remove(this.pausePane);
 //            this.gamePlay.getCanvas().requestFocus(); // very very IMP
 //            animationTimer.start();
+    }
+
+    public Boolean getPaused() {
+        return this.paused;
+    }
+    public void unpause() {
+        this.paused = false;
     }
 }
