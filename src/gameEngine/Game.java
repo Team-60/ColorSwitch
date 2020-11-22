@@ -20,6 +20,7 @@ public class Game {
     private GraphicsContext graphicsContext;
     private static final int numberofObstacle = 5;
     private static final double distanceBetweenObstacles = 150;
+    private static boolean gameOver = false;
 
     Game(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -47,6 +48,9 @@ public class Game {
     public void checkAndUpdate(double time) {
 
         double offset = ball.move(time);
+        if (ball.getY() + ball.getRadius() > 700) {
+            gameOver = true;
+        }
         moveScreenRelative(offset);
         double y = 350;
         double x = 225;
@@ -58,6 +62,7 @@ public class Game {
             if (gameElement.checkCollision(ball)) {
                 gameElement.playSound();
                 if (gameElement instanceof Star) score++;
+                else if (gameElement instanceof Obstacle) gameOver = true;
                 continue;
             }
             if (gameElement.getY() < 1000) {
@@ -124,7 +129,6 @@ public class Game {
             gameElement.refresh(graphicsContext);
         }
         ball.refresh();
-
     }
 
     public Obstacle getRandomObstacle(double x, double y) {
