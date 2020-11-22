@@ -1,12 +1,15 @@
 package gameEngine;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.AudioClip;
 
 public abstract class GameElement {
 
     protected double x;
     protected double y;
     private double closestSafeDist;
+    protected AudioClip audioClip;
+
 
     GameElement(double x, double y, double closestSafeDist) {
         this.x = x;
@@ -24,6 +27,10 @@ public abstract class GameElement {
 
     public double getY() {
         return y;
+    }
+
+    public void playSound() {
+        audioClip.play();
     }
 
     void applyOffset(double offset) {

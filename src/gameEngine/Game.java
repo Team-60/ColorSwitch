@@ -3,6 +3,7 @@ package gameEngine;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -19,7 +20,6 @@ public class Game {
     private GraphicsContext graphicsContext;
     private static final int numberofObstacle = 5;
     private static final double distanceBetweenObstacles = 150;
-
 
     Game(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -56,6 +56,7 @@ public class Game {
         for (GameElement gameElement : gameElements) {
             // TODO : this can give null pointer error is all the elements are not sorted acc to Y coordinates
             if (gameElement.checkCollision(ball)) {
+                gameElement.playSound();
                 if (gameElement instanceof Star) score++;
                 continue;
             }
