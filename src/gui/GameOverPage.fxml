@@ -16,7 +16,17 @@
             <Image url="@../assets/gameOverPage/bg.png" />
          </image>
       </ImageView>
-      <Group layoutX="66.0" layoutY="6.0" scaleX="1.1" scaleY="1.1">
+      <Group layoutX="363.0" layoutY="-2.0" onMouseClicked="#returnIconClicked" onMouseEntered="#returnIconHoverActive" onMouseExited="#returnIconHoverInactive">
+         <children>
+            <Circle fill="LIGHTGRAY" layoutX="45.0" layoutY="43.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <ImageView fitHeight="51.0" fitWidth="46.0" layoutX="24.0" layoutY="22.0" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/gameOverPage/exit.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="66.0" layoutY="13.0" scaleX="1.2" scaleY="1.2">
          <children>
             <ImageView fitHeight="213.0" fitWidth="290.0" layoutX="12.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,14 +49,14 @@
       <Rectangle fill="#ff6600" height="48.0" layoutY="369.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
       <Label alignment="CENTER" layoutX="100.0" layoutY="366.0" prefHeight="54.0" prefWidth="250.0" text="Best Score" textFill="WHITE">
          <font>
-            <Font name="Arial" size="32.0" />
+            <Font name="Arial" size="28.0" />
          </font>
       </Label>
       <Rectangle fill="#66a5ad" height="48.0" layoutY="240.0" opacity="0.8" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
       <Rectangle height="48.0" layoutY="235.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
       <Label alignment="CENTER" layoutX="98.0" layoutY="232.0" prefHeight="54.0" prefWidth="250.0" text="Your Score" textFill="WHITE">
          <font>
-            <Font name="Arial" size="32.0" />
+            <Font name="Arial" size="28.0" />
          </font>
       </Label>
       <Group fx:id="iconLB" layoutX="54.0" layoutY="564.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
@@ -72,9 +82,9 @@
       <Group fx:id="iconReturn" layoutX="304.0" layoutY="564.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
             <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="19.0" layoutY="17.0" preserveRatio="true">
+            <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="15.0" layoutY="13.0" preserveRatio="true">
                <image>
-                  <Image url="@../assets/gameOverPage/exit.png" />
+                  <Image url="@../assets/gameOverPage/restart.png" />
                </image>
             </ImageView>
          </children>

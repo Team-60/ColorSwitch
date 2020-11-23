@@ -31,7 +31,7 @@ public class App extends Application {
     private Scene scene;
 
     private void addAssets() {
-        Media bgMusic = new Media(new File("src/assets/music/bg2.mp3").toURI().toString());
+        Media bgMusic = new Media(new File("src/assets/music/bg1.mp3").toURI().toString());
         BgMediaPlayer = new MediaPlayer(bgMusic);
 
         BgMediaPlayer.setAutoPlay(true);

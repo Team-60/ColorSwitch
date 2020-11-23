@@ -1,6 +1,5 @@
 package gui;
 
-import gameEngine.App;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -47,11 +46,11 @@ public class GameOverPageController {
         RotateTransition rtIconLB = new RotateTransition(Duration.millis(15000), iconLB);
         RotateTransition rtIconRestart = new RotateTransition(Duration.millis(15000), iconRestart);
         RotateTransition rtIconReturn = new RotateTransition(Duration.millis(15000), iconReturn);
-        this.startRotation(rtLogoRingL, 1);
-        this.startRotation(rtLogoRingR, 1);
-        this.startRotation(rtIconLB, -1);
-        this.startRotation(rtIconRestart, -1);
-        this.startRotation(rtIconReturn, -1);
+        this.startRotation(rtLogoRingL, -1);
+        this.startRotation(rtLogoRingR, -1);
+        this.startRotation(rtIconLB, 1);
+        this.startRotation(rtIconRestart, 1);
+        this.startRotation(rtIconReturn, 1);
     }
 
     private void startRotation(RotateTransition rt, int dir) {
@@ -83,5 +82,25 @@ public class GameOverPageController {
     @FXML
     public void playEasterEggClick() {
         this.easterEggClick.play();
+    }
+
+    @FXML
+    public void returnIconHoverActive(MouseEvent mouseEvent) {
+        this.hoverSound.play();
+        Group group = (Group) mouseEvent.getSource();
+        Circle circle = (Circle) group.getChildren().get(0);
+        circle.setFill(Color.web("#a9a9a9"));
+    }
+
+    @FXML
+    public void returnIconHoverInactive(MouseEvent mouseEvent) {
+        Group group = (Group) mouseEvent.getSource();
+        Circle circle = (Circle) group.getChildren().get(0);
+        circle.setFill(Color.web("#d3d3d3"));
+    }
+
+    @FXML
+    public void returnIconClicked() {
+        this.clickSound.play();
     }
 }
