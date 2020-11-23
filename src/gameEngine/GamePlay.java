@@ -51,7 +51,7 @@ public class GamePlay {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
         this.game = new Game(graphicsContext);
-        gamePlayController.init(this); // Controller, for referring game
+        gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
 
         GamePlay.JumpEventHandler = keyEvent -> {
             if (keyEvent.getCode() == KeyCode.SPACE) {

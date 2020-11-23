@@ -1,5 +1,6 @@
 package gui;
 
+import gameEngine.App;
 import gameEngine.GamePlay;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -13,6 +14,8 @@ import javafx.scene.layout.StackPane;
 import java.io.IOException;
 
 public class GamePlayController {
+
+    private App app;
     private GamePlay gamePlay;
     private Boolean paused;
     private AnchorPane pausePane;
@@ -20,7 +23,8 @@ public class GamePlayController {
 
     @FXML
     private Button button;
-    public void init(GamePlay _gamePlay) throws IOException {
+    public void init(GamePlay _gamePlay, App _app) throws IOException {
+        this.app = _app;
         this.gamePlay = _gamePlay;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseOverlay.fxml"));
@@ -53,10 +57,10 @@ public class GamePlayController {
         this.paused = true;
         GamePlay.PreviousFrameTime = -1;
         animationTimer.stop();
-        this.gamePlay.getCanvas().removeEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
+        this.gamePlay.getCanvas().removeEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler); // safe to maintain this, as focus is constantly switched
         rootContainer.getChildren().add(this.pausePane);
         this.pausePane.requestFocus(); // very very important
-        this.pauseOverlayController.init(this);
+        this.pauseOverlayController.init(this, this.app);
     }
 
     public void unpause() { // add event handler again, and get focus

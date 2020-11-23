@@ -7,26 +7,29 @@
   - https://stackoverflow.com/questions/31866814/javafx-multithreading-flashing-lights effects ??
 
 ## Ideas
-- Obstacle, Star, SwitchColor inheriting abstract GameElements
-- ObstacleTypes inheriting abstract Obstacle
-- GameElements, CheckCollision, Action, Offset 
+- ~~Obstacle, Star, SwitchColor inheriting abstract GameElements~~
+- ~~ObstacleTypes inheriting abstract Obstacle~~
+- ~~GameElements, CheckCollision, Action, Offset~~
 - ~~Generic could be implemented for game screens, Main game screen, Load game~~
-- Layout with fxml, transitions through changing scenes
-- Classes like Main Game screen and Load game not necessary and can be implemented better with fxml, instead things like Database would be a good idea
-- A class with its controller methods are intertwined, load corresponding fxml in class and handle in controller
+- ~~Layout with fxml, transitions through changing scenes~~
+- ~~Classes like Main Game screen and Load game not necessary and can be implemented better with fxml, instead things like Database would be a good idea~~
+- ~~A class with its controller methods are intertwined, load corresponding fxml in class and handle in controller~~
 - Maintain midLine, highScoreLine
 - Generic classes for Database, as Database for games for load screens, Database of Players for leaderboard.
 - ? Ball within Game instead of Player to side-line game info with details
-- Controller interacts with other *controllers and fxml* but only interacts with logic of it's superceding class
-- Could use the concept of __flags__ to communicate between logic and controller
+- ~~Controller interacts with other *controllers and fxml* but only interacts with logic of it's superceding class~~
+- ~~Could use the concept of __flags__ to communicate between logic and controller~~
 - Cloning in Player, Database as immutable generic class
+- **IMP** May need to create destroy function for game, (see if instance is garbage collected)
+- **IMP** No one is holding an instance of GamePlay which creates new game
+- Controllers could be viewed as data and game state passing utilities. 
 
 ## Misc
 - Threading (**IMP. FOR BETTER PERFORMANCE** [here](https://www.developer.com/java/data/multithreading-in-javafx.html))
-- Transitions could be done via Scene replacement in a single stage
-- maintain .gitignore
+- ~~Transitions could be done via Scene replacement in a single stage~~
+- ~~maintain .gitignore~~
 - Load games via creating overridden constructors
-- ? Loading fxml while creation
+- ~~? Loading fxml while creation~~
 - Every Loading and Saving would be treated as new player creation but with same parameters (Leaderboard)
 
 ## Classes
