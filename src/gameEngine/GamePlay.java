@@ -1,5 +1,6 @@
 package gameEngine;
 
+import gui.GameOverPageController;
 import gui.GamePlayController;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -73,6 +74,12 @@ public class GamePlay {
 
     public void gameOver() { // imp request focus
         GamePlay.PreviousFrameTime = -1; // IMP for next iteration of game
+//        try {
+//            Thread.sleep(10);
+//        }
+//        catch (InterruptedException e) {
+//            assert false;
+//        }
         this.animationTimer.stop();
         try {
             Thread.sleep(2500);
@@ -89,7 +96,9 @@ public class GamePlay {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GameOverPage.fxml"));
             try {
-                AnchorPane gameOverRoot = loader.load();
+                AnchorPane gameOverRoot = loader.load(); // TODO: create init for instances, rn only for animations
+                GameOverPageController gameOverPageController = loader.getController();
+                gameOverPageController.init();
                 StackPane rootContainer = (StackPane) this.scene.getRoot();
                 rootContainer.getChildren().remove(this.canvasContainer);
                 rootContainer.getChildren().add(gameOverRoot);
@@ -120,6 +129,9 @@ class GamePlayAnimationTimer extends AnimationTimer {
             GamePlay.PreviousFrameTime = currentNanoTime;
             return;
         }
+        if (game.isGameOver()) { // need to check before, as logic is updated but gui also has to be updated IMP
+            this.gamePlay.gameOver();
+        }
         double timeDifference = (double)(currentNanoTime - GamePlay.PreviousFrameTime)/1000000000;
         GamePlay.PreviousFrameTime = currentNanoTime;
 
@@ -128,9 +140,5 @@ class GamePlayAnimationTimer extends AnimationTimer {
         graphicsContext.fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
         game.checkAndUpdate(timeDifference);
         game.refreshGameElements();
-
-        if (game.isGameOver()) {
-            this.gamePlay.gameOver();
-        }
     }
 }

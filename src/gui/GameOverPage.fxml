@@ -9,26 +9,26 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GameOverPageController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="450.0" opacity="0.5" pickOnBounds="true">
          <image>
             <Image url="@../assets/gameOverPage/bg.png" />
          </image>
       </ImageView>
-      <Group layoutX="66.0" layoutY="14.0">
+      <Group layoutX="66.0" layoutY="6.0" scaleX="1.1" scaleY="1.1">
          <children>
             <ImageView fitHeight="213.0" fitWidth="290.0" layoutX="12.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/headingWithoutRing.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="97.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoRingL" fitHeight="46.0" fitWidth="47.0" layoutX="97.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/colorCircleSmallWide.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="179.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoRingR" fitHeight="46.0" fitWidth="47.0" layoutX="179.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/colorCircleSmallWide.png" />
                </image>
@@ -39,40 +39,40 @@
       <Rectangle fill="#ff6600" height="48.0" layoutY="369.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
       <Label alignment="CENTER" layoutX="100.0" layoutY="366.0" prefHeight="54.0" prefWidth="250.0" text="Best Score" textFill="WHITE">
          <font>
-            <Font name="Arial" size="36.0" />
+            <Font name="Arial" size="32.0" />
          </font>
       </Label>
       <Rectangle fill="#66a5ad" height="48.0" layoutY="240.0" opacity="0.8" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
       <Rectangle height="48.0" layoutY="235.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
       <Label alignment="CENTER" layoutX="98.0" layoutY="232.0" prefHeight="54.0" prefWidth="250.0" text="Your Score" textFill="WHITE">
          <font>
-            <Font name="Arial" size="36.0" />
+            <Font name="Arial" size="32.0" />
          </font>
       </Label>
-      <Group layoutX="54.0" layoutY="564.0">
+      <Group fx:id="iconLB" layoutX="54.0" layoutY="564.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
             <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <ImageView fitHeight="65.0" fitWidth="73.0" layoutX="13.0" layoutY="10.0" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="17.0" layoutY="14.0" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/leaderboard.png" />
                </image>
             </ImageView>
          </children>
       </Group>
-      <Group layoutX="178.0" layoutY="564.0">
+      <Group fx:id="iconRestart" layoutX="178.0" layoutY="564.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
             <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="22.0" layoutY="19.0" preserveRatio="true">
+            <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="22.0" layoutY="18.0" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/star_black.png" />
                </image>
             </ImageView>
          </children>
       </Group>
-      <Group layoutX="304.0" layoutY="564.0">
+      <Group fx:id="iconReturn" layoutX="304.0" layoutY="564.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
             <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <ImageView fitHeight="65.0" fitWidth="73.0" layoutX="14.0" layoutY="13.0" preserveRatio="true">
+            <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="19.0" layoutY="17.0" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/exit.png" />
                </image>

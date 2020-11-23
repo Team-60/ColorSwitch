@@ -35,7 +35,7 @@ public class App extends Application {
         BgMediaPlayer = new MediaPlayer(bgMusic);
 
         BgMediaPlayer.setAutoPlay(true);
-        BgMediaPlayer.setCycleCount(BgMediaPlayer.INDEFINITE);
+        BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         BgMediaPlayer.play();
     }
 
