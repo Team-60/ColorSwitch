@@ -28,10 +28,13 @@ TODO: add debug options for everywhere with fxml loader
 
 public class App extends Application {
 
-    public static MediaPlayer BgMediaPlayer; // for easy referencing
+    public static MediaPlayer BgMediaPlayer = null; // for easy referencing
     private Scene scene;
 
     public void addAssets() {
+        if (BgMediaPlayer != null && BgMediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) { // as others switch media like gameover, gameplay
+            BgMediaPlayer.stop();
+        }
         Media bgMusic = new Media(new File("src/assets/music/bg1.mp3").toURI().toString());
         BgMediaPlayer = new MediaPlayer(bgMusic);
 

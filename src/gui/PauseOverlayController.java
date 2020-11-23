@@ -108,6 +108,13 @@ public class PauseOverlayController {
         rootContainer.getChildren().add(mainPageRoot);
         mainPageRoot.requestFocus(); // IMP as pause overlay has focus right now
 
+        // fade down current music
+        Timeline timelineMusicFadeOut = new Timeline();
+        KeyValue kvMusicFadeOut = new KeyValue(App.BgMediaPlayer.volumeProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kfMusicFadeOut = new KeyFrame(Duration.seconds(1), kvMusicFadeOut);
+        timelineMusicFadeOut.getKeyFrames().add(kfMusicFadeOut);
+        timelineMusicFadeOut.setOnFinished(t -> this.app.addAssets()); // for refreshing bg music
+
         // temp rectangle for fade purpose
         Rectangle fadeR = new Rectangle();
         fadeR.setWidth(GamePlay.WIDTH);
@@ -137,5 +144,6 @@ public class PauseOverlayController {
 
         timelineSlide.play();
         timelineFadeIn.play();
+        timelineMusicFadeOut.play();
     }
 }

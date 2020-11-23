@@ -18,7 +18,7 @@ public abstract class Obstacle extends GameElement{
     Obstacle(double x, double y, double safeDist) {
         super(x, y, safeDist);
         rotationalSpeed = 90;
-        audioClip = new AudioClip(new File("src/assets/music/gameplay/deadMeme.mp3").toURI().toString());
+        audioClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
         audioClip.setVolume(0.5);
     }
 

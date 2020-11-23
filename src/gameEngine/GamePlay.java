@@ -2,7 +2,7 @@ package gameEngine;
 
 import gui.GameOverPageController;
 import gui.GamePlayController;
-import javafx.animation.AnimationTimer;
+import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +42,8 @@ public class GamePlay {
         this.app = _app;
         this.scene = this.app.getScene();
 
+        this.resetBgMusic();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GamePlay.fxml"));
         this.canvasContainer = loader.load(); // for adding a button and a canvas
         GamePlayController gamePlayController = loader.getController(); // Controller, for handling mouse events
@@ -66,6 +69,23 @@ public class GamePlay {
         this.animationTimer.start();
     }
 
+    private void resetBgMusic() {
+        // fade down current music
+        Timeline timelineMusicFadeOut = new Timeline();
+        KeyValue kvMusicFadeOut = new KeyValue(App.BgMediaPlayer.volumeProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kfMusicFadeOut = new KeyFrame(Duration.seconds(0.5), kvMusicFadeOut);
+        timelineMusicFadeOut.getKeyFrames().add(kfMusicFadeOut);
+        timelineMusicFadeOut.setOnFinished((t) -> {
+            App.BgMediaPlayer.stop();
+            Media bgMusic = new Media(new File("src/assets/music/gameplay/bg3.mp3").toURI().toString());
+            App.BgMediaPlayer = new MediaPlayer(bgMusic);
+            App.BgMediaPlayer.setAutoPlay(true);
+            App.BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            App.BgMediaPlayer.play();
+        });
+        timelineMusicFadeOut.play();
+    }
+
     public AnimationTimer getAnimationTimer() {
         return this.animationTimer;
     }
@@ -84,18 +104,11 @@ public class GamePlay {
 //        }
         this.animationTimer.stop();
         try {
-            Thread.sleep(2500);
+            Thread.sleep(1200);
         } catch (InterruptedException e) {
             System.out.println(this.getClass().toString() + " Thread sleep failed");
             e.printStackTrace();
         } finally {
-            assert (App.BgMediaPlayer.getStatus() == MediaPlayer.Status.STOPPED); // as obstacle collided, already checked in game elements
-            Media bgMusic = new Media(new File("src/assets/music/gameOver.mp3").toURI().toString());
-            App.BgMediaPlayer = new MediaPlayer(bgMusic);
-            App.BgMediaPlayer.setAutoPlay(true);
-            App.BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            App.BgMediaPlayer.play();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GameOverPage.fxml"));
             try {
                 AnchorPane gameOverRoot = loader.load(); // TODO: create init for instances, rn only for animations

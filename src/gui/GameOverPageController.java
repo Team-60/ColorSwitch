@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -46,6 +48,14 @@ public class GameOverPageController {
 
     public void init(App _app) {
         this.app = _app;
+
+        // reset media with game over
+        assert (App.BgMediaPlayer.getStatus() == MediaPlayer.Status.STOPPED); // as obstacle collided, already checked in game elements
+        Media bgMusic = new Media(new File("src/assets/music/gameOver1.mp3").toURI().toString());
+        App.BgMediaPlayer = new MediaPlayer(bgMusic);
+        App.BgMediaPlayer.setAutoPlay(true);
+        App.BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        App.BgMediaPlayer.play();
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());
