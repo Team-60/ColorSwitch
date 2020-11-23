@@ -79,8 +79,8 @@ public class MainPageController {
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());
         this.exitSound = new AudioClip(new File("src/assets/music/exit2.mp3").toURI().toString());
-        this.exitSound.setVolume(0.5);
-        this.hoverSound.setVolume(0.05);
+        this.clickSound.setVolume(0.5);
+        this.hoverSound.setVolume(0.04);
 
         RotateTransition rtIn = new RotateTransition(Duration.millis(15000), innerPlayRing);
         RotateTransition rtOut = new RotateTransition(Duration.millis(15000), outerPlayRing);
@@ -119,7 +119,7 @@ public class MainPageController {
         ImageView img = iconImgMap.get(group);
 
         this.hoverSound.play();
-        circle.setFill(Color.web("#F5B301"));
+        circle.setFill(Color.web("#FFB52E"));
         circle.setScaleX(1.1);
         circle.setScaleY(1.1);
         img.setScaleX(1.1);
@@ -169,24 +169,24 @@ public class MainPageController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoadGamePage.fxml"));
         Parent loadGameRoot = loader.load();
         LoadGamePageController loadGamePageController = loader.getController(); // init the controller
-        loadGamePageController.init(new ArrayList<>(Arrays.asList(true, true, true, true, false, false))); // for which load slots are present
+        loadGamePageController.init(this.app, new ArrayList<>(Arrays.asList(true, true, true, true, false, false))); // for which load slots are present
         StackPane rootContainer = (StackPane) scene.getRoot();
         rootContainer.getChildren().add(loadGameRoot);
 
         // temp rectangle for fade purpose
         Rectangle fadeR = new Rectangle();
-        fadeR.setWidth(mainPageRoot.getWidth());
-        fadeR.setHeight(mainPageRoot.getHeight());
+        fadeR.setWidth(GamePlay.WIDTH);
+        fadeR.setHeight(GamePlay.HEIGHT);
         fadeR.setFill(Paint.valueOf("#000000"));
         fadeR.setOpacity(0);
         rootContainer.getChildren().add(fadeR);
 
-        loadGameRoot.translateXProperty().set(scene.getWidth());
+        loadGameRoot.translateXProperty().set(GamePlay.WIDTH);
         Timeline timelineSlide = new Timeline();
         KeyValue kvSlide = new KeyValue(loadGameRoot.translateXProperty(), 0, Interpolator.EASE_IN);
         KeyFrame kfSlide = new KeyFrame(Duration.seconds(1), kvSlide);
         timelineSlide.getKeyFrames().add(kfSlide);
-        timelineSlide.setOnFinished(t -> rootContainer.getChildren().remove(mainPageRoot));
+        timelineSlide.setOnFinished(t -> rootContainer.getChildren().remove(this.mainPageRoot));
 
         Timeline timelineFadeOut = new Timeline();
         KeyValue kvFadeOut = new KeyValue(fadeR.opacityProperty(), 0, Interpolator.EASE_IN);
