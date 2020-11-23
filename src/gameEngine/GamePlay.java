@@ -30,14 +30,16 @@ public class GamePlay {
     private final AnchorPane canvasContainer; // root of rootContainer
     private final Canvas canvas;
 
+    private final App app;
     private final Game game;
     private final GamePlayAnimationTimer animationTimer;
     public static long PreviousFrameTime = -1;
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
-    public GamePlay(Scene _scene) throws IOException {
+    public GamePlay(App _app) throws IOException {
 
-        this.scene = _scene;
+        this.app = _app;
+        this.scene = this.app.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GamePlay.fxml"));
         this.canvasContainer = loader.load(); // for adding a button and a canvas
@@ -98,7 +100,7 @@ public class GamePlay {
             try {
                 AnchorPane gameOverRoot = loader.load(); // TODO: create init for instances, rn only for animations
                 GameOverPageController gameOverPageController = loader.getController();
-                gameOverPageController.init();
+                gameOverPageController.init(this.app); // for purposes such as returning back to main page
                 StackPane rootContainer = (StackPane) this.scene.getRoot();
                 rootContainer.getChildren().remove(this.canvasContainer);
                 rootContainer.getChildren().add(gameOverRoot);

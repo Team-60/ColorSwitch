@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class MainPageController {
+
     private App app;
     private HashMap<Group, Circle> iconCircleMap;
     private HashMap<Group, ImageView> iconImgMap;
@@ -64,7 +65,7 @@ public class MainPageController {
     private ImageView logoRingR;
 
     public void init(App _app) {
-        this.app = _app;
+        this.app = _app; // need for database and stuff too
 
         this.iconCircleMap = new HashMap<>();
         this.iconCircleMap.put(iconLB, circleLB);
@@ -155,7 +156,7 @@ public class MainPageController {
         StackPane rootContainer = (StackPane) scene.getRoot();
         rootContainer.getChildren().remove(mainPageRoot);
         try {
-            new GamePlay(scene);
+            new GamePlay(this.app); // app automatically gives a scene reference
         } catch (IOException e) {
             System.out.println(this.getClass().toString() + " New game failed to load!");
             e.printStackTrace();
@@ -163,11 +164,18 @@ public class MainPageController {
     }
 
     @FXML
-    public void loadGamePressed() throws IOException {
+    public void loadGamePressed() {
         this.clickSound.play();
         Scene scene = this.app.getScene();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoadGamePage.fxml"));
-        Parent loadGameRoot = loader.load();
+        Parent loadGameRoot = null;
+        try {
+            loadGameRoot = loader.load();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to load loadGameRoot");
+            e.printStackTrace();
+        }
+        assert (loadGameRoot != null);
         LoadGamePageController loadGamePageController = loader.getController(); // init the controller
         loadGamePageController.init(this.app, new ArrayList<>(Arrays.asList(true, true, true, true, false, false))); // for which load slots are present
         StackPane rootContainer = (StackPane) scene.getRoot();

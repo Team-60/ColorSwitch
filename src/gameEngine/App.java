@@ -23,6 +23,7 @@ TODO: Add game buttons on pause game screen, find suitable return to main screen
 TODO: Implement restart on pause and game over
 TODO: Implement Easter egg2 secret restart
 TODO: Implement Player Class
+TODO: add debug options for everywhere with fxml loader
 */
 
 public class App extends Application {
@@ -30,7 +31,7 @@ public class App extends Application {
     public static MediaPlayer BgMediaPlayer; // for easy referencing
     private Scene scene;
 
-    private void addAssets() {
+    public void addAssets() {
         Media bgMusic = new Media(new File("src/assets/music/bg1.mp3").toURI().toString());
         BgMediaPlayer = new MediaPlayer(bgMusic);
 
@@ -40,11 +41,18 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         this.addAssets();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainPage.fxml")); // keep in mind, referencing of loaders & objects
-        Parent root = loader.load();
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to load mainPage");
+            e.printStackTrace();
+        }
+        assert (root != null);
         MainPageController mainPageController = loader.getController();
         mainPageController.init(this);
 
