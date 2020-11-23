@@ -113,7 +113,7 @@ public class GamePlay {
             try {
                 AnchorPane gameOverRoot = loader.load(); // TODO: create init for instances, rn only for animations
                 GameOverPageController gameOverPageController = loader.getController();
-                gameOverPageController.init(this.app); // for purposes such as returning back to main page
+                gameOverPageController.init(this.app, this.game); // for purposes such as returning back to main page
                 StackPane rootContainer = (StackPane) this.scene.getRoot();
                 rootContainer.getChildren().remove(this.canvasContainer);
                 rootContainer.getChildren().add(gameOverRoot);

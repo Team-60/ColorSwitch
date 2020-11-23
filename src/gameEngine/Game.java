@@ -148,6 +148,10 @@ public class Game {
         }
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public boolean isGameOver() {
         return gameOver;
     }

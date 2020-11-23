@@ -19,18 +19,23 @@ import java.io.IOException;
 /*
 Divyansh's:
 TODO: Beware of file changes and refactoring, especially in file paths while making jar
-TODO: Add game buttons on pause game screen, find suitable return to main screen icon
-TODO: Implement restart on pause and game over
 TODO: Implement Easter egg2 secret restart
 TODO: Implement Player Class
 TODO: add debug options for everywhere with fxml loader
 TODO: restart on game over page implement (maybe see for reference keeping?)
+TODO: add score on game over page, set highscore
 */
 
 public class App extends Application {
 
     public static MediaPlayer BgMediaPlayer = null; // for easy referencing
+
+    private int highscore;
     private Scene scene;
+
+    public App() {
+        this.highscore = 9999; // need to gain this via serializing
+    }
 
     public void addAssets() {
         if (BgMediaPlayer != null && BgMediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) { // as others switch media like gameover, gameplay
@@ -71,6 +76,14 @@ public class App extends Application {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public int getHighscore() {
+        return highscore;
+    }
+
+    public void setHighscore(int highscore) {
+        this.highscore = highscore;
     }
 
     public static void main(String[] args) {

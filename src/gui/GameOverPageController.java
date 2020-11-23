@@ -1,6 +1,7 @@
 package gui;
 
 import gameEngine.App;
+import gameEngine.Game;
 import gameEngine.GamePlay;
 import javafx.animation.*;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +30,7 @@ import java.io.IOException;
 public class GameOverPageController {
 
     private App app;
+    private Game game; // need for serializing
 
     private AudioClip hoverSound;
     private AudioClip clickSound;
@@ -45,9 +48,17 @@ public class GameOverPageController {
     private Group iconRestart;
     @FXML
     private Group iconReturn;
+    @FXML
+    private Label yourScoreLabel;
+    @FXML
+    private Label bestScoreLabel;
 
-    public void init(App _app) {
+    public void init(App _app, Game _game) {
         this.app = _app;
+        this.game = _game;
+
+        this.yourScoreLabel.setText(Integer.toString(this.game.getScore()));
+        this.bestScoreLabel.setText(Integer.toString(this.app.getHighscore()));
 
         // reset media with game over
         assert (App.BgMediaPlayer.getStatus() == MediaPlayer.Status.STOPPED); // as obstacle collided, already checked in game elements
