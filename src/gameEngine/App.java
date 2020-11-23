@@ -27,16 +27,16 @@ TODO: Better game over screen, link it with gameplay, and have boolean for end i
 
 public class App extends Application {
 
-    private MediaPlayer mediaPlayer;
+    public static MediaPlayer BgMediaPlayer; // for easy referencing
     private Scene scene;
 
     private void addAssets() {
         Media bgMusic = new Media(new File("src/assets/music/bg2.mp3").toURI().toString());
-        this.mediaPlayer = new MediaPlayer(bgMusic);
+        BgMediaPlayer = new MediaPlayer(bgMusic);
 
-        this.mediaPlayer.setAutoPlay(true);
-        this.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        this.mediaPlayer.play();
+        BgMediaPlayer.setAutoPlay(true);
+        BgMediaPlayer.setCycleCount(BgMediaPlayer.INDEFINITE);
+        BgMediaPlayer.play();
     }
 
     @Override
@@ -55,10 +55,6 @@ public class App extends Application {
         this.scene.setCursor(new ImageCursor(new Image(new File("src/assets/mainPage/cursor.png").toURI().toString())));
         primaryStage.setScene(this.scene);
         primaryStage.show();
-    }
-
-    public MediaPlayer getMediaPlayer() {
-        return mediaPlayer;
     }
 
     public Scene getScene() {

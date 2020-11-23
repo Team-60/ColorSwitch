@@ -141,7 +141,7 @@ public class MainPageController {
 
     @FXML
     public void exitPressed() throws InterruptedException {
-        this.app.getMediaPlayer().stop();
+        App.BgMediaPlayer.stop();
         this.exitSound.play();
         System.out.println("Game ded :(");
         Thread.sleep(500);

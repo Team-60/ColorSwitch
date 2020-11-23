@@ -20,7 +20,7 @@ public class Game {
     private GraphicsContext graphicsContext;
     private static final int numberofObstacle = 5;
     private static final double distanceBetweenObstacles = 150;
-    private static boolean gameOver = false;
+    private boolean gameOver = false;
 
     Game(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -146,5 +146,9 @@ public class Game {
         }else {
             return new Triangle(x , y - 200 / Math.sqrt(3), 200, 15);
         }
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }

@@ -22,7 +22,7 @@
 - Cloning in Player, Database as immutable generic class
 
 ## Misc
-- Threading
+- Threading (**IMP. FOR BETTER PERFORMANCE** [here](https://www.developer.com/java/data/multithreading-in-javafx.html))
 - Transitions could be done via Scene replacement in a single stage
 - maintain .gitignore
 - Load games via creating overridden constructors
@@ -43,9 +43,9 @@
 * LeaderBoard
 
 ## TODO
-* Understand code workflow (b)
-* Exceptions / Interfaces / Generic 
-* Ask bhavya/osheen on how to get gifs/assets
+* ~~Understand code workflow (b)~~
+* ~~Exceptions / Interfaces / Generic~~
+* ~~Ask bhavya/osheen on how to get gifs/assets~~
 
 ### Resources
 - https://gist.github.com/Roland09/71ef45f14d0ec2a353e6 (Particle system)
@@ -72,3 +72,4 @@
 - Color Yellow: F6DF0E Purple: 8E11FE Blue: 32E1F4 Pink: FD0082
 - keep in mind, referencing of loaders & objects
 - Line is fkd, sometimes it passes through wrong colors and when ball falls down on the line, it doesn't collide
+- on Collision with obstacle, first stop bg music and then play music
