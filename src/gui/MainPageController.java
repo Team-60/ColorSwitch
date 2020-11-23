@@ -157,7 +157,7 @@ public class MainPageController {
         try {
             new GamePlay(scene);
         } catch (IOException e) {
-            System.out.println("New game failed to load!");
+            System.out.println(this.getClass().toString() + " New game failed to load!");
             e.printStackTrace();
         }
     }
