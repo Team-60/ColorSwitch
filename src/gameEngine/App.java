@@ -24,6 +24,7 @@ TODO: Implement restart on pause and game over
 TODO: Implement Easter egg2 secret restart
 TODO: Implement Player Class
 TODO: add debug options for everywhere with fxml loader
+TODO: restart on game over page implement (maybe see for reference keeping?)
 */
 
 public class App extends Application {

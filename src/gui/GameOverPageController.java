@@ -179,4 +179,18 @@ public class GameOverPageController {
         timelineSlide.play();
         timelineFadeIn.play();
     }
+
+    @FXML
+    public void restartIconClicked() {
+        this.clickSound.play();
+        Scene scene = this.app.getScene();
+        StackPane rootContainer = (StackPane) scene.getRoot();
+        rootContainer.getChildren().remove(this.gameOverRoot);
+        try {
+            new GamePlay(this.app);
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " New game failed to load!");
+            e.printStackTrace();
+        }
+    }
 }
