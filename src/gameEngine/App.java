@@ -34,7 +34,7 @@ public class App extends Application {
     private Scene scene;
 
     public App() {
-        this.highscore = 9999; // need to gain this via serializing
+        this.highscore = -1; // need to gain this via serializing
     }
 
     public void addAssets() {

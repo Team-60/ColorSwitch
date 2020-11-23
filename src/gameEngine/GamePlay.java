@@ -95,6 +95,15 @@ public class GamePlay {
     }
 
     public void gameOver() { // imp request focus
+        assert (this.game.isGameOver()); // only single entry point, just in case
+
+        // check for highscore (IMP may not be the only checking point)
+        if (this.app.getHighscore() < this.game.getScore()) {
+            // do some animation maybe?
+            System.out.println(this.getClass().toString() + " Highscore beaten!");
+            this.app.setHighscore(this.game.getScore());
+        }
+
         GamePlay.PreviousFrameTime = -1; // IMP for next iteration of game
 //        try {
 //            Thread.sleep(10);
