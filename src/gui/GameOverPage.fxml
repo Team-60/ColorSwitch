@@ -23,12 +23,12 @@
                   <Image url="@../assets/gameOverPage/headingWithoutRing.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="logoRingL" fitHeight="46.0" fitWidth="47.0" layoutX="97.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoRingL" fitHeight="46.0" fitWidth="47.0" layoutX="97.0" layoutY="70.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/colorCircleSmallWide.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="logoRingR" fitHeight="46.0" fitWidth="47.0" layoutX="179.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoRingR" fitHeight="46.0" fitWidth="47.0" layoutX="179.0" layoutY="70.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/colorCircleSmallWide.png" />
                </image>
