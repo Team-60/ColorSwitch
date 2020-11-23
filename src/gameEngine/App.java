@@ -18,11 +18,11 @@ import java.io.IOException;
 
 /*
 Divyansh's:
-TODO: Add go back option, load game page
 TODO: Beware of file changes and refactoring, especially in file paths while making jar
-TODO: Add effects for gameplay
 TODO: Add game buttons on pause game screen, find suitable return to main screen icon
-TODO: Better game over screen, link it with gameplay, and have boolean for end in GamePlay, refactor icon images
+TODO: Implement restart on pause and game over
+TODO: Implement Easter egg2 secret restart
+TODO: Implement Player Class
 */
 
 public class App extends Application {
