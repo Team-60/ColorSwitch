@@ -120,11 +120,18 @@ public class LoadGamePageController {
     }
 
     @FXML
-    public void goBackPressed() throws IOException {
+    public void goBackPressed() {
         this.clickSound.play();
         Scene scene = this.app.getScene();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
-        Parent mainPageRoot = loader.load();
+        Parent mainPageRoot = null;
+        try {
+            mainPageRoot = loader.load();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to load mainPage");
+            e.printStackTrace();
+        }
+        assert (mainPageRoot != null);
         MainPageController mainPageController = loader.getController();
         mainPageController.init(this.app);
         StackPane rootContainer = (StackPane) scene.getRoot();

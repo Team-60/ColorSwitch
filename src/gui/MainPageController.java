@@ -228,7 +228,7 @@ public class MainPageController {
         }
         assert (lBRoot != null);
         LBPageController lbPageController = loader.getController();
-        lbPageController.init();
+        lbPageController.init(this.app, null, true);
         StackPane rootContainer = (StackPane) scene.getRoot();
         assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().add(lBRoot);

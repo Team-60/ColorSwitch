@@ -46,7 +46,7 @@ public class Ball {
     }
 
     public void jump() {
-        audioClip.play();
+//        audioClip.play(); // TEMPORARY
         velocity = jumpSpeed;
     }
 

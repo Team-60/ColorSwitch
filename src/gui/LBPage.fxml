@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LBPageController">
+<AnchorPane fx:id="lBRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LBPageController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="450.0" opacity="0.45" pickOnBounds="true">
          <image>
@@ -171,7 +171,7 @@
             </VBox>
          </children>
       </Group>
-      <Group fx:id="goBackGroup" layoutX="358.0" layoutY="611.0" scaleX="0.9" scaleY="0.9">
+      <Group fx:id="goBackGroup" layoutX="358.0" layoutY="611.0" onMouseClicked="#goBackPressed" onMouseEntered="#goBackHoverActive" onMouseExited="#goBackHoverInactive" scaleX="0.9" scaleY="0.9">
          <children>
             <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <ImageView fitHeight="54.0" fitWidth="51.0" layoutX="19.0" layoutY="16.0" preserveRatio="true">

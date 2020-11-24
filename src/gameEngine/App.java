@@ -26,7 +26,8 @@ TODO: restart on game over page implement (maybe see for reference keeping?)
 TODO: add score on game over page, set highscore
 TODO: see when all spots for game over (currently missing fall down)
 TODO: throw game over exceptions/ fall down exceptions
-TODO: implement Leaderboard screen
+TODO: implement Leaderboard screen, go back functionality media player doesn't function properly
+TODO: think of something other than assert
 */
 
 public class App extends Application {

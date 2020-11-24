@@ -72,19 +72,21 @@ public class GamePlay {
 
     private void resetBgMusic() {
         // fade down current music
-        Timeline timelineMusicFadeOut = new Timeline();
-        KeyValue kvMusicFadeOut = new KeyValue(App.BgMediaPlayer.volumeProperty(), 0, Interpolator.EASE_IN);
-        KeyFrame kfMusicFadeOut = new KeyFrame(Duration.seconds(0.5), kvMusicFadeOut);
-        timelineMusicFadeOut.getKeyFrames().add(kfMusicFadeOut);
-        timelineMusicFadeOut.setOnFinished((t) -> {
-            App.BgMediaPlayer.stop();
-            Media bgMusic = new Media(new File("src/assets/music/gameplay/bg3.mp3").toURI().toString());
-            App.BgMediaPlayer = new MediaPlayer(bgMusic);
-            App.BgMediaPlayer.setAutoPlay(true);
-            App.BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            App.BgMediaPlayer.play();
-        });
-        timelineMusicFadeOut.play();
+        App.BgMediaPlayer.stop(); // TEMPORARY
+
+//        Timeline timelineMusicFadeOut = new Timeline();
+//        KeyValue kvMusicFadeOut = new KeyValue(App.BgMediaPlayer.volumeProperty(), 0, Interpolator.EASE_IN);
+//        KeyFrame kfMusicFadeOut = new KeyFrame(Duration.seconds(0.5), kvMusicFadeOut);
+//        timelineMusicFadeOut.getKeyFrames().add(kfMusicFadeOut);
+//        timelineMusicFadeOut.setOnFinished((t) -> {
+//            App.BgMediaPlayer.stop();
+//            Media bgMusic = new Media(new File("src/assets/music/gameplay/bg3.mp3").toURI().toString());
+//            App.BgMediaPlayer = new MediaPlayer(bgMusic);
+//            App.BgMediaPlayer.setAutoPlay(true);
+//            App.BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//            App.BgMediaPlayer.play();
+//        });
+//        timelineMusicFadeOut.play();
     }
 
     public AnimationTimer getAnimationTimer() {

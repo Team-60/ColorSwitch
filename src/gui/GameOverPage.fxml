@@ -77,7 +77,7 @@
             <Font name="Tahoma Bold" size="38.0" />
          </font>
       </Label>
-      <Group fx:id="iconLB" layoutX="54.0" layoutY="564.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
+      <Group fx:id="iconLB" layoutX="54.0" layoutY="564.0" onMouseClicked="#iconLBClicked" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
             <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="17.0" layoutY="14.0" preserveRatio="true">

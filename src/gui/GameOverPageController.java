@@ -61,6 +61,7 @@ public class GameOverPageController {
         this.bestScoreLabel.setText(Integer.toString(this.app.getHighscore()));
 
         // reset media with game over
+        System.out.println(this.getClass().toString() + ": " + App.BgMediaPlayer.getStatus() + ", " + MediaPlayer.Status.STOPPED);
         assert (App.BgMediaPlayer.getStatus() == MediaPlayer.Status.STOPPED); // as obstacle collided, already checked in game elements
         Media bgMusic = new Media(new File("src/assets/music/gameOver1.mp3").toURI().toString());
         App.BgMediaPlayer = new MediaPlayer(bgMusic);
@@ -111,6 +112,55 @@ public class GameOverPageController {
         group.setScaleX(1);
         group.setScaleY(1);
         circle.setFill(Color.YELLOW);
+    }
+
+    @FXML
+    public void iconLBClicked() {
+        this.clickSound.play();
+        Scene scene = this.app.getScene();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LBPage.fxml"));
+        Parent lBRoot = null;
+        try {
+            lBRoot = loader.load();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to load LB page");
+        }
+        assert (lBRoot != null);
+        LBPageController lbPageController = loader.getController();
+        lbPageController.init(this.app, this.game, false);
+        StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 1);
+        rootContainer.getChildren().add(lBRoot);
+
+        // temp rectangle for fade purpose
+        Rectangle fadeR = new Rectangle();
+        fadeR.setWidth(GamePlay.WIDTH);
+        fadeR.setHeight(GamePlay.HEIGHT);
+        fadeR.setFill(Paint.valueOf("#000000"));
+        fadeR.setOpacity(0);
+        rootContainer.getChildren().add(fadeR);
+
+        lBRoot.translateXProperty().set(-GamePlay.WIDTH);
+        Timeline timelineSlide = new Timeline();
+        KeyValue kvSlide = new KeyValue(lBRoot.translateXProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kfSlide = new KeyFrame(Duration.seconds(1), kvSlide);
+        timelineSlide.getKeyFrames().add(kfSlide);
+        timelineSlide.setOnFinished(t -> rootContainer.getChildren().remove(this.gameOverRoot));
+
+        Timeline timelineFadeOut = new Timeline();
+        KeyValue kvFadeOut = new KeyValue(fadeR.opacityProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kfFadeOut = new KeyFrame(Duration.seconds(0.5), kvFadeOut);
+        timelineFadeOut.getKeyFrames().add(kfFadeOut);
+        timelineFadeOut.setOnFinished(t -> rootContainer.getChildren().remove(fadeR));
+
+        Timeline timelineFadeIn = new Timeline();
+        KeyValue kvFadeIn = new KeyValue(fadeR.opacityProperty(), 0.75, Interpolator.EASE_IN);
+        KeyFrame kfFadeIn = new KeyFrame(Duration.seconds(1), kvFadeIn);
+        timelineFadeIn.getKeyFrames().add(kfFadeIn);
+        timelineFadeIn.setOnFinished(t -> timelineFadeOut.play());
+
+        timelineSlide.play();
+        timelineFadeIn.play();
     }
 
     @FXML
