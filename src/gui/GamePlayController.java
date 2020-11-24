@@ -77,6 +77,7 @@ public class GamePlayController {
         assert (rootContainer.getChildren().size() == 1);
         this.gamePlay.getCanvas().requestFocus();
         this.gamePlay.getCanvas().addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
+        // add a countdown maybe?
         animationTimer.start();
     }
     public GamePlay getGamePlay() {

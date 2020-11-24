@@ -228,7 +228,7 @@ public class MainPageController {
         }
         assert (lBRoot != null);
         LBPageController lbPageController = loader.getController();
-        lbPageController.init(this.app, null, true);
+        lbPageController.init(this.app, null, true); // as no game is initiated on main page
         StackPane rootContainer = (StackPane) scene.getRoot();
         assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().add(lBRoot);

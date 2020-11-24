@@ -78,3 +78,4 @@
 - Line is fkd, sometimes it passes through wrong colors and when ball falls down on the line, it doesn't collide
 - on Collision with obstacle, first stop bg music and then play music
 - For all screen interchanges, assert root container size
+- In leaderboard for custom sorting, can easily be implemented (use text only), a button for the same 

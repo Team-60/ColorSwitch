@@ -2,10 +2,7 @@ package gui;
 
 import gameEngine.App;
 import gameEngine.GamePlay;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +58,12 @@ public class LoadGamePageController {
         this.colorScheme.add("#07575B");
         this.colorScheme.add("#66A5AD");
         this.inactiveColor = "#808588";
+
+        RotateTransition rt = new RotateTransition(Duration.millis(15000), this.goBack);
+        rt.setByAngle(-720);
+        rt.setCycleCount(Animation.INDEFINITE);
+        rt.setInterpolator(Interpolator.LINEAR);
+        rt.play();
 
         assert buttonContent.size() == NUM_BUTTONS;
         ObservableList<Node> buttonList = buttonContainer.getChildren();
