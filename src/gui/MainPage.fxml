@@ -47,7 +47,7 @@
             <Image url="@../assets/mainPage/play.png" />
          </image>
       </ImageView>
-      <Group fx:id="iconLB" layoutX="44.0" layoutY="598.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
+      <Group fx:id="iconLB" layoutX="44.0" layoutY="598.0" onMouseClicked="#lBPressed" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
             <Circle fx:id="circleLB" fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <ImageView fx:id="imgLB" fitHeight="65.0" fitWidth="73.0" layoutX="13.0" layoutY="10.0" preserveRatio="true">

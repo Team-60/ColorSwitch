@@ -213,4 +213,54 @@ public class MainPageController {
         timelineSlide.play();
         timelineFadeIn.play();
     }
+
+    @FXML
+    public void lBPressed() {
+        this.clickSound.play();
+        Scene scene = this.app.getScene();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LBPage.fxml"));
+        Parent lBRoot = null;
+        try {
+            lBRoot = loader.load();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to load lBRoot");
+            e.printStackTrace();
+        }
+        assert (lBRoot != null);
+        LBPageController lbPageController = loader.getController();
+        lbPageController.init();
+        StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 1);
+        rootContainer.getChildren().add(lBRoot);
+
+        // temp rectangle for fade purpose
+        Rectangle fadeR = new Rectangle();
+        fadeR.setWidth(GamePlay.WIDTH);
+        fadeR.setHeight(GamePlay.HEIGHT);
+        fadeR.setFill(Paint.valueOf("#000000"));
+        fadeR.setOpacity(0);
+        rootContainer.getChildren().add(fadeR);
+
+        lBRoot.translateXProperty().set(-GamePlay.WIDTH);
+        Timeline timelineSlide = new Timeline();
+        KeyValue kvSlide = new KeyValue(lBRoot.translateXProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kfSlide = new KeyFrame(Duration.seconds(1), kvSlide);
+        timelineSlide.getKeyFrames().add(kfSlide);
+        timelineSlide.setOnFinished(t -> rootContainer.getChildren().remove(this.mainPageRoot));
+
+        Timeline timelineFadeOut = new Timeline();
+        KeyValue kvFadeOut = new KeyValue(fadeR.opacityProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kfFadeOut = new KeyFrame(Duration.seconds(0.5), kvFadeOut);
+        timelineFadeOut.getKeyFrames().add(kfFadeOut);
+        timelineFadeOut.setOnFinished(t -> rootContainer.getChildren().remove(fadeR));
+
+        Timeline timelineFadeIn = new Timeline();
+        KeyValue kvFadeIn = new KeyValue(fadeR.opacityProperty(), 0.75, Interpolator.EASE_IN);
+        KeyFrame kfFadeIn = new KeyFrame(Duration.seconds(1), kvFadeIn);
+        timelineFadeIn.getKeyFrames().add(kfFadeIn);
+        timelineFadeIn.setOnFinished(t -> timelineFadeOut.play());
+
+        timelineSlide.play();
+        timelineFadeIn.play();
+    }
 }
