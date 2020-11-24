@@ -22,7 +22,10 @@ public class GamePlayController {
     private PauseOverlayController pauseOverlayController;
 
     @FXML
+    private AnchorPane gamePlayRoot;
+    @FXML
     private Button button;
+
     public void init(GamePlay _gamePlay, App _app) throws IOException {
         this.app = _app;
         this.gamePlay = _gamePlay;
@@ -81,5 +84,9 @@ public class GamePlayController {
     }
     public Boolean getPaused() {
         return this.paused;
+    }
+
+    public AnchorPane getGamePlayRoot() {
+        return gamePlayRoot;
     }
 }

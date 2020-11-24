@@ -105,7 +105,7 @@ public class PauseOverlayController {
         MainPageController mainPageController = loader.getController();
         mainPageController.init(this.app);
         StackPane rootContainer = (StackPane) scene.getRoot();
-        assert (rootContainer.getChildren().size() == 1);
+        assert (rootContainer.getChildren().size() == 2); // as I have pause overlay along with game play
         rootContainer.getChildren().add(mainPageRoot);
         mainPageRoot.requestFocus(); // IMP as pause overlay has focus right now
 
@@ -129,7 +129,10 @@ public class PauseOverlayController {
         KeyValue kvSlide = new KeyValue(mainPageRoot.translateXProperty(), 0, Interpolator.EASE_IN);
         KeyFrame kfSlide = new KeyFrame(Duration.seconds(1), kvSlide);
         timelineSlide.getKeyFrames().add(kfSlide);
-        timelineSlide.setOnFinished(t -> rootContainer.getChildren().remove(this.pauseOverlayRoot));
+        timelineSlide.setOnFinished((t) -> {
+            rootContainer.getChildren().remove(this.pauseOverlayRoot);
+            rootContainer.getChildren().remove(this.gamePlayController.getGamePlayRoot()); // as pause is an overlay and this will be active gameplay alongside
+        });
 
         Timeline timelineFadeOut = new Timeline();
         KeyValue kvFadeOut = new KeyValue(fadeR.opacityProperty(), 0, Interpolator.EASE_IN);

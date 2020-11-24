@@ -60,14 +60,14 @@ public class GameOverPageController {
         this.yourScoreLabel.setText(Integer.toString(this.game.getScore()));
         this.bestScoreLabel.setText(Integer.toString(this.app.getHighscore()));
 
-        // reset media with game over
-        System.out.println(this.getClass().toString() + ": " + App.BgMediaPlayer.getStatus() + ", " + MediaPlayer.Status.STOPPED);
-        assert (App.BgMediaPlayer.getStatus() == MediaPlayer.Status.STOPPED); // as obstacle collided, already checked in game elements
-        Media bgMusic = new Media(new File("src/assets/music/gameOver1.mp3").toURI().toString());
-        App.BgMediaPlayer = new MediaPlayer(bgMusic);
-        App.BgMediaPlayer.setAutoPlay(true);
-        App.BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        App.BgMediaPlayer.play();
+        // reset media with game over in case if returned from game play
+        if (App.BgMediaPlayer.getStatus() == MediaPlayer.Status.STOPPED) { // as obstacle collided, already checked in game elements
+            Media bgMusic = new Media(new File("src/assets/music/gameOver1.mp3").toURI().toString());
+            App.BgMediaPlayer = new MediaPlayer(bgMusic);
+            App.BgMediaPlayer.setAutoPlay(true);
+            App.BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            App.BgMediaPlayer.play();
+        }
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());
