@@ -11,16 +11,18 @@ import java.util.Random;
 
 public class Game {
 
+    private Player player;
     private Ball ball;
-    private int score;
     private ArrayList<GameElement> gameElements;
     private GraphicsContext graphicsContext;
     private static final int numberofObstacle = 5;
     private static final double distanceBetweenObstacles = 150;
     private boolean gameOver = false;
 
-    Game(GraphicsContext graphicsContext) {
+    Game(GraphicsContext graphicsContext, Player player) {
         this.graphicsContext = graphicsContext;
+        this.player = player;
+
         ball = new Ball(graphicsContext);
 
         double x, y;
@@ -58,7 +60,7 @@ public class Game {
             // TODO : this can give null pointer error is all the elements are not sorted acc to Y coordinates
             if (gameElement.checkCollision(ball)) {
                 gameElement.playSound();
-                if (gameElement instanceof Star) score++;
+                if (gameElement instanceof Star) player.incScore();
                 else if (gameElement instanceof Obstacle) gameOver = true;
                 continue;
             }
@@ -114,7 +116,7 @@ public class Game {
         graphicsContext.setTextAlign(TextAlignment.CENTER);
         graphicsContext.setTextBaseline(VPos.CENTER);
         graphicsContext.setFont(new Font("Monospaced", 60));
-        graphicsContext.fillText(Integer.toString(score), 50, 60);
+        graphicsContext.fillText(Integer.toString(this.player.getScore()), 50, 60);
     }
 
     public void registerJump() {
@@ -146,7 +148,7 @@ public class Game {
     }
 
     public int getScore() {
-        return score;
+        return this.player.getScore();
     }
 
     public boolean isGameOver() {

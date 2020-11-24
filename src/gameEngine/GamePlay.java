@@ -22,6 +22,12 @@ import java.io.IOException;
 
 // TODO: IMP, ball fall, it doesn't fall down completely
 
+// GamePlay comprises games and player, a player can have multiple games, during deserialization, require a player, and a game for the player
+// Game associates with a Player
+// each player is anonymous at start, unless chooses a save
+
+// only add to highscore if saved ? o/w how will we retrieve details?
+
 // This simulates a secondary controller
 public class GamePlay {
 
@@ -33,11 +39,12 @@ public class GamePlay {
 
     private final App app;
     private final Game game;
+    private final Player player;
     private final GamePlayAnimationTimer animationTimer;
     public static long PreviousFrameTime = -1;
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
-    public GamePlay(App _app) throws IOException {
+    public GamePlay(App _app) throws IOException { // create a new game and a new player, sep. constructor for deserialize
 
         this.app = _app;
         this.scene = this.app.getScene();
@@ -54,7 +61,8 @@ public class GamePlay {
         this.canvas = (Canvas) canvasContainer.getChildren().get(0);
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
-        this.game = new Game(graphicsContext);
+        this.player = new Player();
+        this.game = new Game(graphicsContext, this.player);
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
 
         GamePlay.JumpEventHandler = keyEvent -> {
@@ -101,10 +109,10 @@ public class GamePlay {
         assert (this.game.isGameOver()); // only single entry point, just in case
 
         // check for highscore (IMP may not be the only checking point)
-        if (this.app.getHighscore() < this.game.getScore()) {
+        if (this.app.getHighscore() < this.player.getScore()) { // player or game?
             // do some animation maybe?
             System.out.println(this.getClass().toString() + " Highscore beaten!");
-            this.app.setHighscore(this.game.getScore());
+            this.app.setHighscore(this.player.getScore());
         }
 
         GamePlay.PreviousFrameTime = -1; // IMP for next iteration of game

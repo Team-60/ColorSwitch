@@ -56,10 +56,17 @@
             </Label>
          </children>
       </Group>
-      <Label fx:id="yourScoreLabel" alignment="CENTER" layoutY="299.0" prefHeight="50.0" prefWidth="450.0" text="12" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="yourScoreLabel" alignment="CENTER" contentDisplay="RIGHT" layoutY="299.0" prefHeight="50.0" prefWidth="450.0" text="-1" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="38.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/gameOverPage/star.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Label>
       <Group layoutY="366.0">
          <children>
@@ -72,10 +79,17 @@
             </Label>
          </children>
       </Group>
-      <Label fx:id="bestScoreLabel" alignment="CENTER" layoutY="436.0" prefHeight="50.0" prefWidth="450.0" text="14" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="bestScoreLabel" alignment="CENTER" contentDisplay="RIGHT" layoutY="436.0" prefHeight="50.0" prefWidth="450.0" text="-1" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="38.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/gameOverPage/star.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Label>
       <Group fx:id="iconLB" layoutX="54.0" layoutY="564.0" onMouseClicked="#iconLBClicked" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
