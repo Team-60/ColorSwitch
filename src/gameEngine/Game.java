@@ -2,13 +2,10 @@ package gameEngine;
 
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -48,7 +45,7 @@ public class Game {
     public void checkAndUpdate(double time) {
 
         double offset = ball.move(time);
-        if (ball.getY() + ball.getRadius() > 700) {
+        if (ball.getY() - ball.getRadius() > 700) { // check if game over due to fall down, throw exception, ball shouldn't be visible at all
             gameOver = true;
         }
         moveScreenRelative(offset);

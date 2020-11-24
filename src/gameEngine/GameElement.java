@@ -30,7 +30,7 @@ public abstract class GameElement {
     }
 
     public void playSound() {
-        if (this instanceof Obstacle) // as game over
+        if (this instanceof Obstacle) // as game over, maybe do this in game over exception
             App.BgMediaPlayer.stop();
         audioClip.play();
     }
