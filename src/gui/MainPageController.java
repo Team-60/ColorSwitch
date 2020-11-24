@@ -154,6 +154,7 @@ public class MainPageController {
         this.clickSound.play();
         Scene scene = this.app.getScene();
         StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().remove(mainPageRoot);
         try {
             new GamePlay(this.app); // app automatically gives a scene reference
@@ -179,6 +180,7 @@ public class MainPageController {
         LoadGamePageController loadGamePageController = loader.getController(); // init the controller
         loadGamePageController.init(this.app, new ArrayList<>(Arrays.asList(true, true, true, true, false, false))); // for which load slots are present
         StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().add(loadGameRoot);
 
         // temp rectangle for fade purpose

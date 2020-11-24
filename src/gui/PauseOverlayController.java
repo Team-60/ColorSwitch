@@ -105,6 +105,7 @@ public class PauseOverlayController {
         MainPageController mainPageController = loader.getController();
         mainPageController.init(this.app);
         StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().add(mainPageRoot);
         mainPageRoot.requestFocus(); // IMP as pause overlay has focus right now
 

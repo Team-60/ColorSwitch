@@ -76,3 +76,4 @@
 - keep in mind, referencing of loaders & objects
 - Line is fkd, sometimes it passes through wrong colors and when ball falls down on the line, it doesn't collide
 - on Collision with obstacle, first stop bg music and then play music
+- For all screen interchanges, assert root container size

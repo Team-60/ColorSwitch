@@ -51,9 +51,10 @@ public class GamePlayController {
         AnimationTimer animationTimer = this.gamePlay.getAnimationTimer();
         Scene scene = this.button.getScene();
         StackPane rootContainer = (StackPane) scene.getRoot();
-
+        assert (rootContainer.getChildren().size() == 1);
         assert (!this.paused);
         System.out.println(this.getClass().toString() + "Pause pressed");
+
         this.paused = true;
         GamePlay.PreviousFrameTime = -1;
         animationTimer.stop();
@@ -70,6 +71,7 @@ public class GamePlayController {
 
         this.paused = false;
         rootContainer.getChildren().remove(this.pausePane);
+        assert (rootContainer.getChildren().size() == 1);
         this.gamePlay.getCanvas().requestFocus();
         this.gamePlay.getCanvas().addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
         animationTimer.start();

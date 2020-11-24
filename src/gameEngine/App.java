@@ -24,6 +24,7 @@ TODO: Implement Player Class
 TODO: add debug options for everywhere with fxml loader
 TODO: restart on game over page implement (maybe see for reference keeping?)
 TODO: add score on game over page, set highscore
+TODO: see when all spots for game over (currently missing fall down)
 */
 
 public class App extends Application {

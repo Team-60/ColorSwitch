@@ -47,8 +47,9 @@ public class GamePlay {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GamePlay.fxml"));
         this.canvasContainer = loader.load(); // for adding a button and a canvas
         GamePlayController gamePlayController = loader.getController(); // Controller, for handling mouse events
-        StackPane stackPane = (StackPane) this.scene.getRoot();
-        stackPane.getChildren().add(canvasContainer);
+        StackPane rootContainer = (StackPane) this.scene.getRoot();
+        assert (rootContainer.getChildren().size() == 0); // as all remove their roots before initiating gameplay
+        rootContainer.getChildren().add(canvasContainer);
 
         this.canvas = (Canvas) canvasContainer.getChildren().get(0);
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
@@ -124,6 +125,7 @@ public class GamePlay {
                 GameOverPageController gameOverPageController = loader.getController();
                 gameOverPageController.init(this.app, this.game); // for purposes such as returning back to main page
                 StackPane rootContainer = (StackPane) this.scene.getRoot();
+                assert (rootContainer.getChildren().size() == 1);
                 rootContainer.getChildren().remove(this.canvasContainer);
                 rootContainer.getChildren().add(gameOverRoot);
                 gameOverRoot.requestFocus(); // IMP, current focus on canvas

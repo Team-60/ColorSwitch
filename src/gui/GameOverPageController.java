@@ -157,6 +157,7 @@ public class GameOverPageController {
         timelineMusicFadeOut.setOnFinished(t -> this.app.addAssets()); // for refreshing bg music
 
         StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().add(mainPageRoot);
 
         // temp rectangle for fade purpose
@@ -196,6 +197,7 @@ public class GameOverPageController {
         this.clickSound.play();
         Scene scene = this.app.getScene();
         StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().remove(this.gameOverRoot);
         try {
             new GamePlay(this.app);

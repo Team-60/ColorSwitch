@@ -128,6 +128,7 @@ public class LoadGamePageController {
         MainPageController mainPageController = loader.getController();
         mainPageController.init(this.app);
         StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().add(mainPageRoot);
 
         // temp rectangle for fade purpose
