@@ -4,6 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.FillRule;
 
+import java.util.ArrayList;
+
 public class Renderer {
 
     // TODO: make all methods static
@@ -13,12 +15,36 @@ public class Renderer {
     // to handle gui components
     GraphicsContext graphicsContext;
 
+    public static boolean checkInside(ArrayList<Pair> points, double p1, double p2) {
+        // points : An arrayList of points in clockwise Order
+        // add first again for full circular order
+        Pair first = points.get(0);
+        points.add(first);
+        double areaByPoint = 0;
+        double area = 0;
+        Pair prevPoint = null;
+        for (Pair point : points) {
+            if (prevPoint == null) {
+                prevPoint = point;
+                continue;
+            }
+            Pair vector = new Pair(prevPoint.first - point.first, prevPoint.second - point.second);
+            areaByPoint += crossProduct(vector.first, vector.second, p1 - point.first, p2 - point.second)/2;
+            area += crossProduct(vector.first, vector.second, first.first - point.first, first.second - point.second)/2;
+            prevPoint = point;
+        }
+        return Math.abs(areaByPoint - area) < 0.0001;
+    }
+
+    public static double crossProduct(double x, double y, double a, double b) {
+        return Math.abs(x * b - y * a);
+    }
+
     public static double rotateX(double x, double y, double angle) {
         double angleRadians = angle * (Math.PI/180);
         double newX = x * Math.cos(angleRadians) - y * Math.sin(angleRadians);
         return newX;
     }
-
 
     public static double rotateY(double x, double y, double angle) {
         double angleRadians = angle * (Math.PI/180);

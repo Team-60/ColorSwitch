@@ -1,5 +1,6 @@
 package gameEngine;
 
+import javafx.scene.PointLight;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -64,38 +65,6 @@ public class ObsSquare extends Obstacle{
         graphicsContext.translate(-getX(), -getY());
     }
 
-    private boolean checkInside(double a1, double a2, double b1, double b2, double c1, double c2, double d1, double d2, double p1, double p2) {
-
-        // a -- b
-        // |    |
-        // c -- d
-        double vector1x = a1 - b1;
-        double vector1y = a2 - b2;
-
-        double vector2x = a1 - c1;
-        double vector2y = a2 - c2;
-
-        double vector3x = c1 - d1;
-        double vector3y = c2 - d2;
-
-        double vector4x = d1 - b1;
-        double vector4y = d2 - b2;
-
-        double area = crossProduct(vector1x, vector1y, vector2x, vector2y);
-
-        double areaByPoint = 0;
-        areaByPoint += crossProduct(vector1x, vector1y, a1 - p1, a2 - p2);
-        areaByPoint += crossProduct(vector2x, vector2y, a1 - p1, a2 - p2);
-        areaByPoint += crossProduct(vector3x, vector3y, c1 - p1, c2 - p2);
-        areaByPoint += crossProduct(vector4x, vector4y, d1 - p1, d2 - p2);
-
-        return Math.abs(areaByPoint - area) < 0.0001;
-    }
-
-    private double crossProduct(double x, double y, double a, double b) {
-        return Math.abs(x * b - y * a);
-    }
-
     @Override
     public void update(double time) {
         rotationAngle += rotationalSpeed * time;
@@ -108,30 +77,56 @@ public class ObsSquare extends Obstacle{
     @Override
     public boolean checkCollision(Ball ball) {
 
-        double leftX, rightX, topY, bottomY;
         double X = getX();
         double Y = getY();
-        leftX = X - sideLength/2;
-        rightX = X + sideLength/2;
-        topY = Y - sideLength/2;
-        bottomY = Y + sideLength/2;
 
-        double a1, a2, b1, b2, c1, c2, d1, d2;
+        double signX = -1, signY = -1;
+        ArrayList<Pair> points = new ArrayList<>();
 
-        a1 = Renderer.rotateX(-sideLength/2, -sideLength/2, rotationAngle) + X;
-        a2 = Renderer.rotateY(-sideLength/2, -sideLength/2, rotationAngle) + Y;
+        for (int i = 0; i < 4; ++i) {
+            Pair point = new Pair(0, 0);
+            point.first = Renderer.rotateX(signX * sideLength/2, signY * sideLength/2, rotationAngle) + X;
+            point.second = Renderer.rotateY(signX * sideLength/2, signY * sideLength/2, rotationAngle) + Y;
+            points.add(point);
+            if (i % 2 == 0) {
+                signX *= -1;
+            }else {
+                signY *= -1;
+            }
+        }
 
-        b1 = Renderer.rotateX(sideLength/2, -sideLength/2, rotationAngle) + X;
-        b2 = Renderer.rotateY(sideLength/2, -sideLength/2, rotationAngle) + Y;
+        boolean insideBigger = false;
 
-        c1 = Renderer.rotateX(-sideLength/2, sideLength/2, rotationAngle) + X;
-        c2 = Renderer.rotateY(-sideLength/2, sideLength/2, rotationAngle) + Y;
+        double p1, p2;
+        for (int i = -45; i < 45; i ++) {
+            p1 = Renderer.rotateX(0, -ball.getRadius(), i) + ball.getX();
+            p2 = Renderer.rotateY(0, -ball.getRadius(), i) + ball.getY();
+            insideBigger |= Renderer.checkInside(points, p1, p2);
+        }
 
-        d1 = Renderer.rotateX(sideLength/2, sideLength/2, rotationAngle) + X;
-        d2 = Renderer.rotateY(sideLength/2, sideLength/2, rotationAngle) + Y;
+        points = new ArrayList<>();
+        signX = -1; signY = -1;
+        for (int i = 0; i < 4; ++i) {
+            Pair point = new Pair(0, 0);
+            point.first = Renderer.rotateX(signX * (sideLength/2 - width), signY * (sideLength/2 - width), rotationAngle) + X;
+            point.second = Renderer.rotateY(signX * (sideLength/2 - width), signY * (sideLength/2 - width), rotationAngle) + Y;
+            points.add(point);
+            if (i % 2 == 0) {
+                signX *= -1;
+            }else {
+                signY *= -1;
+            }
+        }
 
+        boolean insideSmaller = false;
 
-        return false;
+        for (int i = -45; i < 45; i ++) {
+            p1 = Renderer.rotateX(0, ball.getRadius(), i) + ball.getX();
+            p2 = Renderer.rotateY(0, ball.getRadius(), i) + ball.getY();
+            insideSmaller |= Renderer.checkInside(points, p1, p2);
+        }
+
+        return insideBigger && !insideSmaller;
     }
 
     @Override

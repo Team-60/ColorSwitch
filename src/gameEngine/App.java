@@ -34,7 +34,7 @@ TODO: implement Leaderboard screen comparators
 public class App extends Application {
 
     public static MediaPlayer BgMediaPlayer = null; // for easy referencing
-    private static final Boolean startWithAnimation = true;
+    private static final Boolean startWithAnimation = false;
 
     private int highscore;
     private Scene scene;

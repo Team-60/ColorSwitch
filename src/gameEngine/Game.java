@@ -48,7 +48,7 @@ public class Game {
 
         double offset = ball.move(time);
         if (ball.getY() - ball.getRadius() > 700) { // check if game over due to fall down, throw exception, ball shouldn't be visible at all
-            gameOver = true;
+//            gameOver = true;
         }
         moveScreenRelative(offset);
         double y = 350;
@@ -61,7 +61,7 @@ public class Game {
             if (gameElement.checkCollision(ball)) {
                 gameElement.playSound();
                 if (gameElement instanceof Star) player.incScore();
-                else if (gameElement instanceof Obstacle) gameOver = true;
+//                else if (gameElement instanceof Obstacle) gameOver = true;
                 continue;
             }
             if (gameElement.getY() < 1000) {
