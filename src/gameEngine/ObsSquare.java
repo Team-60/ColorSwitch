@@ -53,11 +53,48 @@ public class ObsSquare extends Obstacle{
         graphicsContext.setFill(colors.get(3));
         graphicsContext.fillRoundRect(topLeftX, topLeftY, width, sideLength, width, width);
 
+        graphicsContext.setFill(colors.get(3));
+        graphicsContext.fillRoundRect(topLeftX, topLeftY, width, sideLength, width, width);
+
+        graphicsContext.setFill(colors.get(0));
+        graphicsContext.fillRoundRect(topLeftX, topLeftY, sideLength/2, width, width, width);
+
 
         graphicsContext.rotate(rotationAngle);
         graphicsContext.translate(-getX(), -getY());
     }
 
+    private boolean checkInside(double a1, double a2, double b1, double b2, double c1, double c2, double d1, double d2, double p1, double p2) {
+
+        // a -- b
+        // |    |
+        // c -- d
+        double vector1x = a1 - b1;
+        double vector1y = a2 - b2;
+
+        double vector2x = a1 - c1;
+        double vector2y = a2 - c2;
+
+        double vector3x = c1 - d1;
+        double vector3y = c2 - d2;
+
+        double vector4x = d1 - b1;
+        double vector4y = d2 - b2;
+
+        double area = crossProduct(vector1x, vector1y, vector2x, vector2y);
+
+        double areaByPoint = 0;
+        areaByPoint += crossProduct(vector1x, vector1y, a1 - p1, a2 - p2);
+        areaByPoint += crossProduct(vector2x, vector2y, a1 - p1, a2 - p2);
+        areaByPoint += crossProduct(vector3x, vector3y, c1 - p1, c2 - p2);
+        areaByPoint += crossProduct(vector4x, vector4y, d1 - p1, d2 - p2);
+
+        return Math.abs(areaByPoint - area) < 0.0001;
+    }
+
+    private double crossProduct(double x, double y, double a, double b) {
+        return Math.abs(x * b - y * a);
+    }
 
     @Override
     public void update(double time) {
@@ -70,6 +107,8 @@ public class ObsSquare extends Obstacle{
 
     @Override
     public boolean checkCollision(Ball ball) {
+
+//        double leftX, leftY, left
 
         return false;
     }

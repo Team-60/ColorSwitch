@@ -48,7 +48,7 @@ public class Game {
 
         double offset = ball.move(time);
         if (ball.getY() - ball.getRadius() > 700) { // check if game over due to fall down, throw exception, ball shouldn't be visible at all
-            gameOver = true;
+//            gameOver = true;
         }
         moveScreenRelative(offset);
         double y = 350;
@@ -61,7 +61,7 @@ public class Game {
             if (gameElement.checkCollision(ball)) {
                 gameElement.playSound();
                 if (gameElement instanceof Star) player.incScore();
-                else if (gameElement instanceof Obstacle) gameOver = true;
+//                else if (gameElement instanceof Obstacle) gameOver = true;
                 continue;
             }
             if (gameElement.getY() < 1000) {
@@ -132,8 +132,9 @@ public class Game {
 
     public Obstacle getRandomObstacle(double x, double y) {
 
-        int randomNumber = (new Random()).nextInt(numberofObstacle);
+//        int randomNumber = (new Random()).nextInt(numberofObstacle);
         // y - safe dist of that specific obstacles
+        int randomNumber = 4;
         if (randomNumber == 0) {
             return (new ObsCircle(x, y - 90, 90, 15));
         }else if (randomNumber == 1) {

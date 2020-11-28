@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 
 import java.io.File;
 
-public abstract class Obstacle extends GameElement{
+public abstract class Obstacle extends GameElement {
 
     protected double translationSpeed;
     protected double rotationalSpeed;
@@ -24,11 +24,10 @@ public abstract class Obstacle extends GameElement{
 
     // TODO: do a deep copy
     public abstract Color getRandomColor();
+
     public abstract void update(double time);
 
     public boolean checkNotEqual(Color a, Color b) {
         return a.getRed() != b.getRed() || a.getGreen() != b.getGreen() || a.getBlue() != b.getBlue();
     }
-
-
 }

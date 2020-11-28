@@ -42,6 +42,8 @@ public class LoadAnimationController {
     @FXML
     private Label labelD;
 
+    private static final double durationRt = 2000;
+
     public void init(App _app) { // create and destroy here itself
 
         this.app = _app;
@@ -49,23 +51,23 @@ public class LoadAnimationController {
 
         this.glowClip = new AudioClip(new File("src/assets/music/glow.mp3").toURI().toString());
 
-        RotateTransition rtLogoL = new RotateTransition(Duration.millis(5000), logoRingL);
-        rtLogoL.setByAngle(360);
+        RotateTransition rtLogoL = new RotateTransition(Duration.millis(durationRt), logoRingL);
+        rtLogoL.setByAngle(180);
         rtLogoL.setCycleCount(1);
         rtLogoL.setInterpolator(Interpolator.EASE_BOTH);
 
-        RotateTransition rtLogoR = new RotateTransition(Duration.millis(5000), logoRingR);
-        rtLogoR.setByAngle(360);
+        RotateTransition rtLogoR = new RotateTransition(Duration.millis(durationRt), logoRingR);
+        rtLogoR.setByAngle(180);
         rtLogoR.setCycleCount(1);
         rtLogoR.setInterpolator(Interpolator.EASE_BOTH);
 
-        RotateTransition rtIn = new RotateTransition(Duration.millis(5000), ringIn);
-        rtIn.setByAngle(360);
+        RotateTransition rtIn = new RotateTransition(Duration.millis(durationRt), ringIn);
+        rtIn.setByAngle(180);
         rtIn.setCycleCount(1);
         rtIn.setInterpolator(Interpolator.EASE_BOTH);
 
-        RotateTransition rtOut = new RotateTransition(Duration.millis(5000), ringOut);
-        rtOut.setByAngle(-360);
+        RotateTransition rtOut = new RotateTransition(Duration.millis(durationRt), ringOut);
+        rtOut.setByAngle(-180);
         rtOut.setCycleCount(1);
         rtOut.setInterpolator(Interpolator.EASE_BOTH);
         rtOut.setOnFinished(t1 -> {
