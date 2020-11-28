@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="loadAnimationRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoadAnimationController">
@@ -19,12 +20,12 @@
             <Image url="@../assets/mainPage/colorCircle.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelU" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="171.0" layoutY="625.0" text="Made By" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="labelU" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="171.0" layoutY="625.0" text="Made By" textAlignment="CENTER" textFill="WHITE" visible="false">
          <font>
             <Font name="Consolas Bold" size="28.0" />
          </font>
       </Label>
-      <Label fx:id="labelD" alignment="TOP_CENTER" layoutX="70.0" layoutY="664.0" text="Divyansh Rastogi &amp; Rupanshu Yadav" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="labelD" alignment="TOP_CENTER" layoutX="70.0" layoutY="664.0" text="Divyansh Rastogi &amp; Rupanshu Yadav" textAlignment="CENTER" textFill="WHITE" visible="false">
          <font>
             <Font name="Consolas Italic" size="17.0" />
          </font>
@@ -48,5 +49,6 @@
             </ImageView>
          </children>
       </Group>
+      <Circle fx:id="ballAnim" fill="WHITE" layoutX="225.0" layoutY="650.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

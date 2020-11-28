@@ -14,16 +14,23 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static gameEngine.App.BgMediaPlayer;
 
 public class LoadAnimationController {
 
     private App app;
     private AudioClip glowClip;
+    private AudioClip jumpClip;
 
     @FXML
     private AnchorPane loadAnimationRoot;
@@ -41,15 +48,50 @@ public class LoadAnimationController {
     private Label labelU;
     @FXML
     private Label labelD;
+    @FXML
+    private Circle ballAnim;
 
-    private static final double durationRt = 2000;
+    private static final int ballEnd = 352;
+    private static final double durationRt = 1800;
 
     public void init(App _app) { // create and destroy here itself
 
         this.app = _app;
-        this.app.addAssets(); // how does it affect glowClip?
+
+        // load bg music for App, not calling add assets
+        Media bgMusic = new Media(new File("src/assets/music/bg/bg4.mp3").toURI().toString());
+        App.BgMediaPlayer = new MediaPlayer(bgMusic);
+        App.BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
         this.glowClip = new AudioClip(new File("src/assets/music/glow.mp3").toURI().toString());
+        this.jumpClip = new AudioClip(new File("src/assets/music/effectsColorSwitch/jump.wav").toURI().toString());
+
+        try { // wait for files to load, need them for initial timeline
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println(this.getClass().toString() + " waiting for file load failed");
+        }
+
+        Timeline animBall2 = new Timeline(
+                new KeyFrame(Duration.ZERO, e -> this.jumpClip.play()),
+                new KeyFrame(Duration.ZERO, new KeyValue(ballAnim.layoutYProperty(), ballAnim.getLayoutY(), Interpolator.LINEAR)),
+                new KeyFrame(Duration.millis(250), new KeyValue(ballAnim.layoutYProperty(), ballEnd, Interpolator.EASE_OUT))
+        );
+        animBall2.setCycleCount(1);
+
+        final Integer[] count = {0};
+        Timeline animBall1 = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(ballAnim.layoutYProperty(), ballAnim.getLayoutY(), Interpolator.LINEAR)),
+                new KeyFrame(Duration.ZERO, e -> {
+                    if (count[0] % 2 == 0)
+                        this.jumpClip.play();
+                    count[0] ++;
+                }),
+                new KeyFrame(Duration.millis(300), new KeyValue(ballAnim.layoutYProperty(), ballAnim.getLayoutY() - 100, Interpolator.EASE_OUT))
+        );
+        animBall1.setOnFinished(t0 -> animBall2.play());
+        animBall1.setCycleCount(4); // 2 jumps needed
+        animBall1.setAutoReverse(true);
 
         RotateTransition rtLogoL = new RotateTransition(Duration.millis(durationRt), logoRingL);
         rtLogoL.setByAngle(360);
@@ -84,18 +126,13 @@ public class LoadAnimationController {
             this.logo.setEffect(colorAdjust);
             this.labelD.setEffect(colorAdjust);
             this.labelU.setEffect(colorAdjust);
+            this.ballAnim.setEffect(colorAdjust);
 
-//            Glow glow = new Glow(0.0); FOR GLOW
-//            this.ringIn.setEffect(glow);
-//            this.ringOut.setEffect(glow);
-
-            AtomicBoolean glowClipPlayed = new AtomicBoolean(false); // memory inconsistency, to be played only once
+            AtomicBoolean glowClipPlayed = new AtomicBoolean(false); // to be played only once
             Timeline glowAnim = new Timeline(
-//                    new KeyFrame(Duration.ZERO, new KeyValue(glow.levelProperty(), glow.getLevel(), Interpolator.EASE_IN)), FOR GLOW
-//                    new KeyFrame(Duration.seconds(1), new KeyValue(glow.levelProperty(), glow.getLevel() + 0.75, Interpolator.EASE_IN))
                     new KeyFrame(Duration.ZERO, new KeyValue(colorAdjust.brightnessProperty(), colorAdjust.getBrightness(), Interpolator.LINEAR)),
-                    new KeyFrame(Duration.seconds(0.5), new KeyValue(colorAdjust.brightnessProperty(), colorAdjust.getBrightness() + 0.6, Interpolator.LINEAR)),
-                    new KeyFrame(Duration.ZERO, e -> {
+                    new KeyFrame(Duration.seconds(0.5), new KeyValue(colorAdjust.brightnessProperty(), colorAdjust.getBrightness() + 0.6, Interpolator.LINEAR), new KeyValue(this.ballAnim.radiusProperty(), this.ballAnim.getRadius() + 3, Interpolator.EASE_IN)),
+                    new KeyFrame(Duration.ZERO, e -> { // for auto reverse cases
                         if (!glowClipPlayed.get()) {
                             this.glowClip.play();
                             glowClipPlayed.set(true);
@@ -126,6 +163,7 @@ public class LoadAnimationController {
                 );
                 showMainRootAnim.setOnFinished(t3 -> {
                             rootContainer.getChildren().remove(this.loadAnimationRoot);
+                            App.BgMediaPlayer.play(); // as initially it was just loaded
                             mainPageController.initAnim(); // want animation after glow
                             scene.setCursor(new ImageCursor(new Image(new File("src/assets/mainPage/cursor.png").toURI().toString()))); // show cursor
                         }
@@ -138,6 +176,7 @@ public class LoadAnimationController {
             glowAnim.play();
         });
 
+        animBall1.play();
         rtLogoL.play();
         rtLogoR.play();
         rtIn.play();

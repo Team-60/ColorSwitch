@@ -115,14 +115,8 @@ public class GamePlay {
             this.app.setHighscore(this.player.getScore());
         }
 
-        GamePlay.PreviousFrameTime = -1; // IMP for next iteration of game
-//        try {
-//            Thread.sleep(10);
-//        }
-//        catch (InterruptedException e) {
-//            assert false;
-//        }
         this.animationTimer.stop();
+        GamePlay.PreviousFrameTime = -1; // IMP for next iteration of game
         try {
             Thread.sleep(1200);
         } catch (InterruptedException e) {
