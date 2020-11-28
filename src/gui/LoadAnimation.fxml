@@ -49,6 +49,8 @@
             </ImageView>
          </children>
       </Group>
-      <Circle fx:id="ballAnim" fill="WHITE" layoutX="225.0" layoutY="650.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fx:id="shadow1" fill="LIGHTGRAY" layoutX="224.0" layoutY="376.0" opacity="0.3" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
+      <Circle fx:id="shadow2" fill="DARKGRAY" layoutX="224.0" layoutY="364.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
+      <Circle fx:id="ballAnim" fill="WHITE" layoutX="224.0" layoutY="650.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

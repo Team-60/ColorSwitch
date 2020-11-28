@@ -50,6 +50,10 @@ public class LoadAnimationController {
     private Label labelD;
     @FXML
     private Circle ballAnim;
+    @FXML
+    private Circle shadow1;
+    @FXML
+    private Circle shadow2;
 
     private static final int ballEnd = 352;
     private static final double durationRt = 1800;
@@ -77,6 +81,10 @@ public class LoadAnimationController {
                 new KeyFrame(Duration.ZERO, new KeyValue(ballAnim.layoutYProperty(), ballAnim.getLayoutY(), Interpolator.LINEAR)),
                 new KeyFrame(Duration.millis(250), new KeyValue(ballAnim.layoutYProperty(), ballEnd, Interpolator.EASE_OUT))
         );
+        animBall2.setOnFinished(t -> {
+            this.shadow1.setVisible(true);
+            this.shadow2.setVisible(true);
+        });
         animBall2.setCycleCount(1);
 
         final Integer[] count = {0};
@@ -89,7 +97,7 @@ public class LoadAnimationController {
                 }),
                 new KeyFrame(Duration.millis(300), new KeyValue(ballAnim.layoutYProperty(), ballAnim.getLayoutY() - 100, Interpolator.EASE_OUT))
         );
-        animBall1.setOnFinished(t0 -> animBall2.play());
+        animBall1.setOnFinished(t -> animBall2.play());
         animBall1.setCycleCount(4); // 2 jumps needed
         animBall1.setAutoReverse(true);
 
@@ -131,7 +139,7 @@ public class LoadAnimationController {
             AtomicBoolean glowClipPlayed = new AtomicBoolean(false); // to be played only once
             Timeline glowAnim = new Timeline(
                     new KeyFrame(Duration.ZERO, new KeyValue(colorAdjust.brightnessProperty(), colorAdjust.getBrightness(), Interpolator.LINEAR)),
-                    new KeyFrame(Duration.seconds(0.5), new KeyValue(colorAdjust.brightnessProperty(), colorAdjust.getBrightness() + 0.6, Interpolator.LINEAR), new KeyValue(this.ballAnim.radiusProperty(), this.ballAnim.getRadius() + 3, Interpolator.EASE_IN)),
+                    new KeyFrame(Duration.seconds(0.5), new KeyValue(colorAdjust.brightnessProperty(), colorAdjust.getBrightness() + 0.6, Interpolator.LINEAR), new KeyValue(this.ballAnim.radiusProperty(), this.ballAnim.getRadius() + 2, Interpolator.EASE_IN)),
                     new KeyFrame(Duration.ZERO, e -> { // for auto reverse cases
                         if (!glowClipPlayed.get()) {
                             this.glowClip.play();
