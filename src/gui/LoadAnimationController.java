@@ -52,22 +52,22 @@ public class LoadAnimationController {
         this.glowClip = new AudioClip(new File("src/assets/music/glow.mp3").toURI().toString());
 
         RotateTransition rtLogoL = new RotateTransition(Duration.millis(durationRt), logoRingL);
-        rtLogoL.setByAngle(180);
+        rtLogoL.setByAngle(360);
         rtLogoL.setCycleCount(1);
         rtLogoL.setInterpolator(Interpolator.EASE_BOTH);
 
         RotateTransition rtLogoR = new RotateTransition(Duration.millis(durationRt), logoRingR);
-        rtLogoR.setByAngle(180);
+        rtLogoR.setByAngle(360);
         rtLogoR.setCycleCount(1);
         rtLogoR.setInterpolator(Interpolator.EASE_BOTH);
 
         RotateTransition rtIn = new RotateTransition(Duration.millis(durationRt), ringIn);
-        rtIn.setByAngle(180);
+        rtIn.setByAngle(360);
         rtIn.setCycleCount(1);
         rtIn.setInterpolator(Interpolator.EASE_BOTH);
 
         RotateTransition rtOut = new RotateTransition(Duration.millis(durationRt), ringOut);
-        rtOut.setByAngle(-180);
+        rtOut.setByAngle(-360);
         rtOut.setCycleCount(1);
         rtOut.setInterpolator(Interpolator.EASE_BOTH);
         rtOut.setOnFinished(t1 -> {
