@@ -108,7 +108,28 @@ public class ObsSquare extends Obstacle{
     @Override
     public boolean checkCollision(Ball ball) {
 
-//        double leftX, leftY, left
+        double leftX, rightX, topY, bottomY;
+        double X = getX();
+        double Y = getY();
+        leftX = X - sideLength/2;
+        rightX = X + sideLength/2;
+        topY = Y - sideLength/2;
+        bottomY = Y + sideLength/2;
+
+        double a1, a2, b1, b2, c1, c2, d1, d2;
+
+        a1 = Renderer.rotateX(-sideLength/2, -sideLength/2, rotationAngle) + X;
+        a2 = Renderer.rotateY(-sideLength/2, -sideLength/2, rotationAngle) + Y;
+
+        b1 = Renderer.rotateX(sideLength/2, -sideLength/2, rotationAngle) + X;
+        b2 = Renderer.rotateY(sideLength/2, -sideLength/2, rotationAngle) + Y;
+
+        c1 = Renderer.rotateX(-sideLength/2, sideLength/2, rotationAngle) + X;
+        c2 = Renderer.rotateY(-sideLength/2, sideLength/2, rotationAngle) + Y;
+
+        d1 = Renderer.rotateX(sideLength/2, sideLength/2, rotationAngle) + X;
+        d2 = Renderer.rotateY(sideLength/2, sideLength/2, rotationAngle) + Y;
+
 
         return false;
     }

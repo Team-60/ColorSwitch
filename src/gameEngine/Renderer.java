@@ -13,14 +13,14 @@ public class Renderer {
     // to handle gui components
     GraphicsContext graphicsContext;
 
-    public double rotateX(double x, double y, double angle) {
+    public static double rotateX(double x, double y, double angle) {
         double angleRadians = angle * (Math.PI/180);
         double newX = x * Math.cos(angleRadians) - y * Math.sin(angleRadians);
         return newX;
     }
 
 
-    public double rotateY(double x, double y, double angle) {
+    public static double rotateY(double x, double y, double angle) {
         double angleRadians = angle * (Math.PI/180);
         double newY = x * Math.sin(angleRadians) + y * Math.cos(angleRadians);
         return newY;
