@@ -64,7 +64,12 @@ public class MainPageController {
     @FXML
     private ImageView logoRingR;
 
-    public void init(App _app) {
+    public void init(App _app) { // note, init always before scene transitions, might utilize data member, leads to exceptions
+        this.initData(_app);
+        this.initAnim();
+    }
+
+    public void initData(App _app) { // for init data members
         this.app = _app; // need for database and stuff too
 
         this.iconCircleMap = new HashMap<>();
@@ -82,7 +87,9 @@ public class MainPageController {
         this.exitSound = new AudioClip(new File("src/assets/music/exit2.mp3").toURI().toString());
         this.clickSound.setVolume(0.5);
         this.hoverSound.setVolume(0.04);
+    }
 
+    public void initAnim() { // for starting anim
         RotateTransition rtIn = new RotateTransition(Duration.millis(15000), innerPlayRing);
         RotateTransition rtOut = new RotateTransition(Duration.millis(15000), outerPlayRing);
         RotateTransition rtLogoRingL = new RotateTransition(Duration.millis(15000), logoRingL);

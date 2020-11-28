@@ -61,7 +61,7 @@ public class LBPageController {
 
         Timeline animationCrown = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(crownImg.scaleXProperty(), crownImg.getScaleX(), Interpolator.EASE_IN), new KeyValue(crownImg.scaleYProperty(), crownImg.getScaleY(), Interpolator.EASE_IN), new KeyValue(glow.levelProperty(), glow.getLevel(), Interpolator.EASE_IN)),
-                new KeyFrame(Duration.seconds(0.6), new KeyValue(crownImg.scaleXProperty(), crownImg.getScaleX() + 0.05, Interpolator.EASE_IN), new KeyValue(crownImg.scaleYProperty(), crownImg.getScaleY() + 0.05, Interpolator.EASE_IN), new KeyValue(glow.levelProperty(), glow.getLevel() + 0.4, Interpolator.EASE_IN))
+                new KeyFrame(Duration.seconds(0.6), new KeyValue(crownImg.scaleXProperty(), crownImg.getScaleX() + 0.1, Interpolator.EASE_IN), new KeyValue(crownImg.scaleYProperty(), crownImg.getScaleY() + 0.1, Interpolator.EASE_IN), new KeyValue(glow.levelProperty(), glow.getLevel() + 0.4, Interpolator.EASE_IN))
         );
         animationCrown.setAutoReverse(true);
         animationCrown.setCycleCount(Animation.INDEFINITE);

@@ -59,8 +59,8 @@ public class GamePlayController {
         System.out.println(this.getClass().toString() + "Pause pressed");
 
         this.paused = true;
-        GamePlay.PreviousFrameTime = -1;
         animationTimer.stop();
+        GamePlay.PreviousFrameTime = -1; // after stop, reset previous frame time
         this.gamePlay.getCanvas().removeEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler); // safe to maintain this, as focus is constantly switched
         rootContainer.getChildren().add(this.pausePane);
         this.pausePane.requestFocus(); // very very important
@@ -77,7 +77,6 @@ public class GamePlayController {
         assert (rootContainer.getChildren().size() == 1);
         this.gamePlay.getCanvas().requestFocus();
         this.gamePlay.getCanvas().addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
-        // add a countdown maybe?
         animationTimer.start();
     }
     public GamePlay getGamePlay() {
