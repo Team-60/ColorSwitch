@@ -14,10 +14,10 @@ public class ObsSquare extends Obstacle{
     private double rotationAngle;
     private ArrayList<Color> colors = new ArrayList<>()
     {{
-        add(Color.web("F6DF0E"));
-        add(Color.web("8E11FE"));
-        add(Color.web("32E1F4"));
-        add(Color.web("FD0082"));
+        add(Color.web("F6DF0E")); // yellow
+        add(Color.web("8E11FE")); // purple
+        add(Color.web("32E1F4")); // cyan
+        add(Color.web("FD0082")); // pink
     }};
 
     ObsSquare(double x, double y, double sideLength, double width) {
@@ -50,9 +50,6 @@ public class ObsSquare extends Obstacle{
 
         graphicsContext.setFill(colors.get(2));
         graphicsContext.fillRoundRect(bottomLeftX, bottomLeftY - width, sideLength, width, width, width);
-
-        graphicsContext.setFill(colors.get(3));
-        graphicsContext.fillRoundRect(topLeftX, topLeftY, width, sideLength, width, width);
 
         graphicsContext.setFill(colors.get(3));
         graphicsContext.fillRoundRect(topLeftX, topLeftY, width, sideLength, width, width);
@@ -98,7 +95,7 @@ public class ObsSquare extends Obstacle{
         boolean insideBigger = false;
 
         double p1, p2;
-        for (int i = -45; i < 45; i ++) {
+        for (int i = 0; i < 360; i+=2) {
             p1 = Renderer.rotateX(0, -ball.getRadius(), i) + ball.getX();
             p2 = Renderer.rotateY(0, -ball.getRadius(), i) + ball.getY();
             insideBigger |= Renderer.checkInside(points, p1, p2);
@@ -118,15 +115,51 @@ public class ObsSquare extends Obstacle{
             }
         }
 
-        boolean insideSmaller = false;
+        boolean insideSmaller = true;
 
-        for (int i = -45; i < 45; i ++) {
+        for (int i = 0; i < 360; i+=2) {
             p1 = Renderer.rotateX(0, ball.getRadius(), i) + ball.getX();
             p2 = Renderer.rotateY(0, ball.getRadius(), i) + ball.getY();
-            insideSmaller |= Renderer.checkInside(points, p1, p2);
+            insideSmaller &= Renderer.checkInside(points, p1, p2);
         }
+        boolean isCollided = false;
+        if (insideBigger && !insideSmaller) {
+            if (rotationAngle < 45 || rotationAngle > 315) {
+                if (ball.getY() < getY()) {
+                    // above
+                    isCollided = checkNotEqual(colors.get(0), ball.getColor());
+                }else {
+                    isCollided = checkNotEqual(colors.get(2), ball.getColor());
+                }
+            }
+            if (rotationAngle > 45 && rotationAngle < 135) {
+                if (ball.getY() < getY()) {
+                    // above
+                    isCollided = checkNotEqual(colors.get(1), ball.getColor());
+                }else {
+                    isCollided = checkNotEqual(colors.get(3), ball.getColor());
+                }
+            }
+            if (rotationAngle > 135 && rotationAngle < 225) {
+                if (ball.getY() < getY()) {
+                    // above
+                    isCollided = checkNotEqual(colors.get(2), ball.getColor());
+                }else {
+                    isCollided = checkNotEqual(colors.get(0), ball.getColor());
+                }
+            }
 
-        return insideBigger && !insideSmaller;
+            if (rotationAngle > 225 && rotationAngle < 315) {
+                if (ball.getY() < getY()) {
+                    // above
+                    isCollided = checkNotEqual(colors.get(3), ball.getColor());
+                }else {
+                    isCollided = checkNotEqual(colors.get(1), ball.getColor());
+                }
+            }
+            System.out.println(rotationAngle);
+        }
+        return isCollided;
     }
 
     @Override

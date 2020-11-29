@@ -33,7 +33,7 @@ public class Renderer {
             area += crossProduct(vector.first, vector.second, first.first - point.first, first.second - point.second)/2;
             prevPoint = point;
         }
-        return Math.abs(areaByPoint - area) < 0.0001;
+        return Math.abs(areaByPoint - area) < 0.001;
     }
 
     public static double crossProduct(double x, double y, double a, double b) {
