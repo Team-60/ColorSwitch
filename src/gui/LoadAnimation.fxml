@@ -12,12 +12,12 @@
    <children>
       <ImageView fx:id="ringOut" fitHeight="228.0" fitWidth="223.0" layoutX="113.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/mainPage/colorCircle.png" />
+            <Image url="@../assets/loadAnimation/colorCircle.png" />
          </image>
       </ImageView>
       <ImageView fx:id="ringIn" fitHeight="167.0" fitWidth="167.0" layoutX="141.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
-            <Image url="@../assets/mainPage/colorCircle.png" />
+            <Image url="@../assets/loadAnimation/colorCircle.png" />
          </image>
       </ImageView>
       <Label fx:id="labelU" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="171.0" layoutY="625.0" text="Made By" textAlignment="CENTER" textFill="WHITE" visible="false">
@@ -34,17 +34,17 @@
          <children>
             <ImageView fx:id="logo" fitHeight="255.0" fitWidth="367.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/mainPage/headingWithoutRing.png" />
+                  <Image url="@../assets/loadAnimation/headingWithoutRing.png" />
                </image>
             </ImageView>
             <ImageView fx:id="logoRingL" fitHeight="65.0" fitWidth="58.0" layoutX="99.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/mainPage/colorCircleSmallWide.png" />
+                  <Image url="@../assets/loadAnimation/colorCircleSmallWide.png" />
                </image>
             </ImageView>
             <ImageView fx:id="logoRingR" fitHeight="65.0" fitWidth="58.0" layoutX="204.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/mainPage/colorCircleSmallWide.png" />
+                  <Image url="@../assets/loadAnimation/colorCircleSmallWide.png" />
                </image>
             </ImageView>
          </children>

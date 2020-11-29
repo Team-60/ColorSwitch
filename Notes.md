@@ -25,6 +25,7 @@
 - **IMP** No one is holding an instance of GamePlay which creates new game
 - Controllers could be viewed as data and game state passing utilities. 
 - **IMP** add '-ea' VM option for assert
+- **IMP** always init controllers before transitions, may throw intermediate exceptions
 
 ## Misc
 - Threading (**IMP. FOR BETTER PERFORMANCE** [here](https://www.developer.com/java/data/multithreading-in-javafx.html))
