@@ -3,18 +3,28 @@ package gameEngine;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.AudioClip;
 
-public abstract class GameElement {
+import java.io.File;
+import java.io.Serializable;
+
+public abstract class GameElement implements Serializable {
 
     protected double x;
     protected double y;
     private double closestSafeDist;
-    protected AudioClip audioClip;
 
+    protected String audioClipPath;
+
+    private transient AudioClip audioClip;
 
     GameElement(double x, double y, double closestSafeDist) {
         this.x = x;
         this.y = y;
         this.closestSafeDist = closestSafeDist;
+    }
+
+    public void loadAssets() {
+        this.audioClip = new AudioClip(new File(this.audioClipPath).toURI().toString());
+        this.audioClip.setVolume(0.5);
     }
 
     public double getClosestSafeDist() {
@@ -43,5 +53,4 @@ public abstract class GameElement {
     public abstract void refresh(GraphicsContext graphicsContext);
     public abstract boolean checkCollision(Ball ball);
     public abstract void destroy();
-
 }

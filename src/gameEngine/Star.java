@@ -2,30 +2,30 @@ package gameEngine;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
 
 import java.io.File;
 
-public class Star extends GameElement{
+public class Star extends GameElement {
 
     // TODO: why is this useful??
     private static int closestSafeDist = 100;
-
     private static int points = 0;
+
+    private transient final Image image = new Image(new File("src/assets/gameplay/star.png").toURI().toString());
 
     Star(double x, double y) {
         super(x, y, closestSafeDist);
+        audioClipPath = "src/assets/music/gameplay/star.wav";
+        this.loadAssets(); // need to ensure that audio clip path has been set
     }
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-        Image image = new Image(new File("src/assets/gameplay/star.png").toURI().toString());
         double x = getX();
         double y = getY();
         x -= image.getWidth()/2;
         y -= image.getHeight()/2;
         graphicsContext.drawImage(image, x, y);
-        audioClip = new AudioClip(new File("src/assets/music/gameplay/star.wav").toURI().toString());
     }
 
     @Override

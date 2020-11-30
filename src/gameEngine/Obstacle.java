@@ -1,10 +1,5 @@
 package gameEngine;
 
-import javafx.scene.media.AudioClip;
-import javafx.scene.paint.Color;
-
-import java.io.File;
-
 public abstract class Obstacle extends GameElement {
 
     protected double translationSpeed;
@@ -18,8 +13,8 @@ public abstract class Obstacle extends GameElement {
     Obstacle(double x, double y, double safeDist) {
         super(x, y, safeDist);
         rotationalSpeed = 90;
-        audioClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
-        audioClip.setVolume(0.5);
+        audioClipPath = "src/assets/music/gameplay/dead.wav";
+        this.loadAssets(); // need to ensure that audio clip path has been set
     }
 
     public abstract String getRandomColor();
@@ -27,6 +22,6 @@ public abstract class Obstacle extends GameElement {
     public abstract void update(double time);
 
     public boolean checkNotEqual(String a, String b) {
-        return a != b;
+        return !a.equals(b);
     }
 }

@@ -21,7 +21,7 @@ public class Game implements Serializable {
     private ArrayList<GameElement> gameElements;
     private boolean gameOver = false;
 
-    private transient GraphicsContext graphicsContext; // no need to serialize graphic var. ?
+    private transient GraphicsContext graphicsContext; // can't serialize this
 
     Game(GraphicsContext graphicsContext, Player player) {
         this.graphicsContext = graphicsContext;
@@ -29,9 +29,8 @@ public class Game implements Serializable {
 
         ball = new Ball(graphicsContext);
 
-        double x, y;
-        x = 225;
-        y = 350;
+        double x = 225;
+        double y = 350;
         gameElements = new ArrayList<>();
         Obstacle obstacle = new ObsCircle(225, 350, 90, 15);
         GameElement star = new Star(x, y);

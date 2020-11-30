@@ -29,7 +29,7 @@ TODO: add score on game over page, set highscore
 TODO: see when all spots for game over (currently missing fall down, calibrate media player for the same)
 TODO: throw game over exceptions/ fall down exceptions
 TODO: implement Leaderboard screen comparators
-TODO: implement Serializable
+TODO: implement Serializable, ensure every asset is reloaded after deserializing, might need to create init?
 */
 
 /*

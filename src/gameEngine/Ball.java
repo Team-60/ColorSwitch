@@ -16,22 +16,21 @@ public class Ball implements Serializable {
     private final double x = 225;
     private final double midLine = 350;
 
-    private double handPosition = 570;
+    private double handPosition;
     private double y;
     private double velocity;
     private String color;
 
     private transient final GraphicsContext graphicsContext;
-    private transient final Image hand;
-    private transient final AudioClip audioClip;
+    private transient final Image hand = new Image(new File("src/assets/gameplay/hand_s.png").toURI().toString());
+    private transient final AudioClip audioClip = new AudioClip(new File("src/assets/music/gameplay/jump.wav").toURI().toString());
 
     Ball(GraphicsContext graphicsContext) {
         y = 600;
         velocity = 0;
+        handPosition = 570;
         color = "000000";
         this.graphicsContext = graphicsContext;
-        hand = new Image(new File("src/assets/gameplay/hand_s.png").toURI().toString());
-        audioClip = new AudioClip(new File("src/assets/music/gameplay/jump.wav").toURI().toString());
     }
 
     public void refresh() {
@@ -82,7 +81,6 @@ public class Ball implements Serializable {
     public void setColor(String color) {
         this.color = color;
     }
-
 
     public double getX() {
         return x;
