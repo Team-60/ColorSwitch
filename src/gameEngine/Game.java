@@ -6,18 +6,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 
-public class Game {
+public class Game implements Serializable {
+
+    public static final String FILE_PATH = "src/data/dataGame.ser";
+    private static final int numberOfObstacle = 5;
+    private static final double distanceBetweenObstacles = 150;
 
     private Player player;
     private Ball ball;
     private ArrayList<GameElement> gameElements;
-    private GraphicsContext graphicsContext;
-    private static final int numberofObstacle = 5;
-    private static final double distanceBetweenObstacles = 150;
     private boolean gameOver = false;
+
+    private transient GraphicsContext graphicsContext; // no need to serialize graphic var. ?
 
     Game(GraphicsContext graphicsContext, Player player) {
         this.graphicsContext = graphicsContext;

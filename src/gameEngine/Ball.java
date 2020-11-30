@@ -6,31 +6,29 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 
 import java.io.File;
+import java.io.Serializable;
 
-public class Ball {
+public class Ball implements Serializable {
 
-    private final double jumpSpeed;
-    private final double gravity;
-    private final double radius;
-    private final double x;
-    private final double midLine;
+    private final double jumpSpeed = -500;
+    private final double gravity = 1900;
+    private final double radius = 10;
+    private final double x = 225;
+    private final double midLine = 350;
 
     private double handPosition = 570;
     private double y;
     private double velocity;
+
     private Color color;
     private final GraphicsContext graphicsContext;
-    private Image hand;
-    AudioClip audioClip;
+    private final Image hand;
+
+    private final AudioClip audioClip;
 
     Ball(GraphicsContext graphicsContext) {
-        x = 225;
         y = 600;
-        radius = 10;
         velocity = 0;
-        jumpSpeed = -500;
-        gravity = 1900;
-        midLine = 350;
         color = Color.RED;
         this.graphicsContext = graphicsContext;
         hand = new Image(new File("src/assets/gameplay/hand_s.png").toURI().toString());
