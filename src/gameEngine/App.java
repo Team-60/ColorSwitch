@@ -130,4 +130,12 @@ public class App extends Application {
         new App();
         launch(args);
     }
+
+    public void saveGame(Game game) {
+
+    }
+
+    private int giveId() {
+        return -1;
+    }
 }

@@ -179,6 +179,7 @@ public class PauseOverlayController {
         tempR.setFill(Paint.valueOf("#000000"));
         tempR.setOpacity(0.75);
         rootContainer.getChildren().add(tempR);
+        App.BgMediaPlayer.setVolume(0.05);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("InputPopup.fxml"));
         Parent inputRoot = null;
@@ -198,17 +199,20 @@ public class PauseOverlayController {
         Scene secondaryScene = new Scene(inputRoot);
         secondaryScene.setCursor(new ImageCursor(new Image(new File("src/assets/mainPage/cursor.png").toURI().toString())));
         Stage secondaryStage = new Stage(StageStyle.UNDECORATED);
+        Stage primaryStage = (Stage) this.app.getScene().getWindow();
+        secondaryStage.initOwner(primaryStage); // imp. for them to act as one stage
         secondaryStage.setScene(secondaryScene);
         secondaryStage.showAndWait();
 
-        // TODO: implement cancel option too
+        // TODO: implement cancel option too, see in case of consequent saves, overwrite
 
         assert (this.usernameSave != null);
         System.out.println(this.getClass().toString() + " " + this.usernameSave + " received");
 
+        App.BgMediaPlayer.setVolume(1);
         rootContainer.getChildren().remove(tempR); // regain focus
         this.pauseOverlayRoot.requestFocus();
 
-
+        this.app.saveGame(this.gamePlayController.getGamePlay().getGame());
     }
 }
