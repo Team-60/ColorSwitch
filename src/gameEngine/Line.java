@@ -33,7 +33,7 @@ public class Line extends Obstacle {
         super(x, y, length);
         this.length = length;
         renderer = null;
-        translationSpeed = 90;
+        translationSpeed = 180;
         closestStar = 40;
     }
 
@@ -53,7 +53,6 @@ public class Line extends Obstacle {
 
     @Override
     public boolean checkCollision(Ball ball) {
-        // TODO : needs improvement and bug fixes
         double top = ball.getY() - ball.getRadius();
         double bottom = ball.getY() + ball.getRadius();
         double Left = startingPoint;
@@ -63,14 +62,17 @@ public class Line extends Obstacle {
                 isCollided = checkNotEqual(ball.getColor(), colors.get(0));
             }
             Left += width;
+            Left %= GamePlay.WIDTH;
             if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
                 isCollided |= checkNotEqual(ball.getColor(), colors.get(1));
             }
             Left += width;
+            Left %= GamePlay.WIDTH;
             if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
                 isCollided |= checkNotEqual(ball.getColor(), colors.get(2));
             }
             Left += width;
+            Left %= GamePlay.WIDTH;
             if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
                 isCollided |= checkNotEqual(ball.getColor(), colors.get(3));
             }

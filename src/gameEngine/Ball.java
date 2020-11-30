@@ -57,8 +57,8 @@ public class Ball {
         y += distance;
 
         // TODO : add hand
-        if (y > handPosition) {
-            y = handPosition;
+        if (y > 600) {
+            y = 600;
             velocity = 0;
         }
         if (y < midLine) {
