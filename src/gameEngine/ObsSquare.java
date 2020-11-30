@@ -157,7 +157,6 @@ public class ObsSquare extends Obstacle{
                     isCollided = checkNotEqual(colors.get(1), ball.getColor());
                 }
             }
-            System.out.println(rotationAngle);
         }
         return isCollided;
     }

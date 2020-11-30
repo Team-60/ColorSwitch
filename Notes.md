@@ -6,6 +6,9 @@
 - Supercharge, obstacle blast, high frequency sound ?? (better with sideline collection of balls)
   - https://stackoverflow.com/questions/31866814/javafx-multithreading-flashing-lights effects ??
 - Maybe rotation of obst. as game? Add settings?
+- game mode custom powerups :- revive, extra stars, boost, immunity, 2x, 1/2x
+- game mode - firefly, launch, the floor is lava
+
 
 ## Ideas
 - ~~Obstacle, Star, SwitchColor inheriting abstract GameElements~~

@@ -1,6 +1,7 @@
 package gui;
 
 import gameEngine.App;
+import gameEngine.GamePlay;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -71,7 +74,7 @@ public class LoadAnimationController {
         this.jumpClip = new AudioClip(new File("src/assets/music/effectsColorSwitch/jump.wav").toURI().toString());
 
         try { // wait for files to load, need them for initial timeline
-            Thread.sleep(1000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             System.out.println(this.getClass().toString() + " waiting for file load failed");
         }
@@ -165,12 +168,21 @@ public class LoadAnimationController {
                 assert (rootContainer.getChildren().size() == 1);
                 mainPageRoot.setOpacity(0.0);
                 rootContainer.getChildren().add(mainPageRoot);
+                
+                // to remove focus from mainPageRoot 
+                Rectangle tempR = new Rectangle();
+                tempR.setWidth(GamePlay.WIDTH);
+                tempR.setHeight(GamePlay.HEIGHT);
+                tempR.setFill(Paint.valueOf("#000000"));
+                tempR.setOpacity(0);
+                rootContainer.getChildren().add(tempR);
 
                 Timeline showMainRootAnim = new Timeline(
                         new KeyFrame(Duration.seconds(1), new KeyValue(mainPageRoot.opacityProperty(), 1, Interpolator.EASE_IN))
                 );
                 showMainRootAnim.setOnFinished(t3 -> {
                             rootContainer.getChildren().remove(this.loadAnimationRoot);
+                            rootContainer.getChildren().remove(tempR);
                             App.BgMediaPlayer.play(); // as initially it was just loaded
                             mainPageController.initAnim(); // want animation after glow
                             scene.setCursor(new ImageCursor(new Image(new File("src/assets/mainPage/cursor.png").toURI().toString()))); // show cursor
