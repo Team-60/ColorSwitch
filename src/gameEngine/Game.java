@@ -8,6 +8,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game implements Serializable {
 
@@ -135,9 +136,9 @@ public class Game implements Serializable {
 
     public Obstacle getRandomObstacle(double x, double y) {
 
-//        int randomNumber = (new Random()).nextInt(numberofObstacle);
+        int randomNumber = (new Random()).nextInt(numberOfObstacle);
         // y - safe dist of that specific obstacles
-        int randomNumber = 4;
+//        int randomNumber = 1;
         if (randomNumber == 0) {
             return (new ObsCircle(x, y - 90, 90, 15));
         }else if (randomNumber == 1) {

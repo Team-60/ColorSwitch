@@ -36,7 +36,7 @@ public class SwitchColor extends GameElement{
             String prev = ball.getColor();
             // If the number of colors in ball is small enough (== 1 or 2) infinite loop may occur
             String color = prev;
-            while (color == prev) {
+            while (color.equals(prev)) {
                 color = obstacle.getRandomColor();
             }
             ball.setColor(color);
