@@ -18,7 +18,7 @@ public class Ball {
     private double handPosition = 570;
     private double y;
     private double velocity;
-    private Color color;
+    private String color;
     private final GraphicsContext graphicsContext;
     private Image hand;
     AudioClip audioClip;
@@ -31,14 +31,14 @@ public class Ball {
         jumpSpeed = -500;
         gravity = 1900;
         midLine = 350;
-        color = Color.RED;
+        color = "000000";
         this.graphicsContext = graphicsContext;
         hand = new Image(new File("src/assets/gameplay/hand_s.png").toURI().toString());
         audioClip = new AudioClip(new File("src/assets/music/gameplay/jump.wav").toURI().toString());
     }
 
     public void refresh() {
-        graphicsContext.setFill(color);
+        graphicsContext.setFill(Color.web(color));
         graphicsContext.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
         if (handPosition < 900) {
             graphicsContext.drawImage(hand, x - 17, handPosition + 15);
@@ -79,11 +79,11 @@ public class Ball {
         return radius;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 

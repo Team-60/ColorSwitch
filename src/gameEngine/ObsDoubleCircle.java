@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class ObsDoubleCircle extends ObsCircle {
 
     private final ObsCircle innerCircle;
-    private ArrayList<Color> colors = new ArrayList<>()
+    private ArrayList<String> colors = new ArrayList<>()
     {{
-        add(Color.web("F6DF0E"));
-        add(Color.web("FD0082"));
-        add(Color.web("32E1F4"));
-        add(Color.web("8E11FE"));
+        add("F6DF0E");
+        add("FD0082");
+        add("32E1F4");
+        add("8E11FE");
     }};             // Note : differs from UML
 
     ObsDoubleCircle(double x, double y, double innerRadius, double outerRadius, double width) {

@@ -33,10 +33,10 @@ public class SwitchColor extends GameElement{
     @Override
     public boolean checkCollision(Ball ball) {
         if (ball.getY() < getY() + 18) {
-            Color prev = ball.getColor();
+            String prev = ball.getColor();
             // If the number of colors in ball is small enough (== 1 or 2) infinite loop may occur
-            Color color = prev;
-            while (checkEqual(color, prev)) {
+            String color = prev;
+            while (color == prev) {
                 color = obstacle.getRandomColor();
             }
             ball.setColor(color);
@@ -50,10 +50,6 @@ public class SwitchColor extends GameElement{
     @Override
     public void destroy() {
 
-    }
-
-    public boolean checkEqual(Color a, Color b) {
-        return !(a.getRed() != b.getRed() || a.getGreen() != b.getGreen() || a.getBlue() != b.getBlue());
     }
 
     public void setObstacle(Obstacle obstacle) {
