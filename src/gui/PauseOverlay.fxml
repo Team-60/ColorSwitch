@@ -20,7 +20,7 @@
             </ImageView>
          </children>
       </Group>
-      <Group layoutX="34.0" layoutY="582.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive" scaleX="0.8" scaleY="0.8">
+      <Group layoutX="34.0" layoutY="582.0" onMouseClicked="#saveIconClicked" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive" scaleX="0.8" scaleY="0.8">
          <children>
             <Circle fill="#de7a22" layoutX="45.0" layoutY="43.0" radius="54.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <ImageView fitHeight="69.0" fitWidth="76.0" layoutX="12.0" layoutY="9.0" preserveRatio="true">

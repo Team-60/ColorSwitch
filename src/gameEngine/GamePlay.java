@@ -38,6 +38,7 @@ public class GamePlay {
     private final Canvas canvas;
 
     private final App app;
+
     private final Game game;
     private final Player player;
     private final GamePlayAnimationTimer animationTimer;
@@ -95,6 +96,14 @@ public class GamePlay {
             App.BgMediaPlayer.play();
         });
         timelineMusicFadeOut.play();
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public AnimationTimer getAnimationTimer() {

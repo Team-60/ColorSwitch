@@ -6,8 +6,10 @@ import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -16,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -30,12 +34,17 @@ public class PauseOverlayController {
     private AudioClip hoverSound;
     private AudioClip clickSound;
 
+    private String usernameSave; // will be used to check if any username received from input popup
+
     @FXML
     private AnchorPane pauseOverlayRoot;
     @FXML
     private Group unpauseGroup;
 
     public void init(GamePlayController _gamePlayController, App _app) {
+
+        this.usernameSave = null;
+
         System.out.println(this.getClass().toString() + " instantiated");
         this.app = _app;
         this.gamePlayController = _gamePlayController;
@@ -52,6 +61,11 @@ public class PauseOverlayController {
         animationUnpause.setAutoReverse(true);
         animationUnpause.setCycleCount(Animation.INDEFINITE);
         animationUnpause.play();
+    }
+
+    public void setUsernameSave(String name) {
+        assert (name != null);
+        this.usernameSave = name;
     }
 
     @FXML
@@ -149,5 +163,47 @@ public class PauseOverlayController {
         timelineSlide.play();
         timelineFadeIn.play();
         timelineMusicFadeOut.play();
+    }
+
+    @FXML
+    public void saveIconClicked() { // TODO
+        // ask for username
+        this.clickSound.play();
+
+        Scene scene = this.app.getScene();
+        StackPane rootContainer = (StackPane) scene.getRoot();
+        // temp rectangle for blocking input
+        Rectangle tempR = new Rectangle();
+        tempR.setWidth(GamePlay.WIDTH);
+        tempR.setHeight(GamePlay.HEIGHT);
+        tempR.setFill(Paint.valueOf("#000000"));
+        tempR.setOpacity(0);
+        rootContainer.getChildren().add(tempR);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("InputPopup.fxml"));
+        Parent inputRoot = null;
+        try {
+            inputRoot = loader.load();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to load input root");
+            e.printStackTrace();
+        }
+        assert inputRoot != null;
+        inputRoot.requestFocus(); // IMP
+
+        GamePlay gamePlay = this.gamePlayController.getGamePlay();
+        InputPopupController<PauseOverlayController> inputPopupController = loader.getController();
+        inputPopupController.init(gamePlay.getPlayer(), this);
+
+        Scene secondaryScene = new Scene(inputRoot);
+        secondaryScene.setCursor(new ImageCursor(new Image(new File("src/assets/mainPage/cursor.png").toURI().toString())));
+        Stage secondaryStage = new Stage(StageStyle.UNDECORATED);
+        secondaryStage.setScene(secondaryScene);
+        secondaryStage.showAndWait();
+
+        // TODO: implement cancel option too
+
+        assert (this.usernameSave != null);
+        System.out.println(this.getClass().toString() + " " + this.usernameSave + " received");
     }
 }

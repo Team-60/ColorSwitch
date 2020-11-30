@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="365.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InputPopupController">
+   <children>
+      <Button fx:id="saveButton" alignment="CENTER" layoutX="99.0" layoutY="321.0" mnemonicParsing="false" onAction="#buttonPressed" onMouseEntered="#saveButtonHoverActive" onMouseExited="#saveButtonHoverInactive" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #07575B;" text="Save" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold Italic" size="18.0" />
+         </font>
+      </Button>
+      <Arc fill="#c4d4e6" layoutX="183.0" length="180.0" radiusX="183.0" radiusY="165.0" startAngle="180.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" type="ROUND">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" height="95.775" radius="28.098750000000003" spread="0.24" width="18.62" />
+         </effect>
+      </Arc>
+      <Label alignment="CENTER" layoutY="14.0" prefHeight="28.0" prefWidth="365.0" text="YOUR GAME STATS" textAlignment="CENTER" underline="true">
+         <font>
+            <Font name="Corbel" size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutY="52.0">
+         <children>
+            <Label fx:id="scoreLabel" alignment="CENTER" prefHeight="28.0" prefWidth="365.0" text="Stars : 4" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="distLabel" alignment="CENTER" prefHeight="28.0" prefWidth="365.0" text="Distance : 45m" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="jumpsLabel" alignment="CENTER" prefHeight="28.0" prefWidth="365.0" text="Jumps : 300" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Group layoutX="28.0" layoutY="188.0">
+         <children>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#66a5ad" height="110.0" stroke="BLACK" strokeType="INSIDE" width="310.0">
+               <effect>
+                  <Glow level="0.12">
+                     <input>
+                        <ColorAdjust saturation="0.50" />
+                     </input>
+                  </Glow>
+               </effect>
+            </Rectangle>
+            <VBox layoutX="61.0" layoutY="14.0">
+               <children>
+                  <Label alignment="TOP_CENTER" text="ENTER USERNAME" textAlignment="CENTER" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="Corbel" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="18.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="inputField" alignment="CENTER" promptText="Username">
+                     <font>
+                        <Font name="Calibri Italic" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>
