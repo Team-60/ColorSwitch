@@ -52,13 +52,13 @@ public class Renderer {
         return newY;
     }
 
-    public void drawRotatedRoundRect(double x, double y, double width, double height, double arcWidth, double arcHeight, double angle, Color color) {
-        graphicsContext.translate(x , y);
+    public void drawRotatedRoundRect(double pivotX, double pivotY, double x, double y, double width, double height, double arcWidth, double arcHeight, double angle, Color color) {
+        graphicsContext.translate(pivotX, pivotY);
         graphicsContext.rotate(-angle);
         graphicsContext.setFill(color);
-        graphicsContext.fillRoundRect(-height/2, -height/2, width, height, arcHeight, arcHeight);
+        graphicsContext.fillRoundRect(x, y, width, height, arcHeight, arcHeight);
         graphicsContext.rotate(angle);
-        graphicsContext.translate(-x, -y);
+        graphicsContext.translate(-pivotX, -pivotY);
     }
 
     Renderer(GraphicsContext graphicsContext) {
