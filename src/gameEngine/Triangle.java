@@ -11,11 +11,11 @@ public class Triangle extends Obstacle{
     private double width;
     private double sideLength;
     private double rotationAngle;
-    private ArrayList<Color> colors = new ArrayList<>()
+    private ArrayList<String> colors = new ArrayList<>()
     {{
-        add(Color.web("F6DF0E"));
-        add(Color.web("8E11FE"));
-        add(Color.web("32E1F4"));
+        add("F6DF0E");
+        add("8E11FE");
+        add("32E1F4");
     }};
 
     Triangle(double x, double y, double sideLength, double width) {
@@ -39,11 +39,11 @@ public class Triangle extends Obstacle{
         bottomLeftY = + sideLength/(2 * Math.sqrt(3));
 
         Renderer renderer = new Renderer(graphicsContext);
-        renderer.drawRotatedRoundRect(topX, topY, sideLength, width, width, width, -60, colors.get(0));
+        renderer.drawRotatedRoundRect(topX, topY, sideLength, width, width, width, -60, Color.web(colors.get(0)));
 
-        renderer.drawRotatedRoundRect(topX, topY, sideLength, width, width, width, -120, colors.get(1));
+        renderer.drawRotatedRoundRect(topX, topY, sideLength, width, width, width, -120, Color.web(colors.get(1)));
 
-        renderer.drawRotatedRoundRect(bottomLeftX + width/2, bottomLeftY - width/2, sideLength, width, width, width, 0, colors.get(2));
+        renderer.drawRotatedRoundRect(bottomLeftX + width/2, bottomLeftY - width/2, sideLength, width, width, width, 0, Color.web(colors.get(2)));
 
         graphicsContext.rotate(rotationAngle);
         graphicsContext.translate(-getX(), -getY());
@@ -71,7 +71,7 @@ public class Triangle extends Obstacle{
     }
 
     @Override
-    public Color getRandomColor() {
+    public String getRandomColor() {
         Random random = new Random();
         return colors.get(random.nextInt(colors.size()));
     }

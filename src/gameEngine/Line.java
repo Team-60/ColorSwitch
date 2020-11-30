@@ -9,20 +9,20 @@ import java.util.Random;
 public class Line extends Obstacle {
 
     private static final double closestSafeDist = 100;     // TODO: not final
-    private final double length;                                  // TODO: can we make it static?
+    private final double length;                           // TODO: can we make it static?
     private double startingPoint = 0;                      // a reference point to assess rotation
     private final double width = GamePlay.WIDTH/4;
     Renderer renderer;
-    public void setColors(ArrayList<Color> colors) {
+    public void setColors(ArrayList<String> colors) {
         this.colors = colors;
     }
 
-    private ArrayList<Color> colors = new ArrayList<>()
+    private ArrayList<String> colors = new ArrayList<>()
     {{
-        add(Color.web("F6DF0E"));
-        add(Color.web("8E11FE"));
-        add(Color.web("32E1F4"));
-        add(Color.web("FD0082"));
+        add("F6DF0E");
+        add("8E11FE");
+        add("32E1F4");
+        add("FD0082");
     }};
 
 
@@ -33,7 +33,7 @@ public class Line extends Obstacle {
         super(x, y, length);
         this.length = length;
         renderer = null;
-        translationSpeed = 90;
+        translationSpeed = 180;
         closestStar = 40;
     }
 
@@ -45,7 +45,7 @@ public class Line extends Obstacle {
         }
         double Left = startingPoint;
         for (int i = 0; i < 4; ++i) {
-            renderer.drawFoldingRed(Left, getY() - length/2, width, length, colors.get(i));
+            renderer.drawFoldingRed(Left, getY() - length/2, width, length, Color.web(colors.get(i)));
             Left += width;
             Left %= GamePlay.WIDTH;
         }
@@ -53,7 +53,6 @@ public class Line extends Obstacle {
 
     @Override
     public boolean checkCollision(Ball ball) {
-        // TODO : needs improvement and bug fixes
         double top = ball.getY() - ball.getRadius();
         double bottom = ball.getY() + ball.getRadius();
         double Left = startingPoint;
@@ -63,14 +62,17 @@ public class Line extends Obstacle {
                 isCollided = checkNotEqual(ball.getColor(), colors.get(0));
             }
             Left += width;
+            Left %= GamePlay.WIDTH;
             if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
                 isCollided |= checkNotEqual(ball.getColor(), colors.get(1));
             }
             Left += width;
+            Left %= GamePlay.WIDTH;
             if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
                 isCollided |= checkNotEqual(ball.getColor(), colors.get(2));
             }
             Left += width;
+            Left %= GamePlay.WIDTH;
             if (ball.getX() + ball.getRadius() > Left && ball.getX() - ball.getRadius() < Left + width) {
                 isCollided |= checkNotEqual(ball.getColor(), colors.get(3));
             }
@@ -92,7 +94,7 @@ public class Line extends Obstacle {
     }
 
     @Override
-    public Color getRandomColor() {
+    public String getRandomColor() {
         Random random = new Random();
         return colors.get(random.nextInt(colors.size()));
     }

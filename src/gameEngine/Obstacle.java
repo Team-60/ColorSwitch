@@ -22,12 +22,11 @@ public abstract class Obstacle extends GameElement {
         audioClip.setVolume(0.5);
     }
 
-    // TODO: do a deep copy
-    public abstract Color getRandomColor();
+    public abstract String getRandomColor();
 
     public abstract void update(double time);
 
-    public boolean checkNotEqual(Color a, Color b) {
-        return a.getRed() != b.getRed() || a.getGreen() != b.getGreen() || a.getBlue() != b.getBlue();
+    public boolean checkNotEqual(String a, String b) {
+        return a != b;
     }
 }

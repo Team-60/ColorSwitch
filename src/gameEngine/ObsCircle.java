@@ -16,17 +16,17 @@ public class ObsCircle extends Obstacle{
     }
 
     protected double rotationAngle;
-    public void setColors(ArrayList<Color> colors) {
+    public void setColors(ArrayList<String> colors) {
         this.colors = colors;
     }
 
-    private ArrayList<Color> colors = new ArrayList<>()
+    private ArrayList<String> colors = new ArrayList<>()
     {{
-        add(Color.web("F6DF0E"));
-        add(Color.web("8E11FE"));
-        add(Color.web("32E1F4"));
-        add(Color.web("FD0082"));
-    }};           // Note : differs from UML
+        add("F6DF0E");
+        add("8E11FE");
+        add("32E1F4");
+        add("FD0082");
+    }};
 
     ObsCircle(double x, double y, double radius, double width) {
         super(x, y, radius);
@@ -43,8 +43,8 @@ public class ObsCircle extends Obstacle{
         graphicsContext.rotate(-rotationAngle);
         Renderer renderer = new Renderer(graphicsContext);
         int angle = 0;
-        for (Color color : colors) {
-            renderer.drawArc(0, 0, radius, innerRadius, color, color, angle++);
+        for (String color : colors) {
+            renderer.drawArc(0, 0, radius, innerRadius, Color.web(color), Color.web(color), angle++);
         }
         graphicsContext.rotate(rotationAngle);
         graphicsContext.translate(-getX(), -getY());
@@ -107,7 +107,7 @@ public class ObsCircle extends Obstacle{
     }
 
     @Override
-    public Color getRandomColor() {
+    public String getRandomColor() {
         Random random = new Random();
         return colors.get(random.nextInt(colors.size()));
     }

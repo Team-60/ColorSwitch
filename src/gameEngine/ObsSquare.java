@@ -12,12 +12,12 @@ public class ObsSquare extends Obstacle{
     private double width;
     private double sideLength;
     private double rotationAngle;
-    private ArrayList<Color> colors = new ArrayList<>()
+    private ArrayList<String> colors = new ArrayList<>()
     {{
-        add(Color.web("F6DF0E")); // yellow
-        add(Color.web("8E11FE")); // purple
-        add(Color.web("32E1F4")); // cyan
-        add(Color.web("FD0082")); // pink
+        add("F6DF0E"); // yellow
+        add("8E11FE"); // purple
+        add("32E1F4"); // cyan
+        add("FD0082"); // pink
     }};
 
     ObsSquare(double x, double y, double sideLength, double width) {
@@ -42,19 +42,19 @@ public class ObsSquare extends Obstacle{
         bottomLeftX = - sideLength/2;
         bottomLeftY = + sideLength/2;
 
-        graphicsContext.setFill(colors.get(0));
+        graphicsContext.setFill(Color.web(colors.get(0)));
         graphicsContext.fillRoundRect(topLeftX, topLeftY, sideLength, width, width, width);
 
-        graphicsContext.setFill(colors.get(1));
+        graphicsContext.setFill(Color.web(colors.get(1)));
         graphicsContext.fillRoundRect(topRightX - width, topRightY, width, sideLength, width, width);
 
-        graphicsContext.setFill(colors.get(2));
+        graphicsContext.setFill(Color.web(colors.get(2)));
         graphicsContext.fillRoundRect(bottomLeftX, bottomLeftY - width, sideLength, width, width, width);
 
-        graphicsContext.setFill(colors.get(3));
+        graphicsContext.setFill(Color.web(colors.get(3)));
         graphicsContext.fillRoundRect(topLeftX, topLeftY, width, sideLength, width, width);
 
-        graphicsContext.setFill(colors.get(0));
+        graphicsContext.setFill(Color.web(colors.get(0)));
         graphicsContext.fillRoundRect(topLeftX, topLeftY, sideLength/2, width, width, width);
 
 
@@ -167,7 +167,7 @@ public class ObsSquare extends Obstacle{
     }
 
     @Override
-    public Color getRandomColor() {
+    public String getRandomColor() {
         Random random = new Random();
         return colors.get(random.nextInt(colors.size()));
     }
