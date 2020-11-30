@@ -7,8 +7,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Triangle extends Obstacle{
-
+public class ObsTriangle extends Obstacle{
     private double width;
     private double sideLength;
     private double rotationAngle;
@@ -19,7 +18,7 @@ public class Triangle extends Obstacle{
         add("32E1F4");
     }};
 
-    Triangle(double x, double y, double sideLength, double width) {
+    ObsTriangle(double x, double y, double sideLength, double width) {
         super(x, y, sideLength / Math.sqrt(3));
         this.width = width;
         this.sideLength = sideLength;
