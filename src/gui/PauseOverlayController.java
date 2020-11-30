@@ -177,7 +177,7 @@ public class PauseOverlayController {
         tempR.setWidth(GamePlay.WIDTH);
         tempR.setHeight(GamePlay.HEIGHT);
         tempR.setFill(Paint.valueOf("#000000"));
-        tempR.setOpacity(0);
+        tempR.setOpacity(0.75);
         rootContainer.getChildren().add(tempR);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("InputPopup.fxml"));
@@ -188,7 +188,7 @@ public class PauseOverlayController {
             System.out.println(this.getClass().toString() + " failed to load input root");
             e.printStackTrace();
         }
-        assert inputRoot != null;
+        assert (inputRoot != null);
         inputRoot.requestFocus(); // IMP
 
         GamePlay gamePlay = this.gamePlayController.getGamePlay();
@@ -205,5 +205,10 @@ public class PauseOverlayController {
 
         assert (this.usernameSave != null);
         System.out.println(this.getClass().toString() + " " + this.usernameSave + " received");
+
+        rootContainer.getChildren().remove(tempR); // regain focus
+        this.pauseOverlayRoot.requestFocus();
+
+
     }
 }
