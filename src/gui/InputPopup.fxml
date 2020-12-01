@@ -16,24 +16,24 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="441.0" maxWidth="365.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="365.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InputPopupController">
+<AnchorPane maxHeight="451.0" maxWidth="365.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="451.0" prefWidth="365.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.InputPopupController">
    <children>
       <Circle fill="#003b46" layoutX="59.0" layoutY="191.0" radius="83.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
          <effect>
             <DropShadow height="130.63" radius="37.4075" />
          </effect>
       </Circle>
-      <Circle fill="#66a5ad" layoutX="305.0" layoutY="139.0" radius="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+      <Circle fill="#07575b" layoutX="305.0" layoutY="139.0" radius="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
          <effect>
             <DropShadow height="92.5" radius="27.875" />
          </effect>
       </Circle>
-      <Circle fill="#07575b" layoutX="162.0" layoutY="97.0" radius="83.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+      <Circle fill="#66a5ad" layoutX="162.0" layoutY="97.0" radius="83.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
          <effect>
             <DropShadow height="92.5" radius="27.875" />
          </effect>
       </Circle>
-      <Button fx:id="saveButton" alignment="CENTER" layoutX="99.0" layoutY="377.0" mnemonicParsing="false" onAction="#buttonPressed" onMouseEntered="#saveButtonHoverActive" onMouseExited="#saveButtonHoverInactive" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: ffd300;" text="Save" textAlignment="CENTER">
+      <Button fx:id="saveButton" alignment="CENTER" layoutX="99.0" layoutY="377.0" mnemonicParsing="false" onAction="#buttonPressed" onMouseEntered="#saveButtonHoverActive" onMouseExited="#saveButtonHoverInactive" prefHeight="26.0" prefWidth="166.0" text="Save" textAlignment="CENTER">
          <font>
             <Font name="Calibri Bold Italic" size="18.0" />
          </font>
@@ -61,6 +61,11 @@
             <Glow level="0.2" />
          </effect>
       </Label>
+      <ImageView fitHeight="45.0" fitWidth="47.0" layoutX="283.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/inputPopup/dist_white.png" />
+         </image>
+      </ImageView>
       <Label fx:id="jumpsLabel" alignment="CENTER" contentDisplay="RIGHT" layoutX="102.0" layoutY="88.0" prefHeight="28.0" prefWidth="122.0" text="300" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="25.0" />
@@ -106,17 +111,21 @@
             </VBox>
          </children>
       </Group>
-      <Rectangle fill="YELLOW" height="151.0" layoutY="-82.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="365.0" />
-      <Rectangle height="151.0" layoutY="-86.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="367.0" />
-      <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" text="Save Game" textFill="YELLOW">
+      <Group layoutY="-86.0">
+         <children>
+            <Rectangle fill="YELLOW" height="151.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="365.0" />
+            <Rectangle height="151.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="367.0" />
+            <Label fx:id="headingLabel" alignment="CENTER" layoutX="10.0" layoutY="96.0" text="Leaderboard Entry" textFill="YELLOW">
+               <font>
+                  <Font name="Corbel Light" size="39.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Label fx:id="bottomLabel" alignment="CENTER" layoutY="423.0" prefHeight="18.0" prefWidth="365.0" text="Claim your spot among the finest!" textFill="WHITE">
          <font>
-            <Font name="Corbel Light" size="39.0" />
+            <Font name="Calibri Italic" size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="45.0" fitWidth="47.0" layoutX="283.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/inputPopup/dist_white.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

@@ -214,5 +214,6 @@ public class PauseOverlayController {
         this.pauseOverlayRoot.requestFocus();
 
         this.app.saveGame(this.gamePlayController.getGamePlay().getGame());
+        new Dialog("Game saved!", primaryStage);
     }
 }

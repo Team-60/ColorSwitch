@@ -9,6 +9,7 @@ import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.time.LocalDate;
 
 public class InputPopupController<T> {
 
@@ -21,6 +22,10 @@ public class InputPopupController<T> {
     private Button saveButton;
     @FXML
     private TextField inputField;
+    @FXML
+    private Label headingLabel;
+    @FXML
+    private Label bottomLabel;
     @FXML
     private Label scoreLabel;
     @FXML
@@ -38,7 +43,15 @@ public class InputPopupController<T> {
         this.errorSound.setVolume(0.4);
         this.hoverSound.setVolume(0.2);
 
+        this.saveButton.setStyle("-fx-background-color: #ffd300, linear-gradient(yellow 50%, #ffd300 100%), radial-gradient(center 50% -40%, radius 200%, yellow 45%, #ffd300 50%); -fx-background-radius : 20");
+
         this.controller = _controller;
+        if (this.controller instanceof PauseOverlayController) {
+            this.headingLabel.setText("Save Game");
+            this.bottomLabel.setText("Date: " + LocalDate.now().toString()); // TODO: store date for player also
+        } else { // see for leaderboard
+
+        }
         this.scoreLabel.setText("" + player.getScore());
         this.distLabel.setText("" + player.getDistance());
         this.jumpsLabel.setText("" + player.getJumps());
@@ -47,16 +60,12 @@ public class InputPopupController<T> {
     @FXML
     public void saveButtonHoverActive() {
         this.hoverSound.play();
-        this.saveButton.setStyle("-fx-background-color: #daba0a;");
-        this.saveButton.setScaleX(1.1);
-        this.saveButton.setScaleY(1.1);
+        this.saveButton.setStyle("-fx-background-color: #ffd300, linear-gradient(yellow 50%, #ffd300 100%), radial-gradient(center 50% -40%, radius 200%, yellow 35%, #ffd300 50%); -fx-background-radius : 20");
     }
 
     @FXML
     public void saveButtonHoverInactive() {
-        this.saveButton.setStyle("-fx-background-color: #ffd300;");
-        this.saveButton.setScaleX(1);
-        this.saveButton.setScaleY(1);
+        this.saveButton.setStyle("-fx-background-color: #ffd300, linear-gradient(yellow 50%, #ffd300 100%), radial-gradient(center 50% -40%, radius 200%, yellow 45%, #ffd300 50%); -fx-background-radius : 20");
     }
 
     @FXML
@@ -74,6 +83,8 @@ public class InputPopupController<T> {
 
         if (this.controller instanceof PauseOverlayController) {
             ((PauseOverlayController) this.controller).setUsernameSave(name);
+        } else { // see for leaderboard
+
         }
 
         Stage stage = (Stage) this.saveButton.getScene().getWindow();
