@@ -2,16 +2,15 @@ package gameEngine;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
+@SuppressWarnings("ALL")
 public class ObsTriangle extends Obstacle{
-    private double width;
-    private double sideLength;
+    private final double width;
+    private final double sideLength;
     private double rotationAngle;
-    private ArrayList<String> colors = new ArrayList<>()
+    private final ArrayList<String> colors = new ArrayList<>()
     {{
         add("F6DF0E");
         add("8E11FE");
