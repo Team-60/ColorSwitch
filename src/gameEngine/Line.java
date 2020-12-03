@@ -12,7 +12,6 @@ public class Line extends Obstacle {
     private final double length;                           // TODO: can we make it static?
     private double startingPoint = 0;                      // a reference point to assess rotation
     private final double width = GamePlay.WIDTH/4;
-    Renderer renderer;
     public void setColors(ArrayList<String> colors) {
         this.colors = colors;
     }
@@ -32,7 +31,6 @@ public class Line extends Obstacle {
         // safeDist is zero as y is the higher part
         super(x, y, length);
         this.length = length;
-        renderer = null;
         translationSpeed = 180;
         closestStar = 40;
     }
