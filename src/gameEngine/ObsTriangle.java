@@ -36,14 +36,13 @@ public class ObsTriangle extends Obstacle{
         bottomLeftX = -sideLength/2;
         bottomLeftY = +sideLength/(2 * Math.sqrt(3));
 
-        Renderer renderer = new Renderer(graphicsContext);
-        renderer.drawRotatedRoundRect(topX, topY, 5, 0, sideLength - 10, width, width, width, -60, Color.web(colors.get(0)));
+        Renderer.drawRotatedRoundRect(topX, topY, 5, 0, sideLength - 10, width, width, width, -60, Color.web(colors.get(0)));
 
-        renderer.drawRotatedRoundRect(topX, topY, 5, -width, sideLength - 10, width, width, width, -120, Color.web(colors.get(1)));
+        Renderer.drawRotatedRoundRect(topX, topY, 5, -width, sideLength - 10, width, width, width, -120, Color.web(colors.get(1)));
 
-        renderer.drawRotatedRoundRect(bottomLeftX, bottomLeftY, 5, -width, sideLength - 10, width, width, width, 0, Color.web(colors.get(2)));
+        Renderer.drawRotatedRoundRect(bottomLeftX, bottomLeftY, 5, -width, sideLength - 10, width, width, width, 0, Color.web(colors.get(2)));
 
-        renderer.drawRotatedRoundRect(topX, topY, sideLength/2, 0, sideLength/2 - 5, width, width, width, -60, Color.web(colors.get(0)));
+        Renderer.drawRotatedRoundRect(topX, topY, sideLength/2, 0, sideLength/2 - 5, width, width, width, -60, Color.web(colors.get(0)));
 
 
         // for debugging

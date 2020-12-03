@@ -39,13 +39,9 @@ public class Line extends Obstacle {
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-        // TODO: give every obstacle a graphicsContext in Constructor
-        if (renderer == null) {
-            renderer = new Renderer(graphicsContext);
-        }
         double Left = startingPoint;
         for (int i = 0; i < 4; ++i) {
-            renderer.drawFoldingRed(Left, getY() - length/2, width, length, Color.web(colors.get(i)));
+            Renderer.drawFoldingRed(Left, getY() - length/2, width, length, Color.web(colors.get(i)));
             Left += width;
             Left %= GamePlay.WIDTH;
         }

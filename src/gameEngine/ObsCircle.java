@@ -41,10 +41,9 @@ public class ObsCircle extends Obstacle{
 
         graphicsContext.translate(getX(), getY());
         graphicsContext.rotate(-rotationAngle);
-        Renderer renderer = new Renderer(graphicsContext);
         int angle = 0;
         for (String color : colors) {
-            renderer.drawArc(0, 0, radius, innerRadius, Color.web(color), Color.web(color), angle++);
+            Renderer.drawArc(0, 0, radius, innerRadius, Color.web(color), Color.web(color), angle++);
         }
         graphicsContext.rotate(rotationAngle);
         graphicsContext.translate(-getX(), -getY());
