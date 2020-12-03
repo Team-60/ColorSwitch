@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.Bloom;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
@@ -14,7 +13,6 @@ import java.io.File;
 public class InputPopupController<T> {
 
     private T controller;
-    private Bloom bloom;
     private AudioClip hoverSound;
     private AudioClip clickSound;
     private AudioClip errorSound;
@@ -41,22 +39,24 @@ public class InputPopupController<T> {
         this.hoverSound.setVolume(0.2);
 
         this.controller = _controller;
-        this.scoreLabel.setText("Stars : " + player.getScore());
-        this.distLabel.setText("Distance : " + player.getDistance() + "m");
-        this.jumpsLabel.setText("Jumps : " + player.getJumps());
-        this.bloom = new Bloom(1.0);
-        this.saveButton.setEffect(this.bloom);
+        this.scoreLabel.setText("" + player.getScore());
+        this.distLabel.setText("" + player.getDistance());
+        this.jumpsLabel.setText("" + player.getJumps());
     }
 
     @FXML
     public void saveButtonHoverActive() {
         this.hoverSound.play();
-        this.bloom.setThreshold(0.75);
+        this.saveButton.setStyle("-fx-background-color: #daba0a;");
+        this.saveButton.setScaleX(1.1);
+        this.saveButton.setScaleY(1.1);
     }
 
     @FXML
     public void saveButtonHoverInactive() {
-        this.bloom.setThreshold(1);
+        this.saveButton.setStyle("-fx-background-color: #ffd300;");
+        this.saveButton.setScaleX(1);
+        this.saveButton.setScaleY(1);
     }
 
     @FXML
@@ -64,7 +64,7 @@ public class InputPopupController<T> {
         String name = this.inputField.getText();
         if (name == null || name.length() == 0) {
             this.errorSound.play();
-            this.inputField.setStyle("-fx-border-width: 2; -fx-border-color: yellow;");
+            this.inputField.setStyle("-fx-border-width: 2; -fx-border-color: #ffd300;");
             System.out.println(this.getClass().toString() + " blank input registered");
             return;
         }
