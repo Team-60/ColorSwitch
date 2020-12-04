@@ -10,6 +10,8 @@ import java.io.Serializable;
 
 public class Ball implements Serializable {
 
+    private static final long serialVersionUID = 2022L;
+
     private final double jumpSpeed = -500;
     private final double gravity = 1900;
     private final double radius = 10;

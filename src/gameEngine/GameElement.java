@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 public abstract class GameElement implements Serializable {
 
+    private static final long serialVersionUID = 2021L;
+
     protected double x;
     protected double y;
     protected double closestSafeDist; // TODO private?

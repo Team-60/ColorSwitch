@@ -5,6 +5,7 @@ import java.io.Serializable;
 @SuppressWarnings("rawtypes")
 public class Player implements Serializable, Comparable { // info. keep
 
+    private static final long serialVersionUID = 2023L;
     public static final String FILE_PATH = "src/data/dataPlayer.ser";
 
     private String name;
