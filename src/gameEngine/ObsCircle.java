@@ -33,7 +33,6 @@ public class ObsCircle extends Obstacle{
         this.radius = radius;
         this.innerRadius = radius - width;
         rotationAngle = 0;
-
     }
 
     @Override

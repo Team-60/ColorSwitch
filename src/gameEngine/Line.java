@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class Line extends Obstacle {
 
-    private static final double closestSafeDist = 100;     // TODO: not final
     private final double length;                           // TODO: can we make it static?
     private double startingPoint = 0;                      // a reference point to assess rotation
     private final double width = GamePlay.WIDTH/4;

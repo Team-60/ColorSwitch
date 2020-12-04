@@ -16,12 +16,12 @@ public class Game implements Serializable {
     private static final int numberOfObstacle = 5;
     private static final double distanceBetweenObstacles = 150;
 
-    private Player player;
-    private Ball ball;
+    private final Player player;
+    private final Ball ball;
     private ArrayList<GameElement> gameElements;
     private boolean gameOver = false;
 
-    private transient GraphicsContext graphicsContext; // can't serialize this
+    private final transient GraphicsContext graphicsContext; // can't serialize this
 
     Game(GraphicsContext graphicsContext, Player player) {
         this.graphicsContext = graphicsContext;
@@ -39,6 +39,7 @@ public class Game implements Serializable {
         gameElements.add(star);
         gameElements.add(switchColor);
         ball.setColor(obstacle.getRandomColor());
+        Renderer.init(graphicsContext);
     }
 
     private void moveScreenRelative(double offset) {
@@ -65,6 +66,13 @@ public class Game implements Serializable {
                 gameElement.playSound();
                 if (gameElement instanceof Star) player.incScore();
                 else if (gameElement instanceof Obstacle) gameOver = true;
+//                else if (gameElement instanceof Obstacle) {
+//                    try {
+//                        Thread.sleep(500);
+//                    }catch(Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
                 continue;
             }
             if (gameElement.getY() < 1000) {
@@ -137,7 +145,7 @@ public class Game implements Serializable {
 
         int randomNumber = (new Random()).nextInt(numberOfObstacle);
         // y - safe dist of that specific obstacles
-//        int randomNumber = 1;
+//        int randomNumber = 5;
         if (randomNumber == 0) {
             return (new ObsCircle(x, y - 90, 90, 15));
         }else if (randomNumber == 1) {
@@ -147,7 +155,7 @@ public class Game implements Serializable {
         }else if (randomNumber == 4) {
             return new ObsSquare(x , y - 85 * Math.sqrt(2), 170, 15);
         }else {
-            return new Triangle(x , y - 200 / Math.sqrt(3), 200, 15);
+            return new ObsTriangle(x , y - 200 / Math.sqrt(3), 200, 15);
         }
     }
 
