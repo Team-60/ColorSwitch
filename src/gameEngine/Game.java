@@ -20,6 +20,7 @@ public class Game implements Serializable {
     private final Ball ball;
     private ArrayList<GameElement> gameElements;
     private boolean gameOver = false;
+    private Swarm swarm;
 
     private final transient GraphicsContext graphicsContext; // can't serialize this
 
@@ -40,6 +41,7 @@ public class Game implements Serializable {
         gameElements.add(switchColor);
         ball.setColor(obstacle.getRandomColor());
         Renderer.init(graphicsContext);
+        swarm = new Swarm(graphicsContext);
     }
 
     private void moveScreenRelative(double offset) {
@@ -49,10 +51,14 @@ public class Game implements Serializable {
     }
 
     public void checkAndUpdate(double time) {
-
+        if (gameOver) {
+            swarm.update(time/1.2);
+            return;
+        }
         double offset = ball.move(time);
         if (ball.getY() - ball.getRadius() > 700) { // check if game over due to fall down, throw exception, ball shouldn't be visible at all
             gameOver = true;
+            swarm.explode();
         }
         moveScreenRelative(offset);
         double y = 350;
@@ -65,14 +71,11 @@ public class Game implements Serializable {
             if (gameElement.checkCollision(ball)) {
                 gameElement.playSound();
                 if (gameElement instanceof Star) player.incScore();
-                else if (gameElement instanceof Obstacle) gameOver = true;
-//                else if (gameElement instanceof Obstacle) {
-//                    try {
-//                        Thread.sleep(500);
-//                    }catch(Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
+                else if (gameElement instanceof Obstacle) {
+                    gameOver = true;
+                    swarm.explode();
+                    gameElementsTemp.add(gameElement);
+                }
                 continue;
             }
             if (gameElement.getY() < 1000) {
@@ -135,9 +138,11 @@ public class Game implements Serializable {
     }
 
     public void refreshGameElements() {
+        swarm.refresh();
         for (GameElement gameElement : gameElements) {
             gameElement.refresh(graphicsContext);
         }
+        if (gameOver) return;
         ball.refresh();
     }
 
