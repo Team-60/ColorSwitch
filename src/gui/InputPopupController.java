@@ -34,7 +34,7 @@ public class InputPopupController<T> {
     private Label jumpsLabel;
 
 
-    public void init(Player player, T _controller) {
+    public void init(Player player, T _controller) { // don't modify player here at all
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());

@@ -213,7 +213,7 @@ public class PauseOverlayController {
         rootContainer.getChildren().remove(tempR); // regain focus
         this.pauseOverlayRoot.requestFocus();
 
-        this.app.saveGame(this.gamePlayController.getGamePlay().getGame());
+        this.app.saveGame(this.gamePlayController.getGamePlay().getGame(), this.usernameSave);
         new Dialog("Game saved!", primaryStage);
     }
 }

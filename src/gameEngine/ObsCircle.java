@@ -10,15 +10,7 @@ public class ObsCircle extends Obstacle{
 
     private final double radius;
     private final double innerRadius;
-
-    public void setRotationAngle(double rotationAngle) {
-        this.rotationAngle = rotationAngle;
-    }
-
     protected double rotationAngle;
-    public void setColors(ArrayList<String> colors) {
-        this.colors = colors;
-    }
 
     private ArrayList<String> colors = new ArrayList<>()
     {{
@@ -97,6 +89,14 @@ public class ObsCircle extends Obstacle{
         }
 
         return isCollided;
+    }
+
+    public void setRotationAngle(double rotationAngle) {
+        this.rotationAngle = rotationAngle;
+    }
+
+    public void setColors(ArrayList<String> colors) {
+        this.colors = colors;
     }
 
     @Override

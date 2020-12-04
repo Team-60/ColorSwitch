@@ -131,8 +131,8 @@ public class App extends Application {
         launch(args);
     }
 
-    public void saveGame(Game game) {
-
+    public void saveGame(Game game, String name) {
+        // modify player here, save data also
     }
 
     private int giveId() {

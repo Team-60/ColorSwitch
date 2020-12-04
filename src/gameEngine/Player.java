@@ -10,6 +10,7 @@ public class Player implements Serializable { // info. keep
     private int score;
     private int jumps;
     private double distance;
+    private String date;
 
     public Player() {
         this.name = null;
@@ -17,6 +18,7 @@ public class Player implements Serializable { // info. keep
         this.score = 0;
         this.jumps = 0;
         this.distance = 0;
+        this.date = null;
     }
 
     public int getScore() {
@@ -40,5 +42,8 @@ public class Player implements Serializable { // info. keep
     }
     public void incDist(double dist) {
         this.distance += dist;
+    }
+    public void setDate(String _date) {
+        this.date = _date;
     }
 }
