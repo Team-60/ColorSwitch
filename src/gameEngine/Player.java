@@ -2,9 +2,11 @@ package gameEngine;
 
 import java.io.Serializable;
 
-public class Player implements Serializable { // info. keep
+@SuppressWarnings("rawtypes")
+public class Player implements Serializable, Comparable { // info. keep
 
-    public static final String FILE_PATH = "src/data/dataGame.ser";
+    public static final String FILE_PATH = "src/data/dataPlayer.ser";
+
     private String name;
     private int id;
     private int score;
@@ -24,13 +26,22 @@ public class Player implements Serializable { // info. keep
     public int getScore() {
         return score;
     }
-    public double getDistance() {
-        return distance;
+    public String getDistance() {
+        double fDist = this.distance/1000.0;
+        String res = String.format("%.1f", fDist);
+        return res + "k";
+    } // return formatted string
+    public String getJumps() {
+        int fJumps = this.jumps;
+        return (fJumps >= 1000) ? String.format("%.1f", fJumps / 1000.0) : Integer.toString(fJumps);
     }
-    public int getJumps() {
-        return jumps;
+    public int getId() {
+        return id;
     }
 
+    public void setId(int _id) {
+        this.id = _id;
+    }
     public void setScore(int score) {
         this.score = score;
     }
@@ -46,4 +57,26 @@ public class Player implements Serializable { // info. keep
     public void setDate(String _date) {
         this.date = _date;
     }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public int compareTo(Object o) { // for leaderboard
+        Player p = (Player) o;
+        return Integer.compare(p.getScore(), this.score);
+    }
+
+    @Override
+    public String toString() {
+        String h = "Player\n";
+        String ps = "Name: " + this.name + "\n";
+        String is = "Id: " + this.id + "\n";
+        String ss = "Score: " + this.score + "\n";
+        String js = "Jumps: " + this.jumps + "\n";
+        String dis = "Dist.: " + this.getDistance() + "\n";
+        String ds = "Date: " + this.date + "\n";
+        return h + ps + is + ss + js + dis + ds;
+    }
+
 }

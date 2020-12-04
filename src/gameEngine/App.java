@@ -1,5 +1,6 @@
 package gameEngine;
 
+import gui.Dialog;
 import gui.LoadAnimationController;
 import gui.MainPageController;
 import javafx.application.Application;
@@ -17,6 +18,8 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 /*
 Divyansh's:
@@ -24,7 +27,7 @@ TODO: Beware of file changes and refactoring, especially in file paths while mak
 TODO: Implement Easter egg2 secret restart
 TODO: Implement Player Class, Database class
 TODO: add debug options for everywhere with fxml loader
-TODO: restart on game over page implement (maybe see for reference keeping?)
+TODO: restart on game over page & on pause implement (maybe see for reference keeping?)
 TODO: add score on game over page, set highscore
 TODO: see when all spots for game over (currently missing fall down, calibrate media player for the same)
 TODO: throw game over exceptions/ fall down exceptions
@@ -37,16 +40,24 @@ Serialization notes:
 Score (Player)
  */
 
+
 public class App extends Application {
 
     public static MediaPlayer BgMediaPlayer = null; // for easy referencing
     private static final Boolean startWithAnimation = true;
 
+    private final Database<Game> gameDatabase;
+    private final Database<Player> playerDatabase;
+
     private int highscore;
     private Scene scene;
 
-    public App() {
+    public App() { // instance is automatically created by launch of JavaFX
+        this.gameDatabase = new Database<>();
+        this.playerDatabase = new Database<>();
         this.highscore = -1; // need to gain this via serializing
+        this.gameDatabase.form(Game.FILE_PATH);
+        this.playerDatabase.form(Player.FILE_PATH);
     }
 
     public void addAssets() {
@@ -126,16 +137,26 @@ public class App extends Application {
         this.highscore = highscore;
     }
 
+    public void saveGame(Game game, String name) { // maybe ask for a slot from the player? Implement on the oldest basis
+        // modify player here, save data also, check if the player ID already exists (in another overridden method?) TODO
+        game.getPlayer().setName(name);
+        game.getPlayer().setId(this.giveId());
+        game.getPlayer().setDate(LocalDate.now().toString());
+        boolean overwrite = this.gameDatabase.update(game, Game.FILE_PATH);
+        if (overwrite) new Dialog("Oldest load slot overwritten! Game saved!", (Stage) this.scene.getWindow());
+        else new Dialog("Game saved!", (Stage) this.scene.getWindow());
+    }
+
+    private int giveId() { // return a fresh Id for game
+        // calc. max id and return +1
+        int id = -1;
+        ArrayList<Game> games = this.gameDatabase.getData();
+        for (Game g : games)
+            id = Math.max(id, g.getId());
+        return id + 1;
+    }
+
     public static void main(String[] args) {
-        new App();
         launch(args);
-    }
-
-    public void saveGame(Game game, String name) {
-        // modify player here, save data also
-    }
-
-    private int giveId() {
-        return -1;
     }
 }

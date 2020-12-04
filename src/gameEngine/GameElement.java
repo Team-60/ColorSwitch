@@ -10,7 +10,7 @@ public abstract class GameElement implements Serializable {
 
     protected double x;
     protected double y;
-    protected double closestSafeDist;
+    protected double closestSafeDist; // TODO private?
 
     protected String audioClipPath;
 

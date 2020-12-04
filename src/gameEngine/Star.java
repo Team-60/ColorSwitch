@@ -8,8 +8,8 @@ import java.io.File;
 public class Star extends GameElement {
 
     // TODO: why is this useful??
-    private static int closestSafeDist = 100;
-    private static int points = 0;
+    private static final int closestSafeDist = 100;
+    private static final int points = 0;
 
     private transient final Image image = new Image(new File("src/assets/gameplay/star.png").toURI().toString());
 
@@ -30,10 +30,7 @@ public class Star extends GameElement {
 
     @Override
     public boolean checkCollision(Ball ball) {
-        if (ball.getY() < getY() + 20) {
-            return true;
-        }
-        return false;
+        return ball.getY() < getY() + 20;
     }
 
     @Override

@@ -10,7 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Game implements Serializable {
+@SuppressWarnings("rawtypes")
+public class Game implements Serializable, Comparable {
 
     public static final String FILE_PATH = "src/data/dataGame.ser";
     private static final int numberOfObstacle = 5;
@@ -50,7 +51,7 @@ public class Game implements Serializable {
 
     public void checkAndUpdate(double time) {
 
-        double offset = ball.move(time);
+        double offset = ball.move(time, this.player); // to increment player's dist and move ball
         if (ball.getY() - ball.getRadius() > 700) { // check if game over due to fall down, throw exception, ball shouldn't be visible at all
             gameOver = true;
         }
@@ -69,7 +70,7 @@ public class Game implements Serializable {
 //                else if (gameElement instanceof Obstacle) {
 //                    try {
 //                        Thread.sleep(500);
-//                    }catch(Exception e) {
+//                    } catch(Exception e) {
 //                        e.printStackTrace();
 //                    }
 //                }
@@ -117,7 +118,7 @@ public class Game implements Serializable {
         for (GameElement gameElement : gameElements) {
             if (gameElement instanceof SwitchColor) {
                 prev = gameElement;
-            }else if (gameElement instanceof Obstacle && prev != null) {
+            } else if (gameElement instanceof Obstacle && prev != null) {
                 ((SwitchColor) prev).setObstacle((Obstacle)gameElement);
             }
         }
@@ -132,6 +133,7 @@ public class Game implements Serializable {
 
     public void registerJump() {
         ball.jump();
+        this.player.incJumps();
     }
 
     public void refreshGameElements() {
@@ -148,15 +150,23 @@ public class Game implements Serializable {
 //        int randomNumber = 5;
         if (randomNumber == 0) {
             return (new ObsCircle(x, y - 90, 90, 15));
-        }else if (randomNumber == 1) {
-            return new Line(x, y - 7.5,15);
-        }else if (randomNumber == 3) {
+        } else if (randomNumber == 1) {
+            return new ObsLine(x, y - 7.5,15);
+        } else if (randomNumber == 3) {
             return new ObsDoubleCircle(x, y - 115, 90, 115, 15);
-        }else if (randomNumber == 4) {
+        } else if (randomNumber == 4) {
             return new ObsSquare(x , y - 85 * Math.sqrt(2), 170, 15);
-        }else {
+        } else {
             return new ObsTriangle(x , y - 200 / Math.sqrt(3), 200, 15);
         }
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public int getId() {
+        return this.player.getId();
     }
 
     public int getScore() {
@@ -165,5 +175,18 @@ public class Game implements Serializable {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    @Override
+    public int compareTo(Object o) { // for saving, based on id
+        Game g = (Game) o;
+        int idThis = (this.getId() == -1) ? Integer.MAX_VALUE : this.getId();
+        int idThat = (g.getId() == -1) ? Integer.MAX_VALUE : g.getId();
+        return Integer.compare(idThis, idThat);
+    }
+
+    @Override
+    public String toString() {
+        return this.getPlayer().toString();
     }
 }

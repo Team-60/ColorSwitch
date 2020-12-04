@@ -6,14 +6,11 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Line extends Obstacle {
+public class ObsLine extends Obstacle {
 
     private final double length;                           // TODO: can we make it static?
     private double startingPoint = 0;                      // a reference point to assess rotation
     private final double width = GamePlay.WIDTH/4;
-    public void setColors(ArrayList<String> colors) {
-        this.colors = colors;
-    }
 
     private ArrayList<String> colors = new ArrayList<>()
     {{
@@ -24,7 +21,7 @@ public class Line extends Obstacle {
     }};
 
 
-    Line(double x, double y, double length) {
+    ObsLine(double x, double y, double length) {
         // x can be anything doesn't matter
         // y is the higher part of line
         // safeDist is zero as y is the higher part
@@ -92,4 +89,7 @@ public class Line extends Obstacle {
         return colors.get(random.nextInt(colors.size()));
     }
 
+    public void setColors(ArrayList<String> colors) {
+        this.colors = colors;
+    }
 }

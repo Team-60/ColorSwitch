@@ -46,11 +46,12 @@ public class Ball implements Serializable {
         velocity = jumpSpeed;
     }
 
-    public double move(double time) {
+    public double move(double time, Player player) {
         // TODO : tweaks to make jump animation good
         double distance = velocity * time + (gravity * time * time)/2;
         velocity += gravity * time;
         y += distance;
+        player.incDist(Math.abs(distance)); // inc player distance
 
         if (y > handPosition) {
             y = handPosition;
