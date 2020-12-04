@@ -23,9 +23,10 @@ public class Swarm {
         this.graphicsContext = graphicsContext;
     }
 
-    public void explode() {
+    public void explode(Ball ball) {
         Random random = new Random();
-        int radius, x = 225, y = 350;
+        int radius;
+        double x = ball.getX(), y = ball.getY();
         double Vx, Vy;
         int va;
         String color;

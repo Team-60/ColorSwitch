@@ -2,10 +2,12 @@ package gameEngine;
 
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,6 +15,7 @@ import java.util.Random;
 @SuppressWarnings("rawtypes")
 public class Game implements Serializable, Comparable {
 
+    private static final long serialVersionUID = 2020L;
     public static final String FILE_PATH = "src/data/dataGame.ser";
     private static final int numberOfObstacle = 5;
     private static final double distanceBetweenObstacles = 150;
@@ -21,9 +24,10 @@ public class Game implements Serializable, Comparable {
     private final Ball ball;
     private ArrayList<GameElement> gameElements;
     private boolean gameOver = false;
-    private Swarm swarm;
 
+    private transient final Swarm swarm;
     private final transient GraphicsContext graphicsContext; // can't serialize this
+    private transient final AudioClip fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
 
     Game(GraphicsContext graphicsContext, Player player) {
         this.graphicsContext = graphicsContext;
@@ -57,11 +61,14 @@ public class Game implements Serializable, Comparable {
             return;
         }
         double offset = ball.move(time, this.player);
-        if (ball.getY() - ball.getRadius() > 700) { // check if game over due to fall down, throw exception, ball shouldn't be visible at all
+        if (ball.getY() + ball.getRadius() > 700) { // check if game over due to fall down, throw exception, ball shouldn't be visible at all
             gameOver = true;
-            swarm.explode();
+            swarm.explode(this.ball);
+            App.BgMediaPlayer.stop();
+            this.fallDownClip.play();
         }
         moveScreenRelative(offset);
+
         double y = 350;
         double x = 225;
 
@@ -74,7 +81,7 @@ public class Game implements Serializable, Comparable {
                 if (gameElement instanceof Star) player.incScore();
                 else if (gameElement instanceof Obstacle) {
                     gameOver = true;
-                    swarm.explode();
+                    swarm.explode(this.ball);
                     gameElementsTemp.add(gameElement);
                 }
                 continue;

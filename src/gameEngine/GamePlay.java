@@ -153,21 +153,11 @@ class GamePlayAnimationTimer extends AnimationTimer {
     private final GraphicsContext graphicsContext;
     private final Game game;
     private final GamePlay gamePlay;
-    private Timeline timeline;
-    DoubleProperty brightness;
 
     GamePlayAnimationTimer(GraphicsContext _graphicsContext, Game _game, GamePlay _gamePlay) {
         this.graphicsContext = _graphicsContext;
         this.game = _game;
         this.gamePlay = _gamePlay;
-
-        brightness = new SimpleDoubleProperty();
-
-        timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0.05), new KeyValue(brightness, 0.5)),
-                new KeyFrame(Duration.seconds(0.1), new KeyValue(brightness, 0))
-        );
-        timeline.setCycleCount(1);
     }
 
     @Override
@@ -179,19 +169,12 @@ class GamePlayAnimationTimer extends AnimationTimer {
         if (game.isGameOver()) { // need to check before, as logic is updated but gui also has to be updated IMP
             if (GamePlay.gameOverTime == -1) {
                 GamePlay.gameOverTime = currentNanoTime;
-                timeline.play();
-            }else {
+            } else {
                 double diff = (double)(currentNanoTime - GamePlay.gameOverTime)/1000000000;
                 if (diff > 1.5) {
                     gamePlay.gameOver();
                 }
             }
-        }
-
-        if (timeline.getStatus() == Animation.Status.RUNNING) {
-            graphicsContext.setFill(Color.WHITE.deriveColor(0, 1, 1, brightness.get()));
-            graphicsContext.fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
-            return;
         }
 
         double timeDifference = (double) (currentNanoTime - GamePlay.PreviousFrameTime) / 1000000000;
