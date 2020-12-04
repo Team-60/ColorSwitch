@@ -3,6 +3,8 @@ package gameEngine;
 import gui.GameOverPageController;
 import gui.GamePlayController;
 import javafx.animation.*;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +19,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.awt.desktop.AppReopenedEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -43,6 +46,7 @@ public class GamePlay {
     private final Player player;
     private final GamePlayAnimationTimer animationTimer;
     public static long PreviousFrameTime = -1;
+    public static long gameOverTime = -1;
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
     public GamePlay(App _app) throws IOException { // create a new game and a new player, sep. constructor for deserialize
@@ -82,7 +86,6 @@ public class GamePlay {
     private void resetBgMusic() {
         // fade down current music
 //        App.BgMediaPlayer.stop(); // TEMPORARY, TODO: MUSIC DISABLE , (Comment below code)
-
         Timeline timelineMusicFadeOut = new Timeline();
         KeyValue kvMusicFadeOut = new KeyValue(App.BgMediaPlayer.volumeProperty(), 0, Interpolator.EASE_IN);
         KeyFrame kfMusicFadeOut = new KeyFrame(Duration.seconds(0.5), kvMusicFadeOut);
@@ -126,27 +129,22 @@ public class GamePlay {
 
         this.animationTimer.stop();
         GamePlay.PreviousFrameTime = -1; // IMP for next iteration of game
+        GamePlay.gameOverTime = -1;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GameOverPage.fxml"));
         try {
-            Thread.sleep(1200);
-        } catch (InterruptedException e) {
-            System.out.println(this.getClass().toString() + " Thread sleep failed");
+            AnchorPane gameOverRoot = loader.load(); // TODO: create init for instances, rn only for animations
+            GameOverPageController gameOverPageController = loader.getController();
+            gameOverPageController.init(this.app, this.game); // for purposes such as returning back to main page
+            StackPane rootContainer = (StackPane) this.scene.getRoot();
+            assert (rootContainer.getChildren().size() == 1);
+            rootContainer.getChildren().remove(this.canvasContainer);
+            rootContainer.getChildren().add(gameOverRoot);
+            gameOverRoot.requestFocus(); // IMP, current focus on canvas
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " Failed to load game over page");
             e.printStackTrace();
-        } finally {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GameOverPage.fxml"));
-            try {
-                AnchorPane gameOverRoot = loader.load(); // TODO: create init for instances, rn only for animations
-                GameOverPageController gameOverPageController = loader.getController();
-                gameOverPageController.init(this.app, this.game); // for purposes such as returning back to main page
-                StackPane rootContainer = (StackPane) this.scene.getRoot();
-                assert (rootContainer.getChildren().size() == 1);
-                rootContainer.getChildren().remove(this.canvasContainer);
-                rootContainer.getChildren().add(gameOverRoot);
-                gameOverRoot.requestFocus(); // IMP, current focus on canvas
-            } catch (IOException e) {
-                System.out.println(this.getClass().toString() + " Failed to load game over page");
-                e.printStackTrace();
-            }
         }
+
     }
 }
 
@@ -155,11 +153,21 @@ class GamePlayAnimationTimer extends AnimationTimer {
     private final GraphicsContext graphicsContext;
     private final Game game;
     private final GamePlay gamePlay;
+    private Timeline timeline;
+    DoubleProperty brightness;
 
     GamePlayAnimationTimer(GraphicsContext _graphicsContext, Game _game, GamePlay _gamePlay) {
         this.graphicsContext = _graphicsContext;
         this.game = _game;
         this.gamePlay = _gamePlay;
+
+        brightness = new SimpleDoubleProperty();
+
+        timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0.05), new KeyValue(brightness, 0.5)),
+                new KeyFrame(Duration.seconds(0.1), new KeyValue(brightness, 0))
+        );
+        timeline.setCycleCount(1);
     }
 
     @Override
@@ -169,9 +177,24 @@ class GamePlayAnimationTimer extends AnimationTimer {
             return;
         }
         if (game.isGameOver()) { // need to check before, as logic is updated but gui also has to be updated IMP
-            this.gamePlay.gameOver();
+            if (GamePlay.gameOverTime == -1) {
+                GamePlay.gameOverTime = currentNanoTime;
+                timeline.play();
+            }else {
+                double diff = (double)(currentNanoTime - GamePlay.gameOverTime)/1000000000;
+                if (diff > 1.5) {
+                    gamePlay.gameOver();
+                }
+            }
         }
-        double timeDifference = (double)(currentNanoTime - GamePlay.PreviousFrameTime)/1000000000;
+
+        if (timeline.getStatus() == Animation.Status.RUNNING) {
+            graphicsContext.setFill(Color.WHITE.deriveColor(0, 1, 1, brightness.get()));
+            graphicsContext.fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
+            return;
+        }
+
+        double timeDifference = (double) (currentNanoTime - GamePlay.PreviousFrameTime) / 1000000000;
         GamePlay.PreviousFrameTime = currentNanoTime;
 
         graphicsContext.clearRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
