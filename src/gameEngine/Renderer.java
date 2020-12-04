@@ -4,16 +4,20 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.FillRule;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Renderer {
 
     // TODO: make all methods static
-
     public final static int WIDTH = 450;
     public final static int HEIGHT = 700;
+    private static GraphicsContext graphicsContext;
+
     // to handle gui components
-    GraphicsContext graphicsContext;
+    public static void init(GraphicsContext gc) {
+        graphicsContext = gc;
+    }
 
     public static boolean checkInside(ArrayList<Pair> points, double p1, double p2) {
         // points : An arrayList of points in clockwise Order
@@ -52,21 +56,17 @@ public class Renderer {
         return newY;
     }
 
-    public void drawRotatedRoundRect(double x, double y, double width, double height, double arcWidth, double arcHeight, double angle, Color color) {
-        graphicsContext.translate(x , y);
+    public static void drawRotatedRoundRect(double pivotX, double pivotY, double x, double y, double width, double height, double arcWidth, double arcHeight, double angle, Color color) {
+        graphicsContext.translate(pivotX, pivotY);
         graphicsContext.rotate(-angle);
         graphicsContext.setFill(color);
-        graphicsContext.fillRoundRect(-height/2, -height/2, width, height, arcHeight, arcHeight);
+        graphicsContext.fillRoundRect(x, y, width, height, arcHeight, arcHeight);
         graphicsContext.rotate(angle);
-        graphicsContext.translate(-x, -y);
-    }
-
-    Renderer(GraphicsContext graphicsContext) {
-        this.graphicsContext = graphicsContext;
+        graphicsContext.translate(-pivotX, -pivotY);
     }
 
     // draw rectangle that curves around screen
-    public void drawFoldingRed(double topLeftX, double topLeftY, double width, double length, Color color) {
+    public static void drawFoldingRed(double topLeftX, double topLeftY, double width, double length, Color color) {
 
         graphicsContext.setFill(color);
         graphicsContext.fillRect(topLeftX, topLeftY, width, length);
@@ -76,7 +76,7 @@ public class Renderer {
 
     }
 
-    public void drawArc(double centerX, double centerY, double radius, double innerRadius, Color bgColor, Color strokeColor, int angle) {
+    public static void drawArc(double centerX, double centerY, double radius, double innerRadius, Color bgColor, Color strokeColor, int angle) {
 
         graphicsContext.beginPath();
         graphicsContext.setFill(bgColor);
@@ -141,7 +141,7 @@ public class Renderer {
         graphicsContext.fill();
     }
 
-    private double transformX(double x, double y, double centerX, double centerY, int angle) {
+    private static double transformX(double x, double y, double centerX, double centerY, int angle) {
         double xx = x - centerX;
         double yy = y - centerY;
         if (angle == 0) {
@@ -154,7 +154,7 @@ public class Renderer {
         return -yy + centerX;
     }
 
-    private double transformY(double x, double y, double centerX, double centerY, int angle) {
+    private static double transformY(double x, double y, double centerX, double centerY, int angle) {
         double xx = x - centerX;
         double yy = y - centerY;
         if (angle == 0) {
