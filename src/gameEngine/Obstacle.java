@@ -10,6 +10,14 @@ public abstract class Obstacle extends GameElement {
         return closestStar;
     }
 
+    public void setTranslationSpeed(double translationSpeed) {
+        this.translationSpeed = translationSpeed;
+    }
+
+    public void setRotationalSpeed(double rotationalSpeed) {
+        this.rotationalSpeed = rotationalSpeed;
+    }
+
     Obstacle(double x, double y, double safeDist) {
         super(x, y, safeDist);
         rotationalSpeed = 90;

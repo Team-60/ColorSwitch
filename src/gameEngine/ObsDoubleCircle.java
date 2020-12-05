@@ -31,6 +31,11 @@ public class ObsDoubleCircle extends ObsCircle {
     }
 
     @Override
+    public void setRotationalSpeed(double rotationalSpeed) {
+        super.setRotationalSpeed(rotationalSpeed);
+        innerCircle.setRotationalSpeed(rotationalSpeed);
+    }
+    @Override
     public boolean checkCollision(Ball ball) {
         return super.checkCollision(ball) || innerCircle.checkCollision(ball);
     }
