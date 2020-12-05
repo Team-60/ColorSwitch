@@ -1,16 +1,20 @@
 package gui;
 
 import gameEngine.App;
+import gameEngine.Game;
 import gameEngine.GamePlay;
+import gameEngine.Player;
 import javafx.animation.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -23,16 +27,18 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class LoadGamePageController {
+
+    final static int NUM_BUTTONS = 6;
 
     private App app;
     private ArrayList<Button> slotButtons; // buttons inside buttonContainer
     private ArrayList<String> colorScheme;
     private String inactiveColor;
-    private HashMap<Button, Boolean> isActive; // slot is active with a game
-    final static int NUM_BUTTONS = 6;
+    private HashMap<Button, Game> isActive; // slot is active with a game
 
     private AudioClip hoverSound;
     private AudioClip clickSound;
@@ -44,19 +50,17 @@ public class LoadGamePageController {
     @FXML
     private Group goBack;
 
-    public void init(App _app, ArrayList<Boolean> buttonContent) { // Boolean List but actually will be a Game ArrayList (all active and then all inactive)
+    public void init(App _app) { // (all active and then all inactive) TODO, hover mech. also for further details, tooltip?, add a reset option
 
         this.app = _app; // needed for return back to main page
+        ArrayList<Game> games = this.app.getGameDatabase().getData();
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());
         this.clickSound.setVolume(0.5); // add click sounds
         this.hoverSound.setVolume(0.04);
 
-        this.colorScheme = new ArrayList<>(); // color blues
-        this.colorScheme.add("#003B46");
-        this.colorScheme.add("#07575B");
-        this.colorScheme.add("#66A5AD");
+        this.colorScheme = new ArrayList<>(Arrays.asList("#003B46", "#07575B", "#66A5AD")); // color blues
         this.inactiveColor = "#808588";
 
         RotateTransition rt = new RotateTransition(Duration.millis(15000), this.goBack);
@@ -65,20 +69,20 @@ public class LoadGamePageController {
         rt.setInterpolator(Interpolator.LINEAR);
         rt.play();
 
-        assert buttonContent.size() == NUM_BUTTONS;
+        assert (games.size() <= NUM_BUTTONS);
         ObservableList<Node> buttonList = buttonContainer.getChildren();
         this.slotButtons = new ArrayList<>();
         this.isActive = new HashMap<>();
         for (int i = 0; i < NUM_BUTTONS; ++ i) {
             Button cur = (Button) buttonList.get(i);
             this.slotButtons.add(cur);
-            if (buttonContent.get(i)) { // it's active
+            if (i < games.size()) { // it's active
+                this.isActive.put(cur, games.get(i));
                 this.activateButton(cur);
-                this.isActive.put(cur, true);
             }
             else {
+                this.isActive.put(cur, null);
                 this.deactivateButton(cur);
-                this.isActive.put(cur, false);
             }
         }
     }
@@ -86,17 +90,36 @@ public class LoadGamePageController {
     private void deactivateButton(Button button) {
         button.setStyle("-fx-background-color: " + this.inactiveColor +"; ");
         button.setOpacity(0.75);
+
+        HBox labelContainer = (HBox) button.getGraphic();
+        assert (labelContainer.getChildren().size() == 3);
+        Label username = (Label) labelContainer.getChildren().get(0);
+        Label score = (Label) labelContainer.getChildren().get(1);
+        Label date = (Label) labelContainer.getChildren().get(2);
+        username.setText("Unused");
+        score.setText("-");
+        date.setText("--/--/----");
     }
 
     private void activateButton(Button button) {
         // set status according to the "game" received
         // set text and stuff here
+        Player player = this.isActive.get(button).getPlayer();
+
+        HBox labelContainer = (HBox) button.getGraphic();
+        assert (labelContainer.getChildren().size() == 3);
+        Label username = (Label) labelContainer.getChildren().get(0);
+        Label score = (Label) labelContainer.getChildren().get(1);
+        Label date = (Label) labelContainer.getChildren().get(2);
+        username.setText(player.getName());
+        score.setText(Integer.toString(player.getScore()));
+        date.setText(player.getDate());
     }
 
     @FXML
     public void buttonHoverActive(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
-        if (isActive.get(button)) {
+        if (isActive.get(button) != null) {
             this.hoverSound.play();
             int idx = this.slotButtons.indexOf(button);
             String color = this.colorScheme.get(idx % this.colorScheme.size());
@@ -111,7 +134,7 @@ public class LoadGamePageController {
     @FXML
     public void buttonHoverInactive(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
-        if (isActive.get(button)) {
+        if (isActive.get(button) != null) {
             int idx = this.slotButtons.indexOf(button);
             String color = this.colorScheme.get(idx % this.colorScheme.size());
             button.setStyle("-fx-background-color: " + color + ";");

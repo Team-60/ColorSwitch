@@ -185,7 +185,7 @@ public class MainPageController {
         }
         assert (loadGameRoot != null);
         LoadGamePageController loadGamePageController = loader.getController(); // init the controller
-        loadGamePageController.init(this.app, new ArrayList<>(Arrays.asList(true, true, true, true, false, false))); // for which load slots are present
+        loadGamePageController.init(this.app); // for which load slots are present
         StackPane rootContainer = (StackPane) scene.getRoot();
         assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().add(loadGameRoot);

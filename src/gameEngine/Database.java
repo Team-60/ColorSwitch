@@ -63,4 +63,8 @@ public class Database<T> {
         return data;
     }
 
+    public void reset(String path) {
+        this.data.clear();
+        this.save(path);
+    }
 }

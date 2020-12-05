@@ -42,6 +42,9 @@ public class Player implements Serializable, Comparable { // info. keep
     public String getName() {
         return this.name;
     }
+    public String getDate() {
+        return this.date;
+    }
 
     public void setId(int _id) {
         this.id = _id;

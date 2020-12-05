@@ -196,4 +196,8 @@ public class App extends Application {
     public void setHighscore(int highscore) {
         this.highscore = highscore;
     }
+
+    public Database<Game> getGameDatabase() {
+        return this.gameDatabase;
+    }
 }

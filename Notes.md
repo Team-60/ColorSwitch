@@ -1,7 +1,7 @@
 # Notes
 
 ## Bonus Ideas
-- Settings, play music, night mode
+- Settings, play music, night mode, reset database, rules and creds
 - Leaderboard
 - Supercharge, obstacle blast, high frequency sound ?? (better with sideline collection of balls)
   - https://stackoverflow.com/questions/31866814/javafx-multithreading-flashing-lights effects ??

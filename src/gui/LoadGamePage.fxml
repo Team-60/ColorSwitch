@@ -24,9 +24,9 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="77.0" opacity="0.8" stroke="BLACK" strokeWidth="0.0" width="450.0" />
-      <Label layoutX="15.0" layoutY="11.0" prefHeight="46.0" prefWidth="257.0" text="LOAD GAME" textFill="YELLOW">
+      <Label layoutX="15.0" layoutY="11.0" prefHeight="46.0" prefWidth="257.0" text="Load Game" textFill="YELLOW">
          <font>
-            <Font name="Consolas Bold" size="45.0" />
+            <Font name="Corbel Light" size="45.0" />
          </font>
       </Label>
       <VBox fx:id="buttonContainer" alignment="TOP_CENTER" layoutY="78.0" prefHeight="537.0" prefWidth="450.0">
@@ -35,25 +35,32 @@
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="Username" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="10.0" right="60.0" />
+                              <Insets left="10.0" right="40.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label text="Score" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefWidth="70.4" text="Score" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/loadGamePage/star.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Label>
                         <Label text="Date" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="75.0" right="10.0" />
+                              <Insets left="50.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
@@ -70,25 +77,32 @@
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="Username" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="10.0" right="60.0" />
+                              <Insets left="10.0" right="40.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label text="Score" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefWidth="70.4" text="Score" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/loadGamePage/star.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Label>
                         <Label text="Date" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="75.0" right="10.0" />
+                              <Insets left="50.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
@@ -105,25 +119,32 @@
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="Username" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="10.0" right="60.0" />
+                              <Insets left="10.0" right="40.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label text="Score" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefWidth="70.4" text="Score" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/loadGamePage/star.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Label>
                         <Label text="Date" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="75.0" right="10.0" />
+                              <Insets left="50.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
@@ -140,25 +161,32 @@
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="Username" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="10.0" right="60.0" />
+                              <Insets left="10.0" right="40.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label text="Score" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefWidth="70.4" text="Score" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/loadGamePage/star.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Label>
                         <Label text="Date" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="75.0" right="10.0" />
+                              <Insets left="50.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
@@ -175,25 +203,32 @@
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="Username" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="10.0" right="60.0" />
+                              <Insets left="10.0" right="40.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label text="Score" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefWidth="70.4" text="Score" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/loadGamePage/star.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Label>
                         <Label text="Date" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="75.0" right="10.0" />
+                              <Insets left="50.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
@@ -210,25 +245,32 @@
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label text="Username" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="10.0" right="60.0" />
+                              <Insets left="10.0" right="40.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label text="Score" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="RIGHT" prefWidth="70.4" text="Score" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/loadGamePage/star.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Label>
                         <Label text="Date" textAlignment="CENTER" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="75.0" right="10.0" />
+                              <Insets left="50.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Calibri Bold" size="20.0" />
