@@ -46,7 +46,7 @@ public class GamePlay {
     private final Player player;
     private final GamePlayAnimationTimer animationTimer;
     public static long PreviousFrameTime = -1;
-    public static long gameOverTime = -1;
+    public static long GameOverTime = -1;
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
     public GamePlay(App _app) throws IOException { // create a new game and a new player, sep. constructor for deserialize
@@ -127,9 +127,8 @@ public class GamePlay {
             this.app.setHighscore(this.player.getScore());
         }
 
-        this.animationTimer.stop();
-        GamePlay.PreviousFrameTime = -1; // IMP for next iteration of game
-        GamePlay.gameOverTime = -1;
+        this.animationTimer.stop(); // automatically resets previous time variables
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GameOverPage.fxml"));
         try {
             AnchorPane gameOverRoot = loader.load(); // TODO: create init for instances, rn only for animations
@@ -167,10 +166,10 @@ class GamePlayAnimationTimer extends AnimationTimer {
             return;
         }
         if (game.isGameOver()) { // need to check before, as logic is updated but gui also has to be updated IMP
-            if (GamePlay.gameOverTime == -1) {
-                GamePlay.gameOverTime = currentNanoTime;
+            if (GamePlay.GameOverTime == -1) {
+                GamePlay.GameOverTime = currentNanoTime;
             } else {
-                double diff = (double)(currentNanoTime - GamePlay.gameOverTime)/1000000000;
+                double diff = (double)(currentNanoTime - GamePlay.GameOverTime)/1000000000;
                 if (diff > 1.5) {
                     gamePlay.gameOver();
                 }
@@ -185,5 +184,12 @@ class GamePlayAnimationTimer extends AnimationTimer {
         graphicsContext.fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
         game.checkAndUpdate(timeDifference);
         game.refreshGameElements();
+    }
+
+    @Override
+    public void stop() { // stop the animation timer and reset values for prev frame and game over time
+        super.stop();
+        GamePlay.PreviousFrameTime = -1;
+        GamePlay.GameOverTime = -1;
     }
 }

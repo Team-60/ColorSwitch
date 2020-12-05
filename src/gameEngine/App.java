@@ -28,7 +28,7 @@ TODO: Implement Easter egg2 secret restart
 TODO: Implement Player Class, Database class
 TODO: add debug options for everywhere with fxml loader
 TODO: restart on game over page & on pause implement (maybe see for reference keeping?)
-TODO: add score on game over page, set highscore
+TODO: add score on game over page, set highscore, highscore line
 TODO: see when all spots for game over (currently missing fall down, calibrate media player for the same)
 TODO: throw game over exceptions/ fall down exceptions
 TODO: implement Leaderboard screen comparators

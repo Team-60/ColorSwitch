@@ -26,7 +26,7 @@ public class Game implements Serializable, Comparable {
     private boolean gameOver = false;
 
     private transient final Swarm swarm;
-    private final transient GraphicsContext graphicsContext; // can't serialize this
+    private transient final GraphicsContext graphicsContext; // can't serialize this
     private transient final AudioClip fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
 
     Game(GraphicsContext graphicsContext, Player player) {
