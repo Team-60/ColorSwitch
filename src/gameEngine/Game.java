@@ -17,7 +17,7 @@ public class Game implements Serializable, Comparable {
 
     private static final long serialVersionUID = 2020L;
     public static final String FILE_PATH = "src/data/dataGame.ser";
-    private static final int numberOfObstacle = 5;
+    private static final int numberOfObstacle = 14;
     private static final double distanceBetweenObstacles = 150;
 
     private final Player player;
@@ -155,21 +155,74 @@ public class Game implements Serializable, Comparable {
         ball.refresh();
     }
 
+    private int getMean() {
+        if (player.getScore() >= 13) {
+            return 13;
+        }else {
+            return player.getScore();
+        }
+    }
+
     public Obstacle getRandomObstacle(double x, double y) {
 
-        int randomNumber = (new Random()).nextInt(numberOfObstacle);
+        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
         // y - safe dist of that specific obstacles
-//        int randomNumber = 5;
+//        int randomNumber = 13;
+        System.out.println(randomNumber);
+        if (randomNumber < 0) {
+            randomNumber = 0;
+        }
         if (randomNumber == 0) {
             return (new ObsCircle(x, y - 90, 90, 15));
         } else if (randomNumber == 1) {
             return new ObsLine(x, y - 7.5,15);
-        } else if (randomNumber == 3) {
+        } else if (randomNumber == 2) {
             return new ObsDoubleCircle(x, y - 115, 90, 115, 15);
-        } else if (randomNumber == 4) {
+        } else if (randomNumber == 3) {
             return new ObsSquare(x , y - 85 * Math.sqrt(2), 170, 15);
-        } else {
+        } else if (randomNumber == 4) {
             return new ObsTriangle(x , y - 200 / Math.sqrt(3), 200, 15);
+        } else if (randomNumber == 5) {
+            // smaller square
+            Obstacle obstacle = new ObsSquare(x , y - 70 * Math.sqrt(2), 140, 13);
+            return obstacle;
+        } else if (randomNumber == 6) {
+            // faster square with same size
+            Obstacle obstacle = new ObsSquare(x , y - 85 * Math.sqrt(2), 170, 15);
+            obstacle.setRotationalSpeed(150);
+            return obstacle;
+        } else if (randomNumber == 7) {
+            // smaller circle
+            Obstacle obstacle = new ObsCircle(x, y - 75, 75, 10);
+            return obstacle;
+        } else if (randomNumber == 8) {
+            // smaller double circle
+            Obstacle obstacle = new ObsDoubleCircle(x, y - 90, 70, 90, 13);
+            return obstacle;
+        } else if (randomNumber == 9) {
+            // faster double circle with same size
+            Obstacle obstacle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
+            obstacle.setRotationalSpeed(150);
+            return obstacle;
+        } else if (randomNumber == 10) {
+            // faster circle with same radius
+            Obstacle obstacle = new ObsCircle(x, y - 90, 90, 15);
+            obstacle.setRotationalSpeed(150);
+            return obstacle;
+        } else if (randomNumber == 11) {
+            // smaller triangle
+            Obstacle obstacle = new ObsTriangle(x , y - 190 / Math.sqrt(3), 190, 13);
+            return obstacle;
+        } else if (randomNumber == 12) {
+            // faster triangle with same size
+            Obstacle obstacle = new ObsTriangle(x , y - 200 / Math.sqrt(3), 200, 15);
+            obstacle.setRotationalSpeed(130);
+            return obstacle;
+        } else {
+            // super slow circle
+            Obstacle obstacle = new ObsCircle(x, y - 65, 65, 8);
+            obstacle.setRotationalSpeed(50);
+            return obstacle;
         }
     }
 
