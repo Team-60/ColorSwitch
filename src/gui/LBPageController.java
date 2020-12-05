@@ -3,12 +3,17 @@ package gui;
 import gameEngine.App;
 import gameEngine.Game;
 import gameEngine.GamePlay;
+import gameEngine.Player;
 import javafx.animation.*;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +27,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LBPageController {
 
@@ -37,6 +43,8 @@ public class LBPageController {
     private ImageView crownImg;
     @FXML
     private Group goBackGroup;
+    @FXML
+    private Group posGroup;
 
     public void init(App _app, Game _game, Boolean _fromMainPage) {
 
@@ -61,11 +69,43 @@ public class LBPageController {
 
         Timeline animationCrown = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(crownImg.scaleXProperty(), crownImg.getScaleX(), Interpolator.EASE_IN), new KeyValue(crownImg.scaleYProperty(), crownImg.getScaleY(), Interpolator.EASE_IN), new KeyValue(glow.levelProperty(), glow.getLevel(), Interpolator.EASE_IN)),
-                new KeyFrame(Duration.seconds(0.6), new KeyValue(crownImg.scaleXProperty(), crownImg.getScaleX() + 0.1, Interpolator.EASE_IN), new KeyValue(crownImg.scaleYProperty(), crownImg.getScaleY() + 0.1, Interpolator.EASE_IN), new KeyValue(glow.levelProperty(), glow.getLevel() + 0.4, Interpolator.EASE_IN))
+                new KeyFrame(Duration.seconds(0.6), new KeyValue(crownImg.scaleXProperty(), crownImg.getScaleX() + 0.05, Interpolator.EASE_IN), new KeyValue(crownImg.scaleYProperty(), crownImg.getScaleY() + 0.05, Interpolator.EASE_IN), new KeyValue(glow.levelProperty(), glow.getLevel() + 0.4, Interpolator.EASE_IN))
         );
         animationCrown.setAutoReverse(true);
         animationCrown.setCycleCount(Animation.INDEFINITE);
         animationCrown.play();
+
+        this.formPositions();
+    }
+
+    private void formPositions() {
+        // first 3 are on top separate groups
+        ArrayList<Player> players = this.app.getPlayerDatabase().getData();
+        assert (players.size() <= 6);
+        while (players.size() < 6)
+            players.add(null);
+
+        ObservableList<Node> children = this.posGroup.getChildren();
+        assert (children.size() == 4);
+        for (int i = 0; i < 3; ++ i) {
+            if (players.get(i) == null) break;
+            Group cur = (Group) children.get(i);
+            Label name = (Label) cur.getChildren().get(0);
+            Label score = (Label) cur.getChildren().get(1);
+            name.setText(players.get(i).getName());
+            score.setText(Integer.toString(players.get(i).getScore()));
+        }
+
+        // group -> vBox -> button -> hBox -> label
+        Parent last3 = (Parent) ((Parent) children.get(children.size() - 1)).getChildrenUnmodifiable().get(1); // it's a vBox
+        for (int i = 3, j = 0; i < players.size(); ++ i, ++ j) {
+            if (players.get(i) == null) break;
+            Parent container = (Parent) ((Button) last3.getChildrenUnmodifiable().get(j)).getGraphic(); // it's an button
+            Label name = (Label) container.getChildrenUnmodifiable().get(0);
+            Label score = (Label) container.getChildrenUnmodifiable().get(1);
+            name.setText(players.get(i).getName());
+            score.setText(Integer.toString(players.get(i).getScore()));
+        }
     }
 
     @FXML

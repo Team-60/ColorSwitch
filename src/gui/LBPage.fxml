@@ -4,6 +4,8 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -26,6 +28,252 @@
             <Image url="@../assets/lbPage/crown.png" />
          </image>
       </ImageView>
+      <Rectangle height="355.0" layoutY="345.0" opacity="0.65" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
+      <Group fx:id="goBackGroup" layoutX="358.0" layoutY="611.0" onMouseClicked="#goBackPressed" onMouseEntered="#goBackHoverActive" onMouseExited="#goBackHoverInactive" scaleX="0.9" scaleY="0.9">
+         <children>
+            <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <ImageView fitHeight="54.0" fitWidth="51.0" layoutX="19.0" layoutY="16.0" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/lbPage/goBack.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="posGroup" layoutX="47.0" layoutY="108.0">
+         <children>
+            <Group layoutX="124.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="-4.0" prefHeight="23.0" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="22.0" />
+                     </font>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="RIGHT" layoutY="27.0" prefHeight="23.0" prefWidth="108.0" text="Score" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="22.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/lbPage/star.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutY="61.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="-4.0" prefHeight="23.0" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="22.0" />
+                     </font>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="RIGHT" layoutY="28.0" prefHeight="23.0" prefWidth="108.0" text="Score" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="22.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/lbPage/star.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="246.0" layoutY="95.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="-4.0" prefHeight="23.0" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="22.0" />
+                     </font>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="RIGHT" layoutY="27.0" prefHeight="23.0" prefWidth="108.0" text="Score" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="22.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/lbPage/star.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="3.0" layoutY="275.0">
+               <children>
+                  <VBox prefHeight="215.0" prefWidth="51.0">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #20948b;" text="4." textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Calibri Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #07575B;" text="5." textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Calibri Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="91.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #66A5AD;" text="6." textFill="WHITE">
+                           <font>
+                              <Font name="Calibri Bold" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="59.0" prefHeight="215.0" prefWidth="298.0">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #20948B;">
+                           <graphic>
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="330.0">
+                                 <children>
+                                    <Label prefHeight="23.0" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="60.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Calibri Bold" size="20.0" />
+                                       </font>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </Label>
+                                    <Label contentDisplay="RIGHT" prefHeight="23.0" prefWidth="100.0" text="Score" textAlignment="CENTER" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Calibri Bold" size="20.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/lbPage/star.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #07575B;">
+                           <graphic>
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="330.0">
+                                 <children>
+                                    <Label prefHeight="23.0" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="60.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Calibri Bold" size="20.0" />
+                                       </font>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </Label>
+                                    <Label contentDisplay="RIGHT" prefWidth="100.0" text="Score" textAlignment="CENTER" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Calibri Bold" size="20.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/lbPage/star.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="91.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #66A5AD;">
+                           <graphic>
+                              <HBox alignment="CENTER" prefHeight="42.0" prefWidth="330.0">
+                                 <children>
+                                    <Label prefHeight="23.0" prefWidth="115.0" text="Username" textAlignment="CENTER" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="60.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Calibri Bold" size="20.0" />
+                                       </font>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </Label>
+                                    <Label contentDisplay="RIGHT" prefWidth="100.0" text="Score" textAlignment="CENTER" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Calibri Bold" size="20.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../assets/lbPage/star.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </Group>
+         </children>
+      </Group>
       <Group layoutX="49.5" layoutY="234.5">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="109.0" layoutX="0.5" layoutY="1.5" opacity="0.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="102.0" />
@@ -33,6 +281,9 @@
                <image>
                   <Image url="@../assets/lbPage/silver.png" />
                </image>
+               <effect>
+                  <Reflection />
+               </effect>
             </ImageView>
             <Line endX="103.0" stroke="YELLOW" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" />
          </children>
@@ -44,6 +295,9 @@
                <image>
                   <Image url="@../assets/lbPage/gold.png" />
                </image>
+               <effect>
+                  <Reflection />
+               </effect>
             </ImageView>
             <Line endX="103.0" stroke="YELLOW" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" />
          </children>
@@ -55,203 +309,12 @@
                <image>
                   <Image url="@../assets/lbPage/bronze.png" />
                </image>
+               <effect>
+                  <Reflection />
+               </effect>
             </ImageView>
             <Line endX="103.0" stroke="YELLOW" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" />
          </children>
       </Group>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="355.0" layoutY="345.0" opacity="0.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
-      <Group layoutX="50.0" layoutY="383.0">
-         <children>
-            <VBox prefHeight="215.0" prefWidth="51.0">
-               <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #20948b;" text="4." textFill="WHITE">
-                     <VBox.margin>
-                        <Insets bottom="30.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Calibri Bold" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #07575B;" text="5." textFill="WHITE">
-                     <VBox.margin>
-                        <Insets bottom="30.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Calibri Bold" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="91.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #66A5AD;" text="6." textFill="WHITE">
-                     <font>
-                        <Font name="Calibri Bold" size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-            <VBox layoutX="59.0" prefHeight="215.0" prefWidth="298.0">
-               <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #20948B;">
-                     <graphic>
-                        <HBox alignment="CENTER" prefHeight="42.0" prefWidth="330.0">
-                           <children>
-                              <Label prefHeight="23.0" prefWidth="100.0" text="Username" textAlignment="CENTER" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="60.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Calibri Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label contentDisplay="RIGHT" prefHeight="23.0" prefWidth="100.0" text="Score" textAlignment="CENTER" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets right="30.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Calibri Bold" size="20.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/lbPage/star.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </graphic>
-                     <VBox.margin>
-                        <Insets bottom="30.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #07575B;">
-                     <graphic>
-                        <HBox alignment="CENTER" prefHeight="42.0" prefWidth="330.0">
-                           <children>
-                              <Label prefHeight="23.0" prefWidth="100.0" text="Username" textAlignment="CENTER" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="60.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Calibri Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label contentDisplay="RIGHT" prefWidth="100.0" text="Score" textAlignment="CENTER" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets right="30.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Calibri Bold" size="20.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/lbPage/star.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </graphic>
-                     <VBox.margin>
-                        <Insets bottom="30.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="91.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #66A5AD;">
-                     <graphic>
-                        <HBox alignment="CENTER" prefHeight="42.0" prefWidth="330.0">
-                           <children>
-                              <Label prefHeight="23.0" prefWidth="100.0" text="Username" textAlignment="CENTER" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="60.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Calibri Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label contentDisplay="RIGHT" prefWidth="100.0" text="Score" textAlignment="CENTER" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets right="30.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Calibri Bold" size="20.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/lbPage/star.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </graphic>
-                  </Button>
-               </children>
-            </VBox>
-         </children>
-      </Group>
-      <Group fx:id="goBackGroup" layoutX="358.0" layoutY="611.0" onMouseClicked="#goBackPressed" onMouseEntered="#goBackHoverActive" onMouseExited="#goBackHoverInactive" scaleX="0.9" scaleY="0.9">
-         <children>
-            <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <ImageView fitHeight="54.0" fitWidth="51.0" layoutX="19.0" layoutY="16.0" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/lbPage/goBack.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Group>
-      <Label alignment="CENTER" layoutX="47.0" layoutY="169.0" prefHeight="23.0" prefWidth="108.0" text="Username" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Calibri Bold Italic" size="22.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="171.0" layoutY="108.0" prefHeight="23.0" prefWidth="108.0" text="Username" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Calibri Bold Italic" size="22.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="293.0" layoutY="203.0" prefHeight="23.0" prefWidth="108.0" text="Username" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Calibri Bold Italic" size="22.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="47.0" layoutY="197.0" prefHeight="23.0" prefWidth="108.0" text="Score" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Calibri Bold" size="22.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/lbPage/star.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="171.0" layoutY="135.0" prefHeight="23.0" prefWidth="108.0" text="Score" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Calibri Bold" size="22.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/lbPage/star.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="RIGHT" layoutX="293.0" layoutY="230.0" prefHeight="23.0" prefWidth="108.0" text="Score" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Calibri Bold" size="22.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/lbPage/star.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Label>
    </children>
 </AnchorPane>
