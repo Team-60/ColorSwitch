@@ -101,11 +101,10 @@ public class GamePlay {
     public void gameOver() { // imp request focus
         assert (this.game.isGameOver()); // only single entry point, just in case
 
-        // check for highscore (IMP may not be the only checking point)
-        if (this.app.getHighscore() < this.player.getScore()) { // player or game?
+        if (this.app.getHighscore() < this.player.getScore()) { // player
             // do some animation maybe?
             System.out.println(this.getClass().toString() + " Highscore beaten!");
-            this.app.setHighscore(this.player.getScore());
+            this.app.setHighscore(this.player.getScore()); // in case not saved for LB entry, then reset highscore
         }
 
         this.animationTimer.stop(); // automatically resets previous time variables

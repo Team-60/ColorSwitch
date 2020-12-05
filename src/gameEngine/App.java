@@ -56,9 +56,10 @@ public class App extends Application {
     public App() { // instance is automatically created by launch of JavaFX
         this.gameDatabase = new Database<>();
         this.playerDatabase = new Database<>();
-        this.highscore = -1; // need to gain this via serializing TODO
         this.gameDatabase.form(Game.FILE_PATH);
         this.playerDatabase.form(Player.FILE_PATH);
+        this.highscore = 0;
+        this.calcHighscore();
     }
 
     public void addAssets() {
@@ -75,7 +76,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
         if (startWithAnimation) {
             this.showLoadAnimation(primaryStage);
         }
@@ -127,7 +127,7 @@ public class App extends Application {
     }
 
     public void saveGame(Game game, String name) { // maybe ask for a slot from the player? Implement on the oldest basis
-        // modify player here, save data also, check if the player ID already exists (in another overridden method?) TODO
+        // modify player here, save data also
         game.getPlayer().setName(name);
         game.getPlayer().setId(this.giveId());
         game.getPlayer().setDate(LocalDate.now().toString());
@@ -137,7 +137,7 @@ public class App extends Application {
         System.out.println(this.getClass().toString() + " save success");
     }
 
-    public void overwriteGame(Game game) {
+    public void overwriteGame(Game game) { // overwrites, if player already exists
         assert (game.getPlayer().getId() != -1);
         ArrayList<Game> games = this.gameDatabase.getData();
         boolean found = false;
@@ -183,6 +183,7 @@ public class App extends Application {
             player.setId(this.giveId());
         }
         this.playerDatabase.update(player, Player.FILE_PATH);
+        this.calcHighscore(); // update highscore
         new Dialog("Leaderboard entry added!", (Stage) this.scene.getWindow());
         System.out.println(this.getClass().toString() + " lb entry added");
     }
@@ -199,6 +200,15 @@ public class App extends Application {
         return id + 1;
     }
 
+    public void calcHighscore() { // calc highscore from all players in LB
+        int prevHigh = this.highscore;
+        ArrayList<Player> players = this.playerDatabase.getData();
+        for (Player p : players)
+            this.highscore = Math.max(this.highscore, p.getScore());
+        if (prevHigh != this.highscore)
+            System.out.println(this.getClass().toString() + " highscore updated");
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -211,8 +221,8 @@ public class App extends Application {
         return highscore;
     }
 
-    public void setHighscore(int highscore) {
-        this.highscore = highscore;
+    public void setHighscore(int _highscore) {
+        this.highscore = _highscore;
     }
 
     public Database<Game> getGameDatabase() {

@@ -96,12 +96,12 @@ public class GameOverPageController {
         this.startRotation(rtIconReturn, 1);
     }
 
-    public void checkForLeaderboard() { // TODO
+    public void checkForLeaderboard() {
         assert (this.game.isGameOver()); // reconfirm
 
         ArrayList<Player> players = this.app.getPlayerDatabase().getData();
         boolean madeToLb = true;
-        if (players.size() != 0 && players.get(players.size() - 1).getScore() >= this.game.getPlayer().getScore())
+        if (players.size() != 0 && players.get(players.size() - 1).getScore() >= this.game.getPlayer().getScore()) // last LB player has better score
             madeToLb = false;
 
         if (madeToLb) {
@@ -151,7 +151,8 @@ public class GameOverPageController {
         if (inputPopupController.getSaveSuccess()) {
             System.out.println(this.getClass().toString() + " " + this.usernameLB + " received");
             this.app.addToLB(this.game.getPlayer(), this.usernameLB);
-        } else {
+        } else { // reset highscore in case this was the current highscore as not saved
+            this.app.calcHighscore();
             System.out.println(this.getClass().toString() + " lb entry cancelled");
         }
     }

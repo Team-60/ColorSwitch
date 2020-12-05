@@ -15,7 +15,6 @@ public class Database<T> {
     }
 
     public void form(String path) {
-        // TODO
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(path));
             ArrayList temp = (ArrayList) in.readObject();
@@ -31,7 +30,6 @@ public class Database<T> {
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(this.getClass().toString() + " failed to form database");
             System.out.println(e.toString());
-//            e.printStackTrace();
         }
     }
 
@@ -41,11 +39,13 @@ public class Database<T> {
             System.out.println(this.getClass().toString() + " sz data: "  + this.data.size());
             out.writeObject(this.data);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(this.getClass().toString() + " save failed");
+            System.out.println(e.toString());
         }
     }
 
     public boolean update(T entity, String path) { // updates and calls save and returns true in case of overwrite
+        boolean ret = this.data.size() == MAX_SIZE;
         ArrayList<Comparable> temp = new ArrayList<>();
         for (T t : this.data)
             temp.add((Comparable) t);
@@ -56,7 +56,7 @@ public class Database<T> {
             this.data.add((T) temp.get(cnt));
         assert (this.data.size() <= MAX_SIZE);
         this.save(path);
-        return (this.data.size() == MAX_SIZE);
+        return ret; // overwrite
     }
 
     public ArrayList<T> getData() {
