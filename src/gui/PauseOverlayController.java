@@ -26,7 +26,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class PauseOverlayController {
+public class PauseOverlayController { // TODO maybe for restart here?
 
     private App app;
 
@@ -51,7 +51,7 @@ public class PauseOverlayController {
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());
-//        this.clickSound.setVolume(0.5); // TODO: add click sounds
+        this.clickSound.setVolume(0.5);
         this.hoverSound.setVolume(0.04);
 
         Timeline animationUnpause = new Timeline(

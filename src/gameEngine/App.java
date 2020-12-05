@@ -29,6 +29,7 @@ TODO: Implement Player Class, Database class
 TODO: restart on game over page & on pause implement (maybe see for reference keeping?), pause delay
 TODO: add score on game over page, set highscore, highscore line
 TODO: throw game over exceptions/ fall down exceptions
+TODO: threads while drawing?
 
 TODO: implement Leaderboard screen comparators and saving
 TODO: implement Serializable, ensure every asset is reloaded after deserializing, might need to create init?
@@ -39,7 +40,6 @@ TODO: game is saved, but now display on leaderboard, and implement saving for al
 Serialization notes:
 Score (Player)
  */
-
 
 public class App extends Application {
 

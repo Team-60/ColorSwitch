@@ -19,11 +19,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import java.awt.desktop.AppReopenedEvent;
 import java.io.File;
 import java.io.IOException;
-
-// TODO: IMP, ball fall, it doesn't fall down completely
 
 // GamePlay comprises games and player, a player can have multiple games, during deserialization, require a player, and a game for the player
 // Game associates with a Player

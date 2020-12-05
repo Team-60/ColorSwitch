@@ -4,10 +4,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.FillRule;
 
-import java.awt.*;
 import java.util.ArrayList;
 
-public class Renderer {
+public final class Renderer {
 
     // TODO: make all methods static
     public final static int WIDTH = 450;

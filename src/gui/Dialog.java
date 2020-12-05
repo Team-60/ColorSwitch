@@ -19,7 +19,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 // for popups like confirmations and stuff
-public class Dialog { // TODO
+public class Dialog {
 
     public Dialog(String msg, Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Dialog.fxml"));
