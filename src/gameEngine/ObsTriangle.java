@@ -21,11 +21,14 @@ public class ObsTriangle extends Obstacle{
         super(x, y, sideLength / Math.sqrt(3));
         this.width = width;
         this.sideLength = sideLength;
+        star = new Star(x, y);
     }
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-
+        if (star != null) {
+            star.refresh(graphicsContext);
+        }
         graphicsContext.translate(getX(), getY());
         graphicsContext.rotate(-rotationAngle);
 

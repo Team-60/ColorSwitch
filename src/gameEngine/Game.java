@@ -39,10 +39,8 @@ public class Game implements Serializable, Comparable {
         double y = 350;
         gameElements = new ArrayList<>();
         Obstacle obstacle = new ObsCircle(225, 350, 90, 15);
-        GameElement star = new Star(x, y);
         GameElement switchColor = new SwitchColor(x, y - obstacle.getClosestSafeDist() - distanceBetweenObstacles/2);
         gameElements.add(obstacle);
-        gameElements.add(star);
         gameElements.add(switchColor);
         ball.setColor(obstacle.getRandomColor());
         swarm = new Swarm(graphicsContext);
@@ -85,11 +83,14 @@ public class Game implements Serializable, Comparable {
         // remove unwanted objects
         ArrayList<GameElement> gameElementsTemp = new ArrayList<>();
         for (GameElement gameElement : gameElements) {
-            // TODO : this can give null pointer error is all the elements are not sorted acc to Y coordinates
+
+            if (gameElement instanceof Obstacle && ((Obstacle) gameElement).checkCollisionStar(ball)) {
+                player.incScore();
+                ((Obstacle) gameElement).destroyStar();
+            }
             if (gameElement.checkCollision(ball)) {
                 gameElement.playSound();
-                if (gameElement instanceof Star) player.incScore();
-                else if (gameElement instanceof Obstacle) {
+                if (gameElement instanceof Obstacle) {
                     gameOver = true;
                     swarm.explode(this.ball);
                     gameElementsTemp.add(gameElement);
@@ -120,15 +121,10 @@ public class Game implements Serializable, Comparable {
             Obstacle obstacle = getRandomObstacle(x, y);
             y -= obstacle.getClosestSafeDist();
 
-            y -= obstacle.getClosestStar();
-            GameElement star = new Star(x, y);                  // TODO : getStar() gives star location based on type of obstacle
-            y += obstacle.getClosestStar();
-
             y -= obstacle.getClosestSafeDist();
             GameElement switchColor = new SwitchColor(x, y - distanceBetweenObstacles/2);
 
             gameElements.add(obstacle);
-            gameElements.add(star);
             gameElements.add(switchColor);
             y -= distanceBetweenObstacles;
         }
