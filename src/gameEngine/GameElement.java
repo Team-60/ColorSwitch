@@ -25,6 +25,8 @@ public abstract class GameElement implements Serializable {
     }
 
     public void loadAssets() { // after deserialization
+        if (this instanceof HighScoreLine) return;
+        assert (this.audioClipPath != null);
         this.audioClip = new AudioClip(new File(this.audioClipPath).toURI().toString());
         this.audioClip.setVolume(0.5);
     }
