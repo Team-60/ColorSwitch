@@ -133,6 +133,7 @@ public class App extends Application {
         boolean overwrite = this.gameDatabase.update(game, Game.FILE_PATH);
         if (overwrite) new Dialog("Oldest load slot overwritten! Game saved!", (Stage) this.scene.getWindow());
         else new Dialog("Game saved!", (Stage) this.scene.getWindow());
+        System.out.println(this.getClass().toString() + " save success");
     }
 
     public void overwriteGame(Game game) {
@@ -144,12 +145,31 @@ public class App extends Application {
                 // player found
                 found = true;
                 games.set(i, game);
+                break;
             }
         }
         assert (found);
         // save into file
         this.gameDatabase.save(Game.FILE_PATH);
         new Dialog("Game overwritten for " + game.getPlayer().getName() + "!", (Stage) this.scene.getWindow());
+        System.out.println(this.getClass().toString() + " overwrite success");
+    }
+
+    public void removeGame(Game game) { // after game over remove from database
+        assert (game.getPlayer().getId() != -1);
+        ArrayList<Game> games = this.gameDatabase.getData();
+        int idxRm = -1;
+        for (int i = 0; i < games.size(); ++ i) {
+            if (games.get(i).getPlayer().getId() == game.getPlayer().getId()) {
+                assert (idxRm == -1);
+                idxRm = i;
+            }
+        }
+        assert (idxRm != -1);
+        games.remove(idxRm);
+        this.gameDatabase.save(Game.FILE_PATH);
+        new Dialog("Game data erased for " + game.getPlayer().getName() + ".", (Stage) this.scene.getWindow());
+        System.out.println(this.getClass().toString() + " erase success");
     }
 
     private int giveId() { // return a fresh Id for game
@@ -168,9 +188,11 @@ public class App extends Application {
     public Scene getScene() {
         return scene;
     }
+
     public int getHighscore() {
         return highscore;
     }
+
     public void setHighscore(int highscore) {
         this.highscore = highscore;
     }

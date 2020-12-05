@@ -41,10 +41,10 @@ public class GamePlay {
     private final Canvas canvas;
 
     private final App app;
-
     private final Game game;
     private final Player player;
     private final GamePlayAnimationTimer animationTimer;
+
     public static long PreviousFrameTime = -1;
     public static long GameOverTime = -1;
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
@@ -101,22 +101,6 @@ public class GamePlay {
         timelineMusicFadeOut.play();
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public AnimationTimer getAnimationTimer() {
-        return this.animationTimer;
-    }
-
-    public Canvas getCanvas() {
-        return canvas;
-    }
-
     public void gameOver() { // imp request focus
         assert (this.game.isGameOver()); // only single entry point, just in case
 
@@ -128,6 +112,12 @@ public class GamePlay {
         }
 
         this.animationTimer.stop(); // automatically resets previous time variables
+
+        // remove from database
+        if (this.player.getId() != -1) {
+            assert (this.player == this.game.getPlayer()); // just in case
+            this.app.removeGame(this.game);
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GameOverPage.fxml"));
         try {
@@ -143,7 +133,22 @@ public class GamePlay {
             System.out.println(this.getClass().toString() + " Failed to load game over page");
             e.printStackTrace();
         }
+    }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public AnimationTimer getAnimationTimer() {
+        return this.animationTimer;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
     }
 }
 
