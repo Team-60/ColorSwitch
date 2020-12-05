@@ -31,6 +31,7 @@ TODO: add score on game over page, set highscore, highscore line
 TODO: throw game over exceptions/ fall down exceptions
 TODO: threads while drawing?
 
+TODO: revive using stars!!!!!!
 TODO: implement Leaderboard screen comparators and saving
 TODO: implement Serializable, ensure every asset is reloaded after deserializing, might need to create init?
 TODO: game is saved, but now display on leaderboard, and implement saving for already saved game, remove on game over
@@ -172,12 +173,29 @@ public class App extends Application {
         System.out.println(this.getClass().toString() + " erase success");
     }
 
-    private int giveId() { // return a fresh Id for game
+    public void addToLB(Player player, String name) {
+        // Name of player can be reset as player won't ever make to load game, game over is true
+        player.setName(name);
+        player.setDate(LocalDate.now().toString());
+        // set ID in case player is unidentified
+        if (player.getId() == -1) {
+            System.out.println(this.getClass().toString() + " anonymous player registered");
+            player.setId(this.giveId());
+        }
+        this.playerDatabase.update(player, Player.FILE_PATH);
+        new Dialog("Leaderboard entry added!", (Stage) this.scene.getWindow());
+        System.out.println(this.getClass().toString() + " lb entry added");
+    }
+
+    private int giveId() { // return a fresh Id for game, max from game & player Database, player might make it to LB and not save game
         // calc. max id and return +1
         int id = -1;
         ArrayList<Game> games = this.gameDatabase.getData();
         for (Game g : games)
             id = Math.max(id, g.getPlayer().getId());
+        ArrayList<Player> players = this.playerDatabase.getData();
+        for (Player p : players)
+            id = Math.max(id, p.getId());
         return id + 1;
     }
 
@@ -199,5 +217,9 @@ public class App extends Application {
 
     public Database<Game> getGameDatabase() {
         return this.gameDatabase;
+    }
+
+    public Database<Player> getPlayerDatabase() {
+        return this.playerDatabase;
     }
 }

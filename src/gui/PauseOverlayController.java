@@ -206,7 +206,7 @@ public class PauseOverlayController { // TODO maybe for restart here?
         inputPopupController.init(gamePlay.getPlayer(), this);
 
         Scene secondaryScene = new Scene(inputRoot);
-        secondaryScene.setCursor(new ImageCursor(new Image(new File("src/assets/mainPage/cursor.png").toURI().toString())));
+        secondaryScene.setCursor(new ImageCursor(new Image(new File("src/assets/inputPopup/cursor.png").toURI().toString())));
         Stage secondaryStage = new Stage(StageStyle.UNDECORATED);
         Stage primaryStage = (Stage) this.app.getScene().getWindow();
         secondaryStage.initOwner(primaryStage); // imp. for them to act as one stage

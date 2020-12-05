@@ -1,10 +1,7 @@
 package gui;
 
 import gameEngine.GamePlay;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -44,15 +41,17 @@ public class Dialog {
         secondaryStage.setScene(scene);
         secondaryStage.show();
         secondaryStage.setX((primScreenBounds.getWidth() - secondaryStage.getWidth()) / 2);
-        secondaryStage.setOpacity(0);
-        secondaryStage.setY(GamePlay.HEIGHT + secondaryStage.getHeight() / 3.5);
-        Timeline showAnim = new Timeline(
-            new KeyFrame(Duration.millis(250), new KeyValue(secondaryStage.opacityProperty(), secondaryStage.getOpacity(), Interpolator.LINEAR)),
-            new KeyFrame(Duration.millis(1000), new KeyValue(secondaryStage.opacityProperty(), 1, Interpolator.EASE_BOTH))
-        );
-        showAnim.setOnFinished(t -> secondaryStage.close());
-        showAnim.setCycleCount(2);
-        showAnim.setAutoReverse(true);
+        secondaryStage.setY(GamePlay.HEIGHT + secondaryStage.getHeight() / 3 + 5);
+
+        dialogRoot.setOpacity(0.0);
+        FadeTransition exitAnim = new FadeTransition(Duration.seconds(1), dialogRoot);
+        exitAnim.setToValue(0.0);
+        exitAnim.setOnFinished(t -> secondaryStage.close());
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(t -> exitAnim.play());
+        FadeTransition showAnim = new FadeTransition(Duration.seconds(1), dialogRoot);
+        showAnim.setToValue(1);
+        showAnim.setOnFinished(t -> delay.play());
         showAnim.play();
     }
 }

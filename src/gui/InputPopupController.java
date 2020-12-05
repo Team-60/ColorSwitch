@@ -58,9 +58,12 @@ public class InputPopupController<T> {
             Glow glow = (Glow) this.bottomLabel.getEffect();
             glow.setLevel(0.0);
             this.bottomLabel.setText("Date: " + LocalDate.now().toString());
-        } else { // see for leaderboard TODO
+        } else { // see for leaderboard
             this.headingLabel.setText("Leaderboard Entry");
             this.bottomLabel.setText("Claim your spot among the top!");
+            if (player.getId() != -1) { // if saved, prompt to put previous name
+                inputField.setPromptText(player.getName());
+            }
         }
         this.scoreLabel.setText("" + player.getScore());
         this.distLabel.setText("" + player.getDistance());
@@ -119,7 +122,8 @@ public class InputPopupController<T> {
         if (this.controller instanceof PauseOverlayController) {
             ((PauseOverlayController) this.controller).setUsernameSave(name);
         } else { // see for leaderboard
-
+            assert (this.controller instanceof GameOverPageController);
+            ((GameOverPageController) this.controller).setUsernameLB(name);
         }
 
         Stage stage = (Stage) this.saveButton.getScene().getWindow();

@@ -126,6 +126,8 @@ public class GamePlay {
             rootContainer.getChildren().remove(this.canvasContainer);
             rootContainer.getChildren().add(gameOverRoot);
             gameOverRoot.requestFocus(); // IMP, current focus on canvas
+            // check for LB entry
+            gameOverPageController.checkForLeaderboard();
         } catch (IOException e) {
             System.out.println(this.getClass().toString() + " Failed to load game over page");
             e.printStackTrace();

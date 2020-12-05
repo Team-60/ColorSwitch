@@ -3,13 +3,16 @@ package gui;
 import gameEngine.App;
 import gameEngine.Game;
 import gameEngine.GamePlay;
+import gameEngine.Player;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,16 +24,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class GameOverPageController {
 
     private App app;
     private Game game; // need for serializing
+    private String usernameLB;
 
     private AudioClip hoverSound;
     private AudioClip clickSound;
@@ -56,6 +63,7 @@ public class GameOverPageController {
     public void init(App _app, Game _game) {
         this.app = _app;
         this.game = _game;
+        this.usernameLB = null;
 
         this.yourScoreLabel.setText(Integer.toString(this.game.getPlayer().getScore()));
         this.bestScoreLabel.setText(Integer.toString(this.app.getHighscore()));
@@ -86,6 +94,66 @@ public class GameOverPageController {
         this.startRotation(rtIconLB, 1);
         this.startRotation(rtIconRestart, 1);
         this.startRotation(rtIconReturn, 1);
+    }
+
+    public void checkForLeaderboard() { // TODO
+        assert (this.game.isGameOver()); // reconfirm
+
+        ArrayList<Player> players = this.app.getPlayerDatabase().getData();
+        boolean madeToLb = true;
+        if (players.size() != 0 && players.get(players.size() - 1).getScore() >= this.game.getPlayer().getScore())
+            madeToLb = false;
+
+        if (madeToLb) {
+            // get input from inputPopup
+            Scene scene = this.app.getScene();
+            StackPane rootContainer = (StackPane) scene.getRoot();
+            // temp rectangle for blocking input
+            Rectangle tempR = new Rectangle();
+            tempR.setWidth(GamePlay.WIDTH);
+            tempR.setHeight(GamePlay.HEIGHT);
+            tempR.setFill(Paint.valueOf("#000000"));
+            tempR.setOpacity(0.75);
+            rootContainer.getChildren().add(tempR);
+            App.BgMediaPlayer.setVolume(0.05);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InputPopup.fxml"));
+            Parent inputRoot = null;
+            try {
+                inputRoot = loader.load();
+            } catch (IOException e) {
+                System.out.println(this.getClass().toString() + " failed to load input root");
+                e.printStackTrace();
+            }
+            assert (inputRoot != null);
+            inputRoot.requestFocus(); // IMP
+
+            InputPopupController<GameOverPageController> inputPopupController = loader.getController();
+            inputPopupController.init(this.game.getPlayer(), this);
+
+            Scene secondaryScene = new Scene(inputRoot);
+            secondaryScene.setCursor(new ImageCursor(new Image(new File("src/assets/inputPopup/cursor.png").toURI().toString())));
+            Stage secondaryStage = new Stage(StageStyle.UNDECORATED);
+            Stage primaryStage = (Stage) this.app.getScene().getWindow();
+            secondaryStage.initOwner(primaryStage); // imp. for them to act as one stage
+            secondaryStage.setScene(secondaryScene);
+            secondaryStage.setOnHidden(t -> this.processInputLB(rootContainer, inputPopupController, tempR)); // IMP, as stage can only be waited in an event handler
+            secondaryStage.show();
+        }
+    }
+
+    private void processInputLB(StackPane rootContainer, InputPopupController<GameOverPageController> inputPopupController, Rectangle tempR) {
+        assert (inputPopupController.getSaveSuccess() == (this.usernameLB != null));
+        App.BgMediaPlayer.setVolume(1);
+        rootContainer.getChildren().remove(tempR); // regain focus
+        this.gameOverRoot.requestFocus();
+
+        if (inputPopupController.getSaveSuccess()) {
+            System.out.println(this.getClass().toString() + " " + this.usernameLB + " received");
+            this.app.addToLB(this.game.getPlayer(), this.usernameLB);
+        } else {
+            System.out.println(this.getClass().toString() + " lb entry cancelled");
+        }
     }
 
     private void startRotation(RotateTransition rt, int dir) {
@@ -255,5 +323,10 @@ public class GameOverPageController {
             System.out.println(this.getClass().toString() + " New game failed to load!");
             e.printStackTrace();
         }
+    }
+
+    public void setUsernameLB(String name) {
+        assert (name != null);
+        this.usernameLB = name;
     }
 }

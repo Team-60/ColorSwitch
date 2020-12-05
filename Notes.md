@@ -29,6 +29,7 @@
 - Controllers could be viewed as data and game state passing utilities. 
 - **IMP** add '-ea' VM option for assert
 - **IMP** always init controllers before transitions, may throw intermediate exceptions
+- For other game mode, firefly, just add a separate screen to rootContainer, need a different leaderboard, see for assertions, save slots remain same, need to add distinction via. variable 
 
 ## Misc
 - Threading (**IMP. FOR BETTER PERFORMANCE** [here](https://www.developer.com/java/data/multithreading-in-javafx.html))

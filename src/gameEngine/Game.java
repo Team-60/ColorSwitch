@@ -186,7 +186,7 @@ public class Game implements Serializable, Comparable {
         Game g = (Game) o;
         int idThis = (this.getPlayer().getId() == -1) ? Integer.MAX_VALUE : this.getPlayer().getId();
         int idThat = (g.getPlayer().getId() == -1) ? Integer.MAX_VALUE : g.getPlayer().getId();
-        return Integer.compare(idThis, idThat);
+        return Integer.compare(idThat, idThis);
     }
 
     @Override
