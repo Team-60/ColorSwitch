@@ -39,7 +39,7 @@ public class LoadGamePageController {
     private ArrayList<Button> slotButtons; // buttons inside buttonContainer
     private ArrayList<String> colorScheme;
     private String inactiveColor;
-    private HashMap<Button, Game> isActive; // slot is active with a game
+    private HashMap<Button, Game> bGames; // slot is active with a game, button to game
 
     private AudioClip hoverSound;
     private AudioClip clickSound;
@@ -73,16 +73,16 @@ public class LoadGamePageController {
         assert (games.size() <= NUM_BUTTONS);
         ObservableList<Node> buttonList = buttonContainer.getChildren();
         this.slotButtons = new ArrayList<>();
-        this.isActive = new HashMap<>();
+        this.bGames = new HashMap<>();
         for (int i = 0; i < NUM_BUTTONS; ++ i) {
             Button cur = (Button) buttonList.get(i);
             this.slotButtons.add(cur);
             if (i < games.size()) { // it's active
-                this.isActive.put(cur, games.get(i));
+                this.bGames.put(cur, games.get(i));
                 this.activateButton(cur);
             }
             else {
-                this.isActive.put(cur, null);
+                this.bGames.put(cur, null);
                 this.deactivateButton(cur);
             }
         }
@@ -105,7 +105,7 @@ public class LoadGamePageController {
     private void activateButton(Button button) {
         // set status according to the "game" received
         // set text and stuff here
-        Player player = this.isActive.get(button).getPlayer();
+        Player player = this.bGames.get(button).getPlayer();
 
         HBox labelContainer = (HBox) button.getGraphic();
         assert (labelContainer.getChildren().size() == 3);
@@ -116,15 +116,35 @@ public class LoadGamePageController {
         score.setText(Integer.toString(player.getScore()));
         date.setText(player.getDate());
 
-        Tooltip tooltip = new Tooltip(this.isActive.get(button).getPlayer().toString());
+        Tooltip tooltip = new Tooltip(this.bGames.get(button).getPlayer().toString());
         tooltip.setStyle("-fx-font-style: italic;");
         Tooltip.install(button, tooltip);
     }
 
     @FXML
+    public void slotChosen(MouseEvent mouseEvent) {
+        this.clickSound.play();
+        Button button = (Button) mouseEvent.getSource();
+        Game game = this.bGames.get(button);
+        System.out.println(this.getClass().toString() + " slot chosen");
+        System.out.println(game.getPlayer());
+
+        Scene scene = this.app.getScene();
+        StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 1);
+        rootContainer.getChildren().remove(this.loadGameRoot);
+        try {
+            new GamePlay(this.app, game);
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " New game failed to load");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void buttonHoverActive(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
-        if (isActive.get(button) != null) {
+        if (bGames.get(button) != null) {
             this.hoverSound.play();
             int idx = this.slotButtons.indexOf(button);
             String color = this.colorScheme.get(idx % this.colorScheme.size());
@@ -139,7 +159,7 @@ public class LoadGamePageController {
     @FXML
     public void buttonHoverInactive(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
-        if (isActive.get(button) != null) {
+        if (bGames.get(button) != null) {
             int idx = this.slotButtons.indexOf(button);
             String color = this.colorScheme.get(idx % this.colorScheme.size());
             button.setStyle("-fx-background-color: " + color + ";");

@@ -29,9 +29,10 @@
             <Font name="Corbel Light" size="45.0" />
          </font>
       </Label>
+      <Line endX="450.0" endY="-7.62939453125E-6" layoutY="77.0" startY="-7.62939453125E-6" stroke="YELLOW" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="3.0" />
       <VBox fx:id="buttonContainer" alignment="TOP_CENTER" layoutY="78.0" prefHeight="537.0" prefWidth="450.0">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #003B46;">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#slotChosen" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #003B46;">
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
@@ -73,7 +74,7 @@
                   <Insets bottom="35.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #07575B;">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#slotChosen" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #07575B;">
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
@@ -115,7 +116,7 @@
                   <Insets bottom="35.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="91.0" mnemonicParsing="false" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #66A5AD;">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="91.0" mnemonicParsing="false" onMouseClicked="#slotChosen" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #66A5AD;">
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
@@ -157,7 +158,7 @@
                   <Insets bottom="35.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="161.0" mnemonicParsing="false" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #003B46;">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#slotChosen" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #003B46;">
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
@@ -199,7 +200,7 @@
                   <Insets bottom="35.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="232.0" mnemonicParsing="false" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #07575B;">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#slotChosen" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #07575B;">
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
@@ -241,7 +242,7 @@
                   <Insets bottom="35.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="353.0" mnemonicParsing="false" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #66A5AD;">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#slotChosen" onMouseEntered="#buttonHoverActive" onMouseExited="#buttonHoverInactive" pickOnBounds="false" prefHeight="50.0" prefWidth="410.0" style="-fx-background-color: #66A5AD;">
                <graphic>
                   <HBox alignment="CENTER">
                      <children>
@@ -285,7 +286,6 @@
             <Insets top="30.0" />
          </padding>
       </VBox>
-      <Line endX="450.0" endY="-7.62939453125E-6" layoutY="77.0" startY="-7.62939453125E-6" stroke="YELLOW" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="3.0" />
       <Group fx:id="goBack" layoutX="350.0" layoutY="607.0" onMouseClicked="#goBackPressed" onMouseEntered="#goBackHoverActive" onMouseExited="#goBackHoverInactive">
          <children>
             <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />

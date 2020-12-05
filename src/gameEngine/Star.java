@@ -11,7 +11,7 @@ public class Star extends GameElement {
     private static final int closestSafeDist = 100;
     private static final int points = 0;
 
-    private transient final Image image = new Image(new File("src/assets/gameplay/star.png").toURI().toString());
+    private static final Image image = new Image(new File("src/assets/gameplay/star.png").toURI().toString());
 
     Star(double x, double y) {
         super(x, y, closestSafeDist);

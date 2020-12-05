@@ -46,7 +46,7 @@ public class GamePlay {
     public static long GameOverTime = -1;
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
-    public GamePlay(App _app) throws IOException { // create a new game and a new player, sep. constructor for deserialize
+    public GamePlay(App _app) throws IOException { // create a new game and a new player, sep. constructor for deserialize, IOException is always managed by caller
 
         this.app = _app;
         this.scene = this.app.getScene();
@@ -62,6 +62,7 @@ public class GamePlay {
 
         this.canvas = (Canvas) canvasContainer.getChildren().get(0);
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+        Renderer.init(graphicsContext); // Each gameplay has it's own renderer
 
         this.player = new Player();
         this.game = new Game(graphicsContext, this.player);
@@ -73,6 +74,45 @@ public class GamePlay {
             }
         };
         // TODO: bug case : continuous space pressed
+        canvas.requestFocus(); // very very important
+        canvas.addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
+
+        this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game, this);
+        this.animationTimer.start();
+    }
+
+    // TODO
+    public GamePlay(App _app, Game _game) throws IOException { // in case a game is loaded from gameplay
+        assert (_game.getPlayer().getId() != -1); // it's a saved game
+
+        this.app = _app;
+        this.scene = this.app.getScene();
+        this.game = _game;
+        this.player = this.game.getPlayer();
+
+        this.resetBgMusic();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GamePlay.fxml"));
+        this.canvasContainer = loader.load(); // for adding a button and a canvas
+        GamePlayController gamePlayController = loader.getController(); // Controller, for handling mouse events
+        StackPane rootContainer = (StackPane) this.scene.getRoot();
+        assert (rootContainer.getChildren().size() == 0); // as all remove their roots before initiating gameplay
+        rootContainer.getChildren().add(canvasContainer);
+
+        this.canvas = (Canvas) canvasContainer.getChildren().get(0);
+        GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+        Renderer.init(graphicsContext);
+
+        // set transient variables
+        this.game.reloadParam(graphicsContext);
+
+        gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
+        GamePlay.JumpEventHandler = keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.SPACE) {
+                game.registerJump();
+            }
+        };
+
         canvas.requestFocus(); // very very important
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
 

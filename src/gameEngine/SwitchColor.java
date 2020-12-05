@@ -13,7 +13,7 @@ public class SwitchColor extends GameElement {
     private static final int closestSafeDist = 100;
     private static int points = 0;
 
-    private transient final Image image = new Image(new File("src/assets/gameplay/color_switcher_s.png").toURI().toString());
+    private static final Image image = new Image(new File("src/assets/gameplay/color_switcher_s.png").toURI().toString());
 
     SwitchColor(double x, double y) {
         super(x, y, closestSafeDist);

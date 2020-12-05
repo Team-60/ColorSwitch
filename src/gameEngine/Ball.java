@@ -23,9 +23,9 @@ public class Ball implements Serializable {
     private double velocity;
     private String color;
 
-    private transient final GraphicsContext graphicsContext;
-    private transient final Image hand = new Image(new File("src/assets/gameplay/hand_s.png").toURI().toString());
-    private transient final AudioClip audioClip = new AudioClip(new File("src/assets/music/gameplay/jump.wav").toURI().toString());
+    private transient GraphicsContext graphicsContext;
+    private static final Image hand = new Image(new File("src/assets/gameplay/hand_s.png").toURI().toString());
+    private static final AudioClip audioClip = new AudioClip(new File("src/assets/music/gameplay/jump.wav").toURI().toString());
 
     Ball(GraphicsContext graphicsContext) {
         y = 600;
@@ -33,6 +33,10 @@ public class Ball implements Serializable {
         handPosition = 570;
         color = "000000";
         this.graphicsContext = graphicsContext;
+    }
+
+    public void setGraphicsContext(GraphicsContext _graphicsContext) { // after deserializing
+        this.graphicsContext = _graphicsContext;
     }
 
     public void refresh() {

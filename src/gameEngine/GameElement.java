@@ -24,7 +24,7 @@ public abstract class GameElement implements Serializable {
         this.closestSafeDist = closestSafeDist;
     }
 
-    public void loadAssets() {
+    public void loadAssets() { // after deserialization
         this.audioClip = new AudioClip(new File(this.audioClipPath).toURI().toString());
         this.audioClip.setVolume(0.5);
     }

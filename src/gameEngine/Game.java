@@ -25,8 +25,8 @@ public class Game implements Serializable, Comparable {
     private ArrayList<GameElement> gameElements;
     private boolean gameOver = false;
 
-    private transient final Swarm swarm;
-    private transient final GraphicsContext graphicsContext; // can't serialize this
+    private transient Swarm swarm;
+    private transient GraphicsContext graphicsContext; // can't serialize this
     private transient final AudioClip fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
 
     Game(GraphicsContext graphicsContext, Player player) {
@@ -45,8 +45,18 @@ public class Game implements Serializable, Comparable {
         gameElements.add(star);
         gameElements.add(switchColor);
         ball.setColor(obstacle.getRandomColor());
-        Renderer.init(graphicsContext);
         swarm = new Swarm(graphicsContext);
+    }
+
+    public void reloadParam(GraphicsContext _graphicsContext) { // after deserializing, game's swarm and graphics context
+        assert (!this.gameOver); // only load when game is active
+        this.graphicsContext = _graphicsContext;
+        this.swarm = new Swarm(this.graphicsContext);
+
+        this.ball.setGraphicsContext(this.graphicsContext);
+        for (GameElement g : this.gameElements) {
+            g.loadAssets();
+        }
     }
 
     private void moveScreenRelative(double offset) {
