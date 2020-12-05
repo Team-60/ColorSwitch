@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -114,6 +115,10 @@ public class LoadGamePageController {
         username.setText(player.getName());
         score.setText(Integer.toString(player.getScore()));
         date.setText(player.getDate());
+
+        Tooltip tooltip = new Tooltip(this.isActive.get(button).getPlayer().toString());
+        tooltip.setStyle("-fx-font-style: italic;");
+        Tooltip.install(button, tooltip);
     }
 
     @FXML

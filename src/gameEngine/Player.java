@@ -76,14 +76,13 @@ public class Player implements Serializable, Comparable { // info. keep
 
     @Override
     public String toString() {
-        String h = "Player\n";
-        String ps = "Name: " + this.name + "\n";
-        String is = "Id: " + this.id + "\n";
-        String ss = "Score: " + this.score + "\n";
-        String js = "Jumps: " + this.jumps + "\n";
-        String dis = "Dist.: " + this.getDistance() + "\n";
-        String ds = "Date: " + this.date + "\n";
-        return h + ps + is + ss + js + dis + ds;
+        String ps = "* Name: " + this.name + "\n";
+        String is = "* Game Id: " + this.id + "\n";
+        String ss = "* Score: " + this.score + "\n";
+        String js = "* Jumps: " + this.jumps + "\n";
+        String dis = "* Dist.: " + this.getDistance() + " px \n";
+        String ds = "* Date: " + this.date + "\n";
+        return ps + is + ss + js + dis + ds;
     }
 
 }
