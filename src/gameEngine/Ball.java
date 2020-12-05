@@ -13,14 +13,14 @@ public class Ball implements Serializable {
     private static final long serialVersionUID = 2022L;
 
     private final double jumpSpeed = -450;
-    private final double gravity = 1500;
+    private double gravity = 1500;
     private final double radius = 10;
     private final double x = 225;
     private final double midLine = 350;
 
     private double handPosition;
     private double y;
-    private double velocity;
+    private double velocity; // as velocity, will always start from 0
     private String color;
 
     private transient GraphicsContext graphicsContext;
@@ -91,5 +91,22 @@ public class Ball implements Serializable {
 
     public double getX() {
         return x;
+    }
+
+    // in case to halt the gameplay
+    public void resetGravity() {
+        this.gravity = 1500;
+    }
+
+    public void removeGravity() {
+        this.gravity = 0;
+    }
+
+    public double getVelocity() {
+        return this.velocity;
+    }
+
+    public void setVelocity(double _velocity) {
+        this.velocity = _velocity;
     }
 }

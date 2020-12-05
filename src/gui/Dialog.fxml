@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -14,6 +15,9 @@
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
+         <effect>
+            <Glow level="0.4" />
+         </effect>
       </Label>
    </children>
    <opaqueInsets>

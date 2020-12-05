@@ -236,6 +236,10 @@ public class Game implements Serializable, Comparable {
         }
     }
 
+    public Ball getBall() {
+        return this.ball;
+    }
+
     public Player getPlayer() { // ref. all info attributes from player
         return this.player;
     }

@@ -6,6 +6,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,6 +29,9 @@
          <font>
             <Font name="Corbel Light" size="45.0" />
          </font>
+         <effect>
+            <Glow level="0.8" />
+         </effect>
       </Label>
       <Line endX="450.0" endY="-7.62939453125E-6" layoutY="77.0" startY="-7.62939453125E-6" stroke="YELLOW" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="3.0" />
       <VBox fx:id="buttonContainer" alignment="TOP_CENTER" layoutY="78.0" prefHeight="537.0" prefWidth="450.0">

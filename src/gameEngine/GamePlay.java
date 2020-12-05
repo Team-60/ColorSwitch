@@ -3,13 +3,12 @@ package gameEngine;
 import gui.GameOverPageController;
 import gui.GamePlayController;
 import javafx.animation.*;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.Shadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +16,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -107,17 +109,63 @@ public class GamePlay {
         this.game.reloadParam(graphicsContext);
 
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
-        GamePlay.JumpEventHandler = keyEvent -> {
+        this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game, this);
+
+        this.game.getBall().removeGravity(); // else ball will fall down
+        double prevVelocity = this.game.getBall().getVelocity(); // store velocity
+        this.game.getBall().setVelocity(0);
+        // wait for user input
+        Circle glowCircle = gamePlayController.getGlowCircle();
+        glowCircle.setVisible(true);
+        glowCircle.setCenterX(this.game.getBall().getX());
+        glowCircle.setCenterY(this.game.getBall().getY());
+
+        Timeline animGlow = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(glowCircle.scaleXProperty(), glowCircle.getScaleX(), Interpolator.EASE_IN), new KeyValue(glowCircle.scaleYProperty(), glowCircle.getScaleY(), Interpolator.EASE_IN)),
+                new KeyFrame(Duration.seconds(1), new KeyValue(glowCircle.scaleXProperty(), glowCircle.getScaleX() + 0.2, Interpolator.EASE_IN), new KeyValue(glowCircle.scaleYProperty(), glowCircle.getScaleY() + 0.2, Interpolator.EASE_IN))
+        );
+        animGlow.setAutoReverse(true);
+        animGlow.setCycleCount(Animation.INDEFINITE);
+
+        // temp rectangle for blocking input
+        Rectangle tempR = new Rectangle();
+        tempR.setWidth(GamePlay.WIDTH);
+        tempR.setHeight(GamePlay.HEIGHT);
+        tempR.setFill(Paint.valueOf("#000000"));
+        tempR.setOpacity(0.0);
+        rootContainer.getChildren().add(tempR);
+
+        EventHandler<KeyEvent> resumeEventHandler = keyEvent -> {
             if (keyEvent.getCode() == KeyCode.SPACE) {
-                game.registerJump();
+                System.out.println(this.getClass().toString() + " game resumed");
+                assert (animGlow.getStatus() == Animation.Status.RUNNING);
+                animGlow.stop();
+
+                // reset glow circle and event handler and start animation, add gravity
+                glowCircle.setCenterX(0);
+                glowCircle.setCenterY(0);
+                glowCircle.setVisible(false);
+
+                // remove tempR
+                rootContainer.getChildren().remove(tempR);
+
+                GamePlay.JumpEventHandler = subKeyEvent -> {
+                    if (subKeyEvent.getCode() == KeyCode.SPACE) {
+                        game.registerJump();
+                    }
+                };
+                canvas.requestFocus(); // very very important
+                canvas.addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
+                this.game.getBall().setVelocity(prevVelocity);
+                this.game.getBall().resetGravity();
+                game.registerJump(); // as jump should follow while resetting event handler
             }
         };
+        tempR.addEventHandler(KeyEvent.KEY_PRESSED, resumeEventHandler);
+        tempR.requestFocus(); // for resuming, IMP
 
-        canvas.requestFocus(); // very very important
-        canvas.addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
-
-        this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game, this);
         this.animationTimer.start();
+        animGlow.play();
     }
 
     private void resetBgMusic() {
