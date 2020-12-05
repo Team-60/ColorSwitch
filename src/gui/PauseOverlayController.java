@@ -166,10 +166,19 @@ public class PauseOverlayController {
     }
 
     @FXML
-    public void saveIconClicked() { // TODO
+    public void saveIconClicked() {
         // ask for username
         this.clickSound.play();
 
+        // check if the player has already saved
+        if (this.gamePlayController.getGamePlay().getGame().getPlayer().getId() == -1) {
+            this.newSave(); // ask for username
+        } else {
+            this.app.overwriteGame(this.gamePlayController.getGamePlay().getGame());
+        }
+    }
+
+    private void newSave() {
         Scene scene = this.app.getScene();
         StackPane rootContainer = (StackPane) scene.getRoot();
         // temp rectangle for blocking input
@@ -204,16 +213,16 @@ public class PauseOverlayController {
         secondaryStage.setScene(secondaryScene);
         secondaryStage.showAndWait();
 
-        // TODO: implement cancel option too, see in case of consequent saves, overwrite
-
-        assert (this.usernameSave != null);
-        System.out.println(this.getClass().toString() + " " + this.usernameSave + " received");
-
+        assert (inputPopupController.getSaveSuccess() == (this.usernameSave != null));
         App.BgMediaPlayer.setVolume(1);
         rootContainer.getChildren().remove(tempR); // regain focus
         this.pauseOverlayRoot.requestFocus();
 
-        this.app.saveGame(this.gamePlayController.getGamePlay().getGame(), this.usernameSave);
-
+        if (inputPopupController.getSaveSuccess()) {
+            System.out.println(this.getClass().toString() + " " + this.usernameSave + " received");
+            this.app.saveGame(this.gamePlayController.getGamePlay().getGame(), this.usernameSave);
+        } else {
+            System.out.println(this.getClass().toString() + " save cancelled");
+        }
     }
 }

@@ -119,13 +119,27 @@
                <font>
                   <Font name="Corbel Light" size="39.0" />
                </font>
+               <effect>
+                  <Glow level="0.55" />
+               </effect>
             </Label>
+            <ImageView fx:id="crossButton" fitHeight="34.0" fitWidth="20.0" layoutX="342.0" layoutY="92.0" onMouseClicked="#crossClicked" onMouseEntered="#crossHoverActive" onMouseExited="#crossHoverInactive" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/inputPopup/cross.png" />
+               </image>
+               <effect>
+                  <Glow level="0.0" />
+               </effect>
+            </ImageView>
          </children>
       </Group>
       <Label fx:id="bottomLabel" alignment="CENTER" layoutY="423.0" prefHeight="18.0" prefWidth="365.0" text="Claim your spot among the finest!" textFill="WHITE">
          <font>
             <Font name="Calibri Italic" size="15.0" />
          </font>
+         <effect>
+            <Glow level="0.54" />
+         </effect>
       </Label>
    </children>
 </AnchorPane>

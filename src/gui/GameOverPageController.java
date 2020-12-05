@@ -57,7 +57,7 @@ public class GameOverPageController {
         this.app = _app;
         this.game = _game;
 
-        this.yourScoreLabel.setText(Integer.toString(this.game.getScore()));
+        this.yourScoreLabel.setText(Integer.toString(this.game.getPlayer().getScore()));
         this.bestScoreLabel.setText(Integer.toString(this.app.getHighscore()));
 
         // reset media with game over in case if returned from game play

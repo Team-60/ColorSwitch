@@ -173,16 +173,8 @@ public class Game implements Serializable, Comparable {
         }
     }
 
-    public Player getPlayer() {
+    public Player getPlayer() { // ref. all info attributes from player
         return this.player;
-    }
-
-    public int getId() {
-        return this.player.getId();
-    }
-
-    public int getScore() {
-        return this.player.getScore();
     }
 
     public boolean isGameOver() {
@@ -192,8 +184,8 @@ public class Game implements Serializable, Comparable {
     @Override
     public int compareTo(Object o) { // for saving, based on id
         Game g = (Game) o;
-        int idThis = (this.getId() == -1) ? Integer.MAX_VALUE : this.getId();
-        int idThat = (g.getId() == -1) ? Integer.MAX_VALUE : g.getId();
+        int idThis = (this.getPlayer().getId() == -1) ? Integer.MAX_VALUE : this.getPlayer().getId();
+        int idThat = (g.getPlayer().getId() == -1) ? Integer.MAX_VALUE : g.getPlayer().getId();
         return Integer.compare(idThis, idThat);
     }
 

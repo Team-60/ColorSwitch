@@ -78,13 +78,13 @@ public class GamePlayController {
         this.gamePlay.getCanvas().addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
         animationTimer.start();
     }
+
     public GamePlay getGamePlay() {
         return gamePlay;
     }
     public Boolean getPaused() {
         return this.paused;
     }
-
     public AnchorPane getGamePlayRoot() {
         return gamePlayRoot;
     }

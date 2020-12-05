@@ -26,13 +26,13 @@ Divyansh's:
 TODO: Beware of file changes and refactoring, especially in file paths while making jar
 TODO: Implement Easter egg2 secret restart
 TODO: Implement Player Class, Database class
-TODO: add debug options for everywhere with fxml loader
-TODO: restart on game over page & on pause implement (maybe see for reference keeping?)
+TODO: restart on game over page & on pause implement (maybe see for reference keeping?), pause delay
 TODO: add score on game over page, set highscore, highscore line
-TODO: see when all spots for game over (currently missing fall down, calibrate media player for the same)
 TODO: throw game over exceptions/ fall down exceptions
-TODO: implement Leaderboard screen comparators
+
+TODO: implement Leaderboard screen comparators and saving
 TODO: implement Serializable, ensure every asset is reloaded after deserializing, might need to create init?
+TODO: game is saved, but now display on leaderboard, and implement saving for already saved game, remove on game over
 */
 
 /*
@@ -55,13 +55,13 @@ public class App extends Application {
     public App() { // instance is automatically created by launch of JavaFX
         this.gameDatabase = new Database<>();
         this.playerDatabase = new Database<>();
-        this.highscore = -1; // need to gain this via serializing
+        this.highscore = -1; // need to gain this via serializing TODO
         this.gameDatabase.form(Game.FILE_PATH);
         this.playerDatabase.form(Player.FILE_PATH);
     }
 
     public void addAssets() {
-        if (BgMediaPlayer != null && BgMediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) { // as others switch media like gameover, gameplay
+        if (BgMediaPlayer != null && BgMediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) { // as others switch media like gameOver, gameplay
             BgMediaPlayer.stop();
         }
         Media bgMusic = new Media(new File("src/assets/music/bg/bg4.mp3").toURI().toString());
@@ -125,18 +125,6 @@ public class App extends Application {
         loadAnimationController.init(this);
     }
 
-    public Scene getScene() {
-        return scene;
-    }
-
-    public int getHighscore() {
-        return highscore;
-    }
-
-    public void setHighscore(int highscore) {
-        this.highscore = highscore;
-    }
-
     public void saveGame(Game game, String name) { // maybe ask for a slot from the player? Implement on the oldest basis
         // modify player here, save data also, check if the player ID already exists (in another overridden method?) TODO
         game.getPlayer().setName(name);
@@ -147,16 +135,43 @@ public class App extends Application {
         else new Dialog("Game saved!", (Stage) this.scene.getWindow());
     }
 
+    public void overwriteGame(Game game) {
+        assert (game.getPlayer().getId() != -1);
+        ArrayList<Game> games = this.gameDatabase.getData();
+        boolean found = false;
+        for (int i = 0; i < games.size(); ++ i) {
+            if (games.get(i).getPlayer().getId() == game.getPlayer().getId()) {
+                // player found
+                found = true;
+                games.set(i, game);
+            }
+        }
+        assert (found);
+        // save into file
+        this.gameDatabase.save(Game.FILE_PATH);
+        new Dialog("Game overwritten for " + game.getPlayer().getName() + "!", (Stage) this.scene.getWindow());
+    }
+
     private int giveId() { // return a fresh Id for game
         // calc. max id and return +1
         int id = -1;
         ArrayList<Game> games = this.gameDatabase.getData();
         for (Game g : games)
-            id = Math.max(id, g.getId());
+            id = Math.max(id, g.getPlayer().getId());
         return id + 1;
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+    public int getHighscore() {
+        return highscore;
+    }
+    public void setHighscore(int highscore) {
+        this.highscore = highscore;
     }
 }
