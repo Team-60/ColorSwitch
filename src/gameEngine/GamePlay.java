@@ -67,7 +67,7 @@ public class GamePlay {
         Renderer.init(graphicsContext); // Each gameplay has it's own renderer
 
         this.player = new Player();
-        this.game = new Game(graphicsContext, this.player);
+        this.game = new Game(graphicsContext, this.player, app);
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
 
         GamePlay.JumpEventHandler = keyEvent -> {

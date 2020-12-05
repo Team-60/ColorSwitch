@@ -29,10 +29,14 @@ public class ObsLine extends Obstacle {
         this.length = length;
         translationSpeed = 180;
         closestStar = 40;
+        star = new Star(x, y - 40);
     }
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
+        if (star != null) {
+            star.refresh(graphicsContext);
+        }
         double Left = startingPoint;
         for (int i = 0; i < 4; ++i) {
             Renderer.drawFoldingRed(Left, getY() - length/2, width, length, Color.web(colors.get(i)));

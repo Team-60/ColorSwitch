@@ -22,6 +22,7 @@ public class ObsCircle extends Obstacle{
 
     ObsCircle(double x, double y, double radius, double width) {
         super(x, y, radius);
+        star = new Star(x, y);
         this.radius = radius;
         this.innerRadius = radius - width;
         rotationAngle = 0;
@@ -29,7 +30,9 @@ public class ObsCircle extends Obstacle{
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-
+        if (star != null) {
+            star.refresh(graphicsContext);
+        }
         graphicsContext.translate(getX(), getY());
         graphicsContext.rotate(-rotationAngle);
         int angle = 0;

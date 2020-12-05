@@ -24,28 +24,29 @@ public class Game implements Serializable, Comparable {
     private final Ball ball;
     private ArrayList<GameElement> gameElements;
     private boolean gameOver = false;
+    private int obstacleCount = 1;
 
     private transient Swarm swarm;
     private transient GraphicsContext graphicsContext; // can't serialize this
     private transient final AudioClip fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
-
-    Game(GraphicsContext graphicsContext, Player player) {
+    private transient App app;
+    private int highScore;
+    Game(GraphicsContext graphicsContext, Player player, App app) {
         this.graphicsContext = graphicsContext;
         this.player = player;
-
+        this.app = app;
         ball = new Ball(graphicsContext);
 
         double x = 225;
         double y = 350;
         gameElements = new ArrayList<>();
         Obstacle obstacle = new ObsCircle(225, 350, 90, 15);
-        GameElement star = new Star(x, y);
         GameElement switchColor = new SwitchColor(x, y - obstacle.getClosestSafeDist() - distanceBetweenObstacles/2);
         gameElements.add(obstacle);
-        gameElements.add(star);
         gameElements.add(switchColor);
         ball.setColor(obstacle.getRandomColor());
         swarm = new Swarm(graphicsContext);
+        highScore = app.getHighscore();
     }
 
     public void reloadParam(GraphicsContext _graphicsContext) { // after deserializing, game's swarm and graphics context
@@ -85,11 +86,14 @@ public class Game implements Serializable, Comparable {
         // remove unwanted objects
         ArrayList<GameElement> gameElementsTemp = new ArrayList<>();
         for (GameElement gameElement : gameElements) {
-            // TODO : this can give null pointer error is all the elements are not sorted acc to Y coordinates
+
+            if (gameElement instanceof Obstacle && ((Obstacle) gameElement).checkCollisionStar(ball)) {
+                player.incScore();
+                ((Obstacle) gameElement).destroyStar();
+            }
             if (gameElement.checkCollision(ball)) {
                 gameElement.playSound();
-                if (gameElement instanceof Star) player.incScore();
-                else if (gameElement instanceof Obstacle) {
+                if (gameElement instanceof Obstacle) {
                     gameOver = true;
                     swarm.explode(this.ball);
                     gameElementsTemp.add(gameElement);
@@ -118,17 +122,18 @@ public class Game implements Serializable, Comparable {
 
         while(gameElements.size() < 16) {
             Obstacle obstacle = getRandomObstacle(x, y);
+            obstacleCount++;
+            y -= obstacle.getClosestSafeDist();
             y -= obstacle.getClosestSafeDist();
 
-            y -= obstacle.getClosestStar();
-            GameElement star = new Star(x, y);                  // TODO : getStar() gives star location based on type of obstacle
-            y += obstacle.getClosestStar();
+            if (obstacleCount == highScore) {
+                GameElement highScoreLine = new HighScoreLine(y - distanceBetweenObstacles/4);
+                gameElements.add(highScoreLine);
+            }
 
-            y -= obstacle.getClosestSafeDist();
             GameElement switchColor = new SwitchColor(x, y - distanceBetweenObstacles/2);
 
             gameElements.add(obstacle);
-            gameElements.add(star);
             gameElements.add(switchColor);
             y -= distanceBetweenObstacles;
         }
@@ -178,7 +183,6 @@ public class Game implements Serializable, Comparable {
         int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
         // y - safe dist of that specific obstacles
 //        int randomNumber = 13;
-        System.out.println(randomNumber);
         if (randomNumber < 0) {
             randomNumber = 0;
         }

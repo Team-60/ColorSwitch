@@ -17,6 +17,7 @@ public class ObsDoubleCircle extends ObsCircle {
 
     ObsDoubleCircle(double x, double y, double innerRadius, double outerRadius, double width) {
         super(x, y, outerRadius, width);
+        super.destroyStar();             // only one star for one two circles
         innerCircle = new ObsCircle(x, y, innerRadius, width);
         rotationAngle = 45;
         innerCircle.setRotationAngle(45);
@@ -40,8 +41,19 @@ public class ObsDoubleCircle extends ObsCircle {
     }
 
     @Override
+    public boolean checkCollisionStar(Ball ball) {
+        return super.checkCollisionStar(ball) || innerCircle.checkCollisionStar(ball);
+    }
+
+    @Override
     public void destroy() {
 
+    }
+
+    @Override
+    public void destroyStar() {
+        super.destroyStar();
+        innerCircle.destroyStar();
     }
 
     @Override

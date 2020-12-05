@@ -24,11 +24,14 @@ public class ObsSquare extends Obstacle{
         super(x, y, sideLength/2 * Math.sqrt(2));
         this.width = width;
         this.sideLength = sideLength;
+        star = new Star(x, y);
     }
 
     @Override
     public void refresh(GraphicsContext graphicsContext) {
-
+        if (star != null) {
+            star.refresh(graphicsContext);
+        }
         graphicsContext.translate(getX(), getY());
         graphicsContext.rotate(-rotationAngle);
 

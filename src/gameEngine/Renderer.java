@@ -75,6 +75,16 @@ public final class Renderer {
 
     }
 
+    public static void drawDashedLine(double x, double y, double width, double dashLength, double gap, Color color) {
+        graphicsContext.setStroke(color);
+        graphicsContext.setLineWidth(width);
+        for (double i = x; i < GamePlay.WIDTH; ++i) {
+            graphicsContext.strokeLine(i, y, i + dashLength, y);
+            i += dashLength;
+            i += gap;
+        }
+    }
+
     public static void drawArc(double centerX, double centerY, double radius, double innerRadius, Color bgColor, Color strokeColor, int angle) {
 
         graphicsContext.beginPath();
