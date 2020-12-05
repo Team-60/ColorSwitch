@@ -24,15 +24,17 @@ public class Game implements Serializable, Comparable {
     private final Ball ball;
     private ArrayList<GameElement> gameElements;
     private boolean gameOver = false;
+    private int obstacleCount = 1;
 
     private transient Swarm swarm;
     private transient GraphicsContext graphicsContext; // can't serialize this
     private transient final AudioClip fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
-
-    Game(GraphicsContext graphicsContext, Player player) {
+    private transient App app;
+    private int highScore;
+    Game(GraphicsContext graphicsContext, Player player, App app) {
         this.graphicsContext = graphicsContext;
         this.player = player;
-
+        this.app = app;
         ball = new Ball(graphicsContext);
 
         double x = 225;
@@ -44,6 +46,7 @@ public class Game implements Serializable, Comparable {
         gameElements.add(switchColor);
         ball.setColor(obstacle.getRandomColor());
         swarm = new Swarm(graphicsContext);
+        highScore = app.getHighscore();
     }
 
     public void reloadParam(GraphicsContext _graphicsContext) { // after deserializing, game's swarm and graphics context
@@ -119,9 +122,15 @@ public class Game implements Serializable, Comparable {
 
         while(gameElements.size() < 16) {
             Obstacle obstacle = getRandomObstacle(x, y);
+            obstacleCount++;
+            y -= obstacle.getClosestSafeDist();
             y -= obstacle.getClosestSafeDist();
 
-            y -= obstacle.getClosestSafeDist();
+            if (obstacleCount == highScore) {
+                GameElement highScoreLine = new HighScoreLine(y - distanceBetweenObstacles/4);
+                gameElements.add(highScoreLine);
+            }
+
             GameElement switchColor = new SwitchColor(x, y - distanceBetweenObstacles/2);
 
             gameElements.add(obstacle);
@@ -174,7 +183,6 @@ public class Game implements Serializable, Comparable {
         int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
         // y - safe dist of that specific obstacles
 //        int randomNumber = 13;
-        System.out.println(randomNumber);
         if (randomNumber < 0) {
             randomNumber = 0;
         }
