@@ -41,7 +41,7 @@ public class Dialog {
         secondaryStage.setScene(scene);
         secondaryStage.show();
         secondaryStage.setX((primScreenBounds.getWidth() - secondaryStage.getWidth()) / 2);
-        secondaryStage.setY(GamePlay.HEIGHT + secondaryStage.getHeight() / 3 + 5);
+        secondaryStage.setY(GamePlay.HEIGHT + secondaryStage.getHeight() / 3);
 
         dialogRoot.setOpacity(0.0);
         FadeTransition exitAnim = new FadeTransition(Duration.seconds(1), dialogRoot);

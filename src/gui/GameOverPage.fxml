@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -53,6 +54,9 @@
                <font>
                   <Font name="Arial" size="28.0" />
                </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
             </Label>
          </children>
       </Group>
@@ -67,6 +71,9 @@
                </image>
             </ImageView>
          </graphic>
+         <effect>
+            <Glow />
+         </effect>
       </Label>
       <Group layoutY="366.0">
          <children>
@@ -76,6 +83,9 @@
                <font>
                   <Font name="Arial" size="28.0" />
                </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
             </Label>
          </children>
       </Group>
@@ -90,6 +100,9 @@
                </image>
             </ImageView>
          </graphic>
+         <effect>
+            <Glow />
+         </effect>
       </Label>
       <Group fx:id="iconLB" layoutX="54.0" layoutY="564.0" onMouseClicked="#iconLBClicked" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
