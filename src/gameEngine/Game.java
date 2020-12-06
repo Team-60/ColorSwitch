@@ -20,38 +20,42 @@ public class Game implements Serializable, Comparable {
     private static final int numberOfObstacle = 14;
     private static final double distanceBetweenObstacles = 150;
 
+    private transient App app;
     private final Player player;
     private final Ball ball;
     private ArrayList<GameElement> gameElements;
     private boolean gameOver = false;
     private int obstacleCount = 1;
+    private int highScore;
 
     private transient Swarm swarm;
     private transient GraphicsContext graphicsContext; // can't serialize this
     private transient final AudioClip fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
-    private transient App app;
-    private int highScore;
+
+
     Game(GraphicsContext graphicsContext, Player player, App app) {
         this.graphicsContext = graphicsContext;
         this.player = player;
         this.app = app;
-        ball = new Ball(graphicsContext);
+        this.ball = new Ball(graphicsContext);
 
         double x = 225;
         double y = 350;
-        gameElements = new ArrayList<>();
+        this.gameElements = new ArrayList<>();
         Obstacle obstacle = new ObsCircle(225, 350, 90, 15);
         GameElement switchColor = new SwitchColor(x, y - obstacle.getClosestSafeDist() - distanceBetweenObstacles/2);
-        gameElements.add(obstacle);
-        gameElements.add(switchColor);
-        ball.setColor(obstacle.getRandomColor());
-        swarm = new Swarm(graphicsContext);
-        highScore = app.getHighscore();
+        this.gameElements.add(obstacle);
+        this.gameElements.add(switchColor);
+        this.ball.setColor(obstacle.getRandomColor());
+        this.swarm = new Swarm(graphicsContext);
+        this.highScore = app.getHighscore();
     }
 
-    public void reloadParam(GraphicsContext _graphicsContext) { // after deserializing, game's swarm and graphics context
+    public void reloadParam(GraphicsContext _graphicsContext, App _app) { // after deserializing, game's swarm and graphics context, with app and refresh highscore
         assert (!this.gameOver); // only load when game is active
         this.graphicsContext = _graphicsContext;
+        this.app = _app;
+        this.highScore = this.app.getHighscore();
         this.swarm = new Swarm(this.graphicsContext);
 
         this.ball.setGraphicsContext(this.graphicsContext);

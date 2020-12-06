@@ -66,7 +66,7 @@ public class GamePlay {
         Renderer.init(graphicsContext); // Each gameplay has it's own renderer
 
         this.player = new Player();
-        this.game = new Game(graphicsContext, this.player, app);
+        this.game = new Game(graphicsContext, this.player, this.app);
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
 
         GamePlay.JumpEventHandler = keyEvent -> {
@@ -82,7 +82,7 @@ public class GamePlay {
         this.animationTimer.start();
     }
 
-    // TODO
+    // TODO under review
     public GamePlay(App _app, Game _game) throws IOException { // in case a game is loaded from gameplay
         assert (_game.getPlayer().getId() != -1); // it's a saved game
 
@@ -105,7 +105,7 @@ public class GamePlay {
         Renderer.init(graphicsContext);
 
         // set transient variables
-        this.game.reloadParam(graphicsContext);
+        this.game.reloadParam(graphicsContext, this.app);
 
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
         this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game, this);
