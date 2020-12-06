@@ -58,7 +58,7 @@ public class LoadAnimationController {
     @FXML
     private Circle shadow2;
 
-    private static final int ballEnd = 352;
+    private static final int ballEnd = 340;
     private static final double durationRt = 1800;
 
     public void init(App _app) { // create and destroy here itself

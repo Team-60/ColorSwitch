@@ -19,22 +19,25 @@
       </ImageView>
       <Group layoutX="66.0" layoutY="13.0" scaleX="1.2" scaleY="1.2">
          <children>
-            <ImageView fitHeight="213.0" fitWidth="290.0" layoutX="12.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="213.0" fitWidth="290.0" layoutX="12.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/headingWithoutRing.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="logoRingL" fitHeight="46.0" fitWidth="47.0" layoutX="97.0" layoutY="70.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoRingL" fitHeight="46.0" fitWidth="47.0" layoutX="97.0" layoutY="68.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/colorCircleSmallWide.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="logoRingR" fitHeight="46.0" fitWidth="47.0" layoutX="179.0" layoutY="70.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoRingR" fitHeight="46.0" fitWidth="47.0" layoutX="179.0" layoutY="68.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/colorCircleSmallWide.png" />
                </image>
             </ImageView>
          </children>
+         <effect>
+            <Glow />
+         </effect>
       </Group>
       <Group layoutX="363.0" layoutY="-2.0" onMouseClicked="#returnIconClicked" onMouseEntered="#returnIconHoverActive" onMouseExited="#returnIconHoverInactive">
          <children>
@@ -48,11 +51,11 @@
       </Group>
       <Group layoutY="232.0">
          <children>
-            <Rectangle fill="#66a5ad" height="48.0" layoutY="8.0" opacity="0.8" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
-            <Rectangle height="48.0" layoutY="3.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
-            <Label alignment="CENTER" layoutX="98.0" prefHeight="54.0" prefWidth="250.0" text="Your Score" textFill="WHITE">
+            <Rectangle fill="#66a5ad" height="48.0" layoutY="10.0" opacity="0.8" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
+            <Rectangle height="45.0" layoutY="8.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
+            <Label alignment="CENTER" layoutX="98.0" layoutY="3.0" prefHeight="54.0" prefWidth="250.0" text="Your Score" textFill="WHITE">
                <font>
-                  <Font name="Arial" size="28.0" />
+                  <Font name="Corbel" size="28.0" />
                </font>
                <effect>
                   <Glow level="0.5" />
@@ -60,9 +63,9 @@
             </Label>
          </children>
       </Group>
-      <Label fx:id="yourScoreLabel" alignment="CENTER" contentDisplay="RIGHT" layoutY="299.0" prefHeight="50.0" prefWidth="450.0" text="-1" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="yourScoreLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="300.0" prefHeight="50.0" prefWidth="450.0" text="14" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Tahoma Bold" size="38.0" />
+            <Font name="Courier New Bold" size="38.0" />
          </font>
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
@@ -77,11 +80,11 @@
       </Label>
       <Group layoutY="366.0">
          <children>
-            <Rectangle fill="#c24e00" height="48.0" layoutY="9.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
-            <Rectangle fill="#ff6600" height="48.0" layoutY="3.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
-            <Label alignment="CENTER" layoutX="100.0" prefHeight="54.0" prefWidth="250.0" text="Best Score" textFill="WHITE">
+            <Rectangle fill="#ca4912" height="48.0" layoutY="6.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
+            <Rectangle fill="#ff6600" height="45.0" layoutY="3.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
+            <Label alignment="CENTER" layoutX="100.0" layoutY="-2.0" prefHeight="54.0" prefWidth="250.0" text="Best Score" textFill="WHITE">
                <font>
-                  <Font name="Arial" size="28.0" />
+                  <Font name="Corbel" size="28.0" />
                </font>
                <effect>
                   <Glow level="0.5" />
@@ -89,9 +92,9 @@
             </Label>
          </children>
       </Group>
-      <Label fx:id="bestScoreLabel" alignment="CENTER" contentDisplay="RIGHT" layoutY="436.0" prefHeight="50.0" prefWidth="450.0" text="-1" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="bestScoreLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="431.0" prefHeight="50.0" prefWidth="450.0" text="25" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Tahoma Bold" size="38.0" />
+            <Font name="Courier New Bold" size="38.0" />
          </font>
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
@@ -113,6 +116,9 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <Glow />
+         </effect>
       </Group>
       <Group fx:id="iconRestart" layoutX="178.0" layoutY="564.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
@@ -123,6 +129,9 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <Glow />
+         </effect>
       </Group>
       <Group fx:id="iconReturn" layoutX="304.0" layoutY="564.0" onMouseClicked="#restartIconClicked" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
@@ -133,6 +142,9 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <Glow />
+         </effect>
       </Group>
    </children>
 </AnchorPane>

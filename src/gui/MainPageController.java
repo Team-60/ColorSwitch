@@ -44,6 +44,12 @@ public class MainPageController {
     @FXML
     private Group iconExit;
     @FXML
+    private Group iconSettings;
+    @FXML
+    private Group iconModes1;
+    @FXML
+    private Group iconModes2;
+    @FXML
     private Circle circleLB;
     @FXML
     private Circle circleLoad;
@@ -94,10 +100,16 @@ public class MainPageController {
         RotateTransition rtOut = new RotateTransition(Duration.millis(15000), outerPlayRing);
         RotateTransition rtLogoRingL = new RotateTransition(Duration.millis(15000), logoRingL);
         RotateTransition rtLogoRingR = new RotateTransition(Duration.millis(15000), logoRingR);
+//        RotateTransition rtIconLB = new RotateTransition(Duration.millis(15000), iconLB);
+//        RotateTransition rtIconLoad = new RotateTransition(Duration.millis(15000), iconLoad);
+//        RotateTransition rtIconExit = new RotateTransition(Duration.millis(15000), iconExit);
         this.startRotation(rtIn, 1);
         this.startRotation(rtOut, -1);
         this.startRotation(rtLogoRingL, 1);
         this.startRotation(rtLogoRingR, 1);
+//        this.startRotation(rtIconLB, 1);
+//        this.startRotation(rtIconLoad, 1);
+//        this.startRotation(rtIconExit, 1);
     }
 
     private void startRotation(RotateTransition rt, int dir) {

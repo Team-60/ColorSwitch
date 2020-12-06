@@ -29,7 +29,7 @@ public class Dialog {
         }
         assert (dialogRoot != null);
 
-        Label msgLabel = (Label) dialogRoot.getChildrenUnmodifiable().get(0);
+        Label msgLabel = (Label) dialogRoot.getChildrenUnmodifiable().get(1);
         msgLabel.setText(msg);
 
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -41,7 +41,7 @@ public class Dialog {
         secondaryStage.setScene(scene);
         secondaryStage.show();
         secondaryStage.setX((primScreenBounds.getWidth() - secondaryStage.getWidth()) / 2);
-        secondaryStage.setY(GamePlay.HEIGHT + secondaryStage.getHeight() / 3);
+        secondaryStage.setY(GamePlay.HEIGHT + secondaryStage.getHeight() / 3.25 + 1);
 
         dialogRoot.setOpacity(0.0);
         FadeTransition exitAnim = new FadeTransition(Duration.seconds(1), dialogRoot);

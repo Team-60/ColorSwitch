@@ -10,12 +10,12 @@
 
 <AnchorPane fx:id="loadAnimationRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoadAnimationController">
    <children>
-      <ImageView fx:id="ringOut" fitHeight="228.0" fitWidth="223.0" layoutX="113.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ringOut" fitHeight="228.0" fitWidth="223.0" layoutX="113.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/loadAnimation/colorCircle.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="ringIn" fitHeight="167.0" fitWidth="167.0" layoutX="141.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fx:id="ringIn" fitHeight="167.0" fitWidth="167.0" layoutX="141.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../assets/loadAnimation/colorCircle.png" />
          </image>
@@ -49,8 +49,8 @@
             </ImageView>
          </children>
       </Group>
-      <Circle fx:id="shadow1" fill="LIGHTGRAY" layoutX="224.0" layoutY="376.0" opacity="0.3" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
-      <Circle fx:id="shadow2" fill="DARKGRAY" layoutX="224.0" layoutY="364.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
-      <Circle fx:id="ballAnim" fill="WHITE" layoutX="224.0" layoutY="650.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fx:id="shadow1" fill="LIGHTGRAY" layoutX="224.0" layoutY="363.0" opacity="0.3" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
+      <Circle fx:id="shadow2" fill="DARKGRAY" layoutX="224.0" layoutY="351.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" />
+      <Circle fx:id="ballAnim" fill="WHITE" layoutX="224.0" layoutY="641.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>
