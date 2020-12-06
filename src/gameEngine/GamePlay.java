@@ -255,9 +255,10 @@ class GamePlayAnimationTimer extends AnimationTimer {
             GamePlay.PreviousFrameTime = currentNanoTime;
             return;
         }
-        if (game.isGameOver()) { // need to check before, as logic is updated but gui also has to be updated IMP
+        if (game.isGameOver()) { // need to check before, as logic is updated but gui also has to be updated IMP, update event handler for canvas
             if (GamePlay.GameOverTime == -1) {
                 GamePlay.GameOverTime = currentNanoTime;
+                this.gamePlay.getCanvas().removeEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
             } else {
                 double diff = (double)(currentNanoTime - GamePlay.GameOverTime)/1000000000;
                 if (diff > 1.5) {

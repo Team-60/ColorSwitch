@@ -30,8 +30,7 @@ public class Game implements Serializable, Comparable {
 
     private transient Swarm swarm;
     private transient GraphicsContext graphicsContext; // can't serialize this
-    private transient final AudioClip fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
-
+    private transient AudioClip fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
 
     Game(GraphicsContext graphicsContext, Player player, App app) {
         this.graphicsContext = graphicsContext;
@@ -62,6 +61,8 @@ public class Game implements Serializable, Comparable {
         for (GameElement g : this.gameElements) {
             g.loadAssets();
         }
+
+        this.fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
     }
 
     private void moveScreenRelative(double offset) {

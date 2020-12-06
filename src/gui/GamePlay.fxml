@@ -20,9 +20,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Circle fx:id="glowCircle" fill="WHITE" radius="15.0" stroke="WHITE" strokeType="INSIDE" visible="false">
+      <Circle fx:id="glowCircle" fill="WHITE" radius="12.0" stroke="WHITE" strokeType="INSIDE" visible="false">
          <effect>
-            <Shadow blurType="GAUSSIAN" color="#ffffff80" height="20.0" radius="9.5" width="20.0" />
+            <Shadow blurType="GAUSSIAN" color="#ffffff80" height="50.0" radius="24.5" width="50.0" />
          </effect>
       </Circle>
    </children>
