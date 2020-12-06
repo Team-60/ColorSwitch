@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -94,17 +95,25 @@ public class LBPageController {
             Label score = (Label) cur.getChildren().get(1);
             name.setText(players.get(i).getName());
             score.setText(Integer.toString(players.get(i).getScore()));
+            Tooltip tooltip = new Tooltip(players.get(i).toString());
+            tooltip.setStyle("-fx-font-style: italic; -fx-font-size: 10;");
+            Tooltip.install(name, tooltip);
+            Tooltip.install(score, tooltip);
         }
 
         // group -> vBox -> button -> hBox -> label
         Parent last3 = (Parent) ((Parent) children.get(children.size() - 1)).getChildrenUnmodifiable().get(1); // it's a vBox
         for (int i = 3, j = 0; i < players.size(); ++ i, ++ j) {
             if (players.get(i) == null) break;
-            Parent container = (Parent) ((Button) last3.getChildrenUnmodifiable().get(j)).getGraphic(); // it's an button
+            Button curButton = ((Button) last3.getChildrenUnmodifiable().get(j)); // it's a button
+            Parent container = (Parent) curButton.getGraphic(); // it's a hBox
             Label name = (Label) container.getChildrenUnmodifiable().get(0);
             Label score = (Label) container.getChildrenUnmodifiable().get(1);
             name.setText(players.get(i).getName());
             score.setText(Integer.toString(players.get(i).getScore()));
+            Tooltip tooltip = new Tooltip(players.get(i).toString());
+            tooltip.setStyle("-fx-font-style: italic; -fx-font-size: 10;");
+            Tooltip.install(curButton, tooltip);
         }
     }
 

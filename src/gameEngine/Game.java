@@ -258,6 +258,7 @@ public class Game implements Serializable, Comparable {
 
     @Override
     public int compareTo(Object o) { // for saving, based on id
+        assert (o instanceof Game);
         Game g = (Game) o;
         int idThis = (this.getPlayer().getId() == -1) ? Integer.MAX_VALUE : this.getPlayer().getId();
         int idThat = (g.getPlayer().getId() == -1) ? Integer.MAX_VALUE : g.getPlayer().getId();

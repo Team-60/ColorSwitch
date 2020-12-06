@@ -117,15 +117,17 @@ public class LoadGamePageController {
         date.setText(player.getDate());
 
         Tooltip tooltip = new Tooltip(this.bGames.get(button).getPlayer().toString());
-        tooltip.setStyle("-fx-font-style: italic;");
+        tooltip.setStyle("-fx-font-style: italic; -fx-font-size: 10;");
         Tooltip.install(button, tooltip);
     }
 
     @FXML
     public void slotChosen(MouseEvent mouseEvent) {
-        this.clickSound.play();
         Button button = (Button) mouseEvent.getSource();
         Game game = this.bGames.get(button);
+        if (game == null) return; // inactive slot
+
+        this.clickSound.play();
         System.out.println(this.getClass().toString() + " slot chosen");
         System.out.println(game.getPlayer());
 

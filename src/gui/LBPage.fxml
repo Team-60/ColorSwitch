@@ -151,7 +151,7 @@
                   </VBox>
                   <VBox layoutX="59.0" prefHeight="215.0" prefWidth="298.0">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #20948B;">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #20948B;">
                            <graphic>
                               <HBox alignment="CENTER" prefHeight="42.0" prefWidth="330.0">
                                  <children>
@@ -191,7 +191,7 @@
                               <Insets bottom="30.0" />
                            </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #07575B;">
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #07575B;">
                            <graphic>
                               <HBox alignment="CENTER" prefHeight="42.0" prefWidth="330.0">
                                  <children>
@@ -231,7 +231,7 @@
                               <Insets bottom="30.0" />
                            </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="91.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #66A5AD;">
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="91.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #66A5AD;">
                            <graphic>
                               <HBox alignment="CENTER" prefHeight="42.0" prefWidth="330.0">
                                  <children>

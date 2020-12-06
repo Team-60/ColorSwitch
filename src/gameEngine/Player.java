@@ -34,7 +34,13 @@ public class Player implements Serializable, Comparable { // info. keep
     } // return formatted string
     public String getJumps() {
         int fJumps = this.jumps;
-        return (fJumps >= 1000) ? String.format("%.1f", fJumps / 1000.0) : Integer.toString(fJumps);
+        return (fJumps >= 1000) ? (String.format("%.1f", fJumps / 1000.0) + "k") : Integer.toString(fJumps);
+    }
+    public int getNJumps() {
+        return this.jumps;
+    }
+    public double getNDistance() {
+        return this.distance;
     }
     public int getId() {
         return id;
@@ -70,8 +76,16 @@ public class Player implements Serializable, Comparable { // info. keep
 
     @Override
     public int compareTo(Object o) { // for leaderboard
+        assert (o instanceof Player);
         Player p = (Player) o;
-        return Integer.compare(p.getScore(), this.score);
+        int sc = Integer.compare(p.getScore(), this.score);
+        int jc = Integer.compare(this.getNJumps(), p.getNJumps());
+        int dc = Double.compare(this.getNDistance(), p.getNDistance());
+        if (sc == 0)
+            if (jc == 0)
+                return dc;
+            else return jc;
+        else return sc;
     }
 
     @Override
