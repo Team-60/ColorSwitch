@@ -199,7 +199,6 @@ public class PauseOverlayController { // TODO maybe for restart here?
             e.printStackTrace();
         }
         assert (inputRoot != null);
-        inputRoot.requestFocus(); // IMP
 
         GamePlay gamePlay = this.gamePlayController.getGamePlay();
         InputPopupController<PauseOverlayController> inputPopupController = loader.getController();
@@ -212,6 +211,7 @@ public class PauseOverlayController { // TODO maybe for restart here?
         secondaryStage.initOwner(primaryStage); // imp. for them to act as one stage
         secondaryStage.setScene(secondaryScene);
         secondaryStage.showAndWait();
+        inputRoot.requestFocus(); // IMP, after showing stage
 
         assert (inputPopupController.getSaveSuccess() == (this.usernameSave != null));
         App.BgMediaPlayer.setVolume(1);

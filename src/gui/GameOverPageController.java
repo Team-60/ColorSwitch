@@ -125,7 +125,6 @@ public class GameOverPageController {
                 e.printStackTrace();
             }
             assert (inputRoot != null);
-            inputRoot.requestFocus(); // IMP
 
             InputPopupController<GameOverPageController> inputPopupController = loader.getController();
             inputPopupController.init(this.game.getPlayer(), this);
@@ -138,6 +137,7 @@ public class GameOverPageController {
             secondaryStage.setScene(secondaryScene);
             secondaryStage.setOnHidden(t -> this.processInputLB(rootContainer, inputPopupController, tempR)); // IMP, as stage can only be waited in an event handler
             secondaryStage.show();
+            inputRoot.requestFocus(); // IMP, after showing stage
         }
     }
 
