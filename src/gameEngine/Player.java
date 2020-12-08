@@ -82,8 +82,7 @@ public class Player implements Serializable, Comparable { // info. keep
         int jc = Integer.compare(this.getNJumps(), p.getNJumps());
         int dc = Double.compare(this.getNDistance(), p.getNDistance());
         if (sc == 0)
-            if (jc == 0)
-                return dc;
+            if (jc == 0) return dc;
             else return jc;
         else return sc;
     }

@@ -120,7 +120,7 @@
             <Glow />
          </effect>
       </Group>
-      <Group fx:id="iconRestart" layoutX="178.0" layoutY="564.0" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
+      <Group fx:id="iconRestartUsingStars" layoutX="178.0" layoutY="564.0" onMouseClicked="#restartUsingStarsClicked" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
             <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="22.0" layoutY="18.0" preserveRatio="true">
@@ -133,7 +133,7 @@
             <Glow />
          </effect>
       </Group>
-      <Group fx:id="iconReturn" layoutX="304.0" layoutY="564.0" onMouseClicked="#restartIconClicked" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
+      <Group fx:id="iconRestart" layoutX="304.0" layoutY="564.0" onMouseClicked="#restartIconClicked" onMouseEntered="#iconHoverActive" onMouseExited="#iconHoverInactive">
          <children>
             <Circle fill="YELLOW" layoutX="45.0" layoutY="43.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <ImageView fitHeight="64.0" fitWidth="70.0" layoutX="15.0" layoutY="13.0" preserveRatio="true">

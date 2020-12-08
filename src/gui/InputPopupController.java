@@ -62,6 +62,7 @@ public class InputPopupController<T> {
             this.headingLabel.setText("Leaderboard Entry");
             this.bottomLabel.setText("Claim your spot among the top!");
             if (player.getId() != -1) { // if saved, prompt to put previous name
+                inputField.setText(player.getName());
                 inputField.setPromptText(player.getName());
             }
         }

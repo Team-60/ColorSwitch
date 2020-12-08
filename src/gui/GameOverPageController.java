@@ -42,6 +42,7 @@ public class GameOverPageController {
     private AudioClip hoverSound;
     private AudioClip clickSound;
     private AudioClip easterEggClick;
+    private AudioClip errorSound;
 
     @FXML
     private AnchorPane gameOverRoot;
@@ -54,7 +55,7 @@ public class GameOverPageController {
     @FXML
     private Group iconRestart;
     @FXML
-    private Group iconReturn;
+    private Group iconRestartUsingStars;
     @FXML
     private Label yourScoreLabel;
     @FXML
@@ -80,15 +81,17 @@ public class GameOverPageController {
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());
         this.easterEggClick = new AudioClip(new File("src/assets/music/mouse/easterEgg_click_mainpage.wav").toURI().toString());
+        this.errorSound = new AudioClip(new File("src/assets/music/mouse/error.wav").toURI().toString());
         this.clickSound.setVolume(0.5);
         this.hoverSound.setVolume(0.04);
         this.easterEggClick.setVolume(0.5);
+        this.errorSound.setVolume(0.4);
 
         RotateTransition rtLogoRingL = new RotateTransition(Duration.millis(15000), logoRingL);
         RotateTransition rtLogoRingR = new RotateTransition(Duration.millis(15000), logoRingR);
         RotateTransition rtIconLB = new RotateTransition(Duration.millis(15000), iconLB);
         RotateTransition rtIconRestart = new RotateTransition(Duration.millis(15000), iconRestart);
-        RotateTransition rtIconReturn = new RotateTransition(Duration.millis(15000), iconReturn);
+        RotateTransition rtIconReturn = new RotateTransition(Duration.millis(15000), iconRestartUsingStars);
         this.startRotation(rtLogoRingL, -1);
         this.startRotation(rtLogoRingR, -1);
         this.startRotation(rtIconLB, 1);
@@ -96,9 +99,10 @@ public class GameOverPageController {
         this.startRotation(rtIconReturn, 1);
     }
 
-    public void checkForLeaderboard() {
+    public void checkForLeaderboard() { // LB stores the best performance of players
         assert (this.game.isGameOver()); // reconfirm
 
+        // check if viable for LB
         ArrayList<Player> players = this.app.getPlayerDatabase().getData();
         boolean madeToLb = true;
         if (players.size() != 0 && players.get(players.size() - 1).getScore() >= this.game.getPlayer().getScore()) // last LB player has better score
@@ -148,7 +152,7 @@ public class GameOverPageController {
 
         if (inputPopupController.getSaveSuccess()) {
             System.out.println(this.getClass().toString() + " " + this.usernameLB + " received");
-            this.app.addToLB(this.game.getPlayer(), this.usernameLB);
+            this.app.addToLB(this.game.getPlayer(), this.usernameLB); // as the player doesn't exist on LB
         } else { // reset highscore in case this was the current highscore as not saved
             this.app.calcHighscore();
             System.out.println(this.getClass().toString() + " lb entry cancelled");
@@ -321,6 +325,36 @@ public class GameOverPageController {
         } catch (IOException e) {
             System.out.println(this.getClass().toString() + " New game failed to load!");
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void restartUsingStarsClicked() { // based on score?, keep a total of stars, TODO R
+//        int reqStars = 4 * (this.game.getPlayer().getScore() + 1);
+        int reqStars = 2;
+        if (this.game.getPlayer().getScore() >= reqStars) {
+            this.clickSound.play();
+//            this.game.getPlayer().incReviveCount();
+//            System.out.println(this.getClass().toString() + " restart using stars success");
+//            this.game.getPlayer().decScore(reqStars);
+//            new Dialog(reqStars + " stars used for revival!", (Stage) this.app.getScene().getWindow());
+//
+//            Scene scene = this.app.getScene();
+//            StackPane rootContainer = (StackPane) scene.getRoot();
+//            assert (rootContainer.getChildren().size() == 1);
+//            rootContainer.getChildren().remove(this.gameOverRoot);
+//            try {
+//                // TODO, modify game parameters here, set gameOver = false, relocate ball, currently relocating to star position of colliding obstacle ?
+//                this.game.resetGameOver();
+//                new GamePlay(this.app, this.game); // treated as if it were reloaded from deserialization, TODO, maybe not
+//            } catch (IOException e) {
+//                System.out.println(this.getClass().toString() + " New game failed to load!");
+//                e.printStackTrace();
+//            }
+        } else {
+            this.errorSound.play();
+            System.out.println(this.getClass().toString() + " restart using stars failure");
+            new Dialog("Need " + reqStars + " stars!", (Stage) this.app.getScene().getWindow());
         }
     }
 

@@ -48,7 +48,6 @@ public class GamePlay {
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
     public GamePlay(App _app) throws IOException { // create a new game and a new player, sep. constructor for deserialize, IOException is always managed by caller
-
         this.app = _app;
         this.scene = this.app.getScene();
 
@@ -104,7 +103,7 @@ public class GamePlay {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
         Renderer.init(graphicsContext);
 
-        // set transient variables
+        // set transient variables & refresh game
         this.game.reloadParam(graphicsContext, this.app);
 
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
@@ -196,7 +195,7 @@ public class GamePlay {
 
         this.animationTimer.stop(); // automatically resets previous time variables
 
-        // remove from database
+        // remove from database, TODO a player makes it on LB, but restarts, and then dies, has an ID, but isn't saved
         if (this.player.getId() != -1) {
             assert (this.player == this.game.getPlayer()); // just in case
             this.app.removeGame(this.game);
@@ -243,10 +242,22 @@ class GamePlayAnimationTimer extends AnimationTimer {
     private final Game game;
     private final GamePlay gamePlay;
 
+    private final Rectangle blockTempR; // for blocking input, during game over (during swarm explosion, no input to be registered)
+    private final StackPane rootContainer;
+
     GamePlayAnimationTimer(GraphicsContext _graphicsContext, Game _game, GamePlay _gamePlay) {
         this.graphicsContext = _graphicsContext;
         this.game = _game;
         this.gamePlay = _gamePlay;
+
+        Scene scene = this.graphicsContext.getCanvas().getScene();
+        rootContainer = (StackPane) scene.getRoot();
+
+        blockTempR = new Rectangle();
+        blockTempR.setWidth(GamePlay.WIDTH);
+        blockTempR.setHeight(GamePlay.HEIGHT);
+        blockTempR.setFill(Paint.valueOf("#000000"));
+        blockTempR.setOpacity(0.0);
     }
 
     @Override
@@ -257,11 +268,13 @@ class GamePlayAnimationTimer extends AnimationTimer {
         }
         if (game.isGameOver()) { // need to check before, as logic is updated but gui also has to be updated IMP, update event handler for canvas
             if (GamePlay.GameOverTime == -1) {
+                this.rootContainer.getChildren().add(this.blockTempR);
                 GamePlay.GameOverTime = currentNanoTime;
                 this.gamePlay.getCanvas().removeEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
             } else {
                 double diff = (double)(currentNanoTime - GamePlay.GameOverTime)/1000000000;
                 if (diff > 1.5) {
+                    this.rootContainer.getChildren().remove(this.blockTempR);
                     gamePlay.gameOver();
                 }
             }

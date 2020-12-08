@@ -128,6 +128,7 @@ public class App extends Application {
 
     public void saveGame(Game game, String name) { // maybe ask for a slot from the player? Implement on the oldest basis
         // modify player here, save data also
+        assert (game.getPlayer().getId() == -1 && !game.isGameOver()); // only incomplete & anonymous games can be stored
         game.getPlayer().setName(name);
         game.getPlayer().setId(this.giveId());
         game.getPlayer().setDate(LocalDate.now().toString());
@@ -137,8 +138,8 @@ public class App extends Application {
         System.out.println(this.getClass().toString() + " save success");
     }
 
-    public void overwriteGame(Game game) { // overwrites, if player already exists
-        assert (game.getPlayer().getId() != -1);
+    public void overwriteGame(Game game) { // overwrites, if player already exists, TODO, what to do if player uses revival but then saves game
+        assert (game.getPlayer().getId() != -1 && !game.isGameOver()); // only incomplete games
         ArrayList<Game> games = this.gameDatabase.getData();
         boolean found = false;
         for (int i = 0; i < games.size(); ++ i) {
@@ -153,7 +154,7 @@ public class App extends Application {
         // save into file
         this.gameDatabase.save(Game.FILE_PATH);
         new Dialog("Game overwritten for " + game.getPlayer().getName() + "!", (Stage) this.scene.getWindow());
-        System.out.println(this.getClass().toString() + " overwrite success");
+        System.out.println(this.getClass().toString() + " overwrite game success");
     }
 
     public void removeGame(Game game) { // after game over remove from database

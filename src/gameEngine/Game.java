@@ -51,7 +51,7 @@ public class Game implements Serializable, Comparable {
     }
 
     public void reloadParam(GraphicsContext _graphicsContext, App _app) { // after deserializing, game's swarm and graphics context, with app and refresh highscore
-        assert (!this.gameOver); // only load when game is active
+        assert (!this.gameOver); // only load when game is active, or it's a revival
         this.graphicsContext = _graphicsContext;
         this.app = _app;
         this.highScore = this.app.getHighscore();
@@ -148,7 +148,7 @@ public class Game implements Serializable, Comparable {
         for (GameElement gameElement : gameElements) {
             if (gameElement instanceof SwitchColor) {
                 prev = gameElement;
-            }else if (gameElement instanceof Obstacle && prev != null) {
+            } else if (gameElement instanceof Obstacle && prev != null) {
                 ((SwitchColor) prev).setObstacle((Obstacle)gameElement);
             }
         }
@@ -255,6 +255,11 @@ public class Game implements Serializable, Comparable {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public void resetGameOver() { // for revival, TODO R
+        assert (gameOver);
+        gameOver = false;
     }
 
     @Override

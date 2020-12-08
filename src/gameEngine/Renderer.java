@@ -6,6 +6,7 @@ import javafx.scene.shape.FillRule;
 
 import java.util.ArrayList;
 
+// TODO, singleton design pattern?
 public final class Renderer {
 
     // TODO: make all methods static

@@ -11,7 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -81,10 +83,20 @@ public class GamePlayController {
         rootContainer.getChildren().remove(this.pausePane);
         assert (rootContainer.getChildren().size() == 1);
 
+        // to block inputs during the pause transition
+        Rectangle tempR = new Rectangle();
+        tempR.setWidth(GamePlay.WIDTH);
+        tempR.setHeight(GamePlay.HEIGHT);
+        tempR.setFill(Paint.valueOf("#000000"));
+        tempR.setOpacity(0);
+        rootContainer.getChildren().add(tempR);
+
+        this.gamePlay.getCanvas().requestFocus(); // to remove focus from the pause button & regain for jump event handler, IMP
         PauseTransition pt = new PauseTransition(Duration.millis(600)); // for relaxation after unpause
         pt.setOnFinished(t -> {
+            rootContainer.getChildren().remove(tempR);
             this.gamePlay.getCanvas().addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
-            this.gamePlay.getCanvas().requestFocus();
+            this.gamePlay.getCanvas().requestFocus(); // just in case, rootContainer contents have changed
             animationTimer.start();
         });
         pt.play();
