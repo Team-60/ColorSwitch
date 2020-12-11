@@ -14,7 +14,7 @@ public class Star extends GameElement {
     private static final Image image = new Image(new File("src/assets/gameplay/star.png").toURI().toString());
 
     Star(double x, double y) {
-        super(x, y, closestSafeDist);
+        super(x, y, y, y);
         audioClipPath = "src/assets/music/gameplay/star.wav";
         this.loadAssets(); // need to ensure that audio clip path has been set
     }

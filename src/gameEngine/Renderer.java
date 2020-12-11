@@ -78,6 +78,7 @@ public final class Renderer {
     public static void drawDashedLine(double x, double y, double width, double dashLength, double gap, Color color) {
         graphicsContext.setStroke(color);
         graphicsContext.setLineWidth(width);
+        graphicsContext.setLineDashes(2);
         for (double i = x; i < GamePlay.WIDTH; ++i) {
             graphicsContext.strokeLine(i, y, i + dashLength, y);
             i += dashLength;

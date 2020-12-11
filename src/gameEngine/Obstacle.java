@@ -1,7 +1,5 @@
 package gameEngine;
 
-import java.util.ArrayList;
-
 public abstract class Obstacle extends GameElement {
 
     protected double translationSpeed;
@@ -20,8 +18,8 @@ public abstract class Obstacle extends GameElement {
         this.rotationalSpeed = rotationalSpeed;
     }
 
-    Obstacle(double x, double y, double safeDist) {
-        super(x, y, safeDist);
+    Obstacle(double x, double y, double topY, double bottomY) {
+        super(x, y, topY, bottomY);
         rotationalSpeed = 90;
         audioClipPath = "src/assets/music/gameplay/dead.wav";
         this.loadAssets(); // need to ensure that audio clip path has been set
@@ -39,7 +37,11 @@ public abstract class Obstacle extends GameElement {
         if (star == null) {
             return false;
         }
-        return star.checkCollision(ball);
+        boolean isCollided = star.checkCollision(ball);
+        if (isCollided) {
+            destroyStar();
+        }
+        return isCollided;
     }
     @Override
     void applyOffset(double offset) {

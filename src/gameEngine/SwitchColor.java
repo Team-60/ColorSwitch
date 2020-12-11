@@ -16,7 +16,7 @@ public class SwitchColor extends GameElement {
     private static final Image image = new Image(new File("src/assets/gameplay/color_switcher_s.png").toURI().toString());
 
     SwitchColor(double x, double y) {
-        super(x, y, closestSafeDist);
+        super(x, y, y, y);
         audioClipPath = "src/assets/music/gameplay/colorSwitch.wav";
         this.loadAssets(); // need to ensure that audio clip path has been set
     }

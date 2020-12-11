@@ -11,7 +11,7 @@ public class HighScoreLine extends GameElement {
     private static final Image image = new Image(new File("src/assets/gameplay/crown_s.png").toURI().toString());
 
     HighScoreLine(double y) {
-        super(0, y, 0);
+        super(0, y, y, y);
     }
     @Override
     public void refresh(GraphicsContext graphicsContext){

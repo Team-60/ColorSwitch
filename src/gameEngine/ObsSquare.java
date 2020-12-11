@@ -21,7 +21,7 @@ public class ObsSquare extends Obstacle{
     }};
 
     ObsSquare(double x, double y, double sideLength, double width) {
-        super(x, y, sideLength/2 * Math.sqrt(2));
+        super(x, y, y - sideLength/2 * Math.sqrt(2), y + sideLength/2 * Math.sqrt(2));
         this.width = width;
         this.sideLength = sideLength;
         star = new Star(x, y);

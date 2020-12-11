@@ -46,6 +46,12 @@ public class ObsDoubleCircle extends ObsCircle {
     }
 
     @Override
+    public void rotate(double angle) {
+        super.rotate(angle);
+        innerCircle.rotate(angle);
+    }
+
+    @Override
     public void destroy() {
 
     }
@@ -66,6 +72,11 @@ public class ObsDoubleCircle extends ObsCircle {
     public void update(double time) {
         super.update(time);
         innerCircle.update(-time);
+    }
+
+
+    public ObsCircle generateNext() {
+        return new ObsDoubleCircle(x, y - 2 * radius - 5, innerCircle.radius, radius, radius - innerRadius);
     }
 
 }
