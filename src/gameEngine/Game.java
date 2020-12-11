@@ -41,7 +41,7 @@ public class Game implements Serializable, Comparable {
         double y = 350;
         gameElements = new ArrayList<>();
         Obstacle obstacle = new ObsCircle(225, 350, 90, 15);
-        GameElement switchColor = new SwitchColor(x, y - obstacle.getClosestSafeDist() - distanceBetweenObstacles/2);
+        GameElement switchColor = new SwitchColor(x, obstacle.getTopY() - distanceBetweenObstacles/2);
         gameElements.add(obstacle);
         gameElements.add(switchColor);
         ball.setColor(obstacle.getRandomColor());
@@ -89,7 +89,6 @@ public class Game implements Serializable, Comparable {
 
             if (gameElement instanceof Obstacle && ((Obstacle) gameElement).checkCollisionStar(ball)) {
                 player.incScore();
-                ((Obstacle) gameElement).destroyStar();
             }
             if (gameElement.checkCollision(ball)) {
                 gameElement.playSound();
@@ -113,7 +112,7 @@ public class Game implements Serializable, Comparable {
             // find the last obstacle type and assign prev to it
             for (int i = gameElements.size() - 1; i >= 0; --i) {
                 if (gameElements.get(i) instanceof Obstacle) {
-                    y = gameElements.get(i).getY() - gameElements.get(i).getClosestSafeDist();
+                    y = gameElements.get(i).getTopY();
                     y -= distanceBetweenObstacles;
                     break;
                 }
@@ -123,8 +122,7 @@ public class Game implements Serializable, Comparable {
         while(gameElements.size() < 16) {
             Obstacle obstacle = getRandomObstacle(x, y);
             obstacleCount++;
-            y -= obstacle.getClosestSafeDist();
-            y -= obstacle.getClosestSafeDist();
+            y = obstacle.getTopY();
 
             if (obstacleCount == highScore) {
                 GameElement highScoreLine = new HighScoreLine(y - distanceBetweenObstacles/4);
@@ -180,9 +178,9 @@ public class Game implements Serializable, Comparable {
 
     public Obstacle getRandomObstacle(double x, double y) {
 
-        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
-        // y - safe dist of that specific obstacles
-//        int randomNumber = 13;
+//        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
+        // y - safe dist of that specific obstacle
+        int randomNumber = 4;
         if (randomNumber < 0) {
             randomNumber = 0;
         }
@@ -232,10 +230,18 @@ public class Game implements Serializable, Comparable {
             Obstacle obstacle = new ObsTriangle(x , y - 200 / Math.sqrt(3), 200, 15);
             obstacle.setRotationalSpeed(130);
             return obstacle;
-        } else {
+        } else if (randomNumber == 13){
             // super slow circle
             Obstacle obstacle = new ObsCircle(x, y - 65, 65, 8);
             obstacle.setRotationalSpeed(50);
+            return obstacle;
+        } else if (randomNumber == 14){
+            ObsCircle circle = new ObsCircle(x, y - 90, 90, 15);
+            Obstacle obstacle = new ObsConsecutiveCircles(circle, 5);
+            return obstacle;
+        } else {
+            ObsCircle doubleCircle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
+            Obstacle obstacle = new ObsConsecutiveCircles(doubleCircle, 5);
             return obstacle;
         }
     }
