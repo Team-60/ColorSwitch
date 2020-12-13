@@ -136,7 +136,7 @@ public class LoadGamePageController {
         assert (rootContainer.getChildren().size() == 1);
         rootContainer.getChildren().remove(this.loadGameRoot);
         try {
-            new GamePlay(this.app, game);
+            new GamePlay(this.app, game, false);
         } catch (IOException e) {
             System.out.println(this.getClass().toString() + " New game failed to load");
             e.printStackTrace();

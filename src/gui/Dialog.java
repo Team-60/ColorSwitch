@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,6 +38,7 @@ public class Dialog {
         Scene scene = new Scene(dialogRoot);
         scene.setFill(Color.TRANSPARENT);
         Stage secondaryStage = new Stage(StageStyle.TRANSPARENT);
+        secondaryStage.initModality(Modality.NONE);
         secondaryStage.initOwner(primaryStage);
         secondaryStage.setScene(scene);
         secondaryStage.show();

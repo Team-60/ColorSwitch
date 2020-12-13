@@ -44,6 +44,9 @@ public class GameOverPageController {
     private AudioClip easterEggClick;
     private AudioClip errorSound;
 
+    private RotateTransition rtIconRestartUsingStars;
+    private boolean disableRevival;
+
     @FXML
     private AnchorPane gameOverRoot;
     @FXML
@@ -91,12 +94,16 @@ public class GameOverPageController {
         RotateTransition rtLogoRingR = new RotateTransition(Duration.millis(15000), logoRingR);
         RotateTransition rtIconLB = new RotateTransition(Duration.millis(15000), iconLB);
         RotateTransition rtIconRestart = new RotateTransition(Duration.millis(15000), iconRestart);
-        RotateTransition rtIconReturn = new RotateTransition(Duration.millis(15000), iconRestartUsingStars);
+        this.rtIconRestartUsingStars = new RotateTransition(Duration.millis(15000), iconRestartUsingStars);
         this.startRotation(rtLogoRingL, -1);
         this.startRotation(rtLogoRingR, -1);
         this.startRotation(rtIconLB, 1);
         this.startRotation(rtIconRestart, 1);
-        this.startRotation(rtIconReturn, 1);
+
+        if (this.game.getPlayer().getHasRevived()) // deactivate revival if already has revived
+            this.deactivateRevival();
+        else
+            this.startRotation(rtIconRestartUsingStars, 1);
     }
 
     public void checkForLeaderboard() { // LB stores the best performance of players
@@ -104,8 +111,9 @@ public class GameOverPageController {
 
         // check if viable for LB
         ArrayList<Player> players = this.app.getPlayerDatabase().getData();
+        System.out.println(this.getClass().toString() + " players database sz: " + players.size());
         boolean madeToLb = true;
-        if (players.size() != 0 && players.get(players.size() - 1).getScore() >= this.game.getPlayer().getScore()) // last LB player has better score
+        if (players.size() == 6 && players.get(players.size() - 1).compareTo(this.game.getPlayer()) < 0) // last LB player has better score
             madeToLb = false;
 
         if (madeToLb) {
@@ -145,12 +153,24 @@ public class GameOverPageController {
         }
     }
 
+    private void deactivateRevival() {
+        System.out.println(this.getClass().toString() + " deactivated revival");
+        this.disableRevival = true;
+        if (rtIconRestartUsingStars != null)
+            this.rtIconRestartUsingStars.stop();
+        this.iconRestartUsingStars.setRotate(0);
+        Circle circle = (Circle) this.iconRestartUsingStars.getChildren().get(0);
+        circle.setFill(Color.web("#808588"));
+        this.iconRestartUsingStars.setOpacity(0.75);
+    }
+
     private void processInputLB(StackPane rootContainer, InputPopupController<GameOverPageController> inputPopupController, Rectangle tempR) {
         assert (inputPopupController.getSaveSuccess() == (this.usernameLB != null));
         rootContainer.getChildren().remove(tempR); // regain focus
         this.gameOverRoot.requestFocus();
 
         if (inputPopupController.getSaveSuccess()) {
+            this.deactivateRevival(); // made it to LB, deactivate revival now
             System.out.println(this.getClass().toString() + " " + this.usernameLB + " received");
             this.app.addToLB(this.game.getPlayer(), this.usernameLB); // as the player doesn't exist on LB
         } else { // reset highscore in case this was the current highscore as not saved
@@ -168,8 +188,13 @@ public class GameOverPageController {
 
     @FXML
     public void iconHoverActive(MouseEvent mouseEvent) {
-        this.hoverSound.play();
         Group group = (Group) mouseEvent.getSource();
+        if (group == this.iconRestartUsingStars && this.disableRevival) {
+            Scene scene = this.app.getScene();
+            scene.setCursor(new ImageCursor(new Image(new File("src/assets/gameOverPage/cursorBlocked.png").toURI().toString())));
+            return;
+        }
+        this.hoverSound.play();
         Circle circle = (Circle) group.getChildren().get(0);
         group.setScaleX(1.1);
         group.setScaleY(1.1);
@@ -179,6 +204,11 @@ public class GameOverPageController {
     @FXML
     public void iconHoverInactive(MouseEvent mouseEvent) {
         Group group = (Group) mouseEvent.getSource();
+        if (group == this.iconRestartUsingStars && this.disableRevival) {
+            Scene scene = this.app.getScene();
+            scene.setCursor(new ImageCursor(new Image(new File("src/assets/gameOverPage/cursor.png").toURI().toString())));
+            return;
+        }
         Circle circle = (Circle) group.getChildren().get(0);
         group.setScaleX(1);
         group.setScaleY(1);
@@ -329,26 +359,32 @@ public class GameOverPageController {
     }
 
     @FXML
-    public void restartUsingStarsClicked() { // based on score?, keep a total of stars, TODO R
+    public void restartUsingStarsClicked() { // based on score?, keep a total of stars, TODO, if saved disable
+
+        if (this.disableRevival) {
+            new Dialog("Can't revive now!", (Stage) this.app.getScene().getWindow());
+            return;
+        }
+
         if (this.game.getPlayer().getScore() >= App.REVIVAL_STARS) {
             this.clickSound.play();
-//            this.game.getPlayer().incReviveCount();
-//            System.out.println(this.getClass().toString() + " restart using stars success");
-//            this.game.getPlayer().decScore(reqStars);
-//            new Dialog(reqStars + " stars used for revival!", (Stage) this.app.getScene().getWindow());
-//
-//            Scene scene = this.app.getScene();
-//            StackPane rootContainer = (StackPane) scene.getRoot();
-//            assert (rootContainer.getChildren().size() == 1);
-//            rootContainer.getChildren().remove(this.gameOverRoot);
-//            try {
-//                // TODO, modify game parameters here, set gameOver = false, relocate ball, currently relocating to star position of colliding obstacle ?
-//                this.game.resetGameOver();
-//                new GamePlay(this.app, this.game); // treated as if it were reloaded from deserialization, TODO, maybe not
-//            } catch (IOException e) {
-//                System.out.println(this.getClass().toString() + " New game failed to load!");
-//                e.printStackTrace();
-//            }
+            this.game.getPlayer().setHasRevived();
+            System.out.println(this.getClass().toString() + " restart using stars success");
+            // TODO, decrease overall stars here
+            new Dialog(App.REVIVAL_STARS + " stars used for revival!", (Stage) this.app.getScene().getWindow());
+
+            Scene scene = this.app.getScene();
+            StackPane rootContainer = (StackPane) scene.getRoot();
+            assert (rootContainer.getChildren().size() == 1);
+            rootContainer.getChildren().remove(this.gameOverRoot);
+            try {
+                // TODO, modify game parameters here, set gameOver = false, relocate ball, currently relocating to star position of colliding obstacle ?
+                this.game.revive();
+                new GamePlay(this.app, this.game, true);
+            } catch (IOException e) {
+                System.out.println(this.getClass().toString() + " New game failed to load!");
+                e.printStackTrace();
+            }
         } else {
             this.errorSound.play();
             System.out.println(this.getClass().toString() + " restart using stars failure");

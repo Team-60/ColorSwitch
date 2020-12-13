@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -82,14 +83,16 @@ public class GamePlay {
     }
 
     // TODO under review
-    public GamePlay(App _app, Game _game) throws IOException { // in case a game is loaded from gameplay
-        assert (_game.getPlayer().getId() != -1); // it's a saved game
+    public GamePlay(App _app, Game _game, boolean isRevival) throws IOException { // in case a game is loaded from gameplay
+        assert (_game.getPlayer().getId() != -1 || _game.getPlayer().getHasRevived()); // it's a saved game, or its from revival
 
         this.app = _app;
         this.scene = this.app.getScene();
         this.game = _game;
         this.player = this.game.getPlayer();
 
+        Stage primaryStage = (Stage) this.scene.getWindow();
+        primaryStage.requestFocus(); // in case, overshadowed by secondary stage
         this.resetBgMusic();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GamePlay.fxml"));
@@ -104,7 +107,10 @@ public class GamePlay {
         Renderer.init(graphicsContext);
 
         // set transient variables & refresh game
-        this.game.reloadParam(graphicsContext, this.app);
+        if (!isRevival)
+            this.game.reloadParam(graphicsContext, this.app);
+        else // reset graphics context
+            this.game.reloadParamRevival(graphicsContext);
 
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
         this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game, this);

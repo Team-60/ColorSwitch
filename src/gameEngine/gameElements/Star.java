@@ -31,7 +31,9 @@ public class Star extends GameElement {
 
     @Override
     public boolean checkCollision(Ball ball) {
-        return ball.getY() < getY() + 20;
+        boolean ret = ball.getY() < getY() + 20;
+        if (ret) destroy();
+        return ret;
     }
 
     @Override

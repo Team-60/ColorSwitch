@@ -45,7 +45,7 @@ Score (Player)
 public class App extends Application {
 
     public static MediaPlayer BgMediaPlayer = null; // for easy referencing
-    public static int REVIVAL_STARS = 10;
+    public static int REVIVAL_STARS = 1;
     private static final Boolean startWithAnimation = true;
 
     private final Database<Game> gameDatabase;
@@ -114,9 +114,9 @@ public class App extends Application {
             e.printStackTrace();
         }
         assert (root != null);
-        LoadAnimationController loadAnimationController = loader.getController();
+    LoadAnimationController loadAnimationController = loader.getController();
 
-        StackPane rootContainer = new StackPane(root); // roots of this stack pane will be switched
+    StackPane rootContainer = new StackPane(root); // roots of this stack pane will be switched
         rootContainer.setStyle("-fx-background-color :  #0D152C;"); // for pixel based positioning issues
         primaryStage.initStyle(StageStyle.UNDECORATED);
         this.scene = new Scene(rootContainer); // scene's root is the rootContainer (stackPane) whose root is our switching panes
@@ -125,7 +125,7 @@ public class App extends Application {
         primaryStage.show();
 
         loadAnimationController.init(this);
-    }
+}
 
     public void saveGame(Game game, String name) { // maybe ask for a slot from the player? Implement on the oldest basis
         // modify player here, save data also
@@ -141,6 +141,7 @@ public class App extends Application {
 
     public void overwriteGame(Game game) { // overwrites, if player already exists, TODO, what to do if player uses revival but then saves game
         assert (game.getPlayer().getId() != -1 && !game.isGameOver()); // only incomplete games
+        game.getPlayer().setDate(LocalDate.now().toString());
         ArrayList<Game> games = this.gameDatabase.getData();
         boolean found = false;
         for (int i = 0; i < games.size(); ++ i) {
@@ -151,9 +152,13 @@ public class App extends Application {
                 break;
             }
         }
-        assert (found);
-        // save into file
-        this.gameDatabase.save(Game.FILE_PATH);
+        if (!found) {
+            assert (game.getPlayer().getHasRevived());
+            this.gameDatabase.update(game, Game.FILE_PATH);
+        } else {
+            // save into file
+            this.gameDatabase.save(Game.FILE_PATH);
+        }
         new Dialog("Game overwritten for " + game.getPlayer().getName() + "!", (Stage) this.scene.getWindow());
         System.out.println(this.getClass().toString() + " overwrite game success");
     }
@@ -168,7 +173,8 @@ public class App extends Application {
                 idxRm = i;
             }
         }
-        assert (idxRm != -1);
+        if (idxRm == -1 && game.getPlayer().getHasRevived()) return; // can have an id if saved, then revived and then didn't save on leaderboard
+        assert (idxRm != -1 || game.getPlayer().getHasRevived());
         games.remove(idxRm);
         this.gameDatabase.save(Game.FILE_PATH);
         new Dialog("Game data erased for " + game.getPlayer().getName() + ".", (Stage) this.scene.getWindow());

@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -91,6 +92,8 @@ public class GamePlayController {
         tempR.setOpacity(0);
         rootContainer.getChildren().add(tempR);
 
+        Stage primaryStage = (Stage) this.app.getScene().getWindow();
+        primaryStage.requestFocus(); // in case, overshadowed by secondary stage
         this.gamePlay.getCanvas().requestFocus(); // to remove focus from the pause button & regain for jump event handler, IMP
         PauseTransition pt = new PauseTransition(Duration.millis(600)); // for relaxation after unpause
         pt.setOnFinished(t -> {

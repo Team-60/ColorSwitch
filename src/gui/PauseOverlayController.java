@@ -171,9 +171,9 @@ public class PauseOverlayController { // TODO maybe for restart here?
         this.clickSound.play();
 
         // check if the player has already saved
-        if (this.gamePlayController.getGamePlay().getGame().getPlayer().getId() == -1) {
+        if (this.gamePlayController.getGamePlay().getGame().getPlayer().getId() == -1) { // TODO, what to do if player uses revival but then saves game
             this.newSave(); // ask for username
-        } else {
+        } else { // also handles if the player comes back after revival
             this.app.overwriteGame(this.gamePlayController.getGamePlay().getGame());
         }
     }

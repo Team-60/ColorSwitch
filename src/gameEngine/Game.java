@@ -55,19 +55,29 @@ public class Game implements Serializable, Comparable {
     }
 
     public void reloadParam(GraphicsContext _graphicsContext, App _app) { // after deserializing, game's swarm and graphics context, with app and refresh highscore
-        assert (!this.gameOver); // only load when game is active, or it's a revival
+        assert (!this.gameOver && this.player != null); // only load when game is active, or it's a revival
         this.graphicsContext = _graphicsContext;
         this.app = _app;
         this.highScore = this.app.getHighscore();
-        this.highScoreLineDisplayed = false;
         this.swarm = new Swarm(this.graphicsContext);
 
         this.ball.setGraphicsContext(this.graphicsContext);
         for (GameElement g : this.gameElements) {
             g.loadAssets();
+            if (g instanceof Obstacle) { // as every obstacle has it's own star
+                Star star = ((Obstacle) g).getStar();
+                if (star != null) star.loadAssets(); // as star could be destroyed to null
+            }
         }
 
         this.fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
+    }
+
+    public void reloadParamRevival(GraphicsContext _graphicsContext) {
+        assert (this.player != null);
+        this.graphicsContext = _graphicsContext;
+        this.swarm = new Swarm(this.graphicsContext);
+        this.ball.setGraphicsContext(_graphicsContext);
     }
 
     private void moveScreenRelative(double offset) {
@@ -194,11 +204,11 @@ public class Game implements Serializable, Comparable {
         }
     }
 
-    public Obstacle getRandomObstacle(double x, double y) { // TODO
+    public Obstacle getRandomObstacle(double x, double y) { // TODO, factory?
 
-//        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
+        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
         // y - safe dist of that specific obstacle
-        int randomNumber = 16;
+//        int randomNumber = 16;
         if (randomNumber < 0) {
             randomNumber = 0;
         }
@@ -273,12 +283,13 @@ public class Game implements Serializable, Comparable {
     }
 
 
-    void revive() {
-        gameOver = true;
+    public void revive() { // reset parameters after revival
+        gameOver = false;
         for (GameElement gameElement : gameElements) {
             if (gameElement instanceof Obstacle) {
                 if (!((Obstacle) gameElement).isCrossed()) {
                     ball.setY(gameElement.getBottomY() - distanceBetweenObstacles/2);
+                    System.out.println(this.getClass().toString() + " Y:"  + gameElement.getY() + " bottomY:" + gameElement.getBottomY());
                     break;
                 }
             }
@@ -295,6 +306,10 @@ public class Game implements Serializable, Comparable {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public App getApp() {
+        return this.app;
     }
 
     @Override

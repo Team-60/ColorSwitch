@@ -67,6 +67,10 @@ public abstract class Obstacle extends GameElement {
         super.applyOffset(offset);
     }
 
+    public Star getStar() { // need for reloading assets
+        return this.star;
+    }
+
     public void destroyStar() {
         star = null;
     }
