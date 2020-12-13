@@ -6,6 +6,7 @@ public abstract class Obstacle extends GameElement {
     protected double rotationalSpeed;
     protected double closestStar = 0;
     protected Star star;
+    private boolean isCrossed;
     public double getClosestStar() {
         return closestStar;
     }
@@ -23,6 +24,15 @@ public abstract class Obstacle extends GameElement {
         rotationalSpeed = 90;
         audioClipPath = "src/assets/music/gameplay/dead.wav";
         this.loadAssets(); // need to ensure that audio clip path has been set
+        isCrossed = false;
+    }
+
+    public boolean isCrossed() {
+        return isCrossed;
+    }
+
+    public void setCrossed() {
+        isCrossed = true;
     }
 
     public abstract String getRandomColor();
@@ -53,6 +63,10 @@ public abstract class Obstacle extends GameElement {
 
     public void destroyStar() {
         star = null;
+    }
+
+    public int getMaxCount() {
+        return 1;
     }
 
 }

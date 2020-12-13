@@ -35,6 +35,10 @@ public class Ball implements Serializable {
         this.graphicsContext = graphicsContext;
     }
 
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public void setGraphicsContext(GraphicsContext _graphicsContext) { // after deserializing
         this.graphicsContext = _graphicsContext;
     }

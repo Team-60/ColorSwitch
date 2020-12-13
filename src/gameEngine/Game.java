@@ -87,6 +87,12 @@ public class Game implements Serializable, Comparable {
         ArrayList<GameElement> gameElementsTemp = new ArrayList<>();
         for (GameElement gameElement : gameElements) {
 
+            if (gameElement instanceof Obstacle) {
+                if (gameElement.getTopY() > ball.getY()) {
+                    ((Obstacle) gameElement).setCrossed();
+                }
+            }
+
             if (gameElement instanceof Obstacle && ((Obstacle) gameElement).checkCollisionStar(ball)) {
                 player.incScore();
             }
@@ -118,15 +124,16 @@ public class Game implements Serializable, Comparable {
                 }
             }
         }
-
+        boolean displayed = false;
         while(gameElements.size() < 16) {
             Obstacle obstacle = getRandomObstacle(x, y);
-            obstacleCount++;
+            obstacleCount += obstacle.getMaxCount();
             y = obstacle.getTopY();
 
-            if (obstacleCount == highScore) {
+            if (obstacleCount >= highScore && !displayed) {
                 GameElement highScoreLine = new HighScoreLine(y - distanceBetweenObstacles/4);
                 gameElements.add(highScoreLine);
+                displayed = true;
             }
 
             GameElement switchColor = new SwitchColor(x, y - distanceBetweenObstacles/2);
@@ -180,7 +187,7 @@ public class Game implements Serializable, Comparable {
 
 //        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
         // y - safe dist of that specific obstacle
-        int randomNumber = 4;
+        int randomNumber = 18;
         if (randomNumber < 0) {
             randomNumber = 0;
         }
@@ -230,21 +237,43 @@ public class Game implements Serializable, Comparable {
             Obstacle obstacle = new ObsTriangle(x , y - 200 / Math.sqrt(3), 200, 15);
             obstacle.setRotationalSpeed(130);
             return obstacle;
-        } else if (randomNumber == 13){
+        } else if (randomNumber == 13) {
             // super slow circle
             Obstacle obstacle = new ObsCircle(x, y - 65, 65, 8);
             obstacle.setRotationalSpeed(50);
             return obstacle;
-        } else if (randomNumber == 14){
+        } else if (randomNumber == 14) {
             ObsCircle circle = new ObsCircle(x, y - 90, 90, 15);
             Obstacle obstacle = new ObsConsecutiveCircles(circle, 5);
             return obstacle;
-        } else {
+        } else if (randomNumber == 15) {
             ObsCircle doubleCircle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
             Obstacle obstacle = new ObsConsecutiveCircles(doubleCircle, 5);
             return obstacle;
+        } else if (randomNumber == 16) {
+            return new ObsTripleCircle(x, y - 140, 90, 115, 140, 15);
+        } else if (randomNumber == 17) {
+            ObsCircle obsTripleCircle = new ObsTripleCircle(x, y - 140, 90, 115, 140, 15);
+            Obstacle obstacle = new ObsConsecutiveCircles(obsTripleCircle, 5);
+            return obstacle;
+        } else {
+            return new ObsSquareCircle(x , y - 85 * Math.sqrt(2), 200, 15);
         }
     }
+
+
+    void revive() {
+        gameOver = true;
+        for (GameElement gameElement : gameElements) {
+            if (gameElement instanceof Obstacle) {
+                if (!((Obstacle) gameElement).isCrossed()) {
+                    ball.setY(gameElement.getBottomY() - distanceBetweenObstacles/2);
+                    break;
+                }
+            }
+        }
+    }
+
 
     public Player getPlayer() { // ref. all info attributes from player
         return this.player;

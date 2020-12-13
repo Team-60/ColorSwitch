@@ -2,7 +2,6 @@ package gameEngine;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,7 +12,7 @@ public class ObsCircle extends Obstacle{
     protected final double innerRadius;
     protected double rotationAngle;
 
-    private ArrayList<String> colors = new ArrayList<>()
+    protected ArrayList<String> colors = new ArrayList<>()
     {{
         add("F6DF0E");
         add("8E11FE");
@@ -124,6 +123,17 @@ public class ObsCircle extends Obstacle{
     public String getRandomColor() {
         Random random = new Random();
         return colors.get(random.nextInt(colors.size()));
+    }
+
+    public void mirrorY() {
+        // mirror Image of circle
+        colors = new ArrayList<>()
+        {{
+            add("F6DF0E");
+            add("FD0082");
+            add("32E1F4");
+            add("8E11FE");
+        }};
     }
 
     public ObsCircle generateNext() {

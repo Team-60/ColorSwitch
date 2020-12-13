@@ -67,4 +67,9 @@ public class ObsConsecutiveCircles extends Obstacle {
         }
         return isCollided;
     }
+
+    @Override
+    public int getMaxCount() {
+        return circles.size();
+    }
 }
