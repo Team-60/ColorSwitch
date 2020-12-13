@@ -197,18 +197,18 @@ public class Game implements Serializable, Comparable {
     }
 
     private int getMean() {
-        if (player.getScore() >= 17) {
+        if (player.getScore() + 5 >= 17) {
             return 13;
         }else {
-            return player.getScore();
+            return player.getScore() + 5;
         }
     }
 
     public Obstacle getRandomObstacle(double x, double y) { // TODO
 
-//        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
+        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
         // y - safe dist of that specific obstacle
-        int randomNumber = 16;
+//        int randomNumber = 16;
         if (randomNumber < 0) {
             randomNumber = 0;
         }

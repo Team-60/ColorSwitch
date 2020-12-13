@@ -113,4 +113,9 @@ public class Ball implements Serializable {
     public void setVelocity(double _velocity) {
         this.velocity = _velocity;
     }
+
+    public void clipBall() {
+        graphicsContext.moveTo(x, y);
+        graphicsContext.arc(x, y, radius, radius, 0, 360);
+    }
 }

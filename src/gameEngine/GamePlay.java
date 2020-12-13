@@ -48,6 +48,10 @@ public class GamePlay {
     public static long GameOverTime = -1;
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
+
+    // TODO : assign to users choice in main menu
+    boolean bubbles = true;
+
     public GamePlay(App _app) throws IOException { // create a new game and a new player, sep. constructor for deserialize, IOException is always managed by caller
         this.app = _app;
         this.scene = this.app.getScene();
@@ -250,11 +254,13 @@ class GamePlayAnimationTimer extends AnimationTimer {
 
     private final Rectangle blockTempR; // for blocking input, during game over (during swarm explosion, no input to be registered)
     private final StackPane rootContainer;
+    private final Bubbles bubbles;
 
     GamePlayAnimationTimer(GraphicsContext _graphicsContext, Game _game, GamePlay _gamePlay) {
         this.graphicsContext = _graphicsContext;
         this.game = _game;
         this.gamePlay = _gamePlay;
+        this.bubbles = new Bubbles(_graphicsContext);
 
         Scene scene = this.graphicsContext.getCanvas().getScene();
         rootContainer = (StackPane) scene.getRoot();
@@ -272,13 +278,32 @@ class GamePlayAnimationTimer extends AnimationTimer {
             GamePlay.PreviousFrameTime = currentNanoTime;
             return;
         }
+
+        graphicsContext.restore();
+        graphicsContext.save();
+
+        graphicsContext.setFill(Color.web("000000"));
+        graphicsContext.fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
+
+        double timeDifference = (double) (currentNanoTime - GamePlay.PreviousFrameTime) / 1000000000;
+        GamePlay.PreviousFrameTime = currentNanoTime;
+
+        if (gamePlay.bubbles) {
+            bubbles.move(timeDifference);
+            bubbles.clip();
+            if (!game.isGameOver())
+                game.getBall().clipBall();
+            graphicsContext.clip();
+            graphicsContext.closePath();
+        }
+
         if (game.isGameOver()) { // need to check before, as logic is updated but gui also has to be updated IMP, update event handler for canvas
             if (GamePlay.GameOverTime == -1) {
                 this.rootContainer.getChildren().add(this.blockTempR);
                 GamePlay.GameOverTime = currentNanoTime;
                 this.gamePlay.getCanvas().removeEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
             } else {
-                double diff = (double)(currentNanoTime - GamePlay.GameOverTime)/1000000000;
+                double diff = (double) (currentNanoTime - GamePlay.GameOverTime) / 1000000000;
                 if (diff > 1.5) {
                     this.rootContainer.getChildren().remove(this.blockTempR);
                     gamePlay.gameOver();
@@ -286,14 +311,17 @@ class GamePlayAnimationTimer extends AnimationTimer {
             }
         }
 
-        double timeDifference = (double) (currentNanoTime - GamePlay.PreviousFrameTime) / 1000000000;
-        GamePlay.PreviousFrameTime = currentNanoTime;
-
         graphicsContext.clearRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
         graphicsContext.setFill(Color.web("0D152C"));
         graphicsContext.fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
+
         game.checkAndUpdate(timeDifference);
         game.refreshGameElements();
+
+        if (gamePlay.bubbles) {
+            bubbles.color();
+        }
+
     }
 
     @Override

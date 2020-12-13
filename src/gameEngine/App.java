@@ -46,7 +46,7 @@ public class App extends Application {
 
     public static MediaPlayer BgMediaPlayer = null; // for easy referencing
     public static int REVIVAL_STARS = 1;
-    private static final Boolean startWithAnimation = true;
+    private static final Boolean startWithAnimation = false;
 
     private final Database<Game> gameDatabase;
     private final Database<Player> playerDatabase;
