@@ -38,7 +38,6 @@ public class Dialog {
         Scene scene = new Scene(dialogRoot);
         scene.setFill(Color.TRANSPARENT);
         Stage secondaryStage = new Stage(StageStyle.TRANSPARENT);
-        secondaryStage.initModality(Modality.NONE);
         secondaryStage.initOwner(primaryStage);
         secondaryStage.setScene(scene);
         secondaryStage.show();
