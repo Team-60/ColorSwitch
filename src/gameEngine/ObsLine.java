@@ -25,7 +25,7 @@ public class ObsLine extends Obstacle {
         // x can be anything doesn't matter
         // y is the higher part of line
         // safeDist is zero as y is the higher part
-        super(x, y, length);
+        super(x, y, y - length, y + length);
         this.length = length;
         translationSpeed = 180;
         closestStar = 40;

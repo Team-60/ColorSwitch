@@ -12,16 +12,17 @@ public abstract class GameElement implements Serializable {
 
     protected double x;
     protected double y;
-    protected double closestSafeDist; // TODO private?
+    protected double topY, bottomY;
 
     protected String audioClipPath;
 
     private transient AudioClip audioClip;
 
-    GameElement(double x, double y, double closestSafeDist) {
+    GameElement(double x, double y, double topY, double bottomY) {
         this.x = x;
         this.y = y;
-        this.closestSafeDist = closestSafeDist;
+        this.topY = topY;
+        this.bottomY = bottomY;
     }
 
     public void loadAssets() { // after deserialization
@@ -31,8 +32,11 @@ public abstract class GameElement implements Serializable {
         this.audioClip.setVolume(0.5);
     }
 
-    public double getClosestSafeDist() {
-        return closestSafeDist;
+    public double getTopY() {
+        return topY;
+    }
+    public double getBottomY() {
+        return bottomY;
     }
 
     public double getX() {

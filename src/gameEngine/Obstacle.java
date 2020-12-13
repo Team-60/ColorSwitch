@@ -1,13 +1,12 @@
 package gameEngine;
 
-import java.util.ArrayList;
-
 public abstract class Obstacle extends GameElement {
 
     protected double translationSpeed;
     protected double rotationalSpeed;
     protected double closestStar = 0;
     protected Star star;
+    private boolean isCrossed;
     public double getClosestStar() {
         return closestStar;
     }
@@ -20,11 +19,20 @@ public abstract class Obstacle extends GameElement {
         this.rotationalSpeed = rotationalSpeed;
     }
 
-    Obstacle(double x, double y, double safeDist) {
-        super(x, y, safeDist);
+    Obstacle(double x, double y, double topY, double bottomY) {
+        super(x, y, topY, bottomY);
         rotationalSpeed = 90;
         audioClipPath = "src/assets/music/gameplay/dead.wav";
         this.loadAssets(); // need to ensure that audio clip path has been set
+        isCrossed = false;
+    }
+
+    public boolean isCrossed() {
+        return isCrossed;
+    }
+
+    public void setCrossed() {
+        isCrossed = true;
     }
 
     public abstract String getRandomColor();
@@ -39,7 +47,11 @@ public abstract class Obstacle extends GameElement {
         if (star == null) {
             return false;
         }
-        return star.checkCollision(ball);
+        boolean isCollided = star.checkCollision(ball);
+        if (isCollided) {
+            destroyStar();
+        }
+        return isCollided;
     }
     @Override
     void applyOffset(double offset) {
@@ -51,6 +63,10 @@ public abstract class Obstacle extends GameElement {
 
     public void destroyStar() {
         star = null;
+    }
+
+    public int getMaxCount() {
+        return 1;
     }
 
 }

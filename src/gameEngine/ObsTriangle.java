@@ -18,7 +18,7 @@ public class ObsTriangle extends Obstacle{
     }};
 
     ObsTriangle(double x, double y, double sideLength, double width) {
-        super(x, y, sideLength / Math.sqrt(3));
+        super(x, y, y - sideLength / Math.sqrt(3), y + sideLength/Math.sqrt(3));
         this.width = width;
         this.sideLength = sideLength;
         star = new Star(x, y);

@@ -36,18 +36,18 @@ public class Game implements Serializable, Comparable {
         this.graphicsContext = graphicsContext;
         this.player = player;
         this.app = app;
-        this.ball = new Ball(graphicsContext);
+        ball = new Ball(graphicsContext);
 
         double x = 225;
         double y = 350;
-        this.gameElements = new ArrayList<>();
+        gameElements = new ArrayList<>();
         Obstacle obstacle = new ObsCircle(225, 350, 90, 15);
-        GameElement switchColor = new SwitchColor(x, y - obstacle.getClosestSafeDist() - distanceBetweenObstacles/2);
-        this.gameElements.add(obstacle);
-        this.gameElements.add(switchColor);
-        this.ball.setColor(obstacle.getRandomColor());
-        this.swarm = new Swarm(graphicsContext);
-        this.highScore = app.getHighscore();
+        GameElement switchColor = new SwitchColor(x, obstacle.getTopY() - distanceBetweenObstacles/2);
+        gameElements.add(obstacle);
+        gameElements.add(switchColor);
+        ball.setColor(obstacle.getRandomColor());
+        swarm = new Swarm(graphicsContext);
+        highScore = app.getHighscore();
     }
 
     public void reloadParam(GraphicsContext _graphicsContext, App _app) { // after deserializing, game's swarm and graphics context, with app and refresh highscore
@@ -92,6 +92,12 @@ public class Game implements Serializable, Comparable {
         ArrayList<GameElement> gameElementsTemp = new ArrayList<>();
         for (GameElement gameElement : gameElements) {
 
+            if (gameElement instanceof Obstacle) {
+                if (gameElement.getTopY() > ball.getY()) {
+                    ((Obstacle) gameElement).setCrossed();
+                }
+            }
+
             if (gameElement instanceof Obstacle && ((Obstacle) gameElement).checkCollisionStar(ball)) {
                 player.incScore();
                 ((Obstacle) gameElement).destroyStar();
@@ -118,22 +124,22 @@ public class Game implements Serializable, Comparable {
             // find the last obstacle type and assign prev to it
             for (int i = gameElements.size() - 1; i >= 0; --i) {
                 if (gameElements.get(i) instanceof Obstacle) {
-                    y = gameElements.get(i).getY() - gameElements.get(i).getClosestSafeDist();
+                    y = gameElements.get(i).getTopY();
                     y -= distanceBetweenObstacles;
                     break;
                 }
             }
         }
-
+        boolean displayed = false;
         while(gameElements.size() < 16) {
             Obstacle obstacle = getRandomObstacle(x, y);
-            obstacleCount++;
-            y -= obstacle.getClosestSafeDist();
-            y -= obstacle.getClosestSafeDist();
+            obstacleCount += obstacle.getMaxCount();
+            y = obstacle.getTopY();
 
-            if (obstacleCount == highScore) {
+            if (obstacleCount >= highScore && !displayed) {
                 GameElement highScoreLine = new HighScoreLine(y - distanceBetweenObstacles/4);
                 gameElements.add(highScoreLine);
+                displayed = true;
             }
 
             GameElement switchColor = new SwitchColor(x, y - distanceBetweenObstacles/2);
@@ -185,9 +191,9 @@ public class Game implements Serializable, Comparable {
 
     public Obstacle getRandomObstacle(double x, double y) {
 
-        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
-        // y - safe dist of that specific obstacles
-//        int randomNumber = 13;
+//        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
+        // y - safe dist of that specific obstacle
+        int randomNumber = 18;
         if (randomNumber < 0) {
             randomNumber = 0;
         }
@@ -237,17 +243,43 @@ public class Game implements Serializable, Comparable {
             Obstacle obstacle = new ObsTriangle(x , y - 200 / Math.sqrt(3), 200, 15);
             obstacle.setRotationalSpeed(130);
             return obstacle;
-        } else {
+        } else if (randomNumber == 13) {
             // super slow circle
             Obstacle obstacle = new ObsCircle(x, y - 65, 65, 8);
             obstacle.setRotationalSpeed(50);
             return obstacle;
+        } else if (randomNumber == 14) {
+            ObsCircle circle = new ObsCircle(x, y - 90, 90, 15);
+            Obstacle obstacle = new ObsConsecutiveCircles(circle, 5);
+            return obstacle;
+        } else if (randomNumber == 15) {
+            ObsCircle doubleCircle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
+            Obstacle obstacle = new ObsConsecutiveCircles(doubleCircle, 5);
+            return obstacle;
+        } else if (randomNumber == 16) {
+            return new ObsTripleCircle(x, y - 140, 90, 115, 140, 15);
+        } else if (randomNumber == 17) {
+            ObsCircle obsTripleCircle = new ObsTripleCircle(x, y - 140, 90, 115, 140, 15);
+            Obstacle obstacle = new ObsConsecutiveCircles(obsTripleCircle, 5);
+            return obstacle;
+        } else {
+            return new ObsSquareCircle(x , y - 85 * Math.sqrt(2), 200, 15);
         }
     }
 
-    public Ball getBall() {
-        return this.ball;
+
+    void revive() {
+        gameOver = true;
+        for (GameElement gameElement : gameElements) {
+            if (gameElement instanceof Obstacle) {
+                if (!((Obstacle) gameElement).isCrossed()) {
+                    ball.setY(gameElement.getBottomY() - distanceBetweenObstacles/2);
+                    break;
+                }
+            }
+        }
     }
+
 
     public Player getPlayer() { // ref. all info attributes from player
         return this.player;
@@ -255,11 +287,6 @@ public class Game implements Serializable, Comparable {
 
     public boolean isGameOver() {
         return gameOver;
-    }
-
-    public void resetGameOver() { // for revival, TODO R
-        assert (gameOver);
-        gameOver = false;
     }
 
     @Override

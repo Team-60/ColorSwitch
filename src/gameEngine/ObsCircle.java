@@ -8,11 +8,11 @@ import java.util.Random;
 
 public class ObsCircle extends Obstacle{
 
-    private final double radius;
-    private final double innerRadius;
+    protected final double radius;
+    protected final double innerRadius;
     protected double rotationAngle;
 
-    private ArrayList<String> colors = new ArrayList<>()
+    protected ArrayList<String> colors = new ArrayList<>()
     {{
         add("F6DF0E");
         add("8E11FE");
@@ -21,11 +21,15 @@ public class ObsCircle extends Obstacle{
     }};
 
     ObsCircle(double x, double y, double radius, double width) {
-        super(x, y, radius);
+        super(x, y, y - radius, y + radius);
         star = new Star(x, y);
         this.radius = radius;
         this.innerRadius = radius - width;
         rotationAngle = 0;
+    }
+
+    public double getRadius() {
+        return radius;
     }
 
     @Override
@@ -102,6 +106,14 @@ public class ObsCircle extends Obstacle{
         this.colors = colors;
     }
 
+    public void rotate(double angle) {
+        rotationAngle += angle;
+        while(rotationAngle < 0) {
+            rotationAngle += 360;
+        }
+        rotationAngle %= 360;
+    }
+
     @Override
     public void destroy() {
 
@@ -112,4 +124,20 @@ public class ObsCircle extends Obstacle{
         Random random = new Random();
         return colors.get(random.nextInt(colors.size()));
     }
+
+    public void mirrorY() {
+        // mirror Image of circle
+        colors = new ArrayList<>()
+        {{
+            add("F6DF0E");
+            add("FD0082");
+            add("32E1F4");
+            add("8E11FE");
+        }};
+    }
+
+    public ObsCircle generateNext() {
+        return new ObsCircle(x, y - 2 * radius - 5, radius, radius - innerRadius);
+    }
+
 }
