@@ -1,5 +1,7 @@
-package gameEngine;
+package gameEngine.gameElements;
 
+import gameEngine.Ball;
+import gameEngine.gameElements.obstacles.Obstacle;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -15,7 +17,7 @@ public class SwitchColor extends GameElement {
 
     private static final Image image = new Image(new File("src/assets/gameplay/color_switcher_s.png").toURI().toString());
 
-    SwitchColor(double x, double y) {
+    public SwitchColor(double x, double y) {
         super(x, y, y, y);
         audioClipPath = "src/assets/music/gameplay/colorSwitch.wav";
         this.loadAssets(); // need to ensure that audio clip path has been set

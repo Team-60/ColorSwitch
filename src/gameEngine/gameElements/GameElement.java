@@ -1,11 +1,15 @@
-package gameEngine;
+package gameEngine.gameElements;
 
+import gameEngine.App;
+import gameEngine.Ball;
+import gameEngine.gameElements.obstacles.Obstacle;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.AudioClip;
 
 import java.io.File;
 import java.io.Serializable;
 
+// template and factory pattern ig
 public abstract class GameElement implements Serializable {
 
     private static final long serialVersionUID = 2021L;
@@ -18,7 +22,7 @@ public abstract class GameElement implements Serializable {
 
     private transient AudioClip audioClip;
 
-    GameElement(double x, double y, double topY, double bottomY) {
+    public GameElement(double x, double y, double topY, double bottomY) {
         this.x = x;
         this.y = y;
         this.topY = topY;
@@ -53,8 +57,10 @@ public abstract class GameElement implements Serializable {
          audioClip.play(); // TEMPORARY // TODO: MUSIC DISABLE
     }
 
-    void applyOffset(double offset) {
+    public void applyOffset(double offset) {
         y += offset;
+        topY += offset;
+        bottomY += offset;
     }
 
     // TODO: Should GameElement Contain instance of GraphicsContext

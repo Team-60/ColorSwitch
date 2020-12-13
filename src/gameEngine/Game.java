@@ -1,5 +1,7 @@
 package gameEngine;
 
+import gameEngine.gameElements.*;
+import gameEngine.gameElements.obstacles.*;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.AudioClip;
@@ -27,6 +29,7 @@ public class Game implements Serializable, Comparable {
     private boolean gameOver = false;
     private int obstacleCount = 1;
     private int highScore;
+    private boolean highScoreLineDisplayed;
 
     private transient Swarm swarm;
     private transient GraphicsContext graphicsContext; // can't serialize this
@@ -36,6 +39,7 @@ public class Game implements Serializable, Comparable {
         this.graphicsContext = graphicsContext;
         this.player = player;
         this.app = app;
+        this.highScoreLineDisplayed = false;
         ball = new Ball(graphicsContext);
 
         double x = 225;
@@ -55,6 +59,7 @@ public class Game implements Serializable, Comparable {
         this.graphicsContext = _graphicsContext;
         this.app = _app;
         this.highScore = this.app.getHighscore();
+        this.highScoreLineDisplayed = false;
         this.swarm = new Swarm(this.graphicsContext);
 
         this.ball.setGraphicsContext(this.graphicsContext);
@@ -111,7 +116,7 @@ public class Game implements Serializable, Comparable {
                 }
                 continue;
             }
-            if (gameElement.getY() < 1000) {
+            if (gameElement.getTopY() < 1000) {
                 if (gameElement instanceof Obstacle) {
                     ((Obstacle)gameElement).update(time);
                 }
@@ -130,16 +135,16 @@ public class Game implements Serializable, Comparable {
                 }
             }
         }
-        boolean displayed = false;
+
         while(gameElements.size() < 16) {
             Obstacle obstacle = getRandomObstacle(x, y);
             obstacleCount += obstacle.getMaxCount();
             y = obstacle.getTopY();
 
-            if (obstacleCount >= highScore && !displayed) {
+            if (obstacleCount >= highScore && !highScoreLineDisplayed) {
                 GameElement highScoreLine = new HighScoreLine(y - distanceBetweenObstacles/4);
                 gameElements.add(highScoreLine);
-                displayed = true;
+                highScoreLineDisplayed = true;
             }
 
             GameElement switchColor = new SwitchColor(x, y - distanceBetweenObstacles/2);
@@ -182,18 +187,18 @@ public class Game implements Serializable, Comparable {
     }
 
     private int getMean() {
-        if (player.getScore() >= 13) {
+        if (player.getScore() >= 17) {
             return 13;
         }else {
             return player.getScore();
         }
     }
 
-    public Obstacle getRandomObstacle(double x, double y) {
+    public Obstacle getRandomObstacle(double x, double y) { // TODO
 
 //        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
         // y - safe dist of that specific obstacle
-        int randomNumber = 18;
+        int randomNumber = 16;
         if (randomNumber < 0) {
             randomNumber = 0;
         }
@@ -280,6 +285,9 @@ public class Game implements Serializable, Comparable {
         }
     }
 
+    public Ball getBall() {
+        return this.ball;
+    }
 
     public Player getPlayer() { // ref. all info attributes from player
         return this.player;

@@ -330,9 +330,7 @@ public class GameOverPageController {
 
     @FXML
     public void restartUsingStarsClicked() { // based on score?, keep a total of stars, TODO R
-//        int reqStars = 4 * (this.game.getPlayer().getScore() + 1);
-        int reqStars = 2;
-        if (this.game.getPlayer().getScore() >= reqStars) {
+        if (this.game.getPlayer().getScore() >= App.REVIVAL_STARS) {
             this.clickSound.play();
 //            this.game.getPlayer().incReviveCount();
 //            System.out.println(this.getClass().toString() + " restart using stars success");
@@ -354,7 +352,7 @@ public class GameOverPageController {
         } else {
             this.errorSound.play();
             System.out.println(this.getClass().toString() + " restart using stars failure");
-            new Dialog("Need " + reqStars + " stars!", (Stage) this.app.getScene().getWindow());
+            new Dialog("Need " + App.REVIVAL_STARS + " stars!", (Stage) this.app.getScene().getWindow());
         }
     }
 

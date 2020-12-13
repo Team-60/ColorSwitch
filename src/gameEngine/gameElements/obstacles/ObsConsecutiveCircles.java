@@ -1,5 +1,6 @@
-package gameEngine;
+package gameEngine.gameElements.obstacles;
 
+import gameEngine.Ball;
 import javafx.scene.canvas.GraphicsContext;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ public class ObsConsecutiveCircles extends Obstacle {
 
     private ArrayList<ObsCircle> circles;
 
-    ObsConsecutiveCircles(ObsCircle obsCircle, int numberOfCircles) {
+    public ObsConsecutiveCircles(ObsCircle obsCircle, int numberOfCircles) {
         super(obsCircle.getX(), obsCircle.getY(), obsCircle.getY() - (2 *  numberOfCircles - 1) * obsCircle.getRadius(), obsCircle.getY() + obsCircle.getRadius());
         circles = new ArrayList<>();
         circles.add(obsCircle);
@@ -49,6 +50,7 @@ public class ObsConsecutiveCircles extends Obstacle {
 
     @Override
     public void applyOffset(double offset) {
+        super.applyOffset(offset);
         for (ObsCircle obsCircle : circles) {
             obsCircle.applyOffset(offset);
         }

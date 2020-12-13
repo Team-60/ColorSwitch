@@ -1,14 +1,13 @@
-package gameEngine;
+package gameEngine.gameElements.obstacles;
 
+import gameEngine.Ball;
 import javafx.scene.canvas.GraphicsContext;
-
-import java.util.ArrayList;
 
 public class ObsDoubleCircle extends ObsCircle {
 
     private final ObsCircle innerCircle;
 
-    ObsDoubleCircle(double x, double y, double innerRadius, double outerRadius, double width) {
+    public ObsDoubleCircle(double x, double y, double innerRadius, double outerRadius, double width) {
         super(x, y, outerRadius, width);
         super.destroyStar();             // only one star for one two circles
         super.mirrorY();

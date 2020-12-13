@@ -1,5 +1,9 @@
-package gameEngine;
+package gameEngine.gameElements.obstacles;
 
+import gameEngine.Ball;
+import gameEngine.GamePlay;
+import gameEngine.Renderer;
+import gameEngine.gameElements.Star;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -21,7 +25,7 @@ public class ObsLine extends Obstacle {
     }};
 
 
-    ObsLine(double x, double y, double length) {
+    public ObsLine(double x, double y, double length) {
         // x can be anything doesn't matter
         // y is the higher part of line
         // safeDist is zero as y is the higher part

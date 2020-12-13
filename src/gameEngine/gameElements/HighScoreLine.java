@@ -1,5 +1,7 @@
-package gameEngine;
+package gameEngine.gameElements;
 
+import gameEngine.Ball;
+import gameEngine.Renderer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -10,7 +12,7 @@ public class HighScoreLine extends GameElement {
 
     private static final Image image = new Image(new File("src/assets/gameplay/crown_s.png").toURI().toString());
 
-    HighScoreLine(double y) {
+    public HighScoreLine(double y) {
         super(0, y, y, y);
     }
     @Override

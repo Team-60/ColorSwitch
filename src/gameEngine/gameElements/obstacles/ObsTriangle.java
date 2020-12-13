@@ -1,5 +1,9 @@
-package gameEngine;
+package gameEngine.gameElements.obstacles;
 
+import gameEngine.Ball;
+import gameEngine.Pair;
+import gameEngine.Renderer;
+import gameEngine.gameElements.Star;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
@@ -17,7 +21,7 @@ public class ObsTriangle extends Obstacle{
         add("32E1F4");
     }};
 
-    ObsTriangle(double x, double y, double sideLength, double width) {
+    public ObsTriangle(double x, double y, double sideLength, double width) {
         super(x, y, y - sideLength / Math.sqrt(3), y + sideLength/Math.sqrt(3));
         this.width = width;
         this.sideLength = sideLength;

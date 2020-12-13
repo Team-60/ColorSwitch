@@ -1,4 +1,8 @@
-package gameEngine;
+package gameEngine.gameElements.obstacles;
+
+import gameEngine.Ball;
+import gameEngine.gameElements.GameElement;
+import gameEngine.gameElements.Star;
 
 public abstract class Obstacle extends GameElement {
 
@@ -19,7 +23,7 @@ public abstract class Obstacle extends GameElement {
         this.rotationalSpeed = rotationalSpeed;
     }
 
-    Obstacle(double x, double y, double topY, double bottomY) {
+    public Obstacle(double x, double y, double topY, double bottomY) {
         super(x, y, topY, bottomY);
         rotationalSpeed = 90;
         audioClipPath = "src/assets/music/gameplay/dead.wav";
@@ -49,16 +53,18 @@ public abstract class Obstacle extends GameElement {
         }
         boolean isCollided = star.checkCollision(ball);
         if (isCollided) {
+            star.playSound();
             destroyStar();
         }
         return isCollided;
     }
+
     @Override
-    void applyOffset(double offset) {
+    public void applyOffset(double offset) { // all concatenated obstacles, need to call super
         if (star != null) {
             star.applyOffset(offset);
         }
-        y += offset;
+        super.applyOffset(offset);
     }
 
     public void destroyStar() {

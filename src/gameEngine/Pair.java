@@ -2,10 +2,10 @@ package gameEngine;
 
 public class Pair {
 
-    double first;
-    double second;
+    public double first;
+    public double second;
 
-    Pair(double first, double second) {
+    public Pair(double first, double second) {
         this.first = first;
         this.second = second;
     }

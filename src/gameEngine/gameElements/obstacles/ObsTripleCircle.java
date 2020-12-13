@@ -1,5 +1,6 @@
-package gameEngine;
+package gameEngine.gameElements.obstacles;
 
+import gameEngine.Ball;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class ObsTripleCircle extends ObsCircle {
 
     private final ArrayList<ObsCircle> circles;
 
-    ObsTripleCircle(double x, double y, double innerInnerRadius, double innerRadius,  double outerRadius, double width) {
+    public ObsTripleCircle(double x, double y, double innerInnerRadius, double innerRadius, double outerRadius, double width) {
         super(x, y, outerRadius, width);
         super.destroyStar();
         circles = new ArrayList<>();
@@ -58,6 +59,7 @@ public class ObsTripleCircle extends ObsCircle {
 
     @Override
     public void applyOffset(double offset) {
+        super.applyOffset(offset);
         for (ObsCircle obsCircle : circles) {
             obsCircle.applyOffset(offset);
         }

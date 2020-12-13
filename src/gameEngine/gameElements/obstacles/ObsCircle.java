@@ -1,5 +1,8 @@
-package gameEngine;
+package gameEngine.gameElements.obstacles;
 
+import gameEngine.Ball;
+import gameEngine.Renderer;
+import gameEngine.gameElements.Star;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -20,7 +23,7 @@ public class ObsCircle extends Obstacle{
         add("FD0082");
     }};
 
-    ObsCircle(double x, double y, double radius, double width) {
+    public ObsCircle(double x, double y, double radius, double width) {
         super(x, y, y - radius, y + radius);
         star = new Star(x, y);
         this.radius = radius;

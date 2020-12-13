@@ -31,7 +31,7 @@ TODO: add score on game over page, set highscore, highscore line
 TODO: throw game over exceptions/ fall down exceptions
 TODO: threads while drawing?
 
-TODO: revive using stars!!!!!!
+TODO: revive using stars!!!!!!, add global currency, has revived ~~~~
 TODO: implement Leaderboard screen comparators and saving
 TODO: implement Serializable, ensure every asset is reloaded after deserializing, might need to create init?
 TODO: game is saved, but now display on leaderboard, and implement saving for already saved game, remove on game over, add timer for pause
@@ -45,6 +45,7 @@ Score (Player)
 public class App extends Application {
 
     public static MediaPlayer BgMediaPlayer = null; // for easy referencing
+    public static int REVIVAL_STARS = 10;
     private static final Boolean startWithAnimation = true;
 
     private final Database<Game> gameDatabase;

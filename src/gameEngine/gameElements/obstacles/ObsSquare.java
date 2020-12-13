@@ -1,13 +1,16 @@
-package gameEngine;
+package gameEngine.gameElements.obstacles;
 
-import javafx.scene.PointLight;
+import gameEngine.Ball;
+import gameEngine.Pair;
+import gameEngine.Renderer;
+import gameEngine.gameElements.Star;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ObsSquare extends Obstacle{
+public class ObsSquare extends Obstacle {
 
     private double width;
     private double sideLength;
@@ -20,7 +23,7 @@ public class ObsSquare extends Obstacle{
         add("8E11FE"); // purple
     }};
 
-    ObsSquare(double x, double y, double sideLength, double width) {
+    public ObsSquare(double x, double y, double sideLength, double width) {
         super(x, y, y - sideLength/2 * Math.sqrt(2), y + sideLength/2 * Math.sqrt(2));
         this.width = width;
         this.sideLength = sideLength;

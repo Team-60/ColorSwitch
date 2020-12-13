@@ -1,5 +1,6 @@
-package gameEngine;
+package gameEngine.gameElements.obstacles;
 
+import gameEngine.Ball;
 import javafx.scene.canvas.GraphicsContext;
 
 public class ObsSquareCircle extends Obstacle {
@@ -7,7 +8,7 @@ public class ObsSquareCircle extends Obstacle {
     ObsSquare square;
     ObsCircle circle;
 
-    ObsSquareCircle(double x, double y, double sideLength, double width) {
+    public ObsSquareCircle(double x, double y, double sideLength, double width) {
         super(x, y, y - sideLength/2 * Math.sqrt(2), y + sideLength/2 * Math.sqrt(2));
         square = new ObsSquare(x, y, sideLength, width);
         circle = new ObsCircle(x, y, (sideLength - 2 * width)/2 - 3 , width);
@@ -45,6 +46,7 @@ public class ObsSquareCircle extends Obstacle {
 
     @Override
     public void applyOffset(double offset) {
+        super.applyOffset(offset);
         circle.applyOffset(offset);
         square.applyOffset(offset);
     }

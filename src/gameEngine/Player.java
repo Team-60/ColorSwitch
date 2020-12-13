@@ -14,6 +14,7 @@ public class Player implements Serializable, Comparable { // info. keep
     private int jumps;
     private double distance;
     private String date;
+    private Boolean hasRevived;
 
     public Player() {
         this.name = null;
@@ -22,6 +23,7 @@ public class Player implements Serializable, Comparable { // info. keep
         this.jumps = 0;
         this.distance = 0;
         this.date = null;
+        this.hasRevived = false;
     }
 
     public int getScore() {
@@ -51,6 +53,9 @@ public class Player implements Serializable, Comparable { // info. keep
     public String getDate() {
         return this.date;
     }
+    public boolean getHasRevived() {
+        return this.hasRevived;
+    }
 
     public void setId(int _id) {
         this.id = _id;
@@ -72,6 +77,10 @@ public class Player implements Serializable, Comparable { // info. keep
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public void setHasRevived() {
+        assert (!this.hasRevived);
+        this.hasRevived = true;
     }
 
     @Override
