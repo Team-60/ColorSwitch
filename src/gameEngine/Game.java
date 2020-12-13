@@ -204,11 +204,11 @@ public class Game implements Serializable, Comparable {
         }
     }
 
-    public Obstacle getRandomObstacle(double x, double y) { // TODO, factory?
+    public Obstacle getRandomObstacle(double x, double y) { // TODO
 
-        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
+//        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
         // y - safe dist of that specific obstacle
-//        int randomNumber = 16;
+        int randomNumber = 16;
         if (randomNumber < 0) {
             randomNumber = 0;
         }
@@ -288,8 +288,8 @@ public class Game implements Serializable, Comparable {
         for (GameElement gameElement : gameElements) {
             if (gameElement instanceof Obstacle) {
                 if (!((Obstacle) gameElement).isCrossed()) {
-                    ball.setY(gameElement.getBottomY() - distanceBetweenObstacles/2);
-                    System.out.println(this.getClass().toString() + " Y:"  + gameElement.getY() + " bottomY:" + gameElement.getBottomY());
+                    ball.setY(gameElement.getBottomY() + distanceBetweenObstacles/2);
+                    System.out.println(gameElement.getY() + " " + gameElement.getBottomY() + " " + ball.getY());
                     break;
                 }
             }
