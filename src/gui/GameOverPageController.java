@@ -115,7 +115,6 @@ public class GameOverPageController {
             tempR.setFill(Paint.valueOf("#000000"));
             tempR.setOpacity(0.75);
             rootContainer.getChildren().add(tempR);
-            App.BgMediaPlayer.setVolume(0.05);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("InputPopup.fxml"));
             Parent inputRoot = null;
@@ -144,7 +143,6 @@ public class GameOverPageController {
 
     private void processInputLB(StackPane rootContainer, InputPopupController<GameOverPageController> inputPopupController, Rectangle tempR) {
         assert (inputPopupController.getSaveSuccess() == (this.usernameLB != null));
-        App.BgMediaPlayer.setVolume(1);
         rootContainer.getChildren().remove(tempR); // regain focus
         this.gameOverRoot.requestFocus();
 

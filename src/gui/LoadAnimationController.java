@@ -74,7 +74,7 @@ public class LoadAnimationController {
         this.jumpClip = new AudioClip(new File("src/assets/music/effectsColorSwitch/jump.wav").toURI().toString());
 
         try { // wait for files to load, need them for initial timeline
-            Thread.sleep(1500);
+            Thread.sleep(2500);
         } catch (InterruptedException e) {
             System.out.println(this.getClass().toString() + " waiting for file load failed");
         }

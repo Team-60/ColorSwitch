@@ -86,12 +86,13 @@ public final class Renderer {
         }
     }
 
+    // TODO, graphic bug
     public static void drawArc(double centerX, double centerY, double radius, double innerRadius, Color bgColor, Color strokeColor, int angle) {
 
         graphicsContext.beginPath();
         graphicsContext.setFill(bgColor);
         graphicsContext.setStroke(strokeColor);
-        graphicsContext.setLineWidth(0);
+        graphicsContext.setLineWidth(1);
         graphicsContext.setFillRule(FillRule.EVEN_ODD);
 
         double shiftedX = centerX + innerRadius;

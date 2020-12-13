@@ -3,6 +3,7 @@ package gui;
 import gameEngine.App;
 import gameEngine.GamePlay;
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -25,8 +28,11 @@ public class GamePlayController {
     private AnchorPane gamePlayRoot;
     @FXML
     private Button button;
+    @FXML
+    private Circle glowCircle;
 
     public void init(GamePlay _gamePlay, App _app) throws IOException {
+        System.out.println(this.getClass().toString() + " gameplay instantiated");
         this.app = _app;
         this.gamePlay = _gamePlay;
 
@@ -74,9 +80,14 @@ public class GamePlayController {
         this.paused = false;
         rootContainer.getChildren().remove(this.pausePane);
         assert (rootContainer.getChildren().size() == 1);
-        this.gamePlay.getCanvas().requestFocus();
-        this.gamePlay.getCanvas().addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
-        animationTimer.start();
+
+        PauseTransition pt = new PauseTransition(Duration.millis(600)); // for relaxation after unpause
+        pt.setOnFinished(t -> {
+            this.gamePlay.getCanvas().addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
+            this.gamePlay.getCanvas().requestFocus();
+            animationTimer.start();
+        });
+        pt.play();
     }
 
     public GamePlay getGamePlay() {
@@ -87,5 +98,8 @@ public class GamePlayController {
     }
     public AnchorPane getGamePlayRoot() {
         return gamePlayRoot;
+    }
+    public Circle getGlowCircle() {
+        return glowCircle;
     }
 }
