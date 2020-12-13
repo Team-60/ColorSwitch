@@ -15,9 +15,9 @@ public class ObsSquare extends Obstacle{
     private ArrayList<String> colors = new ArrayList<>()
     {{
         add("F6DF0E"); // yellow
-        add("8E11FE"); // purple
-        add("32E1F4"); // cyan
         add("FD0082"); // pink
+        add("32E1F4"); // cyan
+        add("8E11FE"); // purple
     }};
 
     ObsSquare(double x, double y, double sideLength, double width) {
