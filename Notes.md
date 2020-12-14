@@ -30,7 +30,7 @@
 - **IMP** add '-ea' VM option for assert
 - **IMP** always init controllers before transitions, may throw intermediate exceptions
 - For other game mode, firefly, just add a separate screen to rootContainer, need a different leaderboard, see for assertions, save slots remain same, need to add distinction via. variable 
-- Revival could be visualised as a new player with same instance parameters, but different Id, stars used for revival are global. revival doesn't affect any other player, game can't exist in database if it's player exists on LB
+- Revival is for the same player, overwriteGame modified in order to suit saving methods, cannot be revived twice
 
 ## Misc
 - Threading (**IMP. FOR BETTER PERFORMANCE** [here](https://www.developer.com/java/data/multithreading-in-javafx.html))

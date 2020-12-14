@@ -74,11 +74,13 @@ public class PauseOverlayController { // TODO maybe for restart here?
         Circle circle = (Circle) this.unpauseGroup.getChildren().get(0);
         circle.setFill(Paint.valueOf("#07575B"));
     }
+
     @FXML
     public void unpauseHoverInactive() {
         Circle circle = (Circle) this.unpauseGroup.getChildren().get(0);
         circle.setFill(Paint.valueOf("#66A5AD"));
     }
+
     @FXML
     public void unpausePressed() {
         System.out.println(this.getClass().toString() + " Unpause pressed");
@@ -86,6 +88,7 @@ public class PauseOverlayController { // TODO maybe for restart here?
         assert (this.gamePlayController.getPaused());
         this.gamePlayController.unpause();
     }
+
     @FXML
     public void iconHoverActive(MouseEvent mouseEvent) {
         this.hoverSound.play();
@@ -95,6 +98,7 @@ public class PauseOverlayController { // TODO maybe for restart here?
         group.setScaleY(0.9);
         circle.setFill(Color.web("#fa6602"));
     }
+
     @FXML
     public void iconHoverInactive(MouseEvent mouseEvent) {
         Group group = (Group) mouseEvent.getSource();
@@ -103,6 +107,24 @@ public class PauseOverlayController { // TODO maybe for restart here?
         group.setScaleY(0.8);
         circle.setFill(Color.web("#de7a22"));
     }
+
+    @FXML
+    public void restartIconClicked() { // discard current state of game and the player (retains only if saved on leaderboard)
+        this.clickSound.play();
+        System.out.println(this.getClass().toString() + " prev. game discarded, new game loaded");
+        Scene scene = this.app.getScene();
+        StackPane rootContainer = (StackPane) scene.getRoot();
+        assert (rootContainer.getChildren().size() == 2);
+        rootContainer.getChildren().remove(this.pauseOverlayRoot);
+        rootContainer.getChildren().remove(this.gamePlayController.getGamePlayRoot()); // as pause is an overlay and this will be active gameplay alongside
+        try {
+            new GamePlay(this.app);
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " New game failed to load!");
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     public void returnIconClicked() {
         this.clickSound.play();
