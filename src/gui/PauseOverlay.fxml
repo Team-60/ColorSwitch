@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pauseOverlayRoot" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PauseOverlayController">
    <children>
@@ -46,6 +48,20 @@
             <ImageView fitHeight="67.0" fitWidth="68.0" layoutX="11.0" layoutY="10.0" preserveRatio="true">
                <image>
                   <Image url="@../assets/pauseOverlay/restart_white.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="171.0" layoutY="25.0" visible="false">
+         <children>
+            <Label fx:id="totalStarsLabel" alignment="CENTER" layoutY="37.0" prefHeight="43.0" prefWidth="108.0" text="23" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="32.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="54.0" fitWidth="74.0" layoutX="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/pauseOverlay/totalstars_white.png" />
                </image>
             </ImageView>
          </children>

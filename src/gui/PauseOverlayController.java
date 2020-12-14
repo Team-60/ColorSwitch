@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -40,6 +41,8 @@ public class PauseOverlayController { // TODO maybe for restart here?
     private AnchorPane pauseOverlayRoot;
     @FXML
     private Group unpauseGroup;
+    @FXML
+    private Label totalStarsLabel;
 
     public void init(GamePlayController _gamePlayController, App _app) {
 
@@ -48,6 +51,9 @@ public class PauseOverlayController { // TODO maybe for restart here?
         System.out.println(this.getClass().toString() + " instantiated");
         this.app = _app;
         this.gamePlayController = _gamePlayController;
+
+        // set total stars
+        this.totalStarsLabel.setText(Integer.toString(this.app.getTotalStars()));
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());

@@ -37,7 +37,7 @@
                   <Image url="@../assets/mainPage/colorCircleSmallWide.png" />
                </image>
             </ImageView>
-            <Group fx:id="iconSettings" layoutX="-29.0" layoutY="13.0">
+            <Group fx:id="iconSettings" layoutX="-29.0" layoutY="13.0" visible="false">
                <children>
                   <Circle fill="LIGHTGRAY" layoutX="23.0" layoutY="23.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   <ImageView fitHeight="38.0" fitWidth="32.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
