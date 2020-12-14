@@ -215,8 +215,8 @@ public class GamePlay {
             this.app.removeGame(this.game);
         }
 
-        // update total stars as game is finished
-        this.app.addTotalStars(this.game.getPlayer().getScore());
+        // update total stars as game is finished, in case of revival it returns 0
+        this.app.addTotalStars(this.game.getPlayer().getScore() - this.game.getPlayer().getScoreBeforeRevival());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GameOverPage.fxml"));
         try {

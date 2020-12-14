@@ -14,6 +14,7 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
     private double distance;
     private String date;
     private Boolean hasRevived;
+    private int scoreBeforeRevival;
 
     public Player() {
         this.name = null;
@@ -23,6 +24,7 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
         this.distance = 0;
         this.date = null;
         this.hasRevived = false;
+        this.scoreBeforeRevival = 0; // 0 in case no revival has happened
     }
 
     public int getScore() {
@@ -55,6 +57,9 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
     public boolean getHasRevived() {
         return this.hasRevived;
     }
+    public int getScoreBeforeRevival() {
+        return this.scoreBeforeRevival;
+    }
 
     public void setId(int _id) {
         this.id = _id;
@@ -80,6 +85,10 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
     public void setHasRevived() {
         assert (!this.hasRevived);
         this.hasRevived = true;
+    }
+    public void setScoreBeforeRevival() {
+        assert (this.hasRevived);
+        this.scoreBeforeRevival = this.score;
     }
 
     @Override

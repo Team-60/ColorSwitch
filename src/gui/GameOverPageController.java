@@ -374,7 +374,11 @@ public class GameOverPageController {
 
         if (this.app.getTotalStars() >= App.REVIVAL_STARS) {
             this.clickSound.play();
+
+            // record previous score & set revival status
             this.game.getPlayer().setHasRevived();
+            this.game.getPlayer().setScoreBeforeRevival();
+
             System.out.println(this.getClass().toString() + " restart using stars success");
 
             this.app.decTotalStars(App.REVIVAL_STARS); // decrease current stars & reset label

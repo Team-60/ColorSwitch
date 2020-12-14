@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -17,7 +16,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 // for popups like confirmations and stuff
-public class Dialog {
+public class Dialog { // TODO location of stage
 
     public Dialog(String msg, Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Dialog.fxml"));
