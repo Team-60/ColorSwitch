@@ -215,6 +215,9 @@ public class GamePlay {
             this.app.removeGame(this.game);
         }
 
+        // update total stars as game is finished
+        this.app.addTotalStars(this.game.getPlayer().getScore());
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GameOverPage.fxml"));
         try {
             AnchorPane gameOverRoot = loader.load(); // TODO: create init for instances, rn only for animations

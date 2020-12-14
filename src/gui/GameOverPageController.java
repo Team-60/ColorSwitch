@@ -367,11 +367,12 @@ public class GameOverPageController {
             return;
         }
 
-        if (this.game.getPlayer().getScore() >= App.REVIVAL_STARS) {
+        if (this.app.getTotalStars() >= App.REVIVAL_STARS) {
             this.clickSound.play();
             this.game.getPlayer().setHasRevived();
             System.out.println(this.getClass().toString() + " restart using stars success");
-            // TODO, decrease overall stars here
+            this.app.decTotalStars(App.REVIVAL_STARS); // decrease current stars
+
             new Dialog(App.REVIVAL_STARS + " stars used for revival!", (Stage) this.app.getScene().getWindow());
 
             Scene scene = this.app.getScene();

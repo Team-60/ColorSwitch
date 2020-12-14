@@ -16,8 +16,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -46,6 +45,8 @@ public class App extends Application {
 
     public static MediaPlayer BgMediaPlayer = null; // for easy referencing
     public static int REVIVAL_STARS = 1;
+    private static int TOTAL_STARS = 0;
+    private static final String pathTotalStars = "src/data/dataTotalStars.ser";
     private static final Boolean startWithAnimation = true;
 
     private final Database<Game> gameDatabase;
@@ -61,15 +62,42 @@ public class App extends Application {
         this.playerDatabase.form(Player.FILE_PATH);
         this.highscore = 0;
         this.calcHighscore();
+        TOTAL_STARS = 0;
+        this.readTotalStars();
 
-//        this.eraseDatabaseAndExit();
+//        this.eraseDatabaseAndExit(); UNCOMMENT TO ERASE DATABASE
     }
 
+    @SuppressWarnings("unused")
     private void eraseDatabaseAndExit() { // in order to refresh the database
         System.out.println(this.getClass().toString() + " database refreshed");
         this.gameDatabase.reset(Game.FILE_PATH);
         this.playerDatabase.reset(Player.FILE_PATH);
         System.exit(0);
+    }
+
+    private void readTotalStars() {
+        try {
+            DataInputStream dis = new DataInputStream(new FileInputStream(pathTotalStars));
+            TOTAL_STARS = dis.readInt();
+            System.out.println(this.getClass().toString() + " read TOTAL_STARS: " + TOTAL_STARS);
+            dis.close();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to read total stars");
+            System.out.println(e.toString());
+        }
+    }
+
+    private void saveTotalStars() {
+        try {
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream(pathTotalStars));
+            dos.writeInt(TOTAL_STARS);
+            System.out.println(this.getClass().toString() + " saved TOTAL_STARS: " + TOTAL_STARS);
+            dos.close();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to write total stars");
+            System.out.println(e.toString());
+        }
     }
 
     public void addAssets() {
@@ -248,5 +276,20 @@ public class App extends Application {
 
     public Database<Player> getPlayerDatabase() {
         return this.playerDatabase;
+    }
+
+    public int getTotalStars() {
+        return TOTAL_STARS;
+    }
+
+    public void addTotalStars(int up) { // add only when finished game
+        TOTAL_STARS += up;
+        this.saveTotalStars();
+    }
+
+    public void decTotalStars(int dec) {
+        assert (dec <= TOTAL_STARS);
+        TOTAL_STARS -= dec;
+        System.out.println(this.getClass().toString() + " TOTAL_STARS after dec.: " + TOTAL_STARS);
     }
 }
