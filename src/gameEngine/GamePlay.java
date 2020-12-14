@@ -206,7 +206,7 @@ public class GamePlay {
 
         this.animationTimer.stop(); // automatically resets previous time variables
 
-        // remove from database, TODO a player makes it on LB, but restarts, and then dies, has an ID, but isn't saved
+        // remove from database, checks for revival too
         if (this.player.getId() != -1) {
             assert (this.player == this.game.getPlayer()); // just in case
             this.app.removeGame(this.game);

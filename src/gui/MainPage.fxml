@@ -120,8 +120,8 @@
             </Group>
             <Group fx:id="iconModes2" layoutX="201.0" layoutY="-2.0">
                <children>
-                  <Rectangle fill="#66a5ad" height="36.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="125.0" />
-                  <Label alignment="CENTER" layoutX="30.0" layoutY="8.0" text="Bubbles" textFill="WHITE">
+                  <Rectangle fill="#66a5ad" height="36.0" layoutX="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="125.0" />
+                  <Label alignment="CENTER" layoutX="34.0" layoutY="8.0" text="Bubbles" textFill="WHITE">
                      <font>
                         <Font name="Corbel Bold" size="16.0" />
                      </font>

@@ -378,8 +378,7 @@ public class GameOverPageController {
             assert (rootContainer.getChildren().size() == 1);
             rootContainer.getChildren().remove(this.gameOverRoot);
             try {
-                // TODO, modify game parameters here, set gameOver = false, relocate ball, currently relocating to star position of colliding obstacle ?
-                this.game.revive();
+                this.game.revive(); // refresh game parameters
                 new GamePlay(this.app, this.game, true);
             } catch (IOException e) {
                 System.out.println(this.getClass().toString() + " New game failed to load!");

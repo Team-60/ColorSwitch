@@ -139,7 +139,7 @@ public class App extends Application {
         System.out.println(this.getClass().toString() + " save success");
     }
 
-    public void overwriteGame(Game game) { // overwrites, if player already exists, TODO, what to do if player uses revival but then saves game
+    public void overwriteGame(Game game) { // overwrites, if player already exists
         assert (game.getPlayer().getId() != -1 && !game.isGameOver()); // only incomplete games
         game.getPlayer().setDate(LocalDate.now().toString());
         ArrayList<Game> games = this.gameDatabase.getData();
