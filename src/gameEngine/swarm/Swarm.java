@@ -1,5 +1,6 @@
-package gameEngine;
+package gameEngine.swarm;
 
+import gameEngine.Ball;
 import javafx.scene.canvas.GraphicsContext;
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,9 +9,9 @@ public class Swarm {
 
     ArrayList<Particle> particles;
     private final int numberOfParticles = 41;
-    private GraphicsContext graphicsContext;
+    private final GraphicsContext graphicsContext;
 
-    private ArrayList<String> colors = new ArrayList<>()
+    private final ArrayList<String> colors = new ArrayList<>()
     {{
         add("F6DF0E");
         add("8E11FE");
@@ -18,7 +19,7 @@ public class Swarm {
         add("FD0082");
     }};
 
-    Swarm(GraphicsContext graphicsContext) {
+    public Swarm(GraphicsContext graphicsContext) {
         particles = new ArrayList<>();
         this.graphicsContext = graphicsContext;
     }
@@ -49,13 +50,13 @@ public class Swarm {
         }
     }
 
-    void update(double time) {
+    public void update(double time) {
         for (Particle particle : particles) {
             particle.move(time);
         }
     }
 
-    void refresh() {
+    public void refresh() {
         for (Particle particle : particles) {
             particle.refresh();
         }

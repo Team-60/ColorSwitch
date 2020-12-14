@@ -2,6 +2,7 @@ package gameEngine;
 
 import gameEngine.gameElements.*;
 import gameEngine.gameElements.obstacles.*;
+import gameEngine.swarm.Swarm;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.AudioClip;
@@ -73,7 +74,7 @@ public class Game implements Serializable, Comparable {
         this.fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
     }
 
-    public void reloadParamRevival(GraphicsContext _graphicsContext) {
+    public void reloadParamRevival(GraphicsContext _graphicsContext) { // for revival, reset graphics context
         assert (this.player != null);
         this.graphicsContext = _graphicsContext;
         this.swarm = new Swarm(this.graphicsContext);

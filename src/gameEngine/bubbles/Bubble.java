@@ -1,5 +1,6 @@
-package gameEngine;
+package gameEngine.bubbles;
 
+import gameEngine.GamePlay;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -7,11 +8,11 @@ import java.util.ArrayList;
 
 public class Bubble {
     private double x, y;
-    private double radius;
-    private GraphicsContext graphicsContext;
+    private final double radius;
+    private final GraphicsContext graphicsContext;
     private double Vx, Vy;
 
-    private Color color;
+    private final Color color;
 
     Bubble(double x, double y, double radius, double Vx, double Vy, Color color, GraphicsContext graphicsContext) {
         this.x = x;

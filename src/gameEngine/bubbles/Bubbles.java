@@ -1,5 +1,6 @@
-package gameEngine;
+package gameEngine.bubbles;
 
+import gameEngine.GamePlay;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -12,9 +13,9 @@ public class Bubbles {
     // TODO : optimal ratio between number of bubbles in size of each bubbles is yet to be achieved
     // TODO : color combinations are not final
     private final int numberOfBubbles = 30;
-    private GraphicsContext graphicsContext;
+    private final GraphicsContext graphicsContext;
 
-    private ArrayList<Color> colors = new ArrayList<>()
+    private final ArrayList<Color> colors = new ArrayList<>()
     {{
         add(Color.web("F6DF0E"));
         add(Color.web("8E11FE"));
@@ -22,7 +23,7 @@ public class Bubbles {
         add(Color.web("FD0082"));
     }};
 
-    Bubbles(GraphicsContext graphicsContext) {
+    public Bubbles(GraphicsContext graphicsContext) {
         bubbles = new ArrayList<>();
         this.graphicsContext = graphicsContext;
         generate();

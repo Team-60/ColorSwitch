@@ -1,16 +1,17 @@
-package gameEngine;
+package gameEngine.swarm;
 
+import gameEngine.GamePlay;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Particle {
 
     public double x, y;
-    private GraphicsContext graphicsContext;
-    private double radius;
+    private final GraphicsContext graphicsContext;
+    private final double radius;
     private double Vx, Vy;
     private final double gravity = 1700;
-    private String color;
+    private final String color;
     Particle(double x, double y, double radius, double Vx, double Vy, GraphicsContext graphicsContext, String color) {
         this.x = x;
         this.y = y;

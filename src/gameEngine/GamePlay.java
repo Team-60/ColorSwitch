@@ -1,5 +1,6 @@
 package gameEngine;
 
+import gameEngine.bubbles.Bubbles;
 import gui.GameOverPageController;
 import gui.GamePlayController;
 import javafx.animation.*;
@@ -181,7 +182,7 @@ public class GamePlay {
 //        App.BgMediaPlayer.stop(); // TEMPORARY, TODO: MUSIC DISABLE , (Comment below code)
         Timeline timelineMusicFadeOut = new Timeline();
         KeyValue kvMusicFadeOut = new KeyValue(App.BgMediaPlayer.volumeProperty(), 0, Interpolator.EASE_IN);
-        KeyFrame kfMusicFadeOut = new KeyFrame(Duration.seconds(0.5), kvMusicFadeOut);
+        KeyFrame kfMusicFadeOut = new KeyFrame(Duration.seconds(0.25), kvMusicFadeOut);
         timelineMusicFadeOut.getKeyFrames().add(kfMusicFadeOut);
         timelineMusicFadeOut.setOnFinished((t) -> {
             App.BgMediaPlayer.stop();
