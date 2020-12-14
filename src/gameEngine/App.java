@@ -61,6 +61,15 @@ public class App extends Application {
         this.playerDatabase.form(Player.FILE_PATH);
         this.highscore = 0;
         this.calcHighscore();
+
+//        this.eraseDatabaseAndExit();
+    }
+
+    private void eraseDatabaseAndExit() { // in order to refresh the database
+        System.out.println(this.getClass().toString() + " database refreshed");
+        this.gameDatabase.reset(Game.FILE_PATH);
+        this.playerDatabase.reset(Player.FILE_PATH);
+        System.exit(0);
     }
 
     public void addAssets() {
@@ -114,9 +123,9 @@ public class App extends Application {
             e.printStackTrace();
         }
         assert (root != null);
-    LoadAnimationController loadAnimationController = loader.getController();
+        LoadAnimationController loadAnimationController = loader.getController();
 
-    StackPane rootContainer = new StackPane(root); // roots of this stack pane will be switched
+        StackPane rootContainer = new StackPane(root); // roots of this stack pane will be switched
         rootContainer.setStyle("-fx-background-color :  #0D152C;"); // for pixel based positioning issues
         primaryStage.initStyle(StageStyle.UNDECORATED);
         this.scene = new Scene(rootContainer); // scene's root is the rootContainer (stackPane) whose root is our switching panes

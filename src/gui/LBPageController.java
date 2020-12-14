@@ -81,7 +81,7 @@ public class LBPageController {
 
     private void formPositions() {
         // first 3 are on top separate groups
-        ArrayList<Player> players = this.app.getPlayerDatabase().getData();
+        ArrayList<Player> players = new ArrayList<>(this.app.getPlayerDatabase().getData()); // need a deep copy
         assert (players.size() <= 6);
         while (players.size() < 6)
             players.add(null);

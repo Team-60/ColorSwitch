@@ -2,8 +2,7 @@ package gameEngine;
 
 import java.io.Serializable;
 
-@SuppressWarnings("rawtypes")
-public class Player implements Serializable, Comparable { // info. keep
+public class Player implements Serializable, Comparable<Player> { // info. keep
 
     private static final long serialVersionUID = 2023L;
     public static final String FILE_PATH = "src/data/dataPlayer.ser";
@@ -84,9 +83,7 @@ public class Player implements Serializable, Comparable { // info. keep
     }
 
     @Override
-    public int compareTo(Object o) { // for leaderboard
-        assert (o instanceof Player);
-        Player p = (Player) o;
+    public int compareTo(Player p) { // for leaderboard
         int sc = Integer.compare(p.getScore(), this.score);
         int jc = Integer.compare(this.getNJumps(), p.getNJumps());
         int dc = Double.compare(this.getNDistance(), p.getNDistance());
@@ -104,7 +101,8 @@ public class Player implements Serializable, Comparable { // info. keep
         String js = "* Jumps: " + this.jumps + "\n";
         String dis = "* Dist.: " + this.getDistance() + " px \n";
         String ds = "* Date: " + this.date + "\n";
-        return ps + is + ss + js + dis + ds;
+        String rs = "* Revived: " + this.hasRevived + "\n";
+        return ps + is + ss + js + dis + ds + rs;
     }
 
 }

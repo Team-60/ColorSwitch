@@ -112,6 +112,7 @@ public class GameOverPageController {
         // check if viable for LB
         ArrayList<Player> players = this.app.getPlayerDatabase().getData();
         System.out.println(this.getClass().toString() + " players database sz: " + players.size());
+        System.out.println(this.getClass().toString() + "\n" + this.game.getPlayer());
         boolean madeToLb = true;
         if (players.size() == 6 && players.get(players.size() - 1).compareTo(this.game.getPlayer()) < 0) // last LB player has better score
             madeToLb = false;

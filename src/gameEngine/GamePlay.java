@@ -57,6 +57,9 @@ public class GamePlay {
         this.app = _app;
         this.scene = this.app.getScene();
 
+        Stage primaryStage = (Stage) this.scene.getWindow();
+        primaryStage.requestFocus(); // in case, overshadowed by secondary stage
+
         this.resetBgMusic();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GamePlay.fxml"));

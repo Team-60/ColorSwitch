@@ -15,8 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-@SuppressWarnings("rawtypes")
-public class Game implements Serializable, Comparable {
+public class Game implements Serializable, Comparable<Game> {
 
     private static final long serialVersionUID = 2020L;
     public static final String FILE_PATH = "src/data/dataGame.ser";
@@ -290,7 +289,6 @@ public class Game implements Serializable, Comparable {
             if (gameElement instanceof Obstacle) {
                 if (!((Obstacle) gameElement).isCrossed()) {
                     ball.setY(gameElement.getBottomY() + distanceBetweenObstacles/2);
-                    System.out.println(gameElement.getY() + " " + gameElement.getBottomY() + " " + ball.getY());
                     break;
                 }
             }
@@ -314,9 +312,7 @@ public class Game implements Serializable, Comparable {
     }
 
     @Override
-    public int compareTo(Object o) { // for saving, based on id
-        assert (o instanceof Game);
-        Game g = (Game) o;
+    public int compareTo(Game g) { // for saving, based on id
         int idThis = (this.getPlayer().getId() == -1) ? Integer.MAX_VALUE : this.getPlayer().getId();
         int idThat = (g.getPlayer().getId() == -1) ? Integer.MAX_VALUE : g.getPlayer().getId();
         return Integer.compare(idThat, idThis);
