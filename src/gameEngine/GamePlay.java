@@ -1,6 +1,7 @@
 package gameEngine;
 
 import gameEngine.bubbles.Bubbles;
+import gameEngine.customExceptions.GameOverException;
 import gui.GameOverPageController;
 import gui.GamePlayController;
 import javafx.animation.*;
@@ -324,7 +325,12 @@ class GamePlayAnimationTimer extends AnimationTimer {
         graphicsContext.setFill(Color.web("0D152C"));
         graphicsContext.fillRect(0, 0, GamePlay.WIDTH, GamePlay.HEIGHT);
 
-        game.checkAndUpdate(timeDifference);
+        try {
+            game.checkAndUpdate(timeDifference);
+        } catch (GameOverException e) {
+            System.out.println(this.getClass().toString() + ": " + e.toString());
+            System.out.println(this.getClass().toString() + ": " + e.getMessage() + "\n");
+        }
         game.refreshGameElements();
 
         if (!GamePlay.IS_CLASSIC) {

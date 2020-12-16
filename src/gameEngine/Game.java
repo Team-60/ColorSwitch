@@ -1,5 +1,8 @@
 package gameEngine;
 
+import gameEngine.customExceptions.FallOutException;
+import gameEngine.customExceptions.GameOverException;
+import gameEngine.customExceptions.ObstacleCollisionException;
 import gameEngine.gameElements.*;
 import gameEngine.gameElements.obstacles.*;
 import gameEngine.swarm.Swarm;
@@ -86,7 +89,7 @@ public class Game implements Serializable, Comparable<Game> {
         }
     }
 
-    public void checkAndUpdate(double time) {
+    public void checkAndUpdate(double time) throws GameOverException {
         if (gameOver) {
             swarm.update(time/1.2);
             return;
@@ -97,6 +100,7 @@ public class Game implements Serializable, Comparable<Game> {
             swarm.explode(this.ball);
             App.BgMediaPlayer.stop();
             this.fallDownClip.play();
+            throw new FallOutException();
         }
         moveScreenRelative(offset);
 
@@ -119,10 +123,11 @@ public class Game implements Serializable, Comparable<Game> {
             }
             if (gameElement.checkCollision(ball)) {
                 gameElement.playSound();
-                if (gameElement instanceof Obstacle) {
+                if (gameElement instanceof Obstacle) { // game over condition
                     gameOver = true;
                     swarm.explode(this.ball);
                     gameElementsTemp.add(gameElement);
+                    throw new ObstacleCollisionException(((Obstacle) gameElement).getClass());
                 }
                 continue;
             }

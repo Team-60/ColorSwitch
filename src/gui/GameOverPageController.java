@@ -4,6 +4,7 @@ import gameEngine.App;
 import gameEngine.Game;
 import gameEngine.GamePlay;
 import gameEngine.Player;
+import gameEngine.customExceptions.InsufficientStarsException;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -381,13 +382,16 @@ public class GameOverPageController {
 
     @FXML
     public void restartUsingStarsClicked() { // based on score?, keep a total of stars
-
         if (this.disableRevival) {
             new Dialog(this.cantReviveMsg, (Stage) this.app.getScene().getWindow());
             return;
         }
 
-        if (this.app.getTotalStars() >= App.REVIVAL_STARS) {
+        try {
+            if (!this.app.decTotalStars(App.REVIVAL_STARS)) // check if possible & then decrease current stars & reset label
+                throw new InsufficientStarsException(this.app.getTotalStars());
+            this.totalStarsLabel.setText(Integer.toString(this.app.getTotalStars()));
+
             this.clickSound.play();
 
             // record previous score & set revival status
@@ -395,10 +399,6 @@ public class GameOverPageController {
             this.game.getPlayer().setScoreBeforeRevival();
 
             System.out.println(this.getClass().toString() + " restart using stars success");
-
-            this.app.decTotalStars(App.REVIVAL_STARS); // decrease current stars & reset label
-            this.totalStarsLabel.setText(Integer.toString(this.app.getTotalStars()));
-
             new Dialog(App.REVIVAL_STARS + " stars used for revival!", (Stage) this.app.getScene().getWindow());
 
             Scene scene = this.app.getScene();
@@ -412,9 +412,11 @@ public class GameOverPageController {
                 System.out.println(this.getClass().toString() + " New game failed to load!");
                 e.printStackTrace();
             }
-        } else {
+        } catch (InsufficientStarsException e) {
+            System.out.println(this.getClass().toString() + ": " + e.toString());
+            System.out.println(this.getClass().toString() + ": " + e.getMessage() + "\n");
+
             this.errorSound.play();
-            System.out.println(this.getClass().toString() + " restart using stars failure");
             new Dialog("Need " + App.REVIVAL_STARS + " stars!", (Stage) this.app.getScene().getWindow());
         }
     }
