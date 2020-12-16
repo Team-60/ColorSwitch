@@ -42,8 +42,8 @@ public class Bubbles {
             radius = random.nextInt(60) + 20;
             x = (random.nextDouble() * 1000) % (GamePlay.WIDTH - radius) + radius;
             y = (random.nextDouble() * 1000) % (GamePlay.HEIGHT - radius) + radius;
-            Vx = random.nextInt(150) + 60;
-            Vy = random.nextInt(150) + 60;
+            Vx = random.nextInt(150) + 20;
+            Vy = random.nextInt(150) + 20;
             dir = random.nextInt(4);
             if (dir == 1) {
                 Vx *= -1;
