@@ -18,6 +18,7 @@ public class Bubble {
         this.x = x;
         this.y = y;
         this.radius = radius;
+//        this.radius = 50;
         this.Vx = Vx;
         this.Vy = Vy;
         this.graphicsContext = graphicsContext;
@@ -50,8 +51,16 @@ public class Bubble {
     }
 
     public void color() {
-        graphicsContext.setFill(color.deriveColor(1, 1, 1, 0.1));
-        graphicsContext.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
+
+        double r = 4, bright = 1;
+        while (r < radius) {
+            graphicsContext.setFill(Color.YELLOW.deriveColor(1, 1, 1, bright));
+            graphicsContext.fillOval(x - r, y - r, 2 * r, 2 * r);
+            r += 2;
+            if (bright > 0.01)
+                bright -= bright / 2;
+            else break;
+        }
     }
 
     public void elasticCollisions(ArrayList<Bubble> fireFlies) {
@@ -61,11 +70,11 @@ public class Bubble {
                 double vx = Vx, vy = Vy;
                 double v2x = bubble.getVx(), v2y = bubble.getVy();
                 double r1 = radius, r2 = bubble.getRadius();
-                Vx = (r1 - r2)/(r1 + r2) * vx + 2 * (r2) / (r1 + r2) * v2x;
-                bubble.setVx(2 * r1/(r1 + r2) * vx + (r2 - r1)/(r1 + r2) * v2x);
+                Vx = (r1 - r2) / (r1 + r2) * vx + 2 * (r2) / (r1 + r2) * v2x;
+                bubble.setVx(2 * r1 / (r1 + r2) * vx + (r2 - r1) / (r1 + r2) * v2x);
 
-                Vy = (r1 - r2)/(r1 + r2) * vy + 2 * (r2) / (r1 + r2) * v2y;
-                bubble.setVy(2 * r1/(r1 + r2) * vy + (r2 - r1)/(r1 + r2) * v2y);
+                Vy = (r1 - r2) / (r1 + r2) * vy + 2 * (r2) / (r1 + r2) * v2y;
+                bubble.setVy(2 * r1 / (r1 + r2) * vy + (r2 - r1) / (r1 + r2) * v2y);
             }
         }
     }
