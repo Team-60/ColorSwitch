@@ -63,6 +63,8 @@ public class GameOverPageController {
     private Label yourScoreLabel;
     @FXML
     private Label bestScoreLabel;
+    @FXML
+    private Label totalStarsLabel;
 
     public void init(App _app, Game _game) {
         this.app = _app;
@@ -80,6 +82,9 @@ public class GameOverPageController {
             App.BgMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             App.BgMediaPlayer.play();
         }
+
+        // set total stars
+        this.totalStarsLabel.setText(Integer.toString(this.app.getTotalStars()));
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());
@@ -371,7 +376,9 @@ public class GameOverPageController {
             this.clickSound.play();
             this.game.getPlayer().setHasRevived();
             System.out.println(this.getClass().toString() + " restart using stars success");
-            this.app.decTotalStars(App.REVIVAL_STARS); // decrease current stars
+
+            this.app.decTotalStars(App.REVIVAL_STARS); // decrease current stars & reset label
+            this.totalStarsLabel.setText(Integer.toString(this.app.getTotalStars()));
 
             new Dialog(App.REVIVAL_STARS + " stars used for revival!", (Stage) this.app.getScene().getWindow());
 

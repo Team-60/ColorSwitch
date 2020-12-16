@@ -19,21 +19,35 @@
       </ImageView>
       <Group layoutX="66.0" layoutY="13.0" scaleX="1.2" scaleY="1.2">
          <children>
-            <ImageView fitHeight="213.0" fitWidth="290.0" layoutX="12.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="213.0" fitWidth="290.0" layoutX="12.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/headingWithoutRing.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="logoRingL" fitHeight="46.0" fitWidth="47.0" layoutX="97.0" layoutY="68.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoRingL" fitHeight="46.0" fitWidth="47.0" layoutX="97.0" layoutY="88.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/colorCircleSmallWide.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="logoRingR" fitHeight="46.0" fitWidth="47.0" layoutX="179.0" layoutY="68.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logoRingR" fitHeight="46.0" fitWidth="47.0" layoutX="179.0" layoutY="88.0" onMouseClicked="#playEasterEggClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/gameOverPage/colorCircleSmallWide.png" />
                </image>
             </ImageView>
+            <Group layoutX="-26.0" layoutY="-5.0" scaleX="0.8" scaleY="0.8">
+               <children>
+                  <Label fx:id="totalStarsLabel" alignment="CENTER" layoutX="-22.0" layoutY="50.0" prefHeight="43.0" prefWidth="108.0" scaleX="0.8" scaleY="0.8" text="234" textFill="WHITE">
+                     <font>
+                        <Font name="Courier New Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="54.0" fitWidth="74.0" layoutX="-5.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/gameOverPage/totalstars_white.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
          </children>
          <effect>
             <Glow />
@@ -49,7 +63,7 @@
             </ImageView>
          </children>
       </Group>
-      <Group layoutY="232.0">
+      <Group layoutY="245.0">
          <children>
             <Rectangle fill="#66a5ad" height="48.0" layoutY="10.0" opacity="0.8" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
             <Rectangle height="45.0" layoutY="8.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
@@ -63,7 +77,7 @@
             </Label>
          </children>
       </Group>
-      <Label fx:id="yourScoreLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="300.0" prefHeight="50.0" prefWidth="450.0" text="14" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="yourScoreLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="313.0" prefHeight="50.0" prefWidth="450.0" text="14" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="38.0" />
          </font>
@@ -78,7 +92,7 @@
             <Glow />
          </effect>
       </Label>
-      <Group layoutY="366.0">
+      <Group layoutY="377.0">
          <children>
             <Rectangle fill="#ca4912" height="48.0" layoutY="6.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
             <Rectangle fill="#ff6600" height="45.0" layoutY="3.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="450.0" />
@@ -92,7 +106,7 @@
             </Label>
          </children>
       </Group>
-      <Label fx:id="bestScoreLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="431.0" prefHeight="50.0" prefWidth="450.0" text="25" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="bestScoreLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutY="441.0" prefHeight="50.0" prefWidth="450.0" text="25" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="38.0" />
          </font>

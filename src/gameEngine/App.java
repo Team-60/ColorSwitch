@@ -30,10 +30,7 @@ TODO: add score on game over page, set highscore, highscore line
 TODO: throw game over exceptions/ fall down exceptions
 TODO: threads while drawing?
 
-TODO: revive using stars!!!!!!, add global currency, has revived ~~~~
-TODO: implement Leaderboard screen comparators and saving
-TODO: implement Serializable, ensure every asset is reloaded after deserializing, might need to create init?
-TODO: game is saved, but now display on leaderboard, and implement saving for already saved game, remove on game over, add timer for pause
+TODO: revive using stars!!!!!!, added global currency, has revived ~~~~, need to add net diff to global
 */
 
 /*
