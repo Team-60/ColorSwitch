@@ -33,6 +33,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class GameOverPageController {
@@ -43,13 +44,18 @@ public class GameOverPageController {
 
     private AudioClip hoverSound;
     private AudioClip clickSound;
-    private AudioClip easterEggClick;
     private AudioClip errorSound;
 
     private RotateTransition rtIconRestartUsingStars;
     private boolean disableRevival;
 
     private String cantReviveMsg = null; // As player is either on LB, or has used revival
+
+    private ImageView easterEggRing; // null indicates that easter egg is disabled, if revival is disabled, disable easter egg
+    private RotateTransition easterEggRt;
+    private int countEasterEggClicks;
+    private AudioClip[] easterEggClips;
+    private Image playImgEasterEgg;
 
     @FXML
     private AnchorPane gameOverRoot;
@@ -97,11 +103,9 @@ public class GameOverPageController {
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());
-        this.easterEggClick = new AudioClip(new File("src/assets/music/mouse/easterEgg_click_mainpage.wav").toURI().toString());
         this.errorSound = new AudioClip(new File("src/assets/music/mouse/error.wav").toURI().toString());
         this.clickSound.setVolume(0.5);
         this.hoverSound.setVolume(0.04);
-        this.easterEggClick.setVolume(0.5);
         this.errorSound.setVolume(0.4);
 
         RotateTransition rtLogoRingL = new RotateTransition(Duration.millis(15000), logoRingL);
@@ -122,6 +126,9 @@ public class GameOverPageController {
         }
         else
             this.startRotation(rtIconRestartUsingStars, 1);
+
+        // set easter egg, stop rotate transition on L / R
+        this.setEasterEgg(rtLogoRingL, rtLogoRingR);
     }
 
     public void checkForLeaderboard() { // LB stores the best performance of players
@@ -172,17 +179,6 @@ public class GameOverPageController {
         }
     }
 
-    private void deactivateRevival() {
-        System.out.println(this.getClass().toString() + " deactivated revival");
-        this.disableRevival = true;
-        if (rtIconRestartUsingStars != null)
-            this.rtIconRestartUsingStars.stop();
-        this.iconRestartUsingStars.setRotate(0);
-        Circle circle = (Circle) this.iconRestartUsingStars.getChildren().get(0);
-        circle.setFill(Color.web("#808588"));
-        this.iconRestartUsingStars.setOpacity(0.75);
-    }
-
     private void processInputLB(StackPane rootContainer, InputPopupController<GameOverPageController> inputPopupController, Rectangle tempR) {
         assert (inputPopupController.getSaveSuccess() == (this.usernameLB != null));
         rootContainer.getChildren().remove(tempR); // regain focus
@@ -192,6 +188,7 @@ public class GameOverPageController {
             Tooltip.install(this.iconRestartUsingStars, null);
             this.cantReviveMsg = "Player exists on Leaderboard!";
             this.deactivateRevival(); // made it to LB, deactivate revival now
+            this.easterEggRing = null; // deactivate easter egg
 
             System.out.println(this.getClass().toString() + " " + this.usernameLB + " received");
             this.app.addToLB(this.game.getPlayer(), this.usernameLB); // as the player doesn't exist on LB
@@ -199,6 +196,110 @@ public class GameOverPageController {
             this.app.calcHighscore();
             System.out.println(this.getClass().toString() + " lb entry cancelled");
         }
+    }
+
+    private void setEasterEgg(RotateTransition lrl, RotateTransition lrr) {
+        this.countEasterEggClicks = 0;
+
+        this.easterEggClips = new AudioClip[3];
+        for (int i = 0; i <= 2; ++ i) {
+            this.easterEggClips[i] = new AudioClip(new File("src/assets/music/mouse/easterEgg_click" + i + "." + (i == 0 ? "wav" : "mp3")).toURI().toString());
+            this.easterEggClips[i].setVolume((i == 2) ? 1 : 0.5);
+        }
+
+        this.playImgEasterEgg = new Image(new File("src/assets/gameOverPage/play.png").toURI().toString());
+
+        int rand = (new Random()).nextInt(1000);
+        System.out.println(this.getClass().toString() + " rand: " + rand);
+        if (rand % 4 == 0) {
+            System.out.println(this.getClass().toString() + " created EELRL");
+            this.easterEggRing = this.logoRingL;
+            this.easterEggRt = lrl;
+        } else if (rand % 4 == 2) {
+            System.out.println(this.getClass().toString() + " created EELRR");
+            this.easterEggRing = this.logoRingR;
+            this.easterEggRt = lrr;
+        } else {
+            this.easterEggRing = null;
+        }
+
+        if (this.disableRevival) { // null indicates that easter egg is disabled, if revival is disabled, disable easter egg
+            this.easterEggRing = null;
+        }
+    }
+
+    @FXML
+    public void playEasterEggClick(MouseEvent mouseEvent) {
+        ImageView img = (ImageView) mouseEvent.getSource();
+        assert (img != null); // as null is a checking condition
+        if (img != this.easterEggRing) return;
+
+        if (this.countEasterEggClicks == 2) { // init the easter egg
+            App.BgMediaPlayer.setVolume(0); // automatically gameplay will overwrite with it's own media
+            this.easterEggClips[2].play();
+
+            try { // wait for the audioClip to play
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                System.out.println(this.getClass().toString() + " failed to sleep thread");
+            }
+
+            // free revival
+            // record previous score & set revival status
+            this.game.getPlayer().setHasRevived();
+            this.game.getPlayer().setScoreBeforeRevival();
+
+            System.out.println(this.getClass().toString() + " free revival used! Easter egg discovered");
+            new Dialog("Free revival used!", (Stage) this.app.getScene().getWindow());
+
+            Scene scene = this.app.getScene();
+            StackPane rootContainer = (StackPane) scene.getRoot();
+            assert (rootContainer.getChildren().size() == 1);
+            rootContainer.getChildren().remove(this.gameOverRoot);
+            try {
+                this.game.revive(); // refresh game parameters
+                new GamePlay(this.app, this.game, true);
+            } catch (IOException e) {
+                System.out.println(this.getClass().toString() + " New game failed to load!");
+                e.printStackTrace();
+            }
+        } else {
+            this.easterEggClips[this.countEasterEggClicks ++].play();
+            if (this.countEasterEggClicks == 2) {
+                Timeline scaleAnim = new Timeline(
+                        new KeyFrame(Duration.ZERO, new KeyValue(this.easterEggRing.scaleXProperty(), this.easterEggRing.getScaleX(), Interpolator.EASE_IN), new KeyValue(this.easterEggRing.scaleYProperty(), this.easterEggRing.getScaleY(), Interpolator.EASE_IN)),
+                        new KeyFrame(Duration.seconds(0.6), new KeyValue(this.easterEggRing.scaleXProperty(), 1.075, Interpolator.EASE_IN), new KeyValue(this.easterEggRing.scaleYProperty(), 1.075, Interpolator.EASE_IN))
+                );
+                scaleAnim.setAutoReverse(true);
+                scaleAnim.setCycleCount(Animation.INDEFINITE);
+
+                FadeTransition ftIn = new FadeTransition(Duration.seconds(0.5), this.easterEggRing);
+                ftIn.setToValue(1);
+                ftIn.setOnFinished(t -> scaleAnim.play());
+
+                FadeTransition ftOut = new FadeTransition(Duration.seconds(0.5), this.easterEggRing);
+                ftOut.setToValue(0.0);
+                ftOut.setOnFinished(t -> {
+                    this.easterEggRing.setImage(this.playImgEasterEgg);
+                    this.easterEggRt.stop();
+                    this.easterEggRing.setRotate(0);
+                    ftIn.play();
+                });
+                ftOut.play();
+            }
+
+        }
+    }
+
+    private void deactivateRevival() {
+        System.out.println(this.getClass().toString() + " deactivated revival");
+        this.disableRevival = true;
+        if (this.rtIconRestartUsingStars != null)
+            this.rtIconRestartUsingStars.stop();
+        this.iconRestartUsingStars.setRotate(0);
+        Circle circle = (Circle) this.iconRestartUsingStars.getChildren().get(0);
+        circle.setFill(Color.web("#808588"));
+        this.iconRestartUsingStars.setOpacity(0.75);
     }
 
     private void startRotation(RotateTransition rt, int dir) {
@@ -284,11 +385,6 @@ public class GameOverPageController {
 
         timelineSlide.play();
         timelineFadeIn.play();
-    }
-
-    @FXML
-    public void playEasterEggClick() {
-        this.easterEggClick.play();
     }
 
     @FXML

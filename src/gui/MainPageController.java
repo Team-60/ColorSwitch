@@ -34,6 +34,9 @@ public class MainPageController {
     private AudioClip clickSound;
     private AudioClip exitSound;
 
+    private Image playImgHoverActive;
+    private Image playImgHoverInactive;
+
     // for modes
     private HashMap<Group, Group> otherMode;
     private Group activeMode;
@@ -95,6 +98,9 @@ public class MainPageController {
         this.iconCircleMap.put(iconLB, circleLB);
         this.iconCircleMap.put(iconLoad, circleLoad);
         this.iconCircleMap.put(iconExit, circleExit);
+
+        this.playImgHoverActive = new Image(new File("src/assets/mainPage/playDamped.png").toURI().toString());
+        this.playImgHoverInactive = new Image(new File("src/assets/mainPage/play.png").toURI().toString());
 
         this.iconImgMap = new HashMap<>();
         this.iconImgMap.put(iconLB, imgLB);
@@ -219,15 +225,15 @@ public class MainPageController {
 
     @FXML
     public void playHoverActive(MouseEvent mouseEvent) {
-        ImageView source = (ImageView) mouseEvent.getSource();
-        source.setImage(new Image(new File("src/assets/mainPage/playDamped.png").toURI().toString()));
         this.hoverSound.play();
+        ImageView source = (ImageView) mouseEvent.getSource();
+        source.setImage(this.playImgHoverActive);
     }
 
     @FXML
     public void playHoverInactive(MouseEvent mouseEvent) {
         ImageView source = (ImageView) mouseEvent.getSource();
-        source.setImage(new Image(new File("src/assets/mainPage/play.png").toURI().toString()));
+        source.setImage(this.playImgHoverInactive);
     }
 
     @FXML
