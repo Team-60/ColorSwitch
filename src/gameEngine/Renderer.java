@@ -6,10 +6,8 @@ import javafx.scene.shape.FillRule;
 
 import java.util.ArrayList;
 
-// TODO, singleton design pattern?
 public final class Renderer {
 
-    // TODO: make all methods static
     public final static int WIDTH = 450;
     public final static int HEIGHT = 700;
     private static GraphicsContext graphicsContext;
