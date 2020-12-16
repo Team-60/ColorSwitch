@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -36,6 +37,9 @@ public class MainPageController {
     // for modes
     private HashMap<Group, Group> otherMode;
     private Group activeMode;
+
+    // for glow on non classic mode
+    private Timeline bubbleBgGlow;
 
     @FXML
     private AnchorPane mainPageRoot;
@@ -69,10 +73,15 @@ public class MainPageController {
     private ImageView logoRingL;
     @FXML
     private ImageView logoRingR;
+    @FXML
+    private ImageView bg;
+    @FXML
+    private ImageView bubbleBg;
 
     @SuppressWarnings("unused")
     @FXML
     private Group iconSettings;
+
 
     public void init(App _app) { // note, init always before scene transitions, might utilize data member, leads to exceptions
         this.initData(_app);
@@ -92,6 +101,15 @@ public class MainPageController {
         this.iconImgMap.put(iconLoad, imgLoad);
         this.iconImgMap.put(iconExit, imgExit);
 
+        // create anim timer for bubbleBg
+        Glow g = (Glow) this.bubbleBg.getEffect();
+        this.bubbleBgGlow = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(g.levelProperty(), g.getLevel(), Interpolator.EASE_BOTH)),
+                new KeyFrame(Duration.seconds(1.25), new KeyValue(g.levelProperty(), 1, Interpolator.EASE_BOTH))
+        );
+        bubbleBgGlow.setAutoReverse(true);
+        this.bubbleBgGlow.setCycleCount(Animation.INDEFINITE);
+
         // set modes
         this.otherMode = new HashMap<>();
         this.otherMode.put(this.iconModes1, this.iconModes2);
@@ -102,7 +120,6 @@ public class MainPageController {
         } else {
             this.activeMode = this.iconModes2;
             this.deactivateMode(this.iconModes1);
-            this.displayOtherModeEffects();
         }
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
@@ -113,6 +130,11 @@ public class MainPageController {
     }
 
     public void initAnim() { // for starting anim
+
+        if (!GamePlay.IS_CLASSIC) {
+            this.displayOtherModeEffects();
+        }
+
         RotateTransition rtIn = new RotateTransition(Duration.millis(15000), innerPlayRing);
         RotateTransition rtOut = new RotateTransition(Duration.millis(15000), outerPlayRing);
         RotateTransition rtLogoRingL = new RotateTransition(Duration.millis(15000), logoRingL);
@@ -167,14 +189,32 @@ public class MainPageController {
 
         // switch mode, already existing player can't ever come on main page
         GamePlay.IS_CLASSIC = !GamePlay.IS_CLASSIC;
+        System.out.println(this.getClass().toString() + "mode switched, is classic mode: " + GamePlay.IS_CLASSIC);
 
-        if (this.activeMode == this.iconModes2) {
+        if (this.activeMode == this.iconModes2) { // currently switched to non classic mode
             this.displayOtherModeEffects();
+        } else {
+            this.restoreNormalModeEffects();
         }
     }
 
-    private void displayOtherModeEffects() { // TODO
+    private void restoreNormalModeEffects() {
+        Timeline rmBg = new Timeline(
+                new KeyFrame(Duration.seconds(1), new KeyValue(this.bubbleBg.opacityProperty(), 0, Interpolator.EASE_IN), new KeyValue(this.bg.opacityProperty(), 0.6, Interpolator.EASE_IN))
+        );
+        rmBg.setOnFinished(t -> this.bubbleBgGlow.stop());
+        rmBg.play();
+    }
+
+    private void displayOtherModeEffects() {
         // add extra effects on main screen for non classic mode
+        Glow g = (Glow) this.bubbleBg.getEffect(); // reset glow to 0, might be that previous anim was interrupted
+        g.setLevel(0);
+        Timeline showBg = new Timeline(
+          new KeyFrame(Duration.seconds(1), new KeyValue(this.bubbleBg.opacityProperty(), 0.2, Interpolator.EASE_IN), new KeyValue(this.bg.opacityProperty(), 0.3, Interpolator.EASE_IN))
+        );
+        showBg.setOnFinished(t -> this.bubbleBgGlow.play());
+        showBg.play();
     }
 
     @FXML

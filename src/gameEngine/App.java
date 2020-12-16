@@ -28,7 +28,7 @@ TODO: throw game over exceptions/ fall down exceptions
 TODO: fix dialog ?
 TODO: Maybe Settings ?
 
-TODO: mode switch through LB, effects on main page, effects on lb?
+TODO: mode switch through LB, effects on main page, effects on lb?, add score on bubbles
 */
 
 /*

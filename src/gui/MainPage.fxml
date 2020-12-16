@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,10 +13,22 @@
 
 <AnchorPane fx:id="mainPageRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" style="-fx-background-color: #0D152C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainPageController">
    <children>
-      <ImageView fitHeight="700.0" fitWidth="450.0" opacity="0.6" pickOnBounds="true">
+      <ImageView fx:id="bg" fitHeight="700.0" fitWidth="450.0" opacity="0.6" pickOnBounds="true">
          <image>
             <Image url="@../assets/mainPage/bg.png" />
          </image>
+      </ImageView>
+      <ImageView fx:id="bubbleBg" fitHeight="700.0" fitWidth="450.0" opacity="0.0" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/mainPage/bubblebg.png" />
+         </image>
+         <effect>
+            <Glow level="0.0">
+               <input>
+                  <ColorAdjust brightness="-0.1" contrast="1.0" />
+               </input>
+            </Glow>
+         </effect>
       </ImageView>
       <Group layoutX="50.0" layoutY="6.0" scaleX="1.05" scaleY="1.05">
          <children>

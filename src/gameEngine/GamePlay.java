@@ -99,6 +99,7 @@ public class GamePlay {
         this.player = this.game.getPlayer();
 
         GamePlay.IS_CLASSIC = this.player.getIsClassicMode(); // set mode
+        System.out.println(this.getClass().toString() + "on game reformation, isClassic mode: " + GamePlay.IS_CLASSIC);
 
         Stage primaryStage = (Stage) this.scene.getWindow();
         primaryStage.requestFocus(); // in case, overshadowed by secondary stage
