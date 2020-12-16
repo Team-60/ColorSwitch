@@ -49,9 +49,8 @@ public class GamePlay {
     public static long GameOverTime = -1;
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
-
     // TODO : assign to users choice in main menu
-    boolean bubbles = true;
+    public static boolean IS_CLASSIC = true;
 
     public GamePlay(App _app) throws IOException { // create a new game and a new player, sep. constructor for deserialize, IOException is always managed by caller
         this.app = _app;
@@ -295,7 +294,7 @@ class GamePlayAnimationTimer extends AnimationTimer {
         double timeDifference = (double) (currentNanoTime - GamePlay.PreviousFrameTime) / 1000000000;
         GamePlay.PreviousFrameTime = currentNanoTime;
 
-        if (gamePlay.bubbles) {
+        if (!GamePlay.IS_CLASSIC) {
             bubbles.move(timeDifference);
             bubbles.clip();
             if (!game.isGameOver())
@@ -325,7 +324,7 @@ class GamePlayAnimationTimer extends AnimationTimer {
         game.checkAndUpdate(timeDifference);
         game.refreshGameElements();
 
-        if (gamePlay.bubbles) {
+        if (!GamePlay.IS_CLASSIC) {
             bubbles.color();
         }
 

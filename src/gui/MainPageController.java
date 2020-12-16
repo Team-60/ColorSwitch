@@ -22,8 +22,6 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class MainPageController {
@@ -35,6 +33,10 @@ public class MainPageController {
     private AudioClip clickSound;
     private AudioClip exitSound;
 
+    // for modes
+    private HashMap<Group, Group> otherMode;
+    private Group activeMode;
+
     @FXML
     private AnchorPane mainPageRoot;
     @FXML
@@ -44,11 +46,9 @@ public class MainPageController {
     @FXML
     private Group iconExit;
     @FXML
-    private Group iconSettings;
+    private Group iconModes1; // classic
     @FXML
-    private Group iconModes1;
-    @FXML
-    private Group iconModes2;
+    private Group iconModes2; // other mode
     @FXML
     private Circle circleLB;
     @FXML
@@ -70,6 +70,10 @@ public class MainPageController {
     @FXML
     private ImageView logoRingR;
 
+    @SuppressWarnings("unused")
+    @FXML
+    private Group iconSettings;
+
     public void init(App _app) { // note, init always before scene transitions, might utilize data member, leads to exceptions
         this.initData(_app);
         this.initAnim();
@@ -87,6 +91,19 @@ public class MainPageController {
         this.iconImgMap.put(iconLB, imgLB);
         this.iconImgMap.put(iconLoad, imgLoad);
         this.iconImgMap.put(iconExit, imgExit);
+
+        // set modes
+        this.otherMode = new HashMap<>();
+        this.otherMode.put(this.iconModes1, this.iconModes2);
+        this.otherMode.put(this.iconModes2, this.iconModes1);
+        if (GamePlay.IS_CLASSIC) {
+            this.activeMode = this.iconModes1;
+            this.deactivateMode(this.iconModes2);
+        } else {
+            this.activeMode = this.iconModes2;
+            this.deactivateMode(this.iconModes1);
+            this.displayOtherModeEffects();
+        }
 
         this.hoverSound = new AudioClip(new File("src/assets/music/mouse/hover.wav").toURI().toString());
         this.clickSound = new AudioClip(new File("src/assets/music/mouse/button.wav").toURI().toString());
@@ -117,6 +134,47 @@ public class MainPageController {
         rt.setCycleCount(Animation.INDEFINITE);
         rt.setInterpolator(Interpolator.LINEAR);
         rt.play();
+    }
+
+    private void deactivateMode(Group group) { // for switching between modes
+        group.setOpacity(0.7);
+    }
+
+    @FXML
+    public void modeHoverActive(MouseEvent mouseEvent) {
+        Group g = (Group) mouseEvent.getSource();
+        if (this.activeMode == g) return;
+        this.hoverSound.play();
+        this.otherMode.get(this.activeMode).setOpacity(0.85);
+    }
+
+    @FXML
+    public void modeHoverInactive(MouseEvent mouseEvent) {
+        Group g = (Group) mouseEvent.getSource();
+        if (this.activeMode == g) return;
+        this.otherMode.get(this.activeMode).setOpacity(0.7);
+    }
+
+    @FXML
+    public void modeSwitchClicked(MouseEvent mouseEvent) {
+        Group g = (Group) mouseEvent.getSource();
+        if (this.activeMode == g) return;
+        this.clickSound.play();
+
+        this.activeMode = g;
+        this.activeMode.setOpacity(1);
+        deactivateMode(this.otherMode.get(this.activeMode));
+
+        // switch mode, already existing player can't ever come on main page
+        GamePlay.IS_CLASSIC = !GamePlay.IS_CLASSIC;
+
+        if (this.activeMode == this.iconModes2) {
+            this.displayOtherModeEffects();
+        }
+    }
+
+    private void displayOtherModeEffects() { // TODO
+        // add extra effects on main screen for non classic mode
     }
 
     @FXML
