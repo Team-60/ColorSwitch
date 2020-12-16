@@ -15,6 +15,7 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
     private String date;
     private Boolean hasRevived;
     private int scoreBeforeRevival;
+    private final boolean isClassicMode;
 
     public Player() {
         this.name = null;
@@ -25,6 +26,7 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
         this.date = null;
         this.hasRevived = false;
         this.scoreBeforeRevival = 0; // 0 in case no revival has happened
+        this.isClassicMode = GamePlay.IS_CLASSIC; // as new player inherits current existing mode from GamePlay
     }
 
     public int getScore() {
@@ -59,6 +61,9 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
     }
     public int getScoreBeforeRevival() {
         return this.scoreBeforeRevival;
+    }
+    public boolean getIsClassicMode() {
+        return this.isClassicMode;
     }
 
     public void setId(int _id) {
@@ -104,6 +109,7 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
 
     @Override
     public String toString() {
+        String ms = "* Mode: " + (this.isClassicMode ? "Classic\n" : "Bubbles\n"); // TODO, if mode name changed
         String ps = "* Name: " + this.name + "\n";
         String is = "* Game Id: " + this.id + "\n";
         String ss = "* Score: " + this.score + "\n";
@@ -111,7 +117,7 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
         String dis = "* Dist.: " + this.getDistance() + " px \n";
         String ds = "* Date: " + this.date + "\n";
         String rs = "* Revived: " + this.hasRevived + "\n";
-        return ps + is + ss + js + dis + ds + rs;
+        return ms + ps + is + ss + js + dis + ds + rs;
     }
 
 }

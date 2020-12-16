@@ -105,7 +105,7 @@
       </Group>
       <Group layoutX="25.0" layoutY="496.0">
          <children>
-            <Group fx:id="iconModes1" layoutX="70.0" onMouseClicked="#modeSwitchClicked" onMouseEntered="#modeHoverActive" onMouseExited="#modeHoverInactive">
+            <Group fx:id="iconModes1" layoutX="70.0" onMouseClicked="#modeSwitchClicked" onMouseEntered="#modeHoverActive" onMouseExited="#modeHoverInactive" pickOnBounds="true">
                <children>
                   <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#07575b" height="36.0" stroke="#07575b" strokeType="OUTSIDE" strokeWidth="0.0" width="125.0" />
                   <Label alignment="CENTER" layoutX="20.0" layoutY="8.0" prefHeight="19.0" prefWidth="85.0" text="Classic" textFill="WHITE">
@@ -118,7 +118,7 @@
                   </Label>
                </children>
             </Group>
-            <Group fx:id="iconModes2" layoutX="205.0" onMouseClicked="#modeSwitchClicked" onMouseEntered="#modeHoverActive" onMouseExited="#modeHoverInactive">
+            <Group fx:id="iconModes2" layoutX="205.0" onMouseClicked="#modeSwitchClicked" onMouseEntered="#modeHoverActive" onMouseExited="#modeHoverInactive" pickOnBounds="true">
                <children>
                   <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#66a5ad" height="36.0" stroke="#66a5ad" strokeType="OUTSIDE" strokeWidth="0.0" width="125.0" />
                   <Label alignment="CENTER" layoutX="18.0" layoutY="8.0" prefHeight="19.0" prefWidth="87.0" text="Bubbles" textFill="WHITE">

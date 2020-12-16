@@ -98,6 +98,8 @@ public class GamePlay {
         this.game = _game;
         this.player = this.game.getPlayer();
 
+        GamePlay.IS_CLASSIC = this.player.getIsClassicMode(); // set mode
+
         Stage primaryStage = (Stage) this.scene.getWindow();
         primaryStage.requestFocus(); // in case, overshadowed by secondary stage
         this.resetBgMusic();

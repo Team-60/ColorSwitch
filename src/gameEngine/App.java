@@ -24,13 +24,11 @@ import java.util.ArrayList;
 Divyansh's:
 TODO: Beware of file changes and refactoring, especially in file paths while making jar
 TODO: Implement Easter egg2 secret restart
-TODO: Implement Player Class, Database class
-TODO: restart on game over page & on pause implement (maybe see for reference keeping?), pause delay
-TODO: add score on game over page, set highscore, highscore line
 TODO: throw game over exceptions/ fall down exceptions
-TODO: threads while drawing?
+TODO: fix dialog ?
+TODO: Maybe Settings ?
 
-TODO: revive using stars!!!!!!, added global currency, has revived ~~~~, need to add net diff to global
+TODO: mode switch through LB, effects on main page, effects on lb?
 */
 
 /*
@@ -63,38 +61,6 @@ public class App extends Application {
         this.readTotalStars();
 
 //        this.eraseDatabaseAndExit(); UNCOMMENT TO ERASE DATABASE
-    }
-
-    @SuppressWarnings("unused")
-    private void eraseDatabaseAndExit() { // in order to refresh the database
-        System.out.println(this.getClass().toString() + " database refreshed");
-        this.gameDatabase.reset(Game.FILE_PATH);
-        this.playerDatabase.reset(Player.FILE_PATH);
-        System.exit(0);
-    }
-
-    private void readTotalStars() {
-        try {
-            DataInputStream dis = new DataInputStream(new FileInputStream(pathTotalStars));
-            TOTAL_STARS = dis.readInt();
-            System.out.println(this.getClass().toString() + " read TOTAL_STARS: " + TOTAL_STARS);
-            dis.close();
-        } catch (IOException e) {
-            System.out.println(this.getClass().toString() + " failed to read total stars");
-            System.out.println(e.toString());
-        }
-    }
-
-    private void saveTotalStars() {
-        try {
-            DataOutputStream dos = new DataOutputStream(new FileOutputStream(pathTotalStars));
-            dos.writeInt(TOTAL_STARS);
-            System.out.println(this.getClass().toString() + " saved TOTAL_STARS: " + TOTAL_STARS);
-            dos.close();
-        } catch (IOException e) {
-            System.out.println(this.getClass().toString() + " failed to write total stars");
-            System.out.println(e.toString());
-        }
     }
 
     public void addAssets() {
@@ -251,6 +217,38 @@ public class App extends Application {
             System.out.println(this.getClass().toString() + " highscore updated");
     }
 
+    private void readTotalStars() {
+        try {
+            DataInputStream dis = new DataInputStream(new FileInputStream(pathTotalStars));
+            TOTAL_STARS = dis.readInt();
+            System.out.println(this.getClass().toString() + " read TOTAL_STARS: " + TOTAL_STARS);
+            dis.close();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to read total stars");
+            System.out.println(e.toString());
+        }
+    }
+
+    private void saveTotalStars() {
+        try {
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream(pathTotalStars));
+            dos.writeInt(TOTAL_STARS);
+            System.out.println(this.getClass().toString() + " saved TOTAL_STARS: " + TOTAL_STARS);
+            dos.close();
+        } catch (IOException e) {
+            System.out.println(this.getClass().toString() + " failed to write total stars");
+            System.out.println(e.toString());
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private void eraseDatabaseAndExit() { // in order to refresh the database
+        System.out.println(this.getClass().toString() + " database refreshed");
+        this.gameDatabase.reset(Game.FILE_PATH);
+        this.playerDatabase.reset(Player.FILE_PATH);
+        System.exit(0);
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -279,14 +277,15 @@ public class App extends Application {
         return TOTAL_STARS;
     }
 
-    public void addTotalStars(int up) { // add only when finished game
+    public void addTotalStars(int up) { // add only when finished game, need to save stars on modification
         TOTAL_STARS += up;
         this.saveTotalStars();
     }
 
-    public void decTotalStars(int dec) {
+    public void decTotalStars(int dec) { // need to save stars on modification
         assert (dec <= TOTAL_STARS);
         TOTAL_STARS -= dec;
+        this.saveTotalStars();
         System.out.println(this.getClass().toString() + " TOTAL_STARS after dec.: " + TOTAL_STARS);
     }
 }
