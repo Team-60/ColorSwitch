@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 @SuppressWarnings("ALL")
-public class ObsTriangle extends Obstacle{
+public class ObsTriangle extends Obstacle {
     private final double width;
     private final double sideLength;
     private double rotationAngle;
@@ -160,6 +160,10 @@ public class ObsTriangle extends Obstacle{
     @Override
     public void destroy() {
 
+    }
+
+    public ArrayList<String> getColors() {
+        return colors;
     }
 
     @Override
