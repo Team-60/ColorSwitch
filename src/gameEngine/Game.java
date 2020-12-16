@@ -49,7 +49,7 @@ public class Game implements Serializable, Comparable<Game> {
         double y = 350;
         gameElements = new ArrayList<>();
         Obstacle obstacle = new ObsCircle(225, 350, 90, 15);
-        GameElement switchColor = new SwitchColor(x, obstacle.getTopY() - distanceBetweenObstacles/2);
+        GameElement switchColor = new SwitchColor(x, obstacle.getTopY() - distanceBetweenObstacles / 2);
         gameElements.add(obstacle);
         gameElements.add(switchColor);
         ball.setColor(obstacle.getRandomColor());
@@ -91,7 +91,7 @@ public class Game implements Serializable, Comparable<Game> {
 
     public void checkAndUpdate(double time) throws GameOverException {
         if (gameOver) {
-            swarm.update(time/1.2);
+            swarm.update(time / 1.2);
             return;
         }
         double offset = ball.move(time, this.player);
@@ -133,7 +133,7 @@ public class Game implements Serializable, Comparable<Game> {
             }
             if (gameElement.getTopY() < 1000) {
                 if (gameElement instanceof Obstacle) {
-                    ((Obstacle)gameElement).update(time);
+                    ((Obstacle) gameElement).update(time);
                 }
                 gameElementsTemp.add(gameElement);
             }
@@ -151,18 +151,18 @@ public class Game implements Serializable, Comparable<Game> {
             }
         }
 
-        while(gameElements.size() < 16) {
-            Obstacle obstacle = getRandomObstacle(x, y);
+        while (gameElements.size() < 16) {
+            Obstacle obstacle = ObstacleFactory.obstacle(obstacleCount, x, y);
             obstacleCount += obstacle.getMaxCount();
             y = obstacle.getTopY();
 
             if (obstacleCount >= highScore && !highScoreLineDisplayed) {
-                GameElement highScoreLine = new HighScoreLine(y - distanceBetweenObstacles/4);
+                GameElement highScoreLine = new HighScoreLine(y - distanceBetweenObstacles / 4);
                 gameElements.add(highScoreLine);
                 highScoreLineDisplayed = true;
             }
 
-            GameElement switchColor = new SwitchColor(x, y - distanceBetweenObstacles/2);
+            GameElement switchColor = new SwitchColor(x, y - distanceBetweenObstacles / 2);
 
             gameElements.add(obstacle);
             gameElements.add(switchColor);
@@ -175,7 +175,7 @@ public class Game implements Serializable, Comparable<Game> {
             if (gameElement instanceof SwitchColor) {
                 prev = gameElement;
             } else if (gameElement instanceof Obstacle && prev != null) {
-                ((SwitchColor) prev).setObstacle((Obstacle)gameElement);
+                ((SwitchColor) prev).setObstacle((Obstacle) gameElement);
             }
         }
 
@@ -201,91 +201,6 @@ public class Game implements Serializable, Comparable<Game> {
         ball.refresh();
     }
 
-    private int getMean() {
-        if (player.getScore() + 5 >= 17) {
-            return 13;
-        }else {
-            return player.getScore() + 5;
-        }
-    }
-
-    public Obstacle getRandomObstacle(double x, double y) { // TODO
-
-        int randomNumber = (int)((new Random()).nextGaussian() * 2 + getMean());
-        // y - safe dist of that specific obstacle
-//        int randomNumber = 16;
-        if (randomNumber < 0) {
-            randomNumber = 0;
-        }
-        if (randomNumber == 0) {
-            return (new ObsCircle(x, y - 90, 90, 15));
-        } else if (randomNumber == 1) {
-            return new ObsLine(x, y - 7.5,15);
-        } else if (randomNumber == 2) {
-            return new ObsDoubleCircle(x, y - 115, 90, 115, 15);
-        } else if (randomNumber == 3) {
-            return new ObsSquare(x , y - 85 * Math.sqrt(2), 170, 15);
-        } else if (randomNumber == 4) {
-            return new ObsTriangle(x , y - 200 / Math.sqrt(3), 200, 15);
-        } else if (randomNumber == 5) {
-            // smaller square
-            Obstacle obstacle = new ObsSquare(x , y - 70 * Math.sqrt(2), 140, 13);
-            return obstacle;
-        } else if (randomNumber == 6) {
-            // faster square with same size
-            Obstacle obstacle = new ObsSquare(x , y - 85 * Math.sqrt(2), 170, 15);
-            obstacle.setRotationalSpeed(150);
-            return obstacle;
-        } else if (randomNumber == 7) {
-            // smaller circle
-            Obstacle obstacle = new ObsCircle(x, y - 75, 75, 10);
-            return obstacle;
-        } else if (randomNumber == 8) {
-            // smaller double circle
-            Obstacle obstacle = new ObsDoubleCircle(x, y - 90, 70, 90, 13);
-            return obstacle;
-        } else if (randomNumber == 9) {
-            // faster double circle with same size
-            Obstacle obstacle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
-            obstacle.setRotationalSpeed(150);
-            return obstacle;
-        } else if (randomNumber == 10) {
-            // faster circle with same radius
-            Obstacle obstacle = new ObsCircle(x, y - 90, 90, 15);
-            obstacle.setRotationalSpeed(150);
-            return obstacle;
-        } else if (randomNumber == 11) {
-            // smaller triangle
-            Obstacle obstacle = new ObsTriangle(x , y - 190 / Math.sqrt(3), 190, 13);
-            return obstacle;
-        } else if (randomNumber == 12) {
-            // faster triangle with same size
-            Obstacle obstacle = new ObsTriangle(x , y - 200 / Math.sqrt(3), 200, 15);
-            obstacle.setRotationalSpeed(130);
-            return obstacle;
-        } else if (randomNumber == 13) {
-            // super slow circle
-            Obstacle obstacle = new ObsCircle(x, y - 65, 65, 8);
-            obstacle.setRotationalSpeed(50);
-            return obstacle;
-        } else if (randomNumber == 14) {
-            ObsCircle circle = new ObsCircle(x, y - 90, 90, 15);
-            Obstacle obstacle = new ObsConsecutiveCircles(circle, 5);
-            return obstacle;
-        } else if (randomNumber == 15) {
-            ObsCircle doubleCircle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
-            Obstacle obstacle = new ObsConsecutiveCircles(doubleCircle, 5);
-            return obstacle;
-        } else if (randomNumber == 16) {
-            return new ObsTripleCircle(x, y - 140, 90, 115, 140, 15);
-        } else if (randomNumber == 17) {
-            ObsCircle obsTripleCircle = new ObsTripleCircle(x, y - 140, 90, 115, 140, 15);
-            Obstacle obstacle = new ObsConsecutiveCircles(obsTripleCircle, 5);
-            return obstacle;
-        } else {
-            return new ObsSquareCircle(x , y - 85 * Math.sqrt(2), 200, 15);
-        }
-    }
 
 
     public void revive() { // reset parameters after revival
@@ -293,7 +208,7 @@ public class Game implements Serializable, Comparable<Game> {
         for (GameElement gameElement : gameElements) {
             if (gameElement instanceof Obstacle) {
                 if (!((Obstacle) gameElement).isCrossed()) {
-                    ball.setY(gameElement.getBottomY() + distanceBetweenObstacles/2);
+                    ball.setY(gameElement.getBottomY() + distanceBetweenObstacles / 2);
                     break;
                 }
             }
