@@ -18,7 +18,6 @@ public class Bubble {
         this.x = x;
         this.y = y;
         this.radius = radius;
-//        this.radius = 50;
         this.Vx = Vx;
         this.Vy = Vy;
         this.graphicsContext = graphicsContext;
@@ -51,16 +50,8 @@ public class Bubble {
     }
 
     public void color() {
-
-        double r = 4, bright = 1;
-        while (r < radius) {
-            graphicsContext.setFill(Color.YELLOW.deriveColor(1, 1, 1, bright));
-            graphicsContext.fillOval(x - r, y - r, 2 * r, 2 * r);
-            r += 2;
-            if (bright > 0.01)
-                bright -= bright / 2;
-            else break;
-        }
+        graphicsContext.setFill(color.deriveColor(1, 1, 1, 0.1));
+        graphicsContext.fillOval(x - radius, y - radius, 2 * radius, 2 * radius);
     }
 
     public void elasticCollisions(ArrayList<Bubble> fireFlies) {
