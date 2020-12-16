@@ -12,6 +12,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -46,6 +47,8 @@ public class GameOverPageController {
 
     private RotateTransition rtIconRestartUsingStars;
     private boolean disableRevival;
+
+    private String cantReviveMsg = null; // As player is either on LB, or has used revival
 
     @FXML
     private AnchorPane gameOverRoot;
@@ -83,6 +86,11 @@ public class GameOverPageController {
             App.BgMediaPlayer.play();
         }
 
+        // add tooltip for revival stars count
+        Tooltip tooltip = new Tooltip("Revive using " + App.REVIVAL_STARS + " stars!");
+        tooltip.setStyle("-fx-font-style: italic; -fx-font-size: 10;");
+        Tooltip.install(iconRestartUsingStars, tooltip);
+
         // set total stars
         this.totalStarsLabel.setText(Integer.toString(this.app.getTotalStars()));
 
@@ -105,8 +113,12 @@ public class GameOverPageController {
         this.startRotation(rtIconLB, 1);
         this.startRotation(rtIconRestart, 1);
 
-        if (this.game.getPlayer().getHasRevived()) // deactivate revival if already has revived
+        if (this.game.getPlayer().getHasRevived()) {
+            // deactivate revival if already has revived
+            Tooltip.install(this.iconRestartUsingStars, null);
+            this.cantReviveMsg = "Revival already used!";
             this.deactivateRevival();
+        }
         else
             this.startRotation(rtIconRestartUsingStars, 1);
     }
@@ -176,7 +188,10 @@ public class GameOverPageController {
         this.gameOverRoot.requestFocus();
 
         if (inputPopupController.getSaveSuccess()) {
+            Tooltip.install(this.iconRestartUsingStars, null);
+            this.cantReviveMsg = "Player exists on Leaderboard!";
             this.deactivateRevival(); // made it to LB, deactivate revival now
+
             System.out.println(this.getClass().toString() + " " + this.usernameLB + " received");
             this.app.addToLB(this.game.getPlayer(), this.usernameLB); // as the player doesn't exist on LB
         } else { // reset highscore in case this was the current highscore as not saved
@@ -365,10 +380,10 @@ public class GameOverPageController {
     }
 
     @FXML
-    public void restartUsingStarsClicked() { // based on score?, keep a total of stars, TODO, if saved disable
+    public void restartUsingStarsClicked() { // based on score?, keep a total of stars
 
         if (this.disableRevival) {
-            new Dialog("Can't revive now!", (Stage) this.app.getScene().getWindow());
+            new Dialog(this.cantReviveMsg, (Stage) this.app.getScene().getWindow());
             return;
         }
 
