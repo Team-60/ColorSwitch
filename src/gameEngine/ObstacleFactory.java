@@ -14,7 +14,7 @@ public class ObstacleFactory {
         Random random = new Random();
         if (level > 3) {
             difficulty = - random.nextInt(4) + level;
-        } else difficulty = random.nextInt(4);
+        } else difficulty = random.nextInt(3) + 1;
 
         System.out.println(difficulty);
         Obstacle obstacle;
