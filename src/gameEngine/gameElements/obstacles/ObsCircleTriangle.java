@@ -7,7 +7,6 @@ import java.util.Random;
 
 public class ObsCircleTriangle extends Obstacle {
 
-
     private final ObsTriangle triangle;
     private final ObsCircle circle;
 

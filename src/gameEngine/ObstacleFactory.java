@@ -7,8 +7,8 @@ import java.util.Random;
 public class ObstacleFactory {
 
     public static Obstacle obstacle(int score, double x, double y) {
-        int level = (score + 1) / 2;
-        if (level > 24) level = 24;
+        int level = (score + 1) * 3;
+        if (level > 26) level = 26;
 
         int difficulty;
         Random random = new Random();
@@ -18,7 +18,7 @@ public class ObstacleFactory {
 
         System.out.println(ObstacleFactory.class.toString() + " difficulty: " + difficulty);
         Obstacle obstacle;
-        difficulty = 25;
+
         switch (difficulty) {
             case 1:
                 return (new ObsCircle(x, y - 90, 90, 15));
@@ -99,7 +99,7 @@ public class ObstacleFactory {
                 doubleCircle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
                 return new ObsConsecutiveCircles(doubleCircle, 4);
             case 24:
-                obstacle = new OscillatingCircle(x, y - 90, 90, 15);
+                obstacle = new ObsOscillatingCircle(x, y - 90, 90, 15);
                 return obstacle;
             case 25:
                 obstacle = new ObsOscillatingSquare(x, y - 85 * Math.sqrt(2), 170, 15);

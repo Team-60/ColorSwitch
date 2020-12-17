@@ -4,8 +4,10 @@ import gameEngine.Ball;
 import gameEngine.gameElements.Star;
 import javafx.scene.canvas.GraphicsContext;
 
-public class ObsOscillatingSquare extends Obstacle{
-    ObsSquare obsSquare;
+public class ObsOscillatingSquare extends Obstacle {
+
+    private final ObsSquare obsSquare;
+
     public ObsOscillatingSquare(double x, double y, double sideLength, double width) {
         super(x, y, y - sideLength/2 * Math.sqrt(2) - sideLength + 130, y + sideLength/2 * Math.sqrt(2) + sideLength - 130);
         obsSquare = new ObsSquare(x, y, sideLength, width);
