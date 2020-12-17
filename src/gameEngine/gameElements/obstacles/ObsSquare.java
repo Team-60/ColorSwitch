@@ -30,6 +30,14 @@ public class ObsSquare extends Obstacle {
         star = new Star(x, y);
     }
 
+    public double getRotationAngle() {
+        return rotationAngle;
+    }
+
+    public double getSideLength() {
+        return sideLength;
+    }
+
     @Override
     public void refresh(GraphicsContext graphicsContext) {
         if (star != null) {
