@@ -11,7 +11,6 @@ public class SwitchColor extends GameElement {
 
     private Obstacle obstacle;
 
-    // TODO: why is this useful??
     private static final int closestSafeDist = 100;
     private static int points = 0;
 

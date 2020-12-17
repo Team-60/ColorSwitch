@@ -109,7 +109,7 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
 
     @Override
     public String toString() {
-        String ms = "* Mode: " + (this.isClassicMode ? "Classic\n" : "Bubbles\n"); // TODO, if mode name changed
+        String ms = "* Mode: " + (this.isClassicMode ? "Classic\n" : "Bubbles\n");
         String ps = "* Name: " + this.name + "\n";
         String is = "* Game Id: " + this.id + "\n";
         String ss = "* Score: " + this.score + "\n";

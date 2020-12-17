@@ -8,8 +8,8 @@ import java.util.Random;
 public class ObsCircleTriangle extends Obstacle {
 
 
-    ObsTriangle triangle;
-    ObsCircle circle;
+    private final ObsTriangle triangle;
+    private final ObsCircle circle;
 
     public ObsCircleTriangle(double x, double y, double sideLength, double width) {
         super(x, y, y - sideLength / Math.sqrt(3), y + sideLength/Math.sqrt(3));
