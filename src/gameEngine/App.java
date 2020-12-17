@@ -23,18 +23,7 @@ import java.util.ArrayList;
 /*
 Divyansh's:
 TODO: Beware of file changes and refactoring, especially in file paths while making jar
-TODO: Implement Easter egg2 secret restart
-TODO: throw game over exceptions/ fall down exceptions
-TODO: fix dialog ?
-TODO: Maybe Settings ?
-
-TODO: mode switch through LB, effects on main page, effects on lb?, add score on bubbles
 */
-
-/*
-Serialization notes:
-Score (Player)
- */
 
 public class App extends Application {
 

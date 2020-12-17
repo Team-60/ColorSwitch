@@ -63,7 +63,6 @@ public abstract class GameElement implements Serializable {
         bottomY += offset;
     }
 
-    // TODO: Should GameElement Contain instance of GraphicsContext
     public abstract void refresh(GraphicsContext graphicsContext);
     public abstract boolean checkCollision(Ball ball);
     public abstract void destroy();

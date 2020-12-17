@@ -16,7 +16,7 @@ public class ObstacleFactory {
             difficulty = - random.nextInt(4) + level;
         } else difficulty = random.nextInt(3) + 1;
 
-        System.out.println(difficulty);
+        System.out.println(ObstacleFactory.class.toString() + " difficulty: " + difficulty);
         Obstacle obstacle;
         switch (difficulty) {
             case 1:

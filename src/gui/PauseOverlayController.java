@@ -27,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class PauseOverlayController { // TODO maybe for restart here?
+public class PauseOverlayController {
 
     private App app;
 
