@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ObsCircle extends Obstacle{
+public class ObsCircle extends Obstacle {
 
     protected final double radius;
     protected final double innerRadius;

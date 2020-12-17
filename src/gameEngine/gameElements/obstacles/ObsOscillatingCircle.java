@@ -4,9 +4,11 @@ import gameEngine.Ball;
 import gameEngine.gameElements.Star;
 import javafx.scene.canvas.GraphicsContext;
 
-public class OscillatingCircle extends Obstacle{
-    ObsCircle circle;
-    public OscillatingCircle(double x, double y, double radius, double width) {
+public class ObsOscillatingCircle extends Obstacle {
+
+    private final ObsCircle circle;
+
+    public ObsOscillatingCircle(double x, double y, double radius, double width) {
         super(x, y -  radius/2, y - 2 * radius, y + radius);
         circle = new ObsCircle(x, y - radius/2, radius, width);
     }

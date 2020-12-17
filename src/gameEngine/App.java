@@ -28,7 +28,7 @@ TODO: Beware of file changes and refactoring, especially in file paths while mak
 public class App extends Application {
 
     public static MediaPlayer BgMediaPlayer = null; // for easy referencing
-    public static int REVIVAL_STARS = 100;
+    public static int REVIVAL_STARS = 10;
     private static int TOTAL_STARS = 0;
     private static final String pathTotalStars = "src/data/dataTotalStars.ser";
     private static final Boolean startWithAnimation = true;
