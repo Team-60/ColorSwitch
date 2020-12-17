@@ -125,6 +125,11 @@ public class GamePlay {
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
         this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game, this);
 
+        // make ball centre
+        double move = 350 - this.game.getBall().getY();
+        this.game.moveScreenRelative(move);
+        this.game.getBall().setY(350);
+
         this.game.getBall().removeGravity(); // else ball will fall down
         double prevVelocity = this.game.getBall().getVelocity(); // store velocity
         this.game.getBall().setVelocity(0);
