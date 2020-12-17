@@ -60,6 +60,10 @@ public class ObsCircle extends Obstacle{
         rotationAngle %= 360;
     }
 
+    public double getRotationAngle() {
+        return rotationAngle;
+    }
+
     @Override
     public boolean checkCollision(Ball ball) {
 
