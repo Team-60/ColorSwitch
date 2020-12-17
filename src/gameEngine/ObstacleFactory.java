@@ -7,7 +7,7 @@ import java.util.Random;
 public class ObstacleFactory {
 
     public static Obstacle obstacle(int score, double x, double y) {
-        int level = (score + 1) / 2;
+        int level = (score + 1) * 3;
         if (level > 24) level = 24;
 
         int difficulty;
@@ -18,7 +18,7 @@ public class ObstacleFactory {
 
         System.out.println(ObstacleFactory.class.toString() + " difficulty: " + difficulty);
         Obstacle obstacle;
-        difficulty = 25;
+//        difficulty = 25;
         switch (difficulty) {
             case 1:
                 return (new ObsCircle(x, y - 90, 90, 15));

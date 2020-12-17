@@ -75,6 +75,12 @@ public class Game implements Serializable, Comparable<Game> {
         this.fallDownClip = new AudioClip(new File("src/assets/music/gameplay/dead.wav").toURI().toString());
     }
 
+    public void registerResumeJump() {
+        ball.setVelocity(-300);
+        // Do not count this as player's jump as this is forced
+//        this.player.incJumps();
+    }
+
     public void reloadParamRevival(GraphicsContext _graphicsContext) { // for revival, reset graphics context
         assert (this.player != null);
         this.graphicsContext = _graphicsContext;

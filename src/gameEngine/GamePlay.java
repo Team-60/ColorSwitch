@@ -81,7 +81,6 @@ public class GamePlay {
                 game.registerJump();
             }
         };
-        // TODO: bug case : continuous space pressed
         canvas.requestFocus(); // very very important
         canvas.addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
 
@@ -89,7 +88,6 @@ public class GamePlay {
         this.animationTimer.start();
     }
 
-    // TODO under review
     public GamePlay(App _app, Game _game, boolean isRevival) throws IOException { // in case a game is loaded from gameplay
         assert (_game.getPlayer().getId() != -1 || _game.getPlayer().getHasRevived()); // it's a saved game, or its from revival
 
@@ -177,7 +175,7 @@ public class GamePlay {
                 canvas.addEventHandler(KeyEvent.KEY_PRESSED, GamePlay.JumpEventHandler);
                 this.game.getBall().setVelocity(prevVelocity);
                 this.game.getBall().resetGravity();
-                game.registerJump(); // as jump should follow while resetting event handler
+                game.registerResumeJump(); // as jump should follow while resetting event handler
             }
         };
         tempR.addEventHandler(KeyEvent.KEY_PRESSED, resumeEventHandler);
