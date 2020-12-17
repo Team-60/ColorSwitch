@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class ObsLine extends Obstacle {
 
-    private final double length;                           // TODO: can we make it static?
+    private final double length;
     private double startingPoint = 0;                      // a reference point to assess rotation
     private final double width = GamePlay.WIDTH/4;
 

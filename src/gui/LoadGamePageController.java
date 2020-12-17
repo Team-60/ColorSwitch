@@ -51,7 +51,7 @@ public class LoadGamePageController {
     @FXML
     private Group goBack;
 
-    public void init(App _app) { // (all active and then all inactive) TODO maybe add a reset option
+    public void init(App _app) { // (all active and then all inactive)
 
         this.app = _app; // needed for return back to main page
         ArrayList<Game> games = this.app.getGameDatabase().getData();

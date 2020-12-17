@@ -23,7 +23,6 @@ public class ObsOscillatingSquare extends Obstacle {
     @Override
     public void refresh(GraphicsContext graphicsContext) {
         obsSquare.refresh(graphicsContext);
-
     }
 
     @Override

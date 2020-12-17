@@ -8,12 +8,14 @@ public class ObstacleFactory {
 
     public static Obstacle obstacle(int score, double x, double y) {
         int level = (score + 1) * 3;
-        if (level > 26) level = 26;
 
         int difficulty;
         Random random = new Random();
-        if (level > 3) {
-            difficulty = -random.nextInt(4) + level;
+        if (level > 26) {
+            level = 26;
+            difficulty = -random.nextInt(15) + level;
+        } else if (level > 3) {
+            difficulty = -random.nextInt(5) + level;
         } else difficulty = random.nextInt(3) + 1;
 
         System.out.println(ObstacleFactory.class.toString() + " difficulty: " + difficulty);
