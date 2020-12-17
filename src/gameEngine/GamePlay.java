@@ -101,6 +101,7 @@ public class GamePlay {
 
         Stage primaryStage = (Stage) this.scene.getWindow();
         primaryStage.requestFocus(); // in case, overshadowed by secondary stage
+        System.out.println(this.getClass().toString() + " focused stage: " + primaryStage.isFocused());
         this.resetBgMusic();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GamePlay.fxml"));
@@ -124,9 +125,9 @@ public class GamePlay {
         this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game, this);
 
         // make ball centre
-        double move = 350 - this.game.getBall().getY();
+        double move = 450 - this.game.getBall().getY();
         this.game.moveScreenRelative(move);
-        this.game.getBall().setY(350);
+        this.game.getBall().setY(450);
 
         this.game.getBall().removeGravity(); // else ball will fall down
         double prevVelocity = this.game.getBall().getVelocity(); // store velocity
@@ -180,7 +181,7 @@ public class GamePlay {
         };
         tempR.addEventHandler(KeyEvent.KEY_PRESSED, resumeEventHandler);
         tempR.requestFocus(); // for resuming, IMP
-
+        System.out.println(this.getClass().toString() + " focused tempR: " + tempR.isFocused());
         this.animationTimer.start();
         animGlow.play();
     }
