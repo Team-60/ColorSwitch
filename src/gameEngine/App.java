@@ -23,6 +23,7 @@ import java.util.ArrayList;
 /*
 Divyansh's:
 TODO: Beware of file changes and refactoring, especially in file paths while making jar
+TODO: buggggg, on revival withing obstacle, apply neg offset
 */
 
 public class App extends Application {
