@@ -82,7 +82,7 @@ public class Game implements Serializable, Comparable<Game> {
         this.ball.setGraphicsContext(_graphicsContext);
     }
 
-    private void moveScreenRelative(double offset) {
+    public void moveScreenRelative(double offset) {
         for (GameElement gameElement : gameElements) {
             gameElement.applyOffset(offset);
         }

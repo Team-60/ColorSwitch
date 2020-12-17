@@ -7,17 +7,18 @@ import java.util.Random;
 public class ObstacleFactory {
 
     public static Obstacle obstacle(int score, double x, double y) {
-        int level = (score + 1)/2;
+        int level = (score + 1) / 2;
         if (level > 24) level = 24;
 
         int difficulty;
         Random random = new Random();
         if (level > 3) {
-            difficulty = - random.nextInt(4) + level;
+            difficulty = -random.nextInt(4) + level;
         } else difficulty = random.nextInt(3) + 1;
 
         System.out.println(ObstacleFactory.class.toString() + " difficulty: " + difficulty);
         Obstacle obstacle;
+        difficulty = 24;
         switch (difficulty) {
             case 1:
                 return (new ObsCircle(x, y - 90, 90, 15));
@@ -91,11 +92,15 @@ public class ObstacleFactory {
             case 22:
                 // faster and smaller consecutive circle
                 circle = new ObsCircle(x, y - 75, 75, 10);
-                circle.setRotationalSpeed(150);
-                return new ObsConsecutiveCircles(circle, 4);
+                obstacle = new ObsConsecutiveCircles(circle, 4);
+                obstacle.setRotationalSpeed(150);
+                return obstacle;
             case 23:
                 doubleCircle = new ObsDoubleCircle(x, y - 115, 90, 115, 15);
                 return new ObsConsecutiveCircles(doubleCircle, 4);
+            case 24:
+                obstacle = new OscillatingCircle(x, y - 90, 90, 15);
+                return obstacle;
             default:
                 obsTripleCircle = new ObsTripleCircle(x, y - 140, 90, 115, 140, 15);
                 return new ObsConsecutiveCircles(obsTripleCircle, 5);

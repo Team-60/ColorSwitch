@@ -50,7 +50,6 @@ public class GamePlay {
     public static long GameOverTime = -1;
     public static EventHandler<KeyEvent> JumpEventHandler; // every game (in case multiple) will have same event handler for Jump
 
-    // TODO : assign to users choice in main menu
     public static boolean IS_CLASSIC = true;
 
     public GamePlay(App _app) throws IOException { // create a new game and a new player, sep. constructor for deserialize, IOException is always managed by caller
@@ -125,6 +124,11 @@ public class GamePlay {
 
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
         this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game, this);
+
+        // make ball centre
+        double move = 350 - this.game.getBall().getY();
+        this.game.moveScreenRelative(move);
+        this.game.getBall().setY(350);
 
         this.game.getBall().removeGravity(); // else ball will fall down
         double prevVelocity = this.game.getBall().getVelocity(); // store velocity

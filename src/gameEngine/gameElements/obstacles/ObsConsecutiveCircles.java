@@ -21,6 +21,13 @@ public class ObsConsecutiveCircles extends Obstacle {
     }
 
     @Override
+    public void setRotationalSpeed(double speed) {
+        for (ObsCircle obsCircle : circles) {
+            obsCircle.setRotationalSpeed(speed);
+        }
+    }
+
+    @Override
     public String getRandomColor() {
         return circles.get(0).getRandomColor();
     }
