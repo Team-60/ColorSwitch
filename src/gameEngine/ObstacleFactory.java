@@ -18,7 +18,7 @@ public class ObstacleFactory {
 
         System.out.println(ObstacleFactory.class.toString() + " difficulty: " + difficulty);
         Obstacle obstacle;
-        difficulty = 24;
+        difficulty = 25;
         switch (difficulty) {
             case 1:
                 return (new ObsCircle(x, y - 90, 90, 15));
@@ -100,6 +100,9 @@ public class ObstacleFactory {
                 return new ObsConsecutiveCircles(doubleCircle, 4);
             case 24:
                 obstacle = new OscillatingCircle(x, y - 90, 90, 15);
+                return obstacle;
+            case 25:
+                obstacle = new ObsOscillatingSquare(x, y - 85 * Math.sqrt(2), 170, 15);
                 return obstacle;
             default:
                 obsTripleCircle = new ObsTripleCircle(x, y - 140, 90, 115, 140, 15);
