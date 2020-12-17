@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,9 +39,15 @@ public class Dialog { // TODO location of stage
         Scene scene = new Scene(dialogRoot);
         scene.setFill(Color.TRANSPARENT);
         Stage secondaryStage = new Stage(StageStyle.TRANSPARENT);
+        secondaryStage.initModality(Modality.NONE);
         secondaryStage.initOwner(primaryStage);
         secondaryStage.setScene(scene);
         secondaryStage.show();
+
+        dialogRoot.setFocusTraversable(false);
+        dialogRoot.setDisable(true);
+        primaryStage.requestFocus();
+
         secondaryStage.setX((primScreenBounds.getWidth() - secondaryStage.getWidth()) / 2);
         secondaryStage.setY(GamePlay.HEIGHT + secondaryStage.getHeight() / 3.25 + 1);
 
