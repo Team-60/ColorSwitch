@@ -18,6 +18,9 @@ public class ObstacleFactory {
             difficulty = -random.nextInt(5) + level;
         } else difficulty = random.nextInt(3) + 1;
 
+        // ArrayList<Integer> hard = new ArrayList<>(Arrays.asList(17, 18, 19, 20, 21, 22, 23, 24, 25,26));
+        // difficulty = hard.get(random.nextInt(hard.size()));
+
         System.out.println(ObstacleFactory.class.toString() + " difficulty: " + difficulty);
         Obstacle obstacle;
 
