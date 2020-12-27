@@ -108,6 +108,15 @@ public class Player implements Serializable, Comparable<Player> { // info. keep
     }
 
     @Override
+    public boolean equals(Object p) {
+        if (p.getClass() != this.getClass())
+            return false;
+        Player temp = (Player) p;
+        if (this.id == -1) return false; // unidentified player
+        return temp.getId() == this.id;
+    }
+
+    @Override
     public String toString() {
         String ms = "* Mode: " + (this.isClassicMode ? "Classic\n" : "Bubbles\n");
         String ps = "* Name: " + this.name + "\n";

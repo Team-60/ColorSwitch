@@ -118,8 +118,8 @@ public class GameOverPageController {
         this.startRotation(rtIconLB, 1);
         this.startRotation(rtIconRestart, 1);
 
-        if (this.game.getPlayer().getHasRevived()) {
-            // deactivate revival if already has revived
+        if (this.game.getPlayer().getHasRevived() || this.app.getPlayerDatabase().getData().contains(this.game.getPlayer())) {
+            // deactivate revival if already has revived, or the player exists on leaderboard (different entry point)
             Tooltip.install(this.iconRestartUsingStars, null);
             this.cantReviveMsg = "Revival already used!";
             this.deactivateRevival();
