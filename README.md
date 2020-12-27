@@ -44,4 +44,4 @@ optimized game-play physics offering ultra smooth rendering. <br>
 <br>
 <br>
 
-<h5 align = "center"> All contributions are welcomed! <img src = "https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Hi.gif" width = "25px"></h5>
+<h5 align = "center"> All contributions are welcomed! <img src = "img_readme/Hi.gif" width = "25px"></h5>
