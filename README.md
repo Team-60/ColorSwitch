@@ -8,6 +8,7 @@
   :zap: Implementation Description
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "right">
 </h2>
+<h6 align = "right"><i> For a further detailed overview, refer <a href = https://github.com/Team-60/ColorSwitch/blob/master/ColorSwitch.pdf">here</a> :mag: </i></h6>
 <p>
 <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; The UI/UX for the game is designed with JavaFX. <br>
 <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Implemented our own game-engine in JavaFx on bare canvas with
@@ -22,11 +23,11 @@ optimized game-play physics offering ultra smooth rendering. <br>
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "right">
 </h2>
 <p align = "center"> 
-  Encounter and pave your way through a variety of unique & challenging tri/quad-colored obstacles! <br> 
-  All seems fun and enticing but this may very well change when you escort a colored ball through these shapes! 
   <img src = "img_readme/assets/inputPopup/jump_white.png" width = "22px" align = "right">
   <img src = "img_readme/assets/inputPopup/jump_white.png" width = "22px" align = "left">
-  <br> <i> Keep bouncing, have fun and good luck! </i>
+  Encounter and pave your way through a variety of unique & challenging tri/quad-colored obstacles! <br> 
+  All seems fun & enticing but this may very well change when you escort a colored ball through these shapes! <br>
+  <i> Keep bouncing, have fun and good luck! </i>
 </p>
 <br>
 
