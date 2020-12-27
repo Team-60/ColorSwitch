@@ -124,10 +124,12 @@ public class GamePlay {
         gamePlayController.init(this, this.app); // Controller, for referring game, needs to have app reference for actions like exit
         this.animationTimer = new GamePlayAnimationTimer(graphicsContext, this.game, this);
 
-        // make ball centre
-        double move = 450 - this.game.getBall().getY();
-        this.game.moveScreenRelative(move);
-        this.game.getBall().setY(450);
+        if (isRevival) {
+            // make ball centre, in case revival takes place
+            double move = 450 - this.game.getBall().getY();
+            this.game.moveScreenRelative(move);
+            this.game.getBall().setY(450);
+        }
 
         this.game.getBall().removeGravity(); // else ball will fall down
         double prevVelocity = this.game.getBall().getVelocity(); // store velocity
@@ -182,6 +184,7 @@ public class GamePlay {
         tempR.addEventHandler(KeyEvent.KEY_PRESSED, resumeEventHandler);
         tempR.requestFocus(); // for resuming, IMP
         System.out.println(this.getClass().toString() + " focused tempR: " + tempR.isFocused());
+
         this.animationTimer.start();
         animGlow.play();
     }
@@ -226,7 +229,7 @@ public class GamePlay {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GameOverPage.fxml"));
         try {
-            AnchorPane gameOverRoot = loader.load(); // TODO: create init for instances, rn only for animations
+            AnchorPane gameOverRoot = loader.load();
             GameOverPageController gameOverPageController = loader.getController();
             gameOverPageController.init(this.app, this.game); // for purposes such as returning back to main page
             StackPane rootContainer = (StackPane) this.scene.getRoot();

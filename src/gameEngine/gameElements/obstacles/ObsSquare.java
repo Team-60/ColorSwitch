@@ -137,7 +137,6 @@ public class ObsSquare extends Obstacle {
         }
         boolean isCollided = false;
         if (insideBigger && !insideSmaller) {
-            // TODO : mutually exclusive ?
             if (rotationAngle < 45 || rotationAngle > 315) {
                 if (ball.getY() < getY()) {
                     // above

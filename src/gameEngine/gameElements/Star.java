@@ -8,7 +8,6 @@ import java.io.File;
 
 public class Star extends GameElement {
 
-    // TODO: why is this useful??
     private static final int closestSafeDist = 100;
     private static final int points = 0;
 

@@ -10,8 +10,6 @@ import java.util.Random;
 public class Bubbles {
 
     ArrayList<Bubble> bubbles;
-    // TODO : optimal ratio between number of bubbles in size of each bubbles is yet to be achieved
-    // TODO : color combinations are not final
     private final int numberOfBubbles = 30;
     private final GraphicsContext graphicsContext;
 

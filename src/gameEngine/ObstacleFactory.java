@@ -2,19 +2,26 @@ package gameEngine;
 
 import gameEngine.gameElements.obstacles.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class ObstacleFactory {
 
     public static Obstacle obstacle(int score, double x, double y) {
         int level = (score + 1) * 3;
-        if (level > 26) level = 26;
 
         int difficulty;
         Random random = new Random();
-        if (level > 3) {
-            difficulty = -random.nextInt(4) + level;
+        if (level > 26) {
+            level = 26;
+            difficulty = -random.nextInt(15) + level;
+        } else if (level > 3) {
+            difficulty = -random.nextInt(5) + level;
         } else difficulty = random.nextInt(3) + 1;
+
+         ArrayList<Integer> hard = new ArrayList<>(Arrays.asList(17, 18, 19, 20, 21, 22, 23, 24, 25,26));
+         difficulty = hard.get(random.nextInt(hard.size()));
 
         System.out.println(ObstacleFactory.class.toString() + " difficulty: " + difficulty);
         Obstacle obstacle;

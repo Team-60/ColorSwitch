@@ -85,7 +85,6 @@ public final class Renderer {
         }
     }
 
-    // TODO, graphic bug
     public static void drawArc(double centerX, double centerY, double radius, double innerRadius, Color bgColor, Color strokeColor, int angle) {
 
         graphicsContext.beginPath();

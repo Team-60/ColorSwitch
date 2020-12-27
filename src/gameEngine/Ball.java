@@ -57,7 +57,6 @@ public class Ball implements Serializable {
     }
 
     public double move(double time, Player player) {
-        // TODO : tweaks to make jump animation good
         double distance = velocity * time + (gravity * time * time)/2;
         velocity += gravity * time;
         y += distance;

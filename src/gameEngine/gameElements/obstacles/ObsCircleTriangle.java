@@ -43,6 +43,7 @@ public class ObsCircleTriangle extends Obstacle {
 
     @Override
     public void applyOffset(double offset) {
+        super.applyOffset(offset);
         circle.applyOffset(offset);
         triangle.applyOffset(offset);
     }
