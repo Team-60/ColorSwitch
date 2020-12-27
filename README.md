@@ -8,7 +8,7 @@
   :zap: Implementation Description
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "right">
 </h2>
-<h6 align = "right"><i> For a further detailed overview, refer <a href = https://github.com/Team-60/ColorSwitch/blob/master/ColorSwitch.pdf">here</a> :mag: </i></h6>
+<h6 align = "right"><i> For a further detailed overview, refer <a href = "https://github.com/Team-60/ColorSwitch/blob/master/ColorSwitch.pdf">here</a> :mag: </i></h6>
 <p>
 <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; The UI/UX for the game is designed with JavaFX. <br>
 <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Implemented our own game-engine in JavaFx on bare canvas with
