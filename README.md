@@ -15,7 +15,6 @@
 optimized game-play physics offering ultra smooth rendering. <br>
 <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Utilized FXML and JavaFx CSS to tailor a receptive game interface designed on Scene Builder.
 </p>
-<br>
 
 <h2 align = "center"> 
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "left"> 
@@ -30,9 +29,6 @@ optimized game-play physics offering ultra smooth rendering. <br>
   <i> Keep bouncing, have fun and good luck! </i>
 </p>
 
-<br>
-<br>
-
 <h2 align = "center"> 
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "left"> 
   :rocket: How to Run? 
@@ -43,7 +39,6 @@ optimized game-play physics offering ultra smooth rendering. <br>
 ### :gear: Dependencies:
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; JDK 11 or higher &emsp; | &emsp; [___download___](https://www.oracle.com/in/java/technologies/javase-jdk15-downloads.html) <br>
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; JavaFX 11.0.1 or higher &emsp; | &emsp; [___download___](https://gluonhq.com/products/javafx/) <br>
-<br>
 ### :wrench: Setting up IntelliJ IDEA:
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; JDK 11 or higher <br>
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; JavaFX 11.0.1 or higher <br>
