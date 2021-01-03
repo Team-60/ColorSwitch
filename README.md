@@ -3,8 +3,9 @@
   Color Switch
   <img src = "img_readme/assets/mainPage/logo.png" width = "15%" align = "right"> 
 </h1>
+</p>
 <i><b> A revamped game replica made by Divyansh Rastogi & Rupanshu Yadav </b></i>
-</p> <br>
+<br>
 
 <h2 align = "center">
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "left"> 
@@ -44,9 +45,14 @@ optimized game-play physics offering ultra smooth rendering. <br>
 ### :gear: Dependencies:
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; JDK 11 or higher &emsp; | &emsp; [___download___](https://www.oracle.com/in/java/technologies/javase-jdk15-downloads.html) <br>
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; JavaFX 11.0.1 or higher &emsp; | &emsp; [___download___](https://gluonhq.com/products/javafx/) <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Git &emsp; | &emsp; [___download___](https://git-scm.com/downloads) <br>
 ### :wrench: Setting up IntelliJ IDEA:
-&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; JDK 11 or higher <br>
-&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; JavaFX 11.0.1 or higher <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Install IntelliJ and follow basic setup guidelines <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Open a new project from ___existing source___, use ``` https://github.com/Team-60/ColorSwitch.git ``` as project source.<br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Set up project libraries for JavaFX <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Add VM options <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Build the project <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Go to ``` src/gameEngine/App.java ``` , select the file and press ``` right click > run ``` <br>
 
 <br>
 <h2 align = "center"> 
