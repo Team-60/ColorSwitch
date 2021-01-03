@@ -1,5 +1,8 @@
 <p align = "center">
-<img src = "img_readme/assets/mainPage/logo.png" width = "55%"> <br>
+<h1> 
+  Color Switch
+  <img src = "img_readme/assets/mainPage/logo.png" width = "15%" align = "right"> 
+</h1>
 <i><b> A revamped game replica made by Divyansh Rastogi & Rupanshu Yadav </b></i>
 </p> <br>
 
@@ -15,6 +18,7 @@
 optimized game-play physics offering ultra smooth rendering. <br>
 <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Utilized FXML and JavaFx CSS to tailor a receptive game interface designed on Scene Builder.
 </p>
+<br>
 
 <h2 align = "center"> 
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "left"> 
@@ -28,6 +32,7 @@ optimized game-play physics offering ultra smooth rendering. <br>
   All seems fun & enticing but this may very well change when you escort a colored ball through these shapes! <br>
   <i> Keep bouncing, have fun and good luck! </i>
 </p>
+<br>
 
 <h2 align = "center"> 
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "left"> 
