@@ -5,7 +5,7 @@
 </h1>
 </p>
 <i><b> A revamped game replica made by Divyansh Rastogi & Rupanshu Yadav </b></i>
-<br>
+<br><br>
 
 <h2 align = "center">
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "left"> 
@@ -31,7 +31,7 @@ optimized game-play physics offering ultra smooth rendering. <br>
   <img src = "img_readme/assets/inputPopup/jump_white.png" width = "22px" align = "left">
   Encounter and pave your way through a variety of unique & challenging tri/quad-colored obstacles! <br> 
   All seems fun & enticing but this may very well change when you escort a colored ball through these shapes! <br>
-  <i> Keep bouncing, have fun and good luck! </i>
+  <i><b> Keep bouncing, have fun and good luck! </b></i>
 </p>
 <br>
 
