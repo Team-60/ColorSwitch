@@ -49,8 +49,8 @@ optimized game-play physics offering ultra smooth rendering. <br>
 ### :wrench: Setting up IntelliJ IDEA:
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Install IntelliJ and follow basic setup guidelines <br>
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Open a new project from ___existing source___, use ``` https://github.com/Team-60/ColorSwitch.git ``` as project source.<br>
-&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Set up project libraries for JavaFX <br>
-&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Add VM options <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Set up project libraries for JavaFX, go to ``` File > Project Structure > Project Settings > Libraries ``` and then ``` add a new Java library (+ icon) > select path to your JavaFx > "lib" folder``` <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Add the following VM options under ``` Run > Edit Configurations ``` >> ```-ea --module-path "C:\Program Files\javafx-sdk-15.0.1\lib"  --add-modules javafx.controls,javafx.fxml,javafx.media``` <br>
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Build the project <br>
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Go to ``` src/gameEngine/App.java ``` , select the file and press ``` right click > run ``` <br>
 
