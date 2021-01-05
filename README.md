@@ -49,11 +49,12 @@ optimized game-play physics offering ultra smooth rendering. <br>
 ### :wrench: Setting up IntelliJ IDEA:
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Install IntelliJ and follow basic setup guidelines <br>
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Open a new project from ___existing source___, use ``` https://github.com/Team-60/ColorSwitch.git ``` as project source.<br>
-&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; <i> Set up project libraries for JavaFX </i> <br>
-&emsp; &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Go to ``` File > Project Structure > Project Settings > Libraries ``` <br> &emsp; &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Select``` add a new Java library (+ icon) > select path to your JavaFx > "lib" folder``` <br>
-&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; <i> Adding VM options for run configurations </i> <br>
-&emsp; &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Go under ``` Run > Edit Configurations ``` <br>
-&emsp; &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Add the following under *VM Options* ```-ea --module-path "C:\Program Files\javafx-sdk-15.0.1\lib"  --add-modules javafx.controls,javafx.fxml,javafx.media``` <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; <b> Set up project libraries for JavaFX </b> <br>
+&emsp; &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Go to  ``` File > Project Structure > Project Settings > Libraries ``` <br> &emsp; &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Select ``` add a new Java library (+ icon) > select path to your JavaFx > "lib" folder``` <br>
+&emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; <b> Adding VM options for run configurations </b> <br>
+&emsp; &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Go under  ``` Run > Edit Configurations ``` <br>
+&emsp; &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Add the following under *VM Options* <br> 
+&emsp; &emsp; &emsp; ```-ea --module-path "$JAVAFX_LIB_PATH"  --add-modules javafx.controls,javafx.fxml,javafx.media``` <br>
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Build the project <br>
 &emsp; <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Go to ``` src/gameEngine/App.java ``` , select the file and press ``` right click > run ``` <br>
 
