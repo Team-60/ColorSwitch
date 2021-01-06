@@ -79,8 +79,10 @@ optimized game-play physics offering ultra smooth rendering. <br>
 <h4 align = "center"> :construction: <i>Work In Progress</i> :construction: </h4>
 
 <br>
-<h4 align = "center"> All contributions are welcomed! <img src = "img_readme/Hi.gif" width = "25px"> <br>
-Drop us a star if you found the project to be entertaining/helpful! <img src = "img_readme/sparkles.gif" width = "25px"> </h4>
+<h4 align = "center">
+<img src = "https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/wave.gif" width = "55px"> <br>
+All contributions are welcomed! <br>
+⭐ Drop us a star if you found the project to be entertaining/helpful! ⭐ </h4>
 <br><br>
 
 
