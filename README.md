@@ -13,6 +13,8 @@
 [In-Game Snapshots](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------stars-in-game-snapshots--)
 <br>
 
+#### 🎮 &nbsp; *Check out our gameplay [here](https://bit.ly/3bgOxZk)!* [**](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------stars-in-game-snapshots--)
+
 <h2 align = "center">
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "left"> 
   :zap: Implementation Description
@@ -77,4 +79,13 @@ optimized game-play physics offering ultra smooth rendering. <br>
 <h4 align = "center"> :construction: <i>Work In Progress</i> :construction: </h4>
 
 <br>
-<h4 align = "center"> All contributions are welcomed! <img src = "img_readme/Hi.gif" width = "25px"></h4>
+<h4 align = "center"> All contributions are welcomed! <img src = "img_readme/Hi.gif" width = "25px"> <br>
+<h5 align = "center"> Drop us a star  if you found the project to be entertaining/helpful! <img src = "img_readme/Hi.gif" width = "25px"> </h4>
+<br><br>
+
+
+
+<h6><i>
+  ** The video might be laggy due to quality screen recording causing heavy load 😖 <br>
+  &emsp; For experiencing a super smooth gameplay experience, <a href = "https://github.com/Team-60/ColorSwitch/blob/master/README.md#------rocket-how-to-run----">install & run</a> the game! 
+</i></h6>
