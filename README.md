@@ -13,7 +13,7 @@
 [In-Game Snapshots](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------stars-in-game-snapshots--)
 <br>
 
-#### 🎮 &nbsp; *Check out our gameplay [here](https://bit.ly/3bgOxZk)!* [**](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------stars-in-game-snapshots--)
+#### 🎮 &nbsp; *Check out the gameplay [here](https://bit.ly/3bgOxZk)!* [**](https://github.com/Team-60/ColorSwitch#---the-video-might-be-laggy-due-to-quality-screen-recording-causing-heavy-load-----for-experiencing-a-super-smooth-gameplay-experience-install--run-the-game-)
 
 <h2 align = "center">
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "left"> 
@@ -76,16 +76,14 @@ optimized game-play physics offering ultra smooth rendering. <br>
 <img src = "img_readme/snapshots.jpg" align = "center">
 
 <br>
-<h4 align = "center"> :construction: <i>Work In Progress</i> :construction: </h4>
+<h3 align = "center"> :construction: <i>Work In Progress</i> :construction: </h3>
 
 <br>
 <h4 align = "center">
 <img src = "https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/wave.gif" width = "55px"> <br>
 All contributions are welcomed! <br>
-⭐ Drop us a star if you found the project to be entertaining/helpful! ⭐ </h4>
-<br><br>
-
-
+Drop a ⭐ if you found the project to be entertaining/helpful!  </h4>
+<br>
 
 <h6><i>
   ** The video might be laggy due to quality screen recording causing heavy load 😖 <br>
