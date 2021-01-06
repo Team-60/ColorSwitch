@@ -80,7 +80,7 @@ optimized game-play physics offering ultra smooth rendering. <br>
 
 <br>
 <h4 align = "center"> All contributions are welcomed! <img src = "img_readme/Hi.gif" width = "25px"> <br>
-<h5 align = "center"> Drop us a star  if you found the project to be entertaining/helpful! <img src = "img_readme/Hi.gif" width = "25px"> </h4>
+Drop us a star if you found the project to be entertaining/helpful! <img src = "img_readme/sparkles.gif" width = "25px"> </h4>
 <br><br>
 
 
