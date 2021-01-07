@@ -11,7 +11,7 @@
 [Game Objective](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------book-game-objective---) **/**
 [How To Run?](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------rocket-how-to-run----) **/**
 [In-Game Snapshots](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------stars-in-game-snapshots--) **/**
-[Bonus Features](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------stars-in-game-snapshots--)
+[Bonus Features](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------sparkles-bonus-features----)
 <br>
 
 #### 🎮 &nbsp; *Check out the gameplay [here](https://bit.ly/3bgOxZk)!* [**](https://github.com/Team-60/ColorSwitch#---the-video-might-be-laggy-due-to-quality-screen-recording-causing-heavy-load-----for-experiencing-a-super-smooth-gameplay-experience-install--run-the-game-)
@@ -21,7 +21,7 @@
   :zap: Implementation Description
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "right">
 </h2>
-<h6 align = "right"><i> For a further detailed overview, refer <a href = "https://github.com/Team-60/ColorSwitch/blob/master/ColorSwitch.pdf">here</a> :mag: </i></h6>
+<h6 align = "right"><i> For a further detailed overview, refer <a href = "https://github.com/Team-60/ColorSwitch/blob/master/ColorSwitch.pdf">here</a> 	:mag:  </i></h6>
 <p>
 <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; The UI/UX for the game is designed with JavaFX. <br>
 <img src = "img_readme/assets/mainPage/colorCircleSmallWide.png" width = "13px"> &nbsp; Implemented our own game-engine in JavaFx on bare canvas with
@@ -35,10 +35,11 @@ optimized game-play physics offering ultra smooth rendering. <br>
   :book: Game Objective 
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "right">
 </h2>
+<h6 align = "right"><i> Learn more <a href = "https://github.com/Team-60/ColorSwitch/blob/master/README.md#------sparkles-bonus-features----">here</a> :grey_exclamation: </i></h6>
 <p align = "center"> 
   <img src = "img_readme/assets/inputPopup/jump_white.png" width = "22px" align = "right">
   <img src = "img_readme/assets/inputPopup/jump_white.png" width = "22px" align = "left">
-  Encounter and pave your way through a variety <i>(25+ !)</i> of unique & challenging tri/quad-colored obstacles! <br> 
+  Encounter and pave your way through a variety of unique & challenging tri/quad-colored obstacles! <br> 
   All seems fun & enticing but this may very well change when you escort a colored ball through these shapes! <br>
   <i><b> Keep bouncing, have fun and good luck! </b></i>
 </p>
