@@ -7,10 +7,11 @@
 <i><b> A revamped game replica made by Divyansh Rastogi & Rupanshu Yadav </b></i>
 <br><br>
 
-🔎 &nbsp; [Implementation Description](https://github.com/Team-60/ColorSwitch/blob/master/README.md#-----zap-implementation-description--) /
-[Game Objective](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------book-game-objective---) /
-[How To Run?](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------rocket-how-to-run----) / 
-[In-Game Snapshots](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------stars-in-game-snapshots--)
+🔎 &nbsp; [Implementation Description](https://github.com/Team-60/ColorSwitch/blob/master/README.md#-----zap-implementation-description--) **/**
+[Game Objective](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------book-game-objective---) **/**
+[How To Run?](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------rocket-how-to-run----) **/**
+[In-Game Snapshots](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------stars-in-game-snapshots--) **/**
+[Bonus Features](https://github.com/Team-60/ColorSwitch/blob/master/README.md#------stars-in-game-snapshots--)
 <br>
 
 #### 🎮 &nbsp; *Check out the gameplay [here](https://bit.ly/3bgOxZk)!* [**](https://github.com/Team-60/ColorSwitch#---the-video-might-be-laggy-due-to-quality-screen-recording-causing-heavy-load-----for-experiencing-a-super-smooth-gameplay-experience-install--run-the-game-)
@@ -74,11 +75,19 @@ optimized game-play physics offering ultra smooth rendering. <br>
   <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "right">
 </h2>
 <img src = "img_readme/snapshots.jpg" align = "center">
-
 <br>
+
+<h2 align = "center"> 
+  <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "left"> 
+  :sparkles: Bonus Features 
+  <img src = "img_readme/assets/lbPage/crown.png" width = "28px" align = "right"> 
+</h2>
+<img src = "img_readme/bonus.jpg" align = "center">
+<br>
+
 <h3 align = "center"> :construction: <i>Work In Progress</i> :construction: </h3>
-
 <br>
+
 <h4 align = "center">
 <img src = "https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/wave.gif" width = "55px"> <br>
 All contributions are welcomed! <br>
