@@ -1,5 +1,6 @@
 package gameEngine;
 
+import gameEngine.util.Database;
 import gui.Dialog;
 import gui.LoadAnimationController;
 import gui.MainPageController;

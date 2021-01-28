@@ -2,6 +2,7 @@ package gameEngine;
 
 import gameEngine.bubbles.Bubbles;
 import gameEngine.customExceptions.GameOverException;
+import gameEngine.util.Renderer;
 import gui.GameOverPageController;
 import gui.GamePlayController;
 import javafx.animation.*;

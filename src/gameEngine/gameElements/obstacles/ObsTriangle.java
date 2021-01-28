@@ -1,8 +1,8 @@
 package gameEngine.gameElements.obstacles;
 
 import gameEngine.Ball;
-import gameEngine.Pair;
-import gameEngine.Renderer;
+import gameEngine.util.Pair;
+import gameEngine.util.Renderer;
 import gameEngine.gameElements.Star;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

@@ -1,5 +1,7 @@
-package gameEngine;
+package gameEngine.util;
 
+import gameEngine.GamePlay;
+import gameEngine.util.Pair;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.FillRule;

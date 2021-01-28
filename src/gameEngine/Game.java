@@ -188,8 +188,8 @@ public class Game implements Serializable, Comparable<Game> {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.setTextAlign(TextAlignment.CENTER);
         graphicsContext.setTextBaseline(VPos.CENTER);
-        graphicsContext.setFont(new Font("Monospaced", 60));
-        graphicsContext.fillText(Integer.toString(this.player.getScore()), 50, 60);
+        graphicsContext.setFont(new Font("Monospaced", 50));
+        graphicsContext.fillText(Integer.toString(this.player.getScore()), 40, 50);
     }
 
     public void registerJump() {

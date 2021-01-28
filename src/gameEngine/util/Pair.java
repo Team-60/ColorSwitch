@@ -1,4 +1,4 @@
-package gameEngine;
+package gameEngine.util;
 
 public class Pair {
 
