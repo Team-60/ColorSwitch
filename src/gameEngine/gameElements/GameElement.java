@@ -54,7 +54,14 @@ public abstract class GameElement implements Serializable {
     public void playSound() {
         if (this instanceof Obstacle) // as game over, maybe do this in game over exception
             App.BgMediaPlayer.stop();
-         audioClip.play(); // TEMPORARY // TODO: MUSIC DISABLE
+        try {
+            this.audioClip.play(); // TEMPORARY // TODO: MUSIC DISABLE
+        } catch (NullPointerException e) { // TODO: FIX STAR ASSET
+            System.out.println(this.getClass().toString() + "Caught asset loading in star, " + e.toString());
+            this.audioClip = new AudioClip(new File(this.audioClipPath).toURI().toString());
+            this.audioClip.setVolume(0.5);
+            this.audioClip.play();
+        }
     }
 
     public void applyOffset(double offset) {
