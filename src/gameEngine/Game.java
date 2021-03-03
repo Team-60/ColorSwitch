@@ -14,11 +14,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 import java.io.File;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Game implements Serializable, Comparable<Game> {
 
+    @Serial
     private static final long serialVersionUID = 2020L;
     public static final String FILE_PATH = "src/data/dataGame.ser";
     private static final int numberOfObstacle = 14;
