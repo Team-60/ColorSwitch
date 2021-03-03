@@ -86,6 +86,10 @@ optimized game-play physics offering ultra smooth rendering. <br>
 <img src = "img_readme/bonus.jpg" align = "center">
 <br>
 
+<h2 align = "center"> :thought_balloon: </h2>
+<h5 align = "center"><i> If you wish to delve further into source code's layout and notes/observations compiled over various phases of the project, <br> feel free to check the same out <a href="https://github.com/Team-60/ColorSwitch/tree/master/misc_notes">here</a>! </i></h5>
+<br>
+
 <h3 align = "center"> :construction: <i>Work In Progress</i> :construction: </h3>
 <br>
 
